@@ -51,7 +51,7 @@
   function fmt(v) { return v >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toFixed(2); }
   function spark(o) {
     var pts = o.line; if (!pts || pts.length < 2) { o.s.innerHTML = ''; return; }
-    var w = 210, h = 70, mn = Math.min.apply(null, pts), mx = Math.max.apply(null, pts), d = '';
+    var w = 210, h = 86, mn = Math.min.apply(null, pts), mx = Math.max.apply(null, pts), d = '';
     if (o.hl) { mx = Math.max(mx, o.hl[0]); mn = Math.min(mn, o.hl[1]); }
     var r = (mx - mn) || 1;
     for (var i = 0; i < pts.length; i++) d += (i ? ' L' : 'M') + (i * (o.hl ? w - 46 : w) / (pts.length - 1)).toFixed(1) + ',' + (h - 3 - (pts[i] - mn) / r * (h - 6)).toFixed(1);

@@ -31,7 +31,20 @@
     }
     return p;
   }
-  panel('Stocks', SYMS, function (s) { return s.charAt(0) === '^' ? s.slice(1) : s; }, 'floorrow');
+  function etNow() { // US Eastern time without Intl (old Tizen): DST 2nd Sun Mar 07:00Z .. 1st Sun Nov 06:00Z
+    var n = new Date(), y = n.getUTCFullYear();
+    var m1 = new Date(Date.UTC(y, 2, 1)), a = Date.UTC(y, 2, 1 + (7 - m1.getUTCDay()) % 7 + 7, 7);
+    var n1 = new Date(Date.UTC(y, 10, 1)), b = Date.UTC(y, 10, 1 + (7 - n1.getUTCDay()) % 7, 6);
+    var t = n.getTime(), off = (t >= a && t < b) ? 4 : 5; return new Date(t - off * 3600000);
+  }
+  function mktOpen() { var e = etNow(), d = e.getUTCDay(), m = e.getUTCHours() * 60 + e.getUTCMinutes();
+    return d > 0 && d < 6 && m >= 570 && m < 960; }
+  var stp = panel('Stocks', SYMS, function (s) { return s.charAt(0) === '^' ? s.slice(1) : s; }, 'floorrow');
+  var ctag = document.createElement('em'); ctag.className = 'closed'; ctag.textContent = 'Closed';
+  ctag.style.cssText = 'font-style:normal;font-size:0.62em;margin-left:10px;padding:1px 7px;border-radius:6px;background:rgba(245,245,247,0.12);color:rgba(245,245,247,0.6);vertical-align:middle';
+  stp.firstChild.firstChild.appendChild(ctag);
+  function closedTag() { ctag.style.display = mktOpen() ? 'none' : 'inline'; }
+  closedTag(); setInterval(closedTag, 60000);
   panel('Crypto <i class="live"></i>', COINS, function (k) { return k; });
   var np = div('mkp news', col); div('mkh', np, '<span>News</span>'); var nl = div('nl', np);
 
@@ -41,7 +54,9 @@
     var w = 210, h = 44, mn = Math.min.apply(null, pts), mx = Math.max.apply(null, pts), r = (mx - mn) || 1, d = '';
     for (var i = 0; i < pts.length; i++) d += (i ? ' L' : 'M') + (i * w / (pts.length - 1)).toFixed(1) + ',' + (h - 3 - (pts[i] - mn) / r * (h - 6)).toFixed(1);
     var col = pts[pts.length - 1] >= pts[0] ? '#30D158' : '#FF453A', fresh = !o.s.firstChild;
-    o.s.innerHTML = '<svg width="' + w + '" height="' + h + '"><path ' + (fresh ? 'class="draw" pathLength="100" ' : '') + 'd="' + d +
+    var g = '', gx; for (var k = 1; k < 6; k++) { gx = (k * w / 6).toFixed(1);
+      g += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="' + h + '" stroke="rgba(245,245,247,0.08)" stroke-width="1"/>'; }
+    o.s.innerHTML = '<svg width="' + w + '" height="' + h + '">' + g + '<path ' + (fresh ? 'class="draw" pathLength="100" ' : '') + 'd="' + d +
       '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linejoin="round"/></svg>';
   }
   function set(key, v, ch) {

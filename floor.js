@@ -1,7 +1,7 @@
 /* Trading Floor (custom): a compact VWAP/EMA desk line in the stocks panel header, from the sanitized snapshot JSON at
    CONFIG.floorUrl (numbers only). Shows "Feed offline" when there's no URL or it can't be reached. Plain ES5. */
 (function () {
-  var FEED = (window.CONFIG || {}).floorUrl || '';
+  var FEED = (window.CONFIG || {}).floorUrl || 'https://colemlrogalin-source.github.io/tv-home/floor.json';
   function money(v) { var s = Math.abs(v).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ','); return (v < 0 ? '-$' : '$') + s; }
   function render(d) {
     var el = document.getElementById('floorrow'); if (!el) return;

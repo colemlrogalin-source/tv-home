@@ -1,0 +1,51 @@
+/* MARK: - Custom layout: clock top-left, car on the left 60 %, markets column on the right (x 1180..1872). */
+.no-picks #clock { left: 48px; top: 44px; font-size: 200px; }
+#clock .date { font-size: 46px; }
+#quotes { display: none !important; }
+/* Right column (x 1150..1872): Stocks, Crypto, News panels stacked; big type for a couch 3 m from a 75" TV. */
+#mk { position: absolute; left: 1150px; top: 138px; width: 722px; color: #F5F5F7; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
+#mk .mkp { position: relative; margin-bottom: 12px; padding: 8px 24px 8px; border-radius: 26px; background: rgba(18, 18, 20, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.08); }
+#mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 22px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
+#floorrow { position: absolute; right: 0; top: 0; font-size: 22px; font-weight: 500; letter-spacing: 0; text-transform: none; color: rgba(245, 245, 247, 0.75); }
+#floorrow b { color: #F5F5F7; } #floorrow .off { color: rgba(245, 245, 247, 0.45); }
+#mk .mkr { position: relative; height: 48px; line-height: 48px; }
+#mk .mkr:before { content: ''; position: absolute; left: -14px; right: -14px; top: 2px; bottom: 2px; border-radius: 14px; opacity: 0; -webkit-transition: opacity 1.2s; transition: opacity 1.2s; }
+#mk .fu:before { background: rgba(48, 209, 88, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
+#mk .fd:before { background: rgba(255, 69, 58, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
+#mk .mkr div { position: absolute; top: 0; }
+#mk .t { left: 0; width: 100px; font-size: 30px; font-weight: 700; }
+#mk .s { left: 108px; top: 2px !important; height: 44px; line-height: 0; }
+#mk .p { left: 330px; width: 200px; text-align: right; font-size: 38px; font-weight: 600; }
+#mk .c { right: 0; width: 130px; text-align: right; font-size: 28px; font-weight: 600; }
+#mk .up, #floorrow .up { color: #30D158; } #mk .dn, #floorrow .dn { color: #FF453A; }
+#mk .draw { stroke-dasharray: 100; -webkit-animation: draw 1.4s ease-out; animation: draw 1.4s ease-out; }
+@-webkit-keyframes draw { from { stroke-dashoffset: 100; } } @keyframes draw { from { stroke-dashoffset: 100; } }
+#mk .nl { -webkit-transition: opacity 0.4s; transition: opacity 0.4s; }
+#mk .nl.out { opacity: 0; }
+#mk .n { padding: 3px 0 4px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
+#mk .n:first-child { border-top: 0; }
+#mk .nt { font-size: 26px; font-weight: 500; line-height: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#mk .nm { font-size: 19px; line-height: 24px; color: rgba(245, 245, 247, 0.5); }
+.live { display: inline-block; width: 12px; height: 12px; border-radius: 6px; background: #FF453A; margin-left: 10px; vertical-align: 1px;
+  -webkit-animation: pulse 1.6s ease-in-out infinite; animation: pulse 1.6s ease-in-out infinite; }
+@-webkit-keyframes pulse { 0%, 100% { opacity: 1; -webkit-transform: scale(1); } 50% { opacity: 0.25; -webkit-transform: scale(0.7); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.25; transform: scale(0.7); } }
+.drawer-open #mk { display: none; }
+
+/* Background: slow Ken Burns (from the left edge, so the car stays inside 60 %) and a faint light sweep. */
+#sky { -webkit-transform-origin: 0 55%; transform-origin: 0 55%; -webkit-animation: kb 40s ease-in-out infinite alternate; animation: kb 40s ease-in-out infinite alternate; }
+@-webkit-keyframes kb { from { -webkit-transform: scale(1); } to { -webkit-transform: scale(1.03); } }
+@keyframes kb { from { transform: scale(1); } to { transform: scale(1.03); } }
+#sky .sweep { position: absolute; left: 0; top: 0; width: 400px; height: 100%; opacity: 0.6;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%);
+  -webkit-animation: sweep 14s ease-in-out infinite; animation: sweep 14s ease-in-out infinite; }
+@-webkit-keyframes sweep { 0% { -webkit-transform: translate3d(-500px, 0, 0); } 60%, 100% { -webkit-transform: translate3d(1300px, 0, 0); } }
+@keyframes sweep { 0% { transform: translate3d(-500px, 0, 0); } 60%, 100% { transform: translate3d(1300px, 0, 0); } }
+.lite #sky, .lite #sky .sweep, .lite .live, .lite #mk .draw { -webkit-animation: none !important; animation: none !important; }
+.lite #sky .sweep { display: none; }
+
+/* MARK: - Custom background: Cole's blue Model 3 Performance on black, with a light dark veil (forces the dark look). */
+#sky, .night #sky { background: #000 url(bg.jpg) no-repeat 0 0 / 1920px 1080px; }
+#sky .grad, #sky canvas, #sky canvas.on { opacity: 0 !important; }
+#sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0.22) !important; }

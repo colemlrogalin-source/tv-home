@@ -26,8 +26,8 @@
     var p = div('mkp', col), h = div('mkh', p, '<span>' + title + '</span>');
     if (extra) { var e = div('', h); e.id = extra; }
     for (var i = 0; i < keys.length; i++) {
-      var r = div('mkr', p, '<div class="t">' + label(keys[i]) + '</div><div class="s"></div><div class="p">–</div><div class="c"></div>');
-      rows[keys[i]] = {el: r, s: r.children[1], p: r.children[2], c: r.children[3], v: null, line: null};
+      var r = div('mkr', p, '<div class="t">' + label(keys[i]) + '</div><div class="s"></div><div class="p">–</div><div class="c"></div><div class="x"></div>');
+      rows[keys[i]] = {el: r, s: r.children[1], p: r.children[2], c: r.children[3], x: r.children[4], v: null, line: null};
     }
     return p;
   }
@@ -101,13 +101,25 @@
       if (p > 0 && prev > 0) set(s, p, (p / prev - 1) * 100);
     });
   }
+  function pct(a, b) { var v = (a / b - 1) * 100; return (v >= 0 ? '+' : '') + v.toFixed(1) + '%'; }
   function stocks() {
+    var open = mktOpen();
     SYMS.forEach(function (s) {
-      get('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(s) + '?range=1d&interval=5m', function (t) {
+      get('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(s) + '?range=1d&interval=5m&includePrePost=true', function (t) {
         try {
           var res = json(t).chart.result[0], m = res.meta, p = m.regularMarketPrice, prev = m.chartPreviousClose || m.previousClose;
-          var cl = (res.indicators.quote[0].close || []).filter(function (x) { return x > 0; });
-          if (p > 0 && prev > 0) { set(s, p, (p / prev - 1) * 100); if (cl.length > 1) line(s, cl); return; }
+          var ts = res.timestamp || [], q = res.indicators.quote[0].close || [], off = m.gmtoffset || -14400, cl = [], ah = 0;
+          for (var i = 0; i < ts.length; i++) {
+            if (!(q[i] > 0)) continue;
+            var mn = Math.floor(((ts[i] + off) % 86400) / 60);
+            if (mn >= 570 && mn < 960) cl.push(q[i]); else if (mn >= 960) ah = q[i];
+          }
+          if (p > 0 && prev > 0) {
+            set(s, p, (p / prev - 1) * 100); if (cl.length > 1) line(s, cl);
+            var o = rows[s];
+            if (o) o.x.innerHTML = open ? '' : 'Close' + (ah > 0 && s.charAt(0) !== '^' ? ' · AH ' + fmt(ah) + ' <span class="' + (ah >= p ? 'up' : 'dn') + '">' + pct(ah, p) + '</span>' : '');
+            return;
+          }
         } catch (e) {}
         stooq(s);
       });

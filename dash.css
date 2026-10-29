@@ -50,7 +50,7 @@
 #sky .grad, #sky canvas, #sky canvas.on { opacity: 0 !important; }
 #sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0.22) !important; }
 
-/* Layout v2.3: news panel moved to the empty space above the car's trunk (x 600..1110); car baked into bg.jpg (0.9x, moved SW, calipers boosted, glow + reflection). */
+/* Layout v2.3: news panel moved to the empty space above the car's trunk (x 600..1110); car baked into bg.jpg at 0.9x, moved SW (original pixels, black backdrop). */
 #mk .news { position: absolute; left: -570px; top: 0; width: 500px; margin: 0; }
 #sky, .night #sky { background-position: 0 0; }
 
@@ -61,3 +61,14 @@
 .tile .word { font-size: 22px !important; margin-top: -14px !important; height: 28px !important; line-height: 28px !important; }
 .tile img { max-height: 70% !important; } .tile img.logo { height: 62% !important; }
 .tile.focus { -webkit-transform: scale(1.12) !important; transform: scale(1.12) !important; }
+
+/* Fixed shelf (v2.3): the glass bar never resizes, moves or hides with the app count; tiles keep one size. */
+#platter { display: block !important; left: 40px !important; width: 1840px !important; }
+.tile { width: 190px !important; }
+
+/* After hours: a small 'Close · AH price change' line under each stock's price. */
+#mk .x { left: 300px; width: 230px; top: 64px !important; height: 24px; line-height: 24px; text-align: right; font-size: 16px; font-weight: 500; color: rgba(245, 245, 247, 0.55); white-space: nowrap; }
+#mk .x:empty { display: none; }
+#mk .p { top: -9px !important; }
+/* News headlines: a touch smaller, wrap to two lines instead of cutting off. */
+#mk .nt { font-size: 24px !important; line-height: 29px !important; white-space: normal !important; text-overflow: clip !important; max-height: 58px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }

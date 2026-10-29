@@ -6,7 +6,7 @@
 #mk { position: absolute; left: 1150px; top: 138px; width: 722px; color: #F5F5F7; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
 #mk .mkp { position: relative; margin-bottom: 12px; padding: 8px 24px 8px; border-radius: 26px; background: rgba(18, 18, 20, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.08); }
-#mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 22px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
+#mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 22px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
 #floorrow { position: absolute; right: 0; top: 0; font-size: 22px; font-weight: 500; letter-spacing: 0; text-transform: none; color: rgba(245, 245, 247, 0.75); }
 #floorrow b { color: #F5F5F7; } #floorrow .off { color: rgba(245, 245, 247, 0.45); }
 #mk .mkr { position: relative; height: 96px; line-height: 96px; }
@@ -14,10 +14,10 @@
 #mk .fu:before { background: rgba(48, 209, 88, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
 #mk .fd:before { background: rgba(255, 69, 58, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
 #mk .mkr div { position: absolute; top: 0; }
-#mk .t { left: 0; width: 100px; font-size: 30px; font-weight: 700; }
+#mk .t { left: 0; width: 100px; font-size: 30px; font-weight: 500; }
 #mk .s { left: 108px; top: 5px !important; height: 86px; line-height: 0; }
 #mk .p { left: 330px; width: 200px; text-align: right; font-size: 38px; font-weight: 600; }
-#mk .c { right: 0; width: 130px; text-align: right; font-size: 28px; font-weight: 600; }
+#mk .c { right: 0; width: 130px; text-align: right; font-size: 28px; font-weight: 500; }
 #mk .up, #floorrow .up { color: #30D158; } #mk .dn, #floorrow .dn { color: #FF453A; }
 #mk .draw { stroke-dasharray: 100; -webkit-animation: draw 1.4s ease-out; animation: draw 1.4s ease-out; }
 @-webkit-keyframes draw { from { stroke-dashoffset: 100; } } @keyframes draw { from { stroke-dashoffset: 100; } }
@@ -76,3 +76,55 @@
 /* Screensaver = live dashboard: after 5 idle min, keep markets/crypto/desk/news showing with just the clock on top. */
 #saver { background: transparent !important; }
 #saver .photo, #saver .shade { display: none !important; }
+
+/* MARK: - v3 look (Oct 29): soft gray-scale backdrop, car rebuilt to its true aspect with margins, slideshow on top, wide news, movers. */
+#sky, .night #sky { background: #161618 url(bg.jpg) no-repeat 0 0 / 1920px 1080px !important; }
+#sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0) !important; }
+#sky .sweep { opacity: 0.25; }
+#car { position: absolute; left: 117px; top: 150px; width: 927px; height: 348px; background: url(car.png) no-repeat center / contain; -webkit-transition: opacity 1s; transition: opacity 1s; }
+.hasshow #car { opacity: 0; }
+/* Clock moves to the top of the right column; the top-left quarter is for the car / slideshow. */
+.no-picks #clock, #clock { left: 1150px !important; top: 0px !important; font-size: 84px !important; font-weight: 300; line-height: 96px; }
+#clock .date { display: block; font-size: 26px !important; margin-top: -4px !important; font-weight: 400; }
+#mk { top: 172px; }
+#mk .mkp { background: rgba(28, 28, 31, 0.72); }
+#show { position: absolute; left: 139px; top: 40px; width: 880px; height: 495px; border-radius: 28px; overflow: hidden; display: none; background: #111; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
+.hasshow #show { display: block; }
+#show .ph { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat center / cover; opacity: 0; -webkit-transition: opacity 1.6s; transition: opacity 1.6s; }
+#show .ph.on { opacity: 1; }
+/* News fills the whole left column under the car/slideshow. */
+#mk .news { left: -1102px !important; top: 384px !important; width: 998px !important; padding: 10px 32px 12px !important; }
+#mk .nt { font-size: 28px !important; line-height: 34px !important; max-height: 68px; font-weight: 400 !important; }
+#mk .nm { font-size: 20px; }
+/* Movers ticker: one item at a time, slides in, green glow on gains. */
+#movers { position: absolute; left: 48px; top: 914px; width: 1062px; height: 54px; overflow: hidden; display: none; }
+#movers .mvi { position: absolute; left: 0; top: 0; height: 54px; line-height: 54px; padding: 0 28px; border-radius: 20px; white-space: nowrap; font-size: 28px; font-weight: 400; color: #F5F5F7;
+  background: rgba(28, 28, 31, 0.72); opacity: 0; -webkit-transform: translate3d(60px, 0, 0); transform: translate3d(60px, 0, 0); -webkit-transition: opacity 0.8s, -webkit-transform 0.8s; transition: opacity 0.8s, transform 0.8s; }
+#movers .mvi.in { opacity: 1; -webkit-transform: none; transform: none; }
+#movers .mvi.out { opacity: 0; -webkit-transform: translate3d(-60px, 0, 0); transform: translate3d(-60px, 0, 0); }
+#movers .tag { font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.5); margin-right: 18px; }
+#movers b { font-weight: 600; margin-right: 18px; } #movers .d { color: rgba(245, 245, 247, 0.5); margin-left: 6px; font-size: 22px; }
+#movers .g { color: #30D158; font-weight: 600; margin-right: 18px; text-shadow: 0 0 18px rgba(48, 209, 88, 0.55); }
+/* TMDB backdrop still works if a key is ever added. */
+.tmdb #saver .photo, .tmdb #saver .shade { display: block !important; }
+/* Fleet Wall (screensaver, ready desks only). */
+#wall { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 8; display: none; background: radial-gradient(ellipse at 30% 30%, #1d1d20 0%, #0a0a0b 70%); color: #F5F5F7; overflow: hidden; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
+#wall .wbg { position: absolute; left: 820px; top: 560px; width: 1040px; height: 413px; background: no-repeat center / contain; opacity: 0; }
+#wall .wbg.photo { opacity: 0.22; -webkit-animation: wkb 60s ease-in-out infinite alternate; animation: wkb 60s ease-in-out infinite alternate; }
+@-webkit-keyframes wkb { from { -webkit-transform: scale(1); } to { -webkit-transform: scale(1.08) translate3d(-20px, -10px, 0); } }
+@keyframes wkb { from { transform: scale(1); } to { transform: scale(1.08) translate3d(-20px, -10px, 0); } }
+#wall .wclock { position: absolute; right: 72px; top: 48px; font-size: 64px; font-weight: 300; color: rgba(245, 245, 247, 0.8); }
+#wall .lb { position: absolute; left: 96px; top: 64px; width: 1300px; }
+#wall .lbh { font-size: 28px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); margin-bottom: 12px; }
+#wall .lbh .cd { margin-left: 28px; text-transform: none; letter-spacing: 0; color: rgba(245, 245, 247, 0.75); }
+#wall .lbr { font-size: 40px; line-height: 64px; font-weight: 400; }
+#wall .rk { display: inline-block; width: 56px; color: rgba(245, 245, 247, 0.45); } #wall .nm { display: inline-block; width: 520px; }
+#wall .pv { font-weight: 600; }
+#wall .panel { position: absolute; left: 96px; top: 380px; width: 1728px; height: 620px; opacity: 0; -webkit-transition: opacity 1.2s; transition: opacity 1.2s; }
+#wall .panel.in { opacity: 1; }
+#wall .pn { font-size: 34px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245, 245, 247, 0.6); }
+#wall .big { font-size: 150px; line-height: 170px; font-weight: 600; }
+#wall .pl { font-size: 64px; line-height: 84px; } #wall .pl span { margin-right: 56px; font-weight: 600; }
+#wall .rec { font-size: 32px; margin-top: 10px; color: rgba(245, 245, 247, 0.7); } #wall .as { margin-left: 32px; font-size: 26px; color: rgba(245, 245, 247, 0.45); }
+#wall svg { position: absolute; right: 0; top: 40px; width: 720px; height: 220px; }
+#wall .up { color: #30D158; } #wall .dn { color: #FF453A; }

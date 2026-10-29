@@ -51,11 +51,17 @@
   function fmt(v) { return v >= 1000 ? Math.round(v).toLocaleString('en-US') : v.toFixed(2); }
   function spark(o) {
     var pts = o.line; if (!pts || pts.length < 2) { o.s.innerHTML = ''; return; }
-    var w = 210, h = 44, mn = Math.min.apply(null, pts), mx = Math.max.apply(null, pts), r = (mx - mn) || 1, d = '';
+    var w = 210, h = 44, mn = Math.min.apply(null, pts), mx = Math.max.apply(null, pts), d = '';
+    if (o.hl) { mx = Math.max(mx, o.hl[0]); mn = Math.min(mn, o.hl[1]); }
+    var r = (mx - mn) || 1;
     for (var i = 0; i < pts.length; i++) d += (i ? ' L' : 'M') + (i * w / (pts.length - 1)).toFixed(1) + ',' + (h - 3 - (pts[i] - mn) / r * (h - 6)).toFixed(1);
     var col = pts[pts.length - 1] >= pts[0] ? '#30D158' : '#FF453A', fresh = !o.s.firstChild;
     var g = '', gx; for (var k = 1; k < 6; k++) { gx = (k * w / 6).toFixed(1);
       g += '<line x1="' + gx + '" y1="0" x2="' + gx + '" y2="' + h + '" stroke="rgba(245,245,247,0.08)" stroke-width="1"/>'; }
+    if (o.hl) for (var q = 0; q < 2; q++) { var yy = (h - 3 - (o.hl[q] - mn) / r * (h - 6)).toFixed(1);
+      g += '<line x1="0" y1="' + yy + '" x2="' + w + '" y2="' + yy + '" stroke="rgba(245,245,247,0.18)" stroke-width="1" stroke-dasharray="3,3"/>' +
+        '<text x="' + (w - 1) + '" y="' + (q ? +yy - 2 : +yy + 9) + '" text-anchor="end" font-size="9" fill="rgba(245,245,247,0.45)">' +
+        (q ? 'L ' : 'H ') + kfmt(o.hl[q]) + '</text>'; }
     o.s.innerHTML = '<svg width="' + w + '" height="' + h + '">' + g + '<path ' + (fresh ? 'class="draw" pathLength="100" ' : '') + 'd="' + d +
       '" fill="none" stroke="' + col + '" stroke-width="3" stroke-linejoin="round"/></svg>';
   }
@@ -68,6 +74,22 @@
     var t0 = 0;
     raf(function step(t) { if (!t0) t0 = t; var k = Math.min(1, (t - t0) / 600); k = 1 - Math.pow(1 - k, 3);
       if (o.v !== v) return; o.p.textContent = fmt(from + (v - from) * k); if (k < 1) raf(step); });
+  }
+  function kfmt(v) { return v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : v >= 10000 ? 1 : 2) + 'k' : v.toFixed(2); }
+  function hilo(key, hs, ls) { var o = rows[key]; hs = hs.filter(function (x) { return x > 0; }); ls = ls.filter(function (x) { return x > 0; });
+    if (!o || !hs.length || !ls.length) return; o.hl = [Math.max.apply(null, hs), Math.min.apply(null, ls)]; if (o.line) spark(o); }
+  // 30-day high/low: Yahoo daily bars for stocks, Binance daily klines for crypto (no keys). Every 30 min.
+  function ranges() {
+    SYMS.forEach(function (s) {
+      get('https://query1.finance.yahoo.com/v8/finance/chart/' + encodeURIComponent(s) + '?range=1mo&interval=1d', function (t) {
+        try { var q = json(t).chart.result[0].indicators.quote[0]; hilo(s, q.high || [], q.low || []); } catch (e) {}
+      });
+    });
+    COINS.forEach(function (k) {
+      get(hosts[hi] + '/api/v3/klines?symbol=' + k + 'USDT&interval=1d&limit=30', function (t) {
+        var j = json(t); if (j && j.length) hilo(k, j.map(function (r) { return +r[2]; }), j.map(function (r) { return +r[3]; }));
+      });
+    });
   }
   function line(key, pts) { var o = rows[key]; if (!o) return; o.line = pts; spark(o); }
 
@@ -140,7 +162,7 @@
     });
   }
   var sky = document.getElementById('sky'); div('sweep', sky);
-  stocks(); crypto(); klines(); news();
+  stocks(); crypto(); klines(); news(); ranges(); setInterval(ranges, 1800000);
   setInterval(stocks, 60000); setInterval(crypto, 5000); setInterval(klines, 300000); setInterval(news, 600000); setInterval(showNews, 10000);
   window.MarketsMock = function (q, lines, h) { for (var k in q) set(k, q[k][0], q[k][1]); for (k in lines) line(k, lines[k]); heads = h; at = 0; showNews(); };
 })();

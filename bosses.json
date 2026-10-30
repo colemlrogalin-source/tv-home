@@ -1,13 +1,13 @@
 {
- "asOf": "2026-10-30 02:57 PM ET",
+ "asOf": "2026-10-30 03:02 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -30.59,
-   "week": 201.45,
-   "total": 282.62,
-   "equity": 10282.62,
+   "day": -27.51,
+   "week": 204.53,
+   "total": 285.7,
+   "equity": 10285.7,
    "note": ""
   },
   {
@@ -66,14 +66,14 @@
   ],
   [
    "now",
-   10282.62
+   10285.7
   ]
  ],
  "vwap": {
-  "equity": 10282.62,
+  "equity": 10285.7,
   "start": 10000,
-  "pnlToday": -30.59,
-  "pnlTotal": 282.62,
+  "pnlToday": -27.51,
+  "pnlTotal": 285.7,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -86,46 +86,502 @@
    10079.12,
    10334.61,
    10313.21,
-   10282.62
+   10285.7
   ],
-  "asOf": "2026-10-30T14:57",
+  "asOf": "2026-10-30T15:02",
   "positions": [
    {
     "sym": "META",
-    "upnl": 28.08,
+    "upnl": 27.99,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 134.94,
+    "upnl": 135.33,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -27.16,
+    "upnl": -24.99,
     "entry": 346.99,
     "qty": 7
    },
    {
     "sym": "XLF",
-    "upnl": -1.04,
+    "upnl": -0.78,
     "entry": 56.5,
     "qty": 13
    },
    {
     "sym": "XLE",
-    "upnl": 0.18,
+    "upnl": 0.2,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -17.04,
+    "upnl": -16.71,
     "entry": 525.03,
     "qty": 3
    }
   ]
- }
+ },
+ "desks": [
+  {
+   "name": "VWAP/EMA Agent",
+   "tag": "VWAP/EMA crossover stock model \u00b7 paper",
+   "equity": 10285.7,
+   "total": 285.7,
+   "today": -27.51,
+   "start": 10000,
+   "record": "4\u20134",
+   "positions": [
+    {
+     "sym": "GOOGL",
+     "side": "SHORT",
+     "qty": "3",
+     "entry": 322.59,
+     "now": 277.48,
+     "pnl": 135.33,
+     "pct": 13.98,
+     "held": "7d 23h"
+    },
+    {
+     "sym": "META",
+     "side": "SHORT",
+     "qty": "1",
+     "entry": 640.7,
+     "now": 612.71,
+     "pnl": 27.99,
+     "pct": 4.37,
+     "held": "7d 23h"
+    },
+    {
+     "sym": "XLE",
+     "side": "LONG",
+     "qty": "1",
+     "entry": 69.61,
+     "now": 69.81,
+     "pnl": 0.2,
+     "pct": 0.29,
+     "held": "7d 2h"
+    },
+    {
+     "sym": "XLF",
+     "side": "LONG",
+     "qty": "13",
+     "entry": 56.5,
+     "now": 56.44,
+     "pnl": -0.78,
+     "pct": -0.11,
+     "held": "7d 23h"
+    },
+    {
+     "sym": "MSFT",
+     "side": "LONG",
+     "qty": "3",
+     "entry": 525.03,
+     "now": 519.46,
+     "pnl": -16.71,
+     "pct": -1.06,
+     "held": "5h 32m"
+    },
+    {
+     "sym": "AAPL",
+     "side": "LONG",
+     "qty": "7",
+     "entry": 346.99,
+     "now": 343.42,
+     "pnl": -24.99,
+     "pct": -1.03,
+     "held": "7d 23h"
+    }
+   ],
+   "closed": [
+    {
+     "sym": "GOOGL",
+     "side": "SHORT",
+     "qty": "2",
+     "pnl": 89.12,
+     "pct": 13.81,
+     "held": "7d 23h",
+     "when": "Oct 30 2:15 PM",
+     "ts": 1793384100
+    },
+    {
+     "sym": "AMZN",
+     "side": "LONG",
+     "qty": "7",
+     "pnl": 29.4,
+     "pct": 1.69,
+     "held": "4d 3h",
+     "when": "Oct 27 1:29 PM",
+     "ts": 1793122140
+    },
+    {
+     "sym": "MSFT",
+     "side": "LONG",
+     "qty": "4",
+     "pnl": 43.6,
+     "pct": 2.09,
+     "held": "4d 22h",
+     "when": "Oct 27 1:29 PM",
+     "ts": 1793122140
+    },
+    {
+     "sym": "AMD",
+     "side": "SHORT",
+     "qty": "1",
+     "pnl": 2.09,
+     "pct": 0.4,
+     "held": "36m",
+     "when": "Oct 23 3:55 PM",
+     "ts": 1792785300
+    },
+    {
+     "sym": "AMD",
+     "side": "LONG",
+     "qty": "1",
+     "pnl": -1.03,
+     "pct": -0.2,
+     "held": "1h 17m",
+     "when": "Oct 23 3:19 PM",
+     "ts": 1792783140
+    }
+   ],
+   "note": ""
+  },
+  {
+   "name": "Crypto CEO",
+   "tag": "Crypto Trend50 \u00b7 paper",
+   "equity": 3000.48,
+   "total": 0.48,
+   "today": 0.06,
+   "start": 3000.0,
+   "record": "",
+   "positions": [],
+   "closed": [],
+   "note": "Position details stay on Cole's Mac"
+  },
+  {
+   "name": "Stock Exchange Quant",
+   "tag": "Stock Exchange Quant \u00b7 paper",
+   "equity": 39545.86,
+   "total": -454.14,
+   "today": -2174.38,
+   "start": 40000.0,
+   "record": "",
+   "positions": [],
+   "closed": [],
+   "note": "17 open positions \u00b7 details stay on Cole's Mac"
+  },
+  {
+   "name": "Sports Quant",
+   "tag": "Kalshi \u00b7 real money",
+   "equity": 358.33,
+   "total": 108.33,
+   "today": 2.42,
+   "start": 250.0,
+   "record": "3\u20131",
+   "positions": [
+    {
+     "sym": "7-leg NFL combo \u00b7 pays $454.54",
+     "side": "",
+     "qty": "$0.97",
+     "entry": null,
+     "now": null,
+     "pnl": null,
+     "pct": null,
+     "held": ""
+    },
+    {
+     "sym": "Raiders \u00b7 pays $41.03",
+     "side": "",
+     "qty": "$20.00",
+     "entry": null,
+     "now": null,
+     "pnl": null,
+     "pct": null,
+     "held": ""
+    },
+    {
+     "sym": "Browns \u00b7 pays $25.88",
+     "side": "",
+     "qty": "$10.00",
+     "entry": null,
+     "now": null,
+     "pnl": null,
+     "pct": null,
+     "held": ""
+    },
+    {
+     "sym": "politics (Kalshi desk)",
+     "side": "",
+     "qty": "",
+     "entry": null,
+     "now": null,
+     "pnl": null,
+     "pct": null,
+     "held": ""
+    }
+   ],
+   "closed": [
+    {
+     "sym": "Jalen Coker ATD",
+     "side": "WIN",
+     "qty": "$50.00",
+     "pnl": 99.15,
+     "pct": 198.3,
+     "held": "4h 0m",
+     "when": "Oct 29 11:23 PM",
+     "ts": 1793330580
+    },
+    {
+     "sym": "Panthers ML",
+     "side": "LOSS",
+     "qty": "$50.00",
+     "pnl": -50.0,
+     "pct": -100.0,
+     "held": "3h 59m",
+     "when": "Oct 29 11:23 PM",
+     "ts": 1793330580
+    },
+    {
+     "sym": "Chuba Hubbard ATD",
+     "side": "WIN",
+     "qty": "$50.00",
+     "pnl": 46.61,
+     "pct": 93.22,
+     "held": "",
+     "when": "Oct 29 10:14 PM",
+     "ts": 1793326440
+    },
+    {
+     "sym": "Brewers ML WS Game 5 @ Rays",
+     "side": "WIN",
+     "qty": "$75.00",
+     "pnl": 35.22,
+     "pct": 46.96,
+     "held": "1h 30m",
+     "when": "Oct 28 11:00 PM",
+     "ts": 1793242800
+    }
+   ],
+   "note": ""
+  }
+ ],
+ "events": [
+  {
+   "id": "v-c-GOOGL-2026-10-30 02:15 PM ET-2",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "GOOGL",
+   "qty": 2,
+   "price": 278.03,
+   "pnl": 89.12,
+   "pct": 13.81,
+   "ts": 1793384100
+  },
+  {
+   "id": "v-o-MSFT-2026-10-30 09:30 AM ET",
+   "kind": "open",
+   "desk": "VWAP/EMA Agent",
+   "sym": "MSFT",
+   "qty": 3,
+   "price": 525.03,
+   "side": "long",
+   "ts": 1793367000
+  },
+  {
+   "id": "s-c-#29-2 Jalen 2026-10-29 23:23",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Jalen Coker ATD",
+   "qty": 50.0,
+   "price": null,
+   "pnl": 99.15,
+   "pct": 198.3,
+   "ts": 1793330580
+  },
+  {
+   "id": "s-c-#29-4 Panthe2026-10-29 23:23",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Panthers ML",
+   "qty": 50.0,
+   "price": null,
+   "pnl": -50.0,
+   "pct": -100.0,
+   "ts": 1793330580
+  },
+  {
+   "id": "s-c-#29-3 Chuba 2026-10-29 22:14",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Chuba Hubbard ATD",
+   "qty": 50.0,
+   "price": null,
+   "pnl": 46.61,
+   "pct": 93.22,
+   "ts": 1793326440
+  },
+  {
+   "id": "s-o-#29-4 Panthe2026-10-29 19:24",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "Panthers ML",
+   "qty": 50.0,
+   "price": null,
+   "ts": 1793316240
+  },
+  {
+   "id": "s-o-#29-2 Jalen 2026-10-29 19:23",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "Jalen Coker ATD",
+   "qty": 50.0,
+   "price": null,
+   "ts": 1793316180
+  },
+  {
+   "id": "s-c-#28-1L Brewe2026-10-28 23:00",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Brewers ML WS Game 5 @ Rays",
+   "qty": 75.0,
+   "price": null,
+   "pnl": 35.22,
+   "pct": 46.96,
+   "ts": 1793242800
+  },
+  {
+   "id": "s-o-#28-1L Brewe2026-10-28 21:30",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "Brewers ML WS Game 5 @ Rays",
+   "qty": 75.0,
+   "price": null,
+   "ts": 1793237400
+  },
+  {
+   "id": "v-c-AMZN-2026-10-27 01:29 PM ET-7",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "AMZN",
+   "qty": 7,
+   "price": 253.19,
+   "pnl": 29.4,
+   "pct": 1.69,
+   "ts": 1793122140
+  },
+  {
+   "id": "v-c-MSFT-2026-10-27 01:29 PM ET-4",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "MSFT",
+   "qty": 4,
+   "price": 532.36,
+   "pnl": 43.6,
+   "pct": 2.09,
+   "ts": 1793122140
+  },
+  {
+   "id": "v-c-AMD-2026-10-23 03:55 PM ET-1",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "AMD",
+   "qty": 1,
+   "price": 514.76,
+   "pnl": 2.09,
+   "pct": 0.4,
+   "ts": 1792785300
+  },
+  {
+   "id": "v-c-AMD-2026-10-23 03:19 PM ET-1",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "AMD",
+   "qty": 1,
+   "price": 517.01,
+   "pnl": -1.03,
+   "pct": -0.2,
+   "ts": 1792783140
+  },
+  {
+   "id": "v-c-AMD-2026-10-23 02:02 PM ET-1",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "AMD",
+   "qty": 1,
+   "price": 517.88,
+   "pnl": -2.5,
+   "pct": -0.49,
+   "ts": 1792778520
+  },
+  {
+   "id": "v-c-JPM-2026-10-23 12:57 PM ET-2",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "JPM",
+   "qty": 2,
+   "price": 331.63,
+   "pnl": -1.1,
+   "pct": -0.17,
+   "ts": 1792774620
+  },
+  {
+   "id": "v-c-NVDA-2026-10-23 12:17 PM ET-3",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "NVDA",
+   "qty": 3,
+   "price": 212.36,
+   "pnl": -1.44,
+   "pct": -0.23,
+   "ts": 1792772220
+  },
+  {
+   "id": "v-o-XLE-2026-10-23 12:12 PM ET",
+   "kind": "open",
+   "desk": "VWAP/EMA Agent",
+   "sym": "XLE",
+   "qty": 1,
+   "price": 69.61,
+   "side": "long",
+   "ts": 1792771920
+  },
+  {
+   "id": "v-c-IWM-2026-10-22 03:56 PM ET-9",
+   "kind": "close",
+   "desk": "VWAP/EMA Agent",
+   "sym": "IWM",
+   "qty": 9,
+   "price": 276.7,
+   "pnl": 6.57,
+   "pct": 0.26,
+   "ts": 1792698960
+  },
+  {
+   "id": "v-o-XLF-2026-10-22 03:25 PM ET",
+   "kind": "open",
+   "desk": "VWAP/EMA Agent",
+   "sym": "XLF",
+   "qty": 13,
+   "price": 56.5,
+   "side": "long",
+   "ts": 1792697100
+  },
+  {
+   "id": "v-o-AAPL-2026-10-22 03:15 PM ET",
+   "kind": "open",
+   "desk": "VWAP/EMA Agent",
+   "sym": "AAPL",
+   "qty": 7,
+   "price": 346.99,
+   "side": "long",
+   "ts": 1792696500
+  }
+ ]
 }

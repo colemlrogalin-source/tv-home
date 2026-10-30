@@ -1,17 +1,17 @@
 /* MARK: - Custom layout: clock top-left, car on the left 60 %, markets column on the right (x 1180..1872). */
-.no-picks #clock { left: 48px; top: 44px; font-size: 200px; }
-#clock .date { font-size: 46px; }
+.no-picks #clock { left: 48px; top: 44px; font-size: 198.5px; }
+#clock .date { font-size: 44.5px; }
 #quotes { display: none !important; }
 /* Right column (x 1150..1872): Stocks, Crypto, News panels stacked; big type for a couch 3 m from a 75" TV. */
 #mk .mkp { position: relative; margin-bottom: 12px; padding: 8px 24px 8px; border-radius: 26px; background: rgba(18, 18, 20, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.08); }
-#mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 22px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
+#mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 20.5px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
 #mk .nl { -webkit-transition: opacity 0.4s; transition: opacity 0.4s; }
 #mk .nl.out { opacity: 0; }
 #mk .n { padding: 3px 0 4px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
 #mk .n:first-child { border-top: 0; }
-#mk .nt { font-size: 26px; font-weight: 500; line-height: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-#mk .nm { font-size: 19px; line-height: 24px; color: rgba(245, 245, 247, 0.5); }
+#mk .nt { font-size: 24.5px; font-weight: 500; line-height: 32px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#mk .nm { font-size: 17.5px; line-height: 24px; color: rgba(245, 245, 247, 0.5); }
 .live { display: inline-block; width: 12px; height: 12px; border-radius: 6px; background: #FF453A; margin-left: 10px; vertical-align: 1px;
   -webkit-animation: pulse 1.6s ease-in-out infinite; animation: pulse 1.6s ease-in-out infinite; }
 @-webkit-keyframes pulse { 0%, 100% { opacity: 1; -webkit-transform: scale(1); } 50% { opacity: 0.25; -webkit-transform: scale(0.7); } }
@@ -35,7 +35,7 @@
 #platter { top: 972px !important; height: 80px !important; border-radius: 28px !important; }
 #platter .more { top: 31px !important; }
 .tile { top: 984px !important; height: 56px !important; border-radius: 14px !important; }
-.tile .word { font-size: 22px !important; margin-top: -14px !important; height: 28px !important; line-height: 28px !important; }
+.tile .word { font-size: 20.5px !important; margin-top: -14px !important; height: 28px !important; line-height: 28px !important; }
 .tile img { max-height: 70% !important; } .tile img.logo { height: 62% !important; }
 .tile.focus { -webkit-transform: scale(1.12) !important; transform: scale(1.12) !important; }
 
@@ -44,7 +44,7 @@
 .tile { width: 190px !important; }
 
 /* News headlines: a touch smaller, wrap to two lines instead of cutting off. */
-#mk .nt { font-size: 24px !important; line-height: 29px !important; white-space: normal !important; text-overflow: clip !important; max-height: 58px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+#mk .nt { font-size: 22.5px !important; line-height: 29px !important; white-space: normal !important; text-overflow: clip !important; max-height: 58px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
 /* Screensaver = live dashboard: after 5 idle min, keep markets/crypto/desk/news showing with just the clock on top. */
 #saver { background: transparent !important; }
@@ -55,23 +55,23 @@
 #sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0) !important; }
 .hasshow #car { opacity: 0; }
 /* Clock moves to the top of the right column; the top-left quarter is for the car / slideshow. */
-.no-picks #clock, #clock { left: 1150px !important; top: 0px !important; font-size: 84px !important; font-weight: 300; line-height: 96px; }
-#clock .date { display: block; font-size: 26px !important; margin-top: -4px !important; font-weight: 400; }
+.no-picks #clock, #clock { left: 1150px !important; top: 0px !important; font-size: 82.5px !important; font-weight: 300; line-height: 96px; }
+#clock .date { display: block; font-size: 24.5px !important; margin-top: -4px !important; font-weight: 400; }
 #mk .mkp { background: rgba(28, 28, 31, 0.72); }
 #show { position: absolute; left: 139px; top: 40px; width: 880px; height: 495px; border-radius: 28px; overflow: hidden; display: none; background: #111; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
 .hasshow #show { display: block; }
 #show .ph { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat center / cover; opacity: 0; -webkit-transition: opacity 1.6s; transition: opacity 1.6s; }
 #show .ph.on { opacity: 1; }
-#mk .nt { font-size: 28px !important; line-height: 34px !important; max-height: 68px; font-weight: 400 !important; }
-#mk .nm { font-size: 20px; }
+#mk .nt { font-size: 26.5px !important; line-height: 34px !important; max-height: 68px; font-weight: 400 !important; }
+#mk .nm { font-size: 18.5px; }
 /* Movers ticker: one item at a time, slides in, green glow on gains. */
 #movers { position: absolute; left: 48px; top: 914px; width: 1062px; height: 54px; overflow: hidden; display: none; }
-#movers .mvi { position: absolute; left: 0; top: 0; height: 54px; line-height: 54px; padding: 0 28px; border-radius: 20px; white-space: nowrap; font-size: 28px; font-weight: 400; color: #F5F5F7;
+#movers .mvi { position: absolute; left: 0; top: 0; height: 54px; line-height: 54px; padding: 0 28px; border-radius: 20px; white-space: nowrap; font-size: 26.5px; font-weight: 400; color: #F5F5F7;
   background: rgba(28, 28, 31, 0.72); opacity: 0; -webkit-transform: translate3d(60px, 0, 0); transform: translate3d(60px, 0, 0); -webkit-transition: opacity 0.8s, -webkit-transform 0.8s; transition: opacity 0.8s, transform 0.8s; }
 #movers .mvi.in { opacity: 1; -webkit-transform: none; transform: none; }
 #movers .mvi.out { opacity: 0; -webkit-transform: translate3d(-60px, 0, 0); transform: translate3d(-60px, 0, 0); }
-#movers .tag { font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.5); margin-right: 18px; }
-#movers b { font-weight: 600; margin-right: 18px; } #movers .d { color: rgba(245, 245, 247, 0.5); margin-left: 6px; font-size: 22px; }
+#movers .tag { font-size: 18.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.5); margin-right: 18px; }
+#movers b { font-weight: 600; margin-right: 18px; } #movers .d { color: rgba(245, 245, 247, 0.5); margin-left: 6px; font-size: 20.5px; }
 #movers .g { color: #30D158; font-weight: 600; margin-right: 18px; text-shadow: 0 0 18px rgba(48, 209, 88, 0.55); }
 /* TMDB backdrop still works if a key is ever added. */
 .tmdb #saver .photo, .tmdb #saver .shade { display: block !important; }
@@ -80,51 +80,51 @@
 #car { position: absolute; left: 40px; top: 28px; width: 834px; height: 313px; background: url(car.png) no-repeat left top / contain; }
 #mk { position: absolute; left: 0; top: 0; width: 1920px; height: 0; color: #F5F5F7; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
 #mk .mkp { position: absolute; margin: 0; padding: 14px 28px 16px; }
-#mk .mkh .cd { float: right; text-transform: none; letter-spacing: 0; font-size: 18px; color: rgba(245, 245, 247, 0.45); }
+#mk .mkh .cd { float: right; text-transform: none; letter-spacing: 0; font-size: 16.5px; color: rgba(245, 245, 247, 0.45); }
 #mk .news { left: 48px; top: 360px; width: 1006px; height: 214px; overflow: hidden; }
 #mk .news .nt { -webkit-line-clamp: 1 !important; max-height: 34px !important; }
 #mk .bosses { left: 48px; top: 600px; width: 1006px; }
 #mk .desk { left: 1150px; top: 176px; width: 666px; }
 #mk table { width: 100%; border-collapse: collapse; }
-#mk th { font-size: 18px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); text-align: right; padding: 4px 0; }
-#mk td { font-size: 26px; font-weight: 500; text-align: right; padding: 3px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); white-space: nowrap; }
+#mk th { font-size: 16.5px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); text-align: right; padding: 4px 0; }
+#mk td { font-size: 24.5px; font-weight: 500; text-align: right; padding: 3px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); white-space: nowrap; }
 #mk th:first-child, #mk td:first-child { text-align: left; }
-#mk .bosses td { font-size: 25px; } #mk .bosses td em { font-style: normal; font-size: 18px; margin-left: 10px; opacity: 0.75; }
-#mk .bosses .nm { font-weight: 600; } #mk .bosses s { text-decoration: none; font-size: 16px; padding: 1px 8px; border-radius: 6px; background: rgba(245, 245, 247, 0.12); color: rgba(245, 245, 247, 0.6); vertical-align: 3px; }
+#mk .bosses td { font-size: 23.5px; } #mk .bosses td em { font-style: normal; font-size: 16.5px; margin-left: 10px; opacity: 0.75; }
+#mk .bosses .nm { font-weight: 600; } #mk .bosses s { text-decoration: none; font-size: 14.5px; padding: 1px 8px; border-radius: 6px; background: rgba(245, 245, 247, 0.12); color: rgba(245, 245, 247, 0.6); vertical-align: 3px; }
 #mk .up { color: #30D158; } #mk .dn { color: #FF453A; } #mk .na { color: rgba(245, 245, 247, 0.35); }
-#mk .dn2 { font-size: 30px; font-weight: 600; color: #FFD60A; margin: 2px 0 10px; }
+#mk .dn2 { font-size: 28.5px; font-weight: 600; color: #FFD60A; margin: 2px 0 10px; }
 #mk .kp { overflow: hidden; margin-bottom: 8px; } #mk .kp div { float: left; width: 33.3%; }
-#mk .kp i { display: block; font-style: normal; font-size: 18px; color: rgba(245, 245, 247, 0.5); }
-#mk .kp b { display: block; font-size: 40px; line-height: 50px; font-weight: 600; } #mk .k2 b { font-size: 32px; line-height: 42px; }
+#mk .kp i { display: block; font-style: normal; font-size: 16.5px; color: rgba(245, 245, 247, 0.5); }
+#mk .kp b { display: block; font-size: 38.5px; line-height: 50px; font-weight: 600; } #mk .k2 b { font-size: 30.5px; line-height: 42px; }
 #mk .eq { height: 120px; margin: 6px 0 8px; }
-#mk .as { margin-top: 8px; font-size: 16px; color: rgba(245, 245, 247, 0.4); } #mk .off { font-size: 26px; color: rgba(245, 245, 247, 0.45); }
+#mk .as { margin-top: 8px; font-size: 14.5px; color: rgba(245, 245, 247, 0.4); } #mk .off { font-size: 24.5px; color: rgba(245, 245, 247, 0.45); }
 
 /* MARK: - v4 (Oct 30): edge-to-edge executive layout (dark navy panels, gold accents), weather, crypto desk, light looping animations. */
 #car { left: 20px; top: 14px; }
 #mk .mkp { background: rgba(14, 20, 34, 0.86); border: 1px solid rgba(255, 255, 255, 0.07); border-top: 2px solid rgba(255, 214, 10, 0.55); border-radius: 18px; padding: 14px 24px; box-sizing: border-box; overflow: hidden; }
-#mk .mkh { font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD60A; font-weight: 600; margin-bottom: 6px; }
-#mk .mkh .cd { font-size: 16px; color: rgba(245, 245, 247, 0.42); font-weight: 400; }
+#mk .mkh { font-size: 16.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD60A; font-weight: 600; margin-bottom: 6px; }
+#mk .mkh .cd { font-size: 14.5px; color: rgba(245, 245, 247, 0.42); font-weight: 400; }
 #mk .wx { left: 866px; top: 24px; width: 262px; height: 316px; text-align: left; }
-#mk .wt { font-size: 92px; line-height: 96px; font-weight: 300; } #mk .wc { font-size: 26px; font-weight: 600; } #mk .wd { font-size: 19px; color: rgba(245, 245, 247, 0.6); margin: 4px 0 8px; }
-#mk .wf { font-size: 22px; line-height: 32px; border-top: 1px solid rgba(255, 255, 255, 0.07); } #mk .wf span { display: inline-block; width: 82px; color: rgba(245, 245, 247, 0.55); }
+#mk .wt { font-size: 90.5px; line-height: 96px; font-weight: 300; } #mk .wc { font-size: 24.5px; font-weight: 600; } #mk .wd { font-size: 17.5px; color: rgba(245, 245, 247, 0.6); margin: 4px 0 8px; }
+#mk .wf { font-size: 20.5px; line-height: 32px; border-top: 1px solid rgba(255, 255, 255, 0.07); } #mk .wf span { display: inline-block; width: 82px; color: rgba(245, 245, 247, 0.55); }
 #mk .bosses { left: 20px; top: 352px; width: 1108px; height: 262px; }
-#mk .bosses td { font-size: 30px; padding: 8px 0; } #mk .bosses td.big { font-size: 44px; font-weight: 700; }
-#mk .bosses .nm { font-size: 30px; } #mk .bosses small { display: block; font-size: 15px; font-weight: 400; color: rgba(245, 245, 247, 0.4); margin-left: 26px; }
+#mk .bosses td { font-size: 28.5px; padding: 8px 0; } #mk .bosses td.big { font-size: 42.5px; font-weight: 700; }
+#mk .bosses .nm { font-size: 28.5px; } #mk .bosses small { display: block; font-size: 13.5px; font-weight: 400; color: rgba(245, 245, 247, 0.4); margin-left: 26px; }
 #mk .dot { display: inline-block; width: 12px; height: 12px; border-radius: 6px; background: #30D158; margin-right: 14px; vertical-align: 5px; -webkit-animation: pulse 2.4s ease-in-out infinite; animation: pulse 2.4s ease-in-out infinite; }
 #mk .dot.off { background: rgba(245, 245, 247, 0.25); -webkit-animation: none; animation: none; }
 @-webkit-keyframes pulse { 50% { opacity: 0.25; } } @keyframes pulse { 50% { opacity: 0.25; } }
-#mk .crypto { left: 20px; top: 626px; width: 528px; height: 280px; } #mk .crypto .kp b { font-size: 34px; line-height: 42px; } #mk .crypto .eq { height: 140px; margin: 2px 0; } #mk .crypto .as { margin-top: 0; }
-#mk .news { left: 560px; top: 626px; width: 568px; height: 280px; } #mk .news .nt { font-size: 26px !important; line-height: 32px !important; -webkit-line-clamp: 3 !important; max-height: 96px !important; }
+#mk .crypto { left: 20px; top: 626px; width: 528px; height: 280px; } #mk .crypto .kp b { font-size: 32.5px; line-height: 42px; } #mk .crypto .eq { height: 140px; margin: 2px 0; } #mk .crypto .as { margin-top: 0; }
+#mk .news { left: 560px; top: 626px; width: 568px; height: 280px; } #mk .news .nt { font-size: 24.5px !important; line-height: 32px !important; -webkit-line-clamp: 3 !important; max-height: 96px !important; }
 #mk .news .n { margin-bottom: 10px; }
 #mk .desk { left: 1146px; top: 108px; width: 754px; height: 852px; padding: 14px 4px 14px 4px; } #mk .desk > div, #mk .desk .pt { margin-left: 20px; margin-right: 20px; } #mk .desk .eq { margin: 0; }
-#mk .desk .kp b { font-size: 46px; line-height: 54px; } #mk .desk .k2 b { font-size: 32px; line-height: 40px; }
-#mk .dn2 { font-size: 26px; margin: 0 0 8px; }
-#mk .sub { font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); margin: 6px 0 2px; }
+#mk .desk .kp b { font-size: 44.5px; line-height: 54px; } #mk .desk .k2 b { font-size: 30.5px; line-height: 40px; }
+#mk .dn2 { font-size: 24.5px; margin: 0 0 8px; }
+#mk .sub { font-size: 14.5px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); margin: 6px 0 2px; }
 #mk .eq { height: 250px; }
-#mk .desk td { font-size: 25px; padding: 5px 0; } #mk .pt { opacity: 0; -webkit-transition: opacity 0.6s; transition: opacity 0.6s; } #mk .pt.in { opacity: 1; }
-#mk .pgn { font-size: 16px; color: rgba(245, 245, 247, 0.45); text-align: right; margin-top: 4px; }
-#mk svg .gl { stroke: rgba(255, 255, 255, 0.08); stroke-width: 1; } #mk svg .ax { fill: rgba(245, 245, 247, 0.45); font-size: 15px; }
-#mk svg .hl { fill: rgba(245, 245, 247, 0.8); font-size: 15px; font-weight: 600; } #mk svg .mkh { fill: #FFD60A; } #mk svg .mkl { fill: #64D2FF; }
+#mk .desk td { font-size: 23.5px; padding: 5px 0; } #mk .pt { opacity: 0; -webkit-transition: opacity 0.6s; transition: opacity 0.6s; } #mk .pt.in { opacity: 1; }
+#mk .pgn { font-size: 14.5px; color: rgba(245, 245, 247, 0.45); text-align: right; margin-top: 4px; }
+#mk svg .gl { stroke: rgba(255, 255, 255, 0.08); stroke-width: 1; } #mk svg .ax { fill: rgba(245, 245, 247, 0.45); font-size: 13.5px; }
+#mk svg .hl { fill: rgba(245, 245, 247, 0.8); font-size: 13.5px; font-weight: 600; } #mk svg .mkh { fill: #FFD60A; } #mk svg .mkl { fill: #64D2FF; }
 #mk svg .ln { stroke-dasharray: 2400; -webkit-animation: draw 14s ease-in-out infinite; animation: draw 14s ease-in-out infinite; }
 @-webkit-keyframes draw { 0% { stroke-dashoffset: 2400; } 18%, 100% { stroke-dashoffset: 0; } } @keyframes draw { 0% { stroke-dashoffset: 2400; } 18%, 100% { stroke-dashoffset: 0; } }
 #mk svg .pl { -webkit-animation: pulse 2.4s ease-in-out infinite; animation: pulse 2.4s ease-in-out infinite; }
@@ -132,40 +132,64 @@
 .lite #mk svg .ln, .lite #mk .dot, .lite #mk svg .pl { -webkit-animation: none; animation: none; }
 #mk .desk { top: 128px; height: 832px; } #mk .desk .mkh .cd { display: block; float: none; margin-top: 2px; } #mk .eq { height: 300px; }
 #mk .bosses { height: 262px; } #mk .bosses td { padding: 5px 0; } #mk .bosses small { display: inline; margin-left: 10px; vertical-align: 4px; }
-#mk .crypto .kp b { font-size: 28px; line-height: 36px; } #mk .crypto .eq { height: 150px; } #mk .crypto .as { white-space: nowrap; overflow: hidden; }
+#mk .crypto .kp b { font-size: 26.5px; line-height: 36px; } #mk .crypto .eq { height: 150px; } #mk .crypto .as { white-space: nowrap; overflow: hidden; }
 #mk .desk { top: 164px; height: 796px; } #mk .eq { height: 300px; }
-#mk .bosses td em { display: block; font-size: 16px; margin: 0; line-height: 18px; } #mk .bosses td.big { font-size: 42px; } #mk .bosses td { padding: 3px 0 4px; line-height: 40px; }
-#mk .cl b { font-size: 34px; font-weight: 600; margin-right: 22px; } #mk .cl i { font-style: normal; font-size: 17px; color: rgba(245,245,247,0.45); }
+#mk .bosses td em { display: block; font-size: 14.5px; margin: 0; line-height: 18px; } #mk .bosses td.big { font-size: 40.5px; } #mk .bosses td { padding: 3px 0 4px; line-height: 40px; }
+#mk .cl b { font-size: 32.5px; font-weight: 600; margin-right: 22px; } #mk .cl i { font-style: normal; font-size: 15.5px; color: rgba(245,245,247,0.45); }
 #mk .crypto .eq { height: 130px; margin: 6px 0 2px; }
 #mk .eq { height: 280px; } #mk .bosses { height: 270px; } #mk .crypto, #mk .news { top: 634px; height: 272px; }
 #mk .bosses .nm { color: #F5F5F7; } #mk .news .nt { -webkit-line-clamp: 2 !important; max-height: 64px !important; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; }
-#mk .cl { white-space: nowrap; } #mk .cl b { font-size: 30px; margin-right: 14px; }
+#mk .cl { white-space: nowrap; } #mk .cl b { font-size: 28.5px; margin-right: 14px; }
 #mk .crypto .mkh .cd { float: none; display: block; margin-top: 2px; }
-#mk .crypto .as { margin-top: 2px; font-size: 15px; }
+#mk .crypto .as { margin-top: 2px; font-size: 13.5px; }
 #mk .eq { height: 236px; } #mk .crypto .eq { height: 130px; }
 
 /* MARK: - v5: weather rain-first; bosses with equity; stock section in Stock Exchange Quant's floor style (/workspace/shared/stock-floor-style/floor.css gold theme). */
 #mk .wx { padding: 12px 18px; } #mk .wrow { height: 64px; } #mk .wrow span { display: inline-block; vertical-align: middle; }
-#mk .wi svg { width: 52px; height: 52px; } #mk .wt { font-size: 50px; line-height: 60px; font-weight: 400; margin: 0 8px 0 6px; }
-#mk .wr { text-align: center; } #mk .wr b { display: block; font-size: 46px; line-height: 48px; font-weight: 700; color: #64D2FF; } #mk .wr i { font-style: normal; font-size: 14px; color: rgba(245, 245, 247, 0.6); }
-#mk .wc { font-size: 21px; font-weight: 600; margin-top: 4px; } #mk .wn { font-size: 18px; color: rgba(245, 245, 247, 0.7); margin: 2px 0 6px; } #mk .wn b { color: #64D2FF; }
-#mk .wf { font-size: 20px; line-height: 34px; } #mk .wf span { width: 64px; } #mk .wf em { display: inline-block; width: 30px; vertical-align: -6px; } #mk .wf b { display: inline-block; width: 64px; color: #64D2FF; font-weight: 700; }
-#mk .wx .as { margin-top: 2px; font-size: 14px; }
-#mk .bosses th { padding-right: 0; } #mk .bosses td.eqv { font-size: 30px; color: #F5F5F7; padding-left: 12px; } #mk .bosses .nm { font-size: 28px; }
-#mk .bosses small { display: block; margin: 0 0 0 26px; font-size: 15px; line-height: 16px; vertical-align: 0; }
-#mk .bosses td.big { font-size: 40px; }
+#mk .wi svg { width: 52px; height: 52px; } #mk .wt { font-size: 48.5px; line-height: 60px; font-weight: 400; margin: 0 8px 0 6px; }
+#mk .wr { text-align: center; } #mk .wr b { display: block; font-size: 44.5px; line-height: 48px; font-weight: 700; color: #64D2FF; } #mk .wr i { font-style: normal; font-size: 12.5px; color: rgba(245, 245, 247, 0.6); }
+#mk .wc { font-size: 19.5px; font-weight: 600; margin-top: 4px; } #mk .wn { font-size: 16.5px; color: rgba(245, 245, 247, 0.7); margin: 2px 0 6px; } #mk .wn b { color: #64D2FF; }
+#mk .wf { font-size: 18.5px; line-height: 34px; } #mk .wf span { width: 64px; } #mk .wf em { display: inline-block; width: 30px; vertical-align: -6px; } #mk .wf b { display: inline-block; width: 64px; color: #64D2FF; font-weight: 700; }
+#mk .wx .as { margin-top: 2px; font-size: 12.5px; }
+#mk .bosses th { padding-right: 0; } #mk .bosses td.eqv { font-size: 28.5px; color: #F5F5F7; padding-left: 12px; } #mk .bosses .nm { font-size: 26.5px; }
+#mk .bosses small { display: block; margin: 0 0 0 26px; font-size: 13.5px; line-height: 16px; vertical-align: 0; }
+#mk .bosses td.big { font-size: 38.5px; }
 /* Stock section: SEQ floor palette (bg #101010, border #6a4514, text #f6ecd8, muted #c4b091, gold #ffb000, up #7CFF6B, down #ff5d4a; tables #131e28/#cfd6e0, #60d6b4/#ff7781; mono labels). */
 #mk .desk { background: rgba(16, 16, 16, 0.95); border: 1px solid #6a4514; border-top: 2px solid #ffb000; color: #f6ecd8; }
 #mk .desk .mkh, #mk .desk .sub, #mk .desk .kp i, #mk .desk th, #mk .desk .as { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
 #mk .desk .mkh { color: #ffb000; } #mk .desk .dn2 { color: #ffb000; } #mk .desk .kp i, #mk .desk .sub, #mk .desk .as, #mk .desk .pgn { color: #c4b091; }
-#mk .desk .kp i { font-size: 15px; text-transform: uppercase; letter-spacing: 0.06em; } #mk .desk .kp div:first-child b { color: #ffb000; }
+#mk .desk .kp i { font-size: 13.5px; text-transform: uppercase; letter-spacing: 0.06em; } #mk .desk .kp div:first-child b { color: #ffb000; }
 #mk .desk .up { color: #7CFF6B; } #mk .desk .dn { color: #ff5d4a; }
-#mk .desk th { background: #131e28; color: #cfd6e0; padding: 6px 8px; font-size: 15px; } #mk .desk td { color: #e6edf3; padding: 5px 8px; border-top: 1px solid rgba(106, 69, 20, 0.45); }
+#mk .desk th { background: #131e28; color: #cfd6e0; padding: 6px 8px; font-size: 13.5px; } #mk .desk td { color: #e6edf3; padding: 5px 8px; border-top: 1px solid rgba(106, 69, 20, 0.45); }
 #mk .desk td.up { color: #60d6b4; } #mk .desk td.dn { color: #ff7781; } #mk .desk td:first-child { font-weight: 700; }
 #mk .desk svg .gl { stroke: rgba(196, 176, 145, 0.14); } #mk .desk svg .ax { fill: #c4b091; } #mk .desk svg .mkh { fill: #ffb000; }
 #mk .desk svg .ln { stroke-width: 2.6; }
-#mk .wrow { height: 58px; white-space: nowrap; } #mk .wt { font-size: 46px; line-height: 58px; } #mk .wc { font-size: 20px; margin: 0; white-space: normal; width: 96px; line-height: 22px; }
-#mk .wr { text-align: left; font-size: 17px; color: rgba(245, 245, 247, 0.75); margin-top: 4px; } #mk .wr b { display: inline; font-size: 44px; line-height: 50px; }
-#mk .wf { white-space: nowrap; font-size: 19px; line-height: 32px; } #mk .wf span { width: 56px; } #mk .wf b { width: 58px; }
-#mk .bosses td { line-height: 32px; padding: 3px 0; } #mk .bosses .nm { font-size: 26px; } #mk .bosses td.big { font-size: 36px; } #mk .bosses td.eqv { font-size: 26px; } #mk .bosses td { font-size: 26px; }
-#mk .wf { line-height: 27px; font-size: 18px; } #mk .wn { margin: 0 0 4px; font-size: 17px; } #mk .wr { margin-top: 2px; } #mk .wr b { line-height: 46px; } #mk .wx .mkh { margin-bottom: 2px; }
+#mk .wrow { height: 58px; white-space: nowrap; } #mk .wt { font-size: 44.5px; line-height: 58px; } #mk .wc { font-size: 18.5px; margin: 0; white-space: normal; width: 96px; line-height: 22px; }
+#mk .wr { text-align: left; font-size: 15.5px; color: rgba(245, 245, 247, 0.75); margin-top: 4px; } #mk .wr b { display: inline; font-size: 42.5px; line-height: 50px; }
+#mk .wf { white-space: nowrap; font-size: 17.5px; line-height: 32px; } #mk .wf span { width: 56px; } #mk .wf b { width: 58px; }
+#mk .bosses td { line-height: 32px; padding: 3px 0; } #mk .bosses .nm { font-size: 24.5px; } #mk .bosses td.big { font-size: 34.5px; } #mk .bosses td.eqv { font-size: 24.5px; } #mk .bosses td { font-size: 24.5px; }
+#mk .wf { line-height: 27px; font-size: 16.5px; } #mk .wn { margin: 0 0 4px; font-size: 15.5px; } #mk .wr { margin-top: 2px; } #mk .wr b { line-height: 46px; } #mk .wx .mkh { margin-bottom: 2px; }
+
+/* v6: crypto panel removed (now a bosses row); news takes the full width. Sports Quant row added. */
+#mk .crypto { display: none !important; }
+#mk .bosses { top: 344px; height: 318px; }
+#mk .bosses td { line-height: 28px; padding: 2px 0; }
+#mk .news { left: 20px; top: 672px; width: 1108px; height: 234px; }
+#mk .news .nl { display: block; }
+#mk .news .n { margin-bottom: 8px; }
+#mk .news .nt { -webkit-line-clamp: 1 !important; max-height: 30px !important; font-size: 22.5px !important; line-height: 29px !important; }
+#mk .news .nd { font-size: 15.5px; line-height: 19px; color: rgba(245,245,247,0.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#mk .news .nm { font-size: 13.5px; }
+#mk .news .pg { float: right; font-size: 13.5px; color: rgba(245,245,247,0.45); }
+#mk .news .nl { display: flex; flex-wrap: wrap; justify-content: space-between; } #mk .news .n { width: 538px; }
+#mk .news .nd b { font-weight: 600; color: rgba(245,245,247,0.8); margin-right: 6px; }
+#mk .bosses { height: 262px; } #mk .news { top: 624px; height: 282px; }
+#mk .news .nl { width: 100%; } #mk .news .n { width: 536px; margin-bottom: 6px; }
+#mk .news .nt { -webkit-line-clamp: 2 !important; max-height: 54px !important; line-height: 27px !important; }
+#mk .bosses { height: 280px; } #mk .news { top: 634px; height: 272px; }
+#mk .news .n { width: 518px; margin-bottom: 10px; }
+#mk .news .nd { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; max-height: 38px; }
+#mk .bosses { height: 294px; } #mk .news { top: 652px; height: 254px; }
+#mk .news .nd { -webkit-line-clamp: 1; max-height: 19px; } #mk .news .n { margin-bottom: 14px; }
+#mk .news { height: 290px; } #mk .news .nd { -webkit-line-clamp: 2; max-height: 38px; } #mk .news .n { margin-bottom: 10px; } #movers { top: 948px; }
+#mk .news { top: 646px; height: 276px; } #mk .news .n { margin-bottom: 4px; } #movers { top: 926px; height: 46px; } #movers .mvi { height: 46px; line-height: 46px; }

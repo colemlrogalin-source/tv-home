@@ -51,3 +51,47 @@
   }
   setInterval(tick, 2000);
 })();
+
+/* v6 (Oct 30): app row + YouTube. Ships via GitHub Pages, no reinstall.
+   - YouTube tile -> TizenTube inside TizenBrew (app control 'module' = @foxreis/tizentube, the same call TizenTube's own
+     service makes; TizenBrew reads it in WebSocketClient.js). Falls back to Samsung's YouTube when TizenBrew isn't installed.
+   - Shelf: drops Netflix, Disney+, Apple TV, Alexa; adds ESPN (Samsung id 3201708014618, ESPN+ lives inside it) if installed.
+     Applied once per version (fmtv.shelfFix), so later edits made on the TV stick. */
+(function () {
+  if (!window.TV || !window.Prefs || !window.tizen || !tizen.application) return;
+  var DROP = /netflix|disney|apple ?tv|aria-video|alexa/i, ESPN = /^espn|3201708014618/i, YT = /youtube(?!.*kids)|111299001912/i;
+  var brew = null;
+  try {
+    tizen.application.getAppsInfo(function (all) {
+      for (var i = 0; i < all.length; i++) if (/\.(TizenBrewStandalone|TizenTubeStandalone)$/.test(all[i].id)) { brew = all[i].id; if (/TizenTube/.test(brew)) break; }
+    }, function () {});
+  } catch (e) {}
+  var launch0 = TV.launch;
+  TV.launch = function (id, params, done) {
+    if (brew && YT.test(id) && !/kids/i.test(id)) {
+      try {
+        tizen.application.launchAppControl(new tizen.ApplicationControl('http://tizen.org/appcontrol/operation/view', null, null, null,
+          [new tizen.ApplicationControlData('module', [JSON.stringify({moduleName: '@foxreis/tizentube', moduleType: 'npm', args: ''})])]),
+          brew, function () { if (done) done(true); }, function () { launch0(id, params, done); });
+        return;
+      } catch (e) {}
+    }
+    launch0(id, params, done);
+  };
+  var VER = 'v6';
+  try { if (localStorage.getItem('fmtv.shelfFix') === VER) return; } catch (e) { return; }
+  TV.apps(function (list) {
+    var byId = {}, i, ids = [], cur = Prefs.shelf();
+    for (i = 0; i < list.length; i++) byId[list[i].id] = list[i];
+    function bad(id) { var a = byId[id]; return !a || DROP.test(id) || DROP.test(a.title || ''); }
+    if (cur && cur.length) { for (i = 0; i < cur.length; i++) if (!bad(cur[i])) ids.push(cur[i]); }
+    else {
+      var ORDER = [/youtube/i, /prime video|amazon/i, /^(hbo )?max$|hbo max/i, /hulu/i, /paramount/i, /peacock/i, /nfl/i, /globoplay/i, /jellyfin/i, /spotify/i];
+      for (var o = 0; o < ORDER.length; o++) for (i = 0; i < list.length; i++)
+        if (ORDER[o].test(list[i].title || '') && !bad(list[i].id) && ids.indexOf(list[i].id) < 0 && !/kids/i.test(list[i].title)) { ids.push(list[i].id); break; }
+    }
+    for (i = 0; i < list.length; i++) if ((ESPN.test(list[i].title || '') || ESPN.test(list[i].id)) && ids.indexOf(list[i].id) < 0) { ids.splice(Math.min(1, ids.length), 0, list[i].id); break; }
+    try { localStorage.setItem('fmtv.shelfFix', VER); } catch (e) {}
+    if (ids.length && JSON.stringify(ids) !== JSON.stringify(cur || [])) { Prefs.set('shelf', ids); location.reload(); }
+  });
+})();

@@ -4,6 +4,7 @@
 (function () {
   var BASE = window.DASH_BASE && window.DASH_REMOTE !== false ? window.DASH_BASE : '';
   var FEEDS = [['CNBC', 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114'],
+               ['CNBC', 'https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664'],
                ['MarketWatch', 'https://feeds.content.dowjones.io/public/rss/mw_topstories']];
   function get(url, cb) {
     var x = new XMLHttpRequest();
@@ -21,7 +22,7 @@
   function pc(v, base) { if (v == null || !base) return ''; var p = v / base * 100; return (p >= 0 ? '+' : '\u2212') + Math.abs(p).toFixed(1) + '%'; }
   function ud(v) { return v == null ? 'na' : v >= 0 ? 'up' : 'dn'; }
   var col = div('', document.getElementById('top')); col.id = 'mk';
-  var desk = div('mkp desk', col), bp = div('mkp bosses', col), cp = div('mkp crypto', col), wx = div('mkp wx', col);
+  var desk = div('mkp desk', col), bp = div('mkp bosses', col), wx = div('mkp wx', col);
   var np = div('mkp news', col); div('mkh', np, '<span>News</span><span class="cd">CNBC \u00b7 MarketWatch RSS \u00b7 every 10 min</span>'); var nl = div('nl', np);
 
   /* Chart: thin gridlines, $ labels on the left, date labels on the x axis, high/low markers, line redraws on a loop. */
@@ -76,7 +77,7 @@
       '<div><i>Today P&amp;L</i><b class="' + ud(v.pnlToday) + '">' + money(v.pnlToday, true) + '</b></div></div>' +
       '<div class="kp k2"><div><i>Return</i><b class="' + ud(v.pnlTotal) + '">' + pc(v.pnlTotal, v.start) + '</b></div><div><i>Record (W\u2013L)</i><b>' + (rec.wins || 0) + '\u2013' + (rec.losses || 0) + '</b></div>' +
       '<div><i>Open \u00b7 invested</i><b>' + PS.length + ' \u00b7 ' + money(ex) + '</b></div></div>' +
-      '<div class="sub">Equity by trading day (start of day) \u00b7 start ' + money(v.start) + '</div><div class="eq">' + chart(cv, v.pnlTotal >= 0, 714, 236, v.start) + '</div>' +
+      '<div class="sub">Equity by trading day (start of day)</div><div class="eq">' + chart(cv, v.pnlTotal >= 0, 714, 236, v.start) + '</div>' +
       '<div class="sub">Open positions</div>';
     ptab = div('pt', desk); drawPos(); div('as', desk, 'Snapshot ' + ago(v.asOf) + ' \u00b7 TV checks every 60 s' + (PS.length > MAXR ? ' \u00b7 pages rotate 8 s' : ''));
   }
@@ -84,26 +85,24 @@
   function cell(v, s, big) { return v == null ? '<td class="na">\u2013</td>' : '<td class="' + ud(v) + (big ? ' big' : '') + '">' + money(v, true) + '<em>' + pc(v, s) + '</em></td>'; }
   function cryptoDesk(f) { var ds = (f && f.desks) || []; for (var k = 0; k < ds.length; k++) if (ds[k].id === 'crypto' && typeof ds[k].pnlTotal === 'number') return ds[k]; return null; }
   function deskById(f, id) { var ds = (f && f.desks) || []; for (var k = 0; k < ds.length; k++) if (ds[k].id === id && typeof ds[k].pnlTotal === 'number') return ds[k]; return null; }
+  // Crypto has no chart panel any more: its row says whether it has traded (floor.json trades list, last 24 h).
+  function cryptoNote(f, d) { var n = 0, t = (f && f.trades) || [];
+    for (var k = 0; k < t.length; k++) if (t[k].desk === 'Crypto') n++;
+    return 'Mac \u00b7 5 min' + (n ? ' \u00b7 ' + n + ' trade' + (n > 1 ? 's' : '') + ' in 24 h' : ' \u00b7 no trades in 24 h'); }
   function drawBosses(bj, f) {
     var rows = ((bj && bj.bosses) || []).slice(), cd = cryptoDesk(f), sd = deskById(f, 'stock'), vw = f && f.vwap;
     for (var i = 0; i < rows.length; i++) { var o = rows[i];
-      if (o.name === 'Crypto CEO' && cd) rows[i] = {name: 'Crypto CEO', equity: cd.equity, start: cd.start, day: cd.pnlToday, week: cd.pnlWeek != null ? cd.pnlWeek : cd.pnlTotal, total: cd.pnlTotal, src: 'Mac \u00b7 5 min', live: 1};
+      if (o.name === 'Crypto CEO' && cd) rows[i] = {name: 'Crypto CEO', equity: cd.equity, start: cd.start, day: cd.pnlToday, week: cd.pnlWeek != null ? cd.pnlWeek : cd.pnlTotal, total: cd.pnlTotal, src: cryptoNote(f, cd), live: 1};
       else if (o.name === 'VWAP/EMA Agent' && vw) rows[i] = {name: 'VWAP/EMA Agent', equity: vw.equity, start: vw.start, day: vw.pnlToday, week: o.week, total: vw.pnlTotal, src: 'snapshot ' + ago(vw.asOf), live: 1};
       else if (o.name === 'Stock Exchange Quant' && sd) rows[i] = {name: 'Stock Exchange Quant', equity: sd.equity, start: sd.start, day: sd.pnlToday, week: sd.pnlWeek, total: sd.pnlTotal, src: 'Mac \u00b7 5 min', live: 1};
       else if (o.name === 'Stock Exchange Quant') { o.src = 'snapshot ' + ago(o.asOf); o.live = 1; }
+      else if (o.asOf && !o.src) { o.src = (o.note ? o.note + ' \u00b7 ' : '') + ago(o.asOf); o.live = 1; }
     }
     rows.sort(function (a, b) { var x = a.day == null ? (a.total == null ? -2e9 : -1e9) : a.day, y = b.day == null ? (b.total == null ? -2e9 : -1e9) : b.day; return y - x; });
-    var h = '<div class="mkh"><span>Bosses \u00b7 live P/L \u00b7 best today on top</span><span class="cd">re-sorts every 60 s</span></div><table><tr><th></th><th>Equity</th><th>Today</th><th>7 days</th><th>Total</th></tr>';
+    var h = '<div class="mkh"><span>Bosses \u00b7 live P/L \u00b7 best today on top</span><span class="cd">re-sorts every 60 s</span></div><table><tr><th></th><th>Today</th><th>7 days</th><th>Total</th></tr>';
     for (i = 0; i < rows.length; i++) { var r = rows[i];
-      h += '<tr><td class="nm">' + (r.live ? '<span class="dot"></span>' : '<span class="dot off"></span>') + r.name + '<small>' + (r.src || '') + ' \u00b7 start ' + money(r.start) + '</small></td><td class="eqv">' + (r.equity == null ? '\u2013' : '$' + r.equity.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/, ',')) + '</td>' + cell(r.day, r.start) + cell(r.week, r.start) + cell(r.total, r.start, 1) + '</tr>'; }
+      h += '<tr><td class="nm">' + (r.live ? '<span class="dot"></span>' : '<span class="dot off"></span>') + r.name + '<small>' + (r.equity == null ? '' : 'Equity $' + r.equity.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/, ',') + ' \u00b7 ') + (r.src || '') + '</small></td>' + cell(r.day, r.start) + cell(r.week, r.start) + cell(r.total, r.start, 1) + '</tr>'; }
     bp.innerHTML = h + '</table>';
-  }
-  function drawCrypto(f) {
-    var d = cryptoDesk(f);
-    if (!d) { cp.innerHTML = '<div class="mkh"><span>Crypto desk</span></div><div class="off">No crypto feed in floor.json</div>'; return; }
-    cp.innerHTML = '<div class="mkh"><span>Crypto CEO \u00b7 Trend50</span></div>' +
-      '<div class="cl"><b>$' + d.equity.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/, ',') + '</b><b class="' + ud(d.pnlTotal) + '">' + money(d.pnlTotal, true) + ' \u00b7 ' + pc(d.pnlTotal, d.start) + '</b></div>' +
-      '<div class="eq">' + chart(f.crypto_curve || d.curve, d.pnlTotal >= 0, 480, 130) + '</div><div class="as">Last ' + (d.curve || []).length + ' checks \u00b7 last bar ' + ago(d.asOf) + '</div><div class="as">Mac feed every 5 min \u00b7 desk checks every 4 h</div>';
   }
   /* Weather: Open-Meteo (free, no key), Delray Beach from config.js, every 30 min. Rain chance is the headline. */
   var SUN = '<circle cx="24" cy="24" r="9" fill="#FFD60A"/><g stroke="#FFD60A" stroke-width="3" stroke-linecap="round"><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M10 38l4-4M34 14l4-4"/></g>',
@@ -134,7 +133,7 @@
     });
   }
   var F = null, B = null;
-  function redraw() { drawDesk(F, B); drawBosses(B, F); drawCrypto(F); }
+  function redraw() { drawDesk(F, B); drawBosses(B, F); }
   function feeds() {
     get(BASE + 'floor.json?t=' + Date.now(), function (t) { var j = json(t); if (j) F = j; redraw(); });
     get(BASE + 'bosses.json?t=' + Date.now(), function (t) { var j = json(t); if (j) B = j; redraw(); });
@@ -144,29 +143,32 @@
   function decode(s) { var d = document.createElement('textarea'); d.innerHTML = s.replace(/<!\[CDATA\[|\]\]>/g, ''); return d.value.replace(/\s+/g, ' '); }
   function clock(t) { if (!t) return ''; var d = new Date(t), h = d.getHours(), m = d.getMinutes();
     return (h % 12 || 12) + ':' + (m < 10 ? '0' : '') + m + (h < 12 ? ' AM ET' : ' PM ET'); }
+  var NPER = 4; function esc(x) { return String(x || '').replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
   function showNews() {
     if (!heads.length) return;
     nl.className = 'nl out';
     setTimeout(function () {
       var h = '';
-      for (var i = 0; i < 2 && i < heads.length; i++) { var n = heads[(at + i) % heads.length];
-        h += '<div class="n"><div class="nt">' + n.title.replace(/</g, '&lt;') + '</div><div class="nm">' + n.src + (n.t ? ' · ' + clock(n.t) : '') + '</div></div>'; }
-      nl.innerHTML = h; nl.className = 'nl'; at = (at + 1) % heads.length;
+      var pages = Math.ceil(heads.length / NPER), p = at % pages;
+      for (var i = p * NPER; i < p * NPER + NPER && i < heads.length; i++) { var n = heads[i];
+        h += '<div class="n"><div class="nt">' + esc(n.title) + '</div><div class="nd"><b>' + n.src + (n.t ? ' \u00b7 ' + clock(n.t) : '') + '</b> ' + esc(n.desc) + '</div></div>'; }
+      nl.innerHTML = h; nl.className = 'nl'; np.querySelector('.cd').innerHTML = 'CNBC \u00b7 MarketWatch RSS \u00b7 page ' + (p + 1) + '/' + pages; at = (p + 1) % pages;
     }, lite() ? 0 : 400);
   }
   function news() {
-    var got = [], left = FEEDS.length;
+    var got = [], left = FEEDS.length, seen = {};
     FEEDS.forEach(function (f) {
       get(f[1], function (t) {
         if (t) { var items = t.split('<item');
           for (var i = 1; i < items.length && i <= 8; i++) {
             var m = /<title>([\s\S]*?)<\/title>/.exec(items[i]), d = /<pubDate>([\s\S]*?)<\/pubDate>/.exec(items[i]);
-            if (m) got.push({title: decode(m[1]), src: f[0], t: d ? Date.parse(d[1]) || 0 : 0});
+            var ds = /<description>([\s\S]*?)<\/description>/.exec(items[i]), ti = m && decode(m[1]);
+            if (m && !seen[ti]) { seen[ti] = 1; got.push({title: ti, desc: ds ? decode(ds[1]).replace(/<[^>]*>/g, '').trim() : '', src: f[0], t: d ? Date.parse(d[1]) || 0 : 0}); }
           } }
-        if (--left === 0 && got.length) { got.sort(function (a, b) { return b.t - a.t; }); heads = got.slice(0, 12); at = 0; showNews(); }
+        if (--left === 0 && got.length) { got.sort(function (a, b) { return b.t - a.t; }); heads = got.slice(0, 2 * NPER); at = 0; showNews(); }
       });
     });
   }
-  feeds(); news(); weather(); setInterval(weather, 1800000); setInterval(feeds, 60000); setInterval(news, 600000); setInterval(showNews, 10000);
+  feeds(); news(); weather(); setInterval(weather, 1800000); setInterval(feeds, 60000); setInterval(news, 600000); setInterval(showNews, 15000);
   window.MarketsMock = function (h) { heads = h; at = 0; showNews(); };
 })();

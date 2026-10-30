@@ -27,6 +27,17 @@
    "note": "Mac status.json copy, Oct 29 1:06 AM ET",
    "equity": 41167.16,
    "asOf": "2026-10-29T05:06:13+00:00"
+  },
+  {
+   "name": "Sports Quant",
+   "start": 250.0,
+   "day": 68.92,
+   "week": 108.02,
+   "total": 108.02,
+   "equity": 358.02,
+   "note": "Kalshi (Cole's video)",
+   "asOf": "2026-10-29T23:31:00-04:00",
+   "src_file": "/workspace/betlog/changes.md 10/29 11:31 PM: total $358.02, 24h +$68.92; deposit $250 on 10/27 (bankroll.json)"
   }
  ],
  "vwapCurve": [

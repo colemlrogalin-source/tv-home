@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 05:26 PM ET",
+ "asOf": "2026-10-30 05:31 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -22,12 +22,12 @@
   {
    "name": "Stock Exchange Quant",
    "start": 10000.0,
-   "equity": 9927.6,
-   "day": -398.99,
-   "week": -72.4,
-   "total": -72.4,
+   "equity": 9927.66,
+   "day": -398.34,
+   "week": -72.34,
+   "total": -72.34,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:26:35.494926-04:00"
+   "asOf": "2026-10-30T17:31:59.366346-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T17:26",
+  "asOf": "2026-10-30T17:31",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "7h 56m",
+     "held": "8h 1m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -260,9 +260,9 @@
   {
    "name": "Stock Exchange Quant",
    "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
-   "equity": 9927.6,
-   "total": -72.4,
-   "today": -398.99,
+   "equity": 9927.66,
+   "total": -72.34,
+   "today": -398.34,
    "start": 10000.0,
    "record": "8\u20131",
    "noStop": true,
@@ -272,11 +272,11 @@
      "side": "Long",
      "qty": "7.75",
      "entry": 377.872258,
-     "now": 371.9,
-     "value": 2882.22,
+     "now": 372.0,
+     "value": 2883.0,
      "stop": null,
-     "pnl": -46.28,
-     "pct": -1.58,
+     "pnl": -45.51,
+     "pct": -1.55,
      "held": "1d 5h"
     },
     {
@@ -284,11 +284,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 702.881429,
-     "now": 690.99,
-     "value": 1209.23,
+     "now": 691.0399,
+     "value": 1209.32,
      "stop": null,
-     "pnl": -20.81,
-     "pct": -1.69,
+     "pnl": -20.72,
+     "pct": -1.68,
      "held": "8d 2h"
     },
     {
@@ -296,11 +296,11 @@
      "side": "Long",
      "qty": "1.25",
      "entry": 769.016,
-     "now": 756.1,
-     "value": 945.12,
+     "now": 756.02,
+     "value": 945.02,
      "stop": null,
-     "pnl": -16.14,
-     "pct": -1.68,
+     "pnl": -16.25,
+     "pct": -1.69,
      "held": "1d 6h"
     },
     {
@@ -308,12 +308,12 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 515.72,
-     "now": 505.0204,
+     "now": 505.03,
      "value": 378.77,
      "stop": null,
      "pnl": -8.02,
      "pct": -2.07,
-     "held": "8d 4h"
+     "held": "8d 5h"
     },
     {
      "sym": "WDC",
@@ -325,7 +325,7 @@
      "stop": null,
      "pnl": 12.5,
      "pct": 3.54,
-     "held": "8d 4h"
+     "held": "8d 5h"
     },
     {
      "sym": "LRCX",
@@ -337,18 +337,18 @@
      "stop": null,
      "pnl": 7.6,
      "pct": 2.16,
-     "held": "8d 4h"
+     "held": "8d 5h"
     },
     {
      "sym": "MRVL",
      "side": "Long",
      "qty": "1.75",
      "entry": 225.52,
-     "now": 196.65,
-     "value": 344.14,
+     "now": 196.41,
+     "value": 343.72,
      "stop": null,
-     "pnl": -50.52,
-     "pct": -12.8,
+     "pnl": -50.94,
+     "pct": -12.91,
      "held": "8d 4h"
     },
     {
@@ -356,23 +356,23 @@
      "side": "Long",
      "qty": "0.5",
      "entry": 635.08,
-     "now": 644.25,
-     "value": 322.12,
+     "now": 643.99,
+     "value": 322.0,
      "stop": null,
-     "pnl": 4.58,
-     "pct": 1.44,
-     "held": "8d 4h"
+     "pnl": 4.46,
+     "pct": 1.4,
+     "held": "8d 5h"
     },
     {
      "sym": "DELL",
      "side": "Long",
      "qty": "0.75",
      "entry": 454.54,
-     "now": 423.4,
-     "value": 317.55,
+     "now": 423.5,
+     "value": 317.62,
      "stop": null,
-     "pnl": -23.36,
-     "pct": -6.85,
+     "pnl": -23.28,
+     "pct": -6.83,
      "held": "8d 4h"
     },
     {
@@ -380,11 +380,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 419.08,
-     "now": 399.0982,
-     "value": 299.32,
+     "now": 399.5,
+     "value": 299.62,
      "stop": null,
-     "pnl": -14.99,
-     "pct": -4.77,
+     "pnl": -14.69,
+     "pct": -4.67,
      "held": "8d 4h"
     },
     {
@@ -392,24 +392,24 @@
      "side": "Long",
      "qty": "4.5",
      "entry": 87.631111,
-     "now": 65.0305,
-     "value": 292.64,
+     "now": 65.03,
+     "value": 292.63,
      "stop": null,
      "pnl": -101.7,
      "pct": -25.79,
-     "held": "8d 4h"
+     "held": "8d 5h"
     },
     {
      "sym": "SNDK",
      "side": "Long",
      "qty": "0.25",
      "entry": 1278.63,
-     "now": 1146.3,
-     "value": 286.57,
+     "now": 1146.1,
+     "value": 286.52,
      "stop": null,
-     "pnl": -33.08,
-     "pct": -10.35,
-     "held": "8d 4h"
+     "pnl": -33.13,
+     "pct": -10.37,
+     "held": "8d 5h"
     },
     {
      "sym": "COST",
@@ -428,23 +428,23 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 867.14,
-     "now": 885.0,
-     "value": 221.25,
+     "now": 884.21,
+     "value": 221.05,
      "stop": null,
-     "pnl": 4.46,
-     "pct": 2.06,
-     "held": "8d 4h"
+     "pnl": 4.27,
+     "pct": 1.97,
+     "held": "8d 5h"
     },
     {
      "sym": "LITE",
      "side": "Long",
      "qty": "0.25",
      "entry": 802.3,
-     "now": 840.0,
-     "value": 210.0,
+     "now": 839.0,
+     "value": 209.75,
      "stop": null,
-     "pnl": 9.43,
-     "pct": 4.7,
+     "pnl": 9.18,
+     "pct": 4.57,
      "held": "8d 7h"
     },
     {
@@ -452,11 +452,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 345.37,
-     "now": 344.89,
-     "value": 86.22,
+     "now": 344.8,
+     "value": 86.2,
      "stop": null,
-     "pnl": -0.12,
-     "pct": -0.14,
+     "pnl": -0.14,
+     "pct": -0.17,
      "held": "8d 7h"
     },
     {
@@ -464,11 +464,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 321.68,
-     "now": 274.9662,
-     "value": 68.74,
+     "now": 274.91,
+     "value": 68.73,
      "stop": null,
-     "pnl": -11.68,
-     "pct": -14.52,
+     "pnl": -11.69,
+     "pct": -14.54,
      "held": "8d 7h"
     }
    ],
@@ -535,7 +535,7 @@
     }
    ],
    "note": "",
-   "week": -72.4,
+   "week": -72.34,
    "baseline": "start @ $10,000",
    "chart": [
     [
@@ -608,7 +608,7 @@
     ],
     [
      "10/30 PM",
-     9927.6
+     9927.66
     ]
    ]
   },

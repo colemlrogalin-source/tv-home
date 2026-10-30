@@ -3,24 +3,9 @@
 #clock .date { font-size: 46px; }
 #quotes { display: none !important; }
 /* Right column (x 1150..1872): Stocks, Crypto, News panels stacked; big type for a couch 3 m from a 75" TV. */
-#mk { position: absolute; left: 1150px; top: 138px; width: 722px; color: #F5F5F7; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
 #mk .mkp { position: relative; margin-bottom: 12px; padding: 8px 24px 8px; border-radius: 26px; background: rgba(18, 18, 20, 0.78);
   border: 1px solid rgba(255, 255, 255, 0.08); }
 #mk .mkh { position: relative; height: 34px; line-height: 34px; font-size: 22px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); }
-#floorrow { position: absolute; right: 0; top: 0; font-size: 22px; font-weight: 500; letter-spacing: 0; text-transform: none; color: rgba(245, 245, 247, 0.75); }
-#floorrow b { color: #F5F5F7; } #floorrow .off { color: rgba(245, 245, 247, 0.45); }
-#mk .mkr { position: relative; height: 96px; line-height: 96px; }
-#mk .mkr:before { content: ''; position: absolute; left: -14px; right: -14px; top: 2px; bottom: 2px; border-radius: 14px; opacity: 0; -webkit-transition: opacity 1.2s; transition: opacity 1.2s; }
-#mk .fu:before { background: rgba(48, 209, 88, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
-#mk .fd:before { background: rgba(255, 69, 58, 0.32); opacity: 1; -webkit-transition: none; transition: none; }
-#mk .mkr div { position: absolute; top: 0; }
-#mk .t { left: 0; width: 100px; font-size: 30px; font-weight: 500; }
-#mk .s { left: 108px; top: 5px !important; height: 86px; line-height: 0; }
-#mk .p { left: 330px; width: 200px; text-align: right; font-size: 38px; font-weight: 600; }
-#mk .c { right: 0; width: 130px; text-align: right; font-size: 28px; font-weight: 500; }
-#mk .up, #floorrow .up { color: #30D158; } #mk .dn, #floorrow .dn { color: #FF453A; }
-#mk .draw { stroke-dasharray: 100; -webkit-animation: draw 1.4s ease-out; animation: draw 1.4s ease-out; }
-@-webkit-keyframes draw { from { stroke-dashoffset: 100; } } @keyframes draw { from { stroke-dashoffset: 100; } }
 #mk .nl { -webkit-transition: opacity 0.4s; transition: opacity 0.4s; }
 #mk .nl.out { opacity: 0; }
 #mk .n { padding: 3px 0 4px; border-top: 1px solid rgba(255, 255, 255, 0.07); }
@@ -37,21 +22,13 @@
 #sky { -webkit-transform-origin: 0 55%; transform-origin: 0 55%; -webkit-animation: kb 40s ease-in-out infinite alternate; animation: kb 40s ease-in-out infinite alternate; }
 @-webkit-keyframes kb { from { -webkit-transform: scale(1); } to { -webkit-transform: scale(1.03); } }
 @keyframes kb { from { transform: scale(1); } to { transform: scale(1.03); } }
-#sky .sweep { position: absolute; left: 0; top: 0; width: 400px; height: 100%; opacity: 0.6;
-  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.07) 50%, rgba(255,255,255,0) 100%);
-  -webkit-animation: sweep 14s ease-in-out infinite; animation: sweep 14s ease-in-out infinite; }
-@-webkit-keyframes sweep { 0% { -webkit-transform: translate3d(-500px, 0, 0); } 60%, 100% { -webkit-transform: translate3d(1300px, 0, 0); } }
-@keyframes sweep { 0% { transform: translate3d(-500px, 0, 0); } 60%, 100% { transform: translate3d(1300px, 0, 0); } }
-.lite #sky, .lite #sky .sweep, .lite .live, .lite #mk .draw { -webkit-animation: none !important; animation: none !important; }
-.lite #sky .sweep { display: none; }
+.lite #sky, .lite .live { -webkit-animation: none !important; animation: none !important; }
 
 /* MARK: - Custom background: Cole's blue Model 3 Performance on black, with a light dark veil (forces the dark look). */
 #sky, .night #sky { background: #000 url(bg.jpg) no-repeat 0 0 / 1920px 1080px; }
 #sky .grad, #sky canvas, #sky canvas.on { opacity: 0 !important; }
 #sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0.22) !important; }
 
-/* Layout v2.3: news panel moved to the empty space above the car's trunk (x 600..1110); car baked into bg.jpg at 0.9x, moved SW (original pixels, black backdrop). */
-#mk .news { position: absolute; left: -570px; top: 0; width: 500px; margin: 0; }
 #sky, .night #sky { background-position: 0 0; }
 
 /* Slim app bar (v2.3): thin glass strip with short tiles; overrides home.js's inline sizes. */
@@ -66,10 +43,6 @@
 #platter { display: block !important; left: 40px !important; width: 1840px !important; }
 .tile { width: 190px !important; }
 
-/* After hours: a small 'Close · AH price change' line under each stock's price. */
-#mk .x { left: 300px; width: 230px; top: 64px !important; height: 24px; line-height: 24px; text-align: right; font-size: 16px; font-weight: 500; color: rgba(245, 245, 247, 0.55); white-space: nowrap; }
-#mk .x:empty { display: none; }
-#mk .p { top: -9px !important; }
 /* News headlines: a touch smaller, wrap to two lines instead of cutting off. */
 #mk .nt { font-size: 24px !important; line-height: 29px !important; white-space: normal !important; text-overflow: clip !important; max-height: 58px; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
 
@@ -80,20 +53,15 @@
 /* MARK: - v3 look (Oct 29): soft gray-scale backdrop, car rebuilt to its true aspect with margins, slideshow on top, wide news, movers. */
 #sky, .night #sky { background: #161618 url(bg.jpg) no-repeat 0 0 / 1920px 1080px !important; }
 #sky .veil, .night #sky .veil { background: rgba(0, 0, 0, 0) !important; }
-#sky .sweep { opacity: 0.25; }
-#car { position: absolute; left: 117px; top: 150px; width: 927px; height: 348px; background: url(car.png) no-repeat center / contain; -webkit-transition: opacity 1s; transition: opacity 1s; }
 .hasshow #car { opacity: 0; }
 /* Clock moves to the top of the right column; the top-left quarter is for the car / slideshow. */
 .no-picks #clock, #clock { left: 1150px !important; top: 0px !important; font-size: 84px !important; font-weight: 300; line-height: 96px; }
 #clock .date { display: block; font-size: 26px !important; margin-top: -4px !important; font-weight: 400; }
-#mk { top: 172px; }
 #mk .mkp { background: rgba(28, 28, 31, 0.72); }
 #show { position: absolute; left: 139px; top: 40px; width: 880px; height: 495px; border-radius: 28px; overflow: hidden; display: none; background: #111; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); }
 .hasshow #show { display: block; }
 #show .ph { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: no-repeat center / cover; opacity: 0; -webkit-transition: opacity 1.6s; transition: opacity 1.6s; }
 #show .ph.on { opacity: 1; }
-/* News fills the whole left column under the car/slideshow. */
-#mk .news { left: -1102px !important; top: 384px !important; width: 998px !important; padding: 10px 32px 12px !important; }
 #mk .nt { font-size: 28px !important; line-height: 34px !important; max-height: 68px; font-weight: 400 !important; }
 #mk .nm { font-size: 20px; }
 /* Movers ticker: one item at a time, slides in, green glow on gains. */
@@ -107,24 +75,97 @@
 #movers .g { color: #30D158; font-weight: 600; margin-right: 18px; text-shadow: 0 0 18px rgba(48, 209, 88, 0.55); }
 /* TMDB backdrop still works if a key is ever added. */
 .tmdb #saver .photo, .tmdb #saver .shade { display: block !important; }
-/* Fleet Wall (screensaver, ready desks only). */
-#wall { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 8; display: none; background: radial-gradient(ellipse at 30% 30%, #1d1d20 0%, #0a0a0b 70%); color: #F5F5F7; overflow: hidden; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
-#wall .wbg { position: absolute; left: 820px; top: 560px; width: 1040px; height: 413px; background: no-repeat center / contain; opacity: 0; }
-#wall .wbg.photo { opacity: 0.22; -webkit-animation: wkb 60s ease-in-out infinite alternate; animation: wkb 60s ease-in-out infinite alternate; }
-@-webkit-keyframes wkb { from { -webkit-transform: scale(1); } to { -webkit-transform: scale(1.08) translate3d(-20px, -10px, 0); } }
-@keyframes wkb { from { transform: scale(1); } to { transform: scale(1.08) translate3d(-20px, -10px, 0); } }
-#wall .wclock { position: absolute; right: 72px; top: 48px; font-size: 64px; font-weight: 300; color: rgba(245, 245, 247, 0.8); }
-#wall .lb { position: absolute; left: 96px; top: 64px; width: 1300px; }
-#wall .lbh { font-size: 28px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.55); margin-bottom: 12px; }
-#wall .lbh .cd { margin-left: 28px; text-transform: none; letter-spacing: 0; color: rgba(245, 245, 247, 0.75); }
-#wall .lbr { font-size: 40px; line-height: 64px; font-weight: 400; }
-#wall .rk { display: inline-block; width: 56px; color: rgba(245, 245, 247, 0.45); } #wall .nm { display: inline-block; width: 520px; }
-#wall .pv { font-weight: 600; }
-#wall .panel { position: absolute; left: 96px; top: 380px; width: 1728px; height: 620px; opacity: 0; -webkit-transition: opacity 1.2s; transition: opacity 1.2s; }
-#wall .panel.in { opacity: 1; }
-#wall .pn { font-size: 34px; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245, 245, 247, 0.6); }
-#wall .big { font-size: 150px; line-height: 170px; font-weight: 600; }
-#wall .pl { font-size: 64px; line-height: 84px; } #wall .pl span { margin-right: 56px; font-weight: 600; }
-#wall .rec { font-size: 32px; margin-top: 10px; color: rgba(245, 245, 247, 0.7); } #wall .as { margin-left: 32px; font-size: 26px; color: rgba(245, 245, 247, 0.45); }
-#wall svg { position: absolute; right: 0; top: 40px; width: 720px; height: 220px; }
-#wall .up { color: #30D158; } #wall .dn { color: #FF453A; }
+
+/* MARK: - v3 (Oct 30): agents dashboard. Car top-left at 0.9x; news + bosses on the left; stock paper desk on the right. */
+#car { position: absolute; left: 40px; top: 28px; width: 834px; height: 313px; background: url(car.png) no-repeat left top / contain; }
+#mk { position: absolute; left: 0; top: 0; width: 1920px; height: 0; color: #F5F5F7; font-feature-settings: 'tnum'; -webkit-font-feature-settings: 'tnum'; }
+#mk .mkp { position: absolute; margin: 0; padding: 14px 28px 16px; }
+#mk .mkh .cd { float: right; text-transform: none; letter-spacing: 0; font-size: 18px; color: rgba(245, 245, 247, 0.45); }
+#mk .news { left: 48px; top: 360px; width: 1006px; height: 214px; overflow: hidden; }
+#mk .news .nt { -webkit-line-clamp: 1 !important; max-height: 34px !important; }
+#mk .bosses { left: 48px; top: 600px; width: 1006px; }
+#mk .desk { left: 1150px; top: 176px; width: 666px; }
+#mk table { width: 100%; border-collapse: collapse; }
+#mk th { font-size: 18px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); text-align: right; padding: 4px 0; }
+#mk td { font-size: 26px; font-weight: 500; text-align: right; padding: 3px 0; border-top: 1px solid rgba(255, 255, 255, 0.06); white-space: nowrap; }
+#mk th:first-child, #mk td:first-child { text-align: left; }
+#mk .bosses td { font-size: 25px; } #mk .bosses td em { font-style: normal; font-size: 18px; margin-left: 10px; opacity: 0.75; }
+#mk .bosses .nm { font-weight: 600; } #mk .bosses s { text-decoration: none; font-size: 16px; padding: 1px 8px; border-radius: 6px; background: rgba(245, 245, 247, 0.12); color: rgba(245, 245, 247, 0.6); vertical-align: 3px; }
+#mk .up { color: #30D158; } #mk .dn { color: #FF453A; } #mk .na { color: rgba(245, 245, 247, 0.35); }
+#mk .dn2 { font-size: 30px; font-weight: 600; color: #FFD60A; margin: 2px 0 10px; }
+#mk .kp { overflow: hidden; margin-bottom: 8px; } #mk .kp div { float: left; width: 33.3%; }
+#mk .kp i { display: block; font-style: normal; font-size: 18px; color: rgba(245, 245, 247, 0.5); }
+#mk .kp b { display: block; font-size: 40px; line-height: 50px; font-weight: 600; } #mk .k2 b { font-size: 32px; line-height: 42px; }
+#mk .eq { height: 120px; margin: 6px 0 8px; }
+#mk .as { margin-top: 8px; font-size: 16px; color: rgba(245, 245, 247, 0.4); } #mk .off { font-size: 26px; color: rgba(245, 245, 247, 0.45); }
+
+/* MARK: - v4 (Oct 30): edge-to-edge executive layout (dark navy panels, gold accents), weather, crypto desk, light looping animations. */
+#car { left: 20px; top: 14px; }
+#mk .mkp { background: rgba(14, 20, 34, 0.86); border: 1px solid rgba(255, 255, 255, 0.07); border-top: 2px solid rgba(255, 214, 10, 0.55); border-radius: 18px; padding: 14px 24px; box-sizing: border-box; overflow: hidden; }
+#mk .mkh { font-size: 18px; letter-spacing: 0.1em; text-transform: uppercase; color: #FFD60A; font-weight: 600; margin-bottom: 6px; }
+#mk .mkh .cd { font-size: 16px; color: rgba(245, 245, 247, 0.42); font-weight: 400; }
+#mk .wx { left: 866px; top: 24px; width: 262px; height: 316px; text-align: left; }
+#mk .wt { font-size: 92px; line-height: 96px; font-weight: 300; } #mk .wc { font-size: 26px; font-weight: 600; } #mk .wd { font-size: 19px; color: rgba(245, 245, 247, 0.6); margin: 4px 0 8px; }
+#mk .wf { font-size: 22px; line-height: 32px; border-top: 1px solid rgba(255, 255, 255, 0.07); } #mk .wf span { display: inline-block; width: 82px; color: rgba(245, 245, 247, 0.55); }
+#mk .bosses { left: 20px; top: 352px; width: 1108px; height: 262px; }
+#mk .bosses td { font-size: 30px; padding: 8px 0; } #mk .bosses td.big { font-size: 44px; font-weight: 700; }
+#mk .bosses .nm { font-size: 30px; } #mk .bosses small { display: block; font-size: 15px; font-weight: 400; color: rgba(245, 245, 247, 0.4); margin-left: 26px; }
+#mk .dot { display: inline-block; width: 12px; height: 12px; border-radius: 6px; background: #30D158; margin-right: 14px; vertical-align: 5px; -webkit-animation: pulse 2.4s ease-in-out infinite; animation: pulse 2.4s ease-in-out infinite; }
+#mk .dot.off { background: rgba(245, 245, 247, 0.25); -webkit-animation: none; animation: none; }
+@-webkit-keyframes pulse { 50% { opacity: 0.25; } } @keyframes pulse { 50% { opacity: 0.25; } }
+#mk .crypto { left: 20px; top: 626px; width: 528px; height: 280px; } #mk .crypto .kp b { font-size: 34px; line-height: 42px; } #mk .crypto .eq { height: 140px; margin: 2px 0; } #mk .crypto .as { margin-top: 0; }
+#mk .news { left: 560px; top: 626px; width: 568px; height: 280px; } #mk .news .nt { font-size: 26px !important; line-height: 32px !important; -webkit-line-clamp: 3 !important; max-height: 96px !important; }
+#mk .news .n { margin-bottom: 10px; }
+#mk .desk { left: 1146px; top: 108px; width: 754px; height: 852px; padding: 14px 4px 14px 4px; } #mk .desk > div, #mk .desk .pt { margin-left: 20px; margin-right: 20px; } #mk .desk .eq { margin: 0; }
+#mk .desk .kp b { font-size: 46px; line-height: 54px; } #mk .desk .k2 b { font-size: 32px; line-height: 40px; }
+#mk .dn2 { font-size: 26px; margin: 0 0 8px; }
+#mk .sub { font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245, 245, 247, 0.45); margin: 6px 0 2px; }
+#mk .eq { height: 250px; }
+#mk .desk td { font-size: 25px; padding: 5px 0; } #mk .pt { opacity: 0; -webkit-transition: opacity 0.6s; transition: opacity 0.6s; } #mk .pt.in { opacity: 1; }
+#mk .pgn { font-size: 16px; color: rgba(245, 245, 247, 0.45); text-align: right; margin-top: 4px; }
+#mk svg .gl { stroke: rgba(255, 255, 255, 0.08); stroke-width: 1; } #mk svg .ax { fill: rgba(245, 245, 247, 0.45); font-size: 15px; }
+#mk svg .hl { fill: rgba(245, 245, 247, 0.8); font-size: 15px; font-weight: 600; } #mk svg .mkh { fill: #FFD60A; } #mk svg .mkl { fill: #64D2FF; }
+#mk svg .ln { stroke-dasharray: 2400; -webkit-animation: draw 14s ease-in-out infinite; animation: draw 14s ease-in-out infinite; }
+@-webkit-keyframes draw { 0% { stroke-dashoffset: 2400; } 18%, 100% { stroke-dashoffset: 0; } } @keyframes draw { 0% { stroke-dashoffset: 2400; } 18%, 100% { stroke-dashoffset: 0; } }
+#mk svg .pl { -webkit-animation: pulse 2.4s ease-in-out infinite; animation: pulse 2.4s ease-in-out infinite; }
+#movers { left: 20px; top: 914px; width: 1108px; }
+.lite #mk svg .ln, .lite #mk .dot, .lite #mk svg .pl { -webkit-animation: none; animation: none; }
+#mk .desk { top: 128px; height: 832px; } #mk .desk .mkh .cd { display: block; float: none; margin-top: 2px; } #mk .eq { height: 300px; }
+#mk .bosses { height: 262px; } #mk .bosses td { padding: 5px 0; } #mk .bosses small { display: inline; margin-left: 10px; vertical-align: 4px; }
+#mk .crypto .kp b { font-size: 28px; line-height: 36px; } #mk .crypto .eq { height: 150px; } #mk .crypto .as { white-space: nowrap; overflow: hidden; }
+#mk .desk { top: 164px; height: 796px; } #mk .eq { height: 300px; }
+#mk .bosses td em { display: block; font-size: 16px; margin: 0; line-height: 18px; } #mk .bosses td.big { font-size: 42px; } #mk .bosses td { padding: 3px 0 4px; line-height: 40px; }
+#mk .cl b { font-size: 34px; font-weight: 600; margin-right: 22px; } #mk .cl i { font-style: normal; font-size: 17px; color: rgba(245,245,247,0.45); }
+#mk .crypto .eq { height: 130px; margin: 6px 0 2px; }
+#mk .eq { height: 280px; } #mk .bosses { height: 270px; } #mk .crypto, #mk .news { top: 634px; height: 272px; }
+#mk .bosses .nm { color: #F5F5F7; } #mk .news .nt { -webkit-line-clamp: 2 !important; max-height: 64px !important; overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; }
+#mk .cl { white-space: nowrap; } #mk .cl b { font-size: 30px; margin-right: 14px; }
+#mk .crypto .mkh .cd { float: none; display: block; margin-top: 2px; }
+#mk .crypto .as { margin-top: 2px; font-size: 15px; }
+#mk .eq { height: 236px; } #mk .crypto .eq { height: 130px; }
+
+/* MARK: - v5: weather rain-first; bosses with equity; stock section in Stock Exchange Quant's floor style (/workspace/shared/stock-floor-style/floor.css gold theme). */
+#mk .wx { padding: 12px 18px; } #mk .wrow { height: 64px; } #mk .wrow span { display: inline-block; vertical-align: middle; }
+#mk .wi svg { width: 52px; height: 52px; } #mk .wt { font-size: 50px; line-height: 60px; font-weight: 400; margin: 0 8px 0 6px; }
+#mk .wr { text-align: center; } #mk .wr b { display: block; font-size: 46px; line-height: 48px; font-weight: 700; color: #64D2FF; } #mk .wr i { font-style: normal; font-size: 14px; color: rgba(245, 245, 247, 0.6); }
+#mk .wc { font-size: 21px; font-weight: 600; margin-top: 4px; } #mk .wn { font-size: 18px; color: rgba(245, 245, 247, 0.7); margin: 2px 0 6px; } #mk .wn b { color: #64D2FF; }
+#mk .wf { font-size: 20px; line-height: 34px; } #mk .wf span { width: 64px; } #mk .wf em { display: inline-block; width: 30px; vertical-align: -6px; } #mk .wf b { display: inline-block; width: 64px; color: #64D2FF; font-weight: 700; }
+#mk .wx .as { margin-top: 2px; font-size: 14px; }
+#mk .bosses th { padding-right: 0; } #mk .bosses td.eqv { font-size: 30px; color: #F5F5F7; padding-left: 12px; } #mk .bosses .nm { font-size: 28px; }
+#mk .bosses small { display: block; margin: 0 0 0 26px; font-size: 15px; line-height: 16px; vertical-align: 0; }
+#mk .bosses td.big { font-size: 40px; }
+/* Stock section: SEQ floor palette (bg #101010, border #6a4514, text #f6ecd8, muted #c4b091, gold #ffb000, up #7CFF6B, down #ff5d4a; tables #131e28/#cfd6e0, #60d6b4/#ff7781; mono labels). */
+#mk .desk { background: rgba(16, 16, 16, 0.95); border: 1px solid #6a4514; border-top: 2px solid #ffb000; color: #f6ecd8; }
+#mk .desk .mkh, #mk .desk .sub, #mk .desk .kp i, #mk .desk th, #mk .desk .as { font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace; }
+#mk .desk .mkh { color: #ffb000; } #mk .desk .dn2 { color: #ffb000; } #mk .desk .kp i, #mk .desk .sub, #mk .desk .as, #mk .desk .pgn { color: #c4b091; }
+#mk .desk .kp i { font-size: 15px; text-transform: uppercase; letter-spacing: 0.06em; } #mk .desk .kp div:first-child b { color: #ffb000; }
+#mk .desk .up { color: #7CFF6B; } #mk .desk .dn { color: #ff5d4a; }
+#mk .desk th { background: #131e28; color: #cfd6e0; padding: 6px 8px; font-size: 15px; } #mk .desk td { color: #e6edf3; padding: 5px 8px; border-top: 1px solid rgba(106, 69, 20, 0.45); }
+#mk .desk td.up { color: #60d6b4; } #mk .desk td.dn { color: #ff7781; } #mk .desk td:first-child { font-weight: 700; }
+#mk .desk svg .gl { stroke: rgba(196, 176, 145, 0.14); } #mk .desk svg .ax { fill: #c4b091; } #mk .desk svg .mkh { fill: #ffb000; }
+#mk .desk svg .ln { stroke-width: 2.6; }
+#mk .wrow { height: 58px; white-space: nowrap; } #mk .wt { font-size: 46px; line-height: 58px; } #mk .wc { font-size: 20px; margin: 0; white-space: normal; width: 96px; line-height: 22px; }
+#mk .wr { text-align: left; font-size: 17px; color: rgba(245, 245, 247, 0.75); margin-top: 4px; } #mk .wr b { display: inline; font-size: 44px; line-height: 50px; }
+#mk .wf { white-space: nowrap; font-size: 19px; line-height: 32px; } #mk .wf span { width: 56px; } #mk .wf b { width: 58px; }
+#mk .bosses td { line-height: 32px; padding: 3px 0; } #mk .bosses .nm { font-size: 26px; } #mk .bosses td.big { font-size: 36px; } #mk .bosses td.eqv { font-size: 26px; } #mk .bosses td { font-size: 26px; }
+#mk .wf { line-height: 27px; font-size: 18px; } #mk .wn { margin: 0 0 4px; font-size: 17px; } #mk .wr { margin-top: 2px; } #mk .wr b { line-height: 46px; } #mk .wx .mkh { margin-bottom: 2px; }

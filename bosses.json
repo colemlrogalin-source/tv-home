@@ -1,0 +1,58 @@
+{
+ "asOf": "2026-10-29 11:56 PM ET",
+ "bosses": [
+  {
+   "name": "VWAP/EMA Agent",
+   "start": 10000,
+   "day": -17.82,
+   "week": 276.68,
+   "total": 316.79,
+   "note": "",
+   "equity": 10316.79
+  },
+  {
+   "name": "Crypto CEO",
+   "start": null,
+   "day": null,
+   "week": null,
+   "total": null,
+   "note": "from floor.json"
+  },
+  {
+   "name": "Stock Exchange Quant",
+   "start": 40000.0,
+   "day": -515.32,
+   "week": null,
+   "total": 1167.16,
+   "note": "Mac status.json copy, Oct 29 1:06 AM ET",
+   "equity": 41167.16,
+   "asOf": "2026-10-29T05:06:13+00:00"
+  }
+ ],
+ "vwapCurve": [
+  [
+   "10/22",
+   10000
+  ],
+  [
+   "10/23",
+   10040.11
+  ],
+  [
+   "10/27",
+   10081.17
+  ],
+  [
+   "10/28",
+   10079.12
+  ],
+  [
+   "10/29",
+   10334.61
+  ],
+  [
+   "now",
+   10316.79
+  ]
+ ]
+}

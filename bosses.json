@@ -1,13 +1,13 @@
 {
- "asOf": "2026-10-30 03:19 PM ET",
+ "asOf": "2026-10-30 03:24 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -28.25,
-   "week": 203.79,
-   "total": 284.96,
-   "equity": 10284.96,
+   "day": -23.51,
+   "week": 208.53,
+   "total": 289.7,
+   "equity": 10289.7,
    "note": ""
   },
   {
@@ -67,14 +67,14 @@
   ],
   [
    "now",
-   10284.96
+   10289.7
   ]
  ],
  "vwap": {
-  "equity": 10284.96,
+  "equity": 10289.7,
   "start": 10000,
-  "pnlToday": -28.25,
-  "pnlTotal": 284.96,
+  "pnlToday": -23.51,
+  "pnlTotal": 289.7,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -87,43 +87,43 @@
    10079.12,
    10334.61,
    10313.21,
-   10284.96
+   10289.7
   ],
-  "asOf": "2026-10-30T15:19",
+  "asOf": "2026-10-30T15:24",
   "positions": [
    {
     "sym": "META",
-    "upnl": 27.62,
+    "upnl": 27.77,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 134.25,
+    "upnl": 133.92,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -28.28,
+    "upnl": -25.97,
     "entry": 346.99,
     "qty": 7
    },
    {
     "sym": "XLF",
-    "upnl": -1.56,
+    "upnl": -0.91,
     "entry": 56.5,
     "qty": 13
    },
    {
     "sym": "XLE",
-    "upnl": 0.06,
+    "upnl": 0.04,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -11.79,
+    "upnl": -9.81,
     "entry": 525.03,
     "qty": 3
    }
@@ -133,10 +133,10 @@
   {
    "name": "VWAP/EMA Agent",
    "tag": "VWAP/EMA crossover stock model \u00b7 paper",
-   "equity": 10284.96,
-   "week": 203.79,
-   "total": 284.96,
-   "today": -28.25,
+   "equity": 10289.7,
+   "week": 208.53,
+   "total": 289.7,
+   "today": -23.51,
    "start": 10000,
    "record": "4\u20134",
    "positions": [
@@ -145,60 +145,72 @@
      "side": "SHORT",
      "qty": "3",
      "entry": 322.59,
-     "now": 277.84,
-     "pnl": 134.25,
-     "pct": 13.87,
-     "held": "8d 0h"
+     "now": 277.95,
+     "pnl": 133.92,
+     "pct": 13.84,
+     "held": "8d 0h",
+     "value": 833.85,
+     "stop": 303.16
     },
     {
      "sym": "META",
      "side": "SHORT",
      "qty": "1",
      "entry": 640.7,
-     "now": 613.08,
-     "pnl": 27.62,
-     "pct": 4.31,
-     "held": "8d 0h"
+     "now": 612.93,
+     "pnl": 27.77,
+     "pct": 4.33,
+     "held": "8d 0h",
+     "value": 612.93,
+     "stop": 669.07
     },
     {
      "sym": "XLE",
      "side": "LONG",
      "qty": "1",
      "entry": 69.61,
-     "now": 69.67,
-     "pnl": 0.06,
-     "pct": 0.09,
-     "held": "7d 3h"
+     "now": 69.65,
+     "pnl": 0.04,
+     "pct": 0.06,
+     "held": "7d 3h",
+     "value": 69.65,
+     "stop": 66.73
     },
     {
      "sym": "XLF",
      "side": "LONG",
      "qty": "13",
      "entry": 56.5,
-     "now": 56.38,
-     "pnl": -1.56,
-     "pct": -0.21,
-     "held": "7d 23h"
+     "now": 56.43,
+     "pnl": -0.91,
+     "pct": -0.12,
+     "held": "7d 23h",
+     "value": 733.59,
+     "stop": 55.405
     },
     {
      "sym": "MSFT",
      "side": "LONG",
      "qty": "3",
      "entry": 525.03,
-     "now": 521.1,
-     "pnl": -11.79,
-     "pct": -0.75,
-     "held": "5h 49m"
+     "now": 521.76,
+     "pnl": -9.81,
+     "pct": -0.62,
+     "held": "5h 54m",
+     "value": 1565.28,
+     "stop": 502.67
     },
     {
      "sym": "AAPL",
      "side": "LONG",
      "qty": "7",
      "entry": 346.99,
-     "now": 342.95,
-     "pnl": -28.28,
-     "pct": -1.16,
-     "held": "8d 0h"
+     "now": 343.28,
+     "pnl": -25.97,
+     "pct": -1.07,
+     "held": "8d 0h",
+     "value": 2402.96,
+     "stop": 335.735
     }
    ],
    "closed": [
@@ -206,6 +218,8 @@
      "sym": "GOOGL",
      "side": "SHORT",
      "qty": "2",
+     "entry": 322.59,
+     "exit": 278.03,
      "pnl": 89.12,
      "pct": 13.81,
      "held": "7d 23h",
@@ -216,6 +230,8 @@
      "sym": "AMZN",
      "side": "LONG",
      "qty": "7",
+     "entry": 248.99,
+     "exit": 253.19,
      "pnl": 29.4,
      "pct": 1.69,
      "held": "4d 3h",
@@ -226,6 +242,8 @@
      "sym": "MSFT",
      "side": "LONG",
      "qty": "4",
+     "entry": 521.46,
+     "exit": 532.36,
      "pnl": 43.6,
      "pct": 2.09,
      "held": "4d 22h",
@@ -236,6 +254,8 @@
      "sym": "AMD",
      "side": "SHORT",
      "qty": "1",
+     "entry": 516.85,
+     "exit": 514.76,
      "pnl": 2.09,
      "pct": 0.4,
      "held": "36m",
@@ -246,6 +266,8 @@
      "sym": "AMD",
      "side": "LONG",
      "qty": "1",
+     "entry": 518.04,
+     "exit": 517.01,
      "pnl": -1.03,
      "pct": -0.2,
      "held": "1h 17m",
@@ -254,7 +276,37 @@
     }
    ],
    "note": "",
-   "baseline": "start @ $10,000"
+   "baseline": "start @ $10,000",
+   "chart": [
+    [
+     "10/22 AM",
+     10000
+    ],
+    [
+     "10/23 AM",
+     10040.11
+    ],
+    [
+     "10/27 AM",
+     10081.17
+    ],
+    [
+     "10/28 AM",
+     10079.12
+    ],
+    [
+     "10/29 AM",
+     10334.61
+    ],
+    [
+     "10/30 AM",
+     10313.21
+    ],
+    [
+     "10/30 PM",
+     10289.7
+    ]
+   ]
   },
   {
    "name": "Crypto CEO",
@@ -268,7 +320,17 @@
    "closed": [],
    "note": "Position details stay on Cole's Mac",
    "week": 1.61,
-   "baseline": "reset Oct 30 12:00 AM ET @ $10,000"
+   "baseline": "reset Oct 30 12:00 AM ET @ $10,000",
+   "chart": [
+    [
+     "10/30 AM",
+     10000.0
+    ],
+    [
+     "10/30 PM",
+     10001.61
+    ]
+   ]
   },
   {
    "name": "Stock Exchange Quant",
@@ -282,7 +344,13 @@
    "closed": [],
    "note": "17 open positions \u00b7 details stay on Cole's Mac",
    "week": null,
-   "baseline": "start @ $40,000"
+   "baseline": "start @ $40,000",
+   "chart": [
+    [
+     "10/30 PM",
+     39545.86
+    ]
+   ]
   },
   {
    "name": "Sports Quant",
@@ -376,7 +444,21 @@
      "ts": 1793242800
     }
    ],
-   "note": ""
+   "note": "",
+   "chart": [
+    [
+     "10/27 PM",
+     250.0
+    ],
+    [
+     "10/29 PM",
+     358.02
+    ],
+    [
+     "10/30 PM",
+     358.33
+    ]
+   ]
   }
  ],
  "events": [

@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 05:17 PM ET",
+ "asOf": "2026-10-30 05:20 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -27,7 +27,7 @@
    "week": -71.19,
    "total": -71.19,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:17:23.553803-04:00"
+   "asOf": "2026-10-30T17:20:48.812532-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T17:17",
+  "asOf": "2026-10-30T17:20",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "7h 47m",
+     "held": "7h 50m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -264,11 +264,12 @@
    "total": -71.19,
    "today": -397.28,
    "start": 10000.0,
-   "record": "",
+   "record": "8\u20131",
+   "noStop": true,
    "positions": [
     {
      "sym": "VTI",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "7.75",
      "entry": 377.872258,
      "now": 371.8191,
@@ -276,11 +277,11 @@
      "stop": null,
      "pnl": -46.91,
      "pct": -1.6,
-     "held": ""
+     "held": "1d 5h"
     },
     {
      "sym": "QQQ",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "1.75",
      "entry": 702.881429,
      "now": 690.89,
@@ -288,11 +289,11 @@
      "stop": null,
      "pnl": -20.99,
      "pct": -1.71,
-     "held": ""
+     "held": "8d 2h"
     },
     {
      "sym": "SPY",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "1.25",
      "entry": 769.016,
      "now": 756.0,
@@ -300,11 +301,11 @@
      "stop": null,
      "pnl": -16.27,
      "pct": -1.69,
-     "held": ""
+     "held": "1d 6h"
     },
     {
      "sym": "AMD",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.75",
      "entry": 515.72,
      "now": 505.0449,
@@ -312,11 +313,11 @@
      "stop": null,
      "pnl": -8.01,
      "pct": -2.07,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "WDC",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "1",
      "entry": 353.0775,
      "now": 365.0,
@@ -324,11 +325,11 @@
      "stop": null,
      "pnl": 11.92,
      "pct": 3.38,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "LRCX",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "1.5",
      "entry": 234.88,
      "now": 240.0,
@@ -336,11 +337,11 @@
      "stop": null,
      "pnl": 7.68,
      "pct": 2.18,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "MRVL",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "1.75",
      "entry": 225.52,
      "now": 196.77,
@@ -348,11 +349,11 @@
      "stop": null,
      "pnl": -50.31,
      "pct": -12.75,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "STX",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.5",
      "entry": 635.08,
      "now": 645.4771,
@@ -360,11 +361,11 @@
      "stop": null,
      "pnl": 5.2,
      "pct": 1.64,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "DELL",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.75",
      "entry": 454.54,
      "now": 424.0843,
@@ -372,11 +373,11 @@
      "stop": null,
      "pnl": -22.84,
      "pct": -6.7,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "VLO",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.75",
      "entry": 419.08,
      "now": 399.0982,
@@ -384,11 +385,11 @@
      "stop": null,
      "pnl": -14.99,
      "pct": -4.77,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "INTC",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "4.5",
      "entry": 87.631111,
      "now": 65.0528,
@@ -396,11 +397,11 @@
      "stop": null,
      "pnl": -101.6,
      "pct": -25.77,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "SNDK",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 1278.63,
      "now": 1150.89,
@@ -408,11 +409,11 @@
      "stop": null,
      "pnl": -31.93,
      "pct": -9.99,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "COST",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 1013.48,
      "now": 1011.25,
@@ -420,11 +421,11 @@
      "stop": null,
      "pnl": -0.56,
      "pct": -0.22,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "MU",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 867.14,
      "now": 885.34,
@@ -432,11 +433,11 @@
      "stop": null,
      "pnl": 4.55,
      "pct": 2.1,
-     "held": ""
+     "held": "8d 4h"
     },
     {
      "sym": "LITE",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 802.3,
      "now": 840.01,
@@ -444,11 +445,11 @@
      "stop": null,
      "pnl": 9.43,
      "pct": 4.7,
-     "held": ""
+     "held": "8d 7h"
     },
     {
      "sym": "AAPL",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 345.37,
      "now": 344.75,
@@ -456,11 +457,11 @@
      "stop": null,
      "pnl": -0.15,
      "pct": -0.18,
-     "held": ""
+     "held": "8d 7h"
     },
     {
      "sym": "TER",
-     "side": "LONG",
+     "side": "Long stock",
      "qty": "0.25",
      "entry": 321.68,
      "now": 274.89,
@@ -468,10 +469,71 @@
      "stop": null,
      "pnl": -11.7,
      "pct": -14.55,
-     "held": ""
+     "held": "8d 7h"
     }
    ],
-   "closed": [],
+   "closed": [
+    {
+     "sym": "QQQ",
+     "side": "Put",
+     "qty": "0.25",
+     "entry": 5.08,
+     "exit": 11.44,
+     "pnl": 159.0,
+     "pct": 125.2,
+     "held": "1d 1h",
+     "when": "Oct 30 11:38 AM",
+     "ts": 1793374720
+    },
+    {
+     "sym": "VTI",
+     "side": "Long stock",
+     "qty": "8",
+     "entry": 377.75,
+     "exit": 378.62,
+     "pnl": 4.89,
+     "pct": 0.16,
+     "held": "2d 0h",
+     "when": "Oct 29 11:40 AM",
+     "ts": 1793288440
+    },
+    {
+     "sym": "SPY",
+     "side": "Long stock",
+     "qty": "1.25",
+     "entry": 771.28,
+     "exit": 768.47,
+     "pnl": -3.21,
+     "pct": -0.33,
+     "held": "21h 48m",
+     "when": "Oct 29 10:59 AM",
+     "ts": 1793285951
+    },
+    {
+     "sym": "SPY",
+     "side": "Long stock",
+     "qty": "1.25",
+     "entry": 769.54,
+     "exit": 771.22,
+     "pnl": 1.02,
+     "pct": 0.11,
+     "held": "1d 1h",
+     "when": "Oct 28 1:10 PM",
+     "ts": 1793207451
+    },
+    {
+     "sym": "SPY",
+     "side": "Long stock",
+     "qty": "1.25",
+     "entry": 767.09,
+     "exit": 769.49,
+     "pnl": 3.63,
+     "pct": 0.38,
+     "held": "5d 1h",
+     "when": "Oct 27 11:37 AM",
+     "ts": 1793115421
+    }
+   ],
    "note": "",
    "week": -71.19,
    "baseline": "start @ $10,000",
@@ -648,6 +710,11 @@
     "Roll $358.33 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 6 PM"
    ],
    "suggestRec": "ALL \u00b7 15\u201320 (43%) \u00b7 NET +0.9u / +$44.28",
+   "flip": [
+    "NBA FLIP WATCH \u00b7 DET -8.5 vs BKN 19:30 | flip at 8.5 | watch",
+    "NBA FLIP WATCH \u00b7 TOR -5.5 vs ORL 19:30 | flip at 5.5 | watch",
+    "NBA FLIP WATCH \u00b7 MIA -8.5 vs IND 20:00 | flip at 8.5 | watch"
+   ],
    "suggest": [
     {
      "id": "#30-2",

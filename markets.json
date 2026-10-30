@@ -1,5 +1,5 @@
 {
- "asOf": "4:29 PM ET",
+ "asOf": "4:39 PM ET",
  "indexes": [
   {
    "name": "S&P 500",
@@ -13,7 +13,7 @@
    "level": 25437.0,
    "chg": -747.73,
    "pct": -2.86,
-   "t": "4:29 PM ET"
+   "t": "4:39 PM ET"
   }
  ],
  "movers": [
@@ -49,8 +49,8 @@
   },
   {
    "sym": "SNDK",
-   "price": 1137.36,
-   "pct": -14.49
+   "price": 1150.89,
+   "pct": -13.47
   },
   {
    "sym": "GPN",
@@ -58,14 +58,14 @@
    "pct": 12.97
   },
   {
-   "sym": "COIN",
-   "price": 140.42,
-   "pct": -12.56
+   "sym": "TWST",
+   "price": 152.78,
+   "pct": -11.92
   },
   {
-   "sym": "COHR",
-   "price": 207.59,
-   "pct": -12.49
+   "sym": "DDOG",
+   "price": 235.27,
+   "pct": -11.5
   }
  ]
 }

@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Stock market rocked as investors dump tech shares; Nasdaq suffers worst day since June: Live updates",
+   "src": "CNBC",
+   "t": 1793390932,
+   "summary": "The tech-heavy Nasdaq Composite posted its worst month since March 2025. The Nasdaq Composite tumbled on Friday, while the Dow Jones Industrial Average outperformed as traders moved out of key stocks related to artificial intelligence and into more defensive areas of the market. The tech-heavy Nasdaq lost 2.86% for its worst single-day performance\u2026"
+  },
+  {
    "title": "Intel stock has worst day since 1970s, wiping about $12 billion off government's stake",
    "src": "CNBC",
    "t": 1793390568,
@@ -41,12 +47,6 @@
    "src": "MarketWatch",
    "t": 1793389020,
    "summary": "These big life decisions will determine just how well you retire."
-  },
-  {
-   "title": "Caregivers are now spending more than $11,000 a year out of pocket\u2014up 60% in five years",
-   "src": "MarketWatch",
-   "t": 1793389020,
-   "summary": "An AARP study shows the financial sacrifices families make and their long-term impacts."
   }
  ]
 }

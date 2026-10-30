@@ -1,13 +1,13 @@
 {
- "asOf": "2026-10-30 02:23 PM ET",
+ "asOf": "2026-10-30 02:28 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -31.43,
-   "week": 200.61,
-   "total": 281.78,
-   "equity": 10281.78,
+   "day": -30.31,
+   "week": 201.73,
+   "total": 282.9,
+   "equity": 10282.9,
    "note": ""
   },
   {
@@ -66,14 +66,14 @@
   ],
   [
    "now",
-   10281.78
+   10282.9
   ]
  ],
  "vwap": {
-  "equity": 10281.78,
+  "equity": 10282.9,
   "start": 10000,
-  "pnlToday": -31.43,
-  "pnlTotal": 281.78,
+  "pnlToday": -30.31,
+  "pnlTotal": 282.9,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -86,25 +86,25 @@
    10079.12,
    10334.61,
    10313.21,
-   10281.78
+   10282.9
   ],
-  "asOf": "2026-10-30T14:23",
+  "asOf": "2026-10-30T14:28",
   "positions": [
    {
     "sym": "META",
-    "upnl": 26.08,
+    "upnl": 25.86,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 134.31,
+    "upnl": 132.84,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -28.0,
+    "upnl": -24.85,
     "entry": 346.99,
     "qty": 7
    },
@@ -116,13 +116,13 @@
    },
    {
     "sym": "XLE",
-    "upnl": 0.06,
+    "upnl": -0.04,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -13.77,
+    "upnl": -14.01,
     "entry": 525.03,
     "qty": 3
    }

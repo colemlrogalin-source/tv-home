@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 04:09 PM ET",
+ "asOf": "2026-10-30 04:12 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T16:09",
+  "asOf": "2026-10-30T16:12",
   "positions": [
    {
     "sym": "META",
@@ -133,7 +133,7 @@
      "now": 278.92,
      "pnl": 129.98,
      "pct": 13.54,
-     "held": "8d 0h",
+     "held": "8d 1h",
      "value": 830.19,
      "stop": 303.16
     },
@@ -169,7 +169,7 @@
      "now": 70.05,
      "pnl": 0.44,
      "pct": 0.64,
-     "held": "7d 3h",
+     "held": "7d 4h",
      "value": 69.5,
      "stop": 66.73
     },
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "6h 39m",
+     "held": "6h 42m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -357,19 +357,39 @@
      "held": "",
      "when": "Oct 29 10:14 PM",
      "ts": 1793326440
-    },
-    {
-     "sym": "Brewers ML WS Game 5 @ Rays",
-     "side": "WIN",
-     "qty": "$75.00",
-     "pnl": 35.22,
-     "pct": 46.96,
-     "held": "1h 30m",
-     "when": "Oct 28 11:00 PM",
-     "ts": 1793242800
     }
    ],
    "note": "",
+   "suggest": [
+    {
+     "sym": "LA Clippers @ Minnesota \u00b7 Jaden McDaniels 6+ rebounds",
+     "price": "46c",
+     "qty": "$24.84",
+     "when": "Oct 30 1:20 PM",
+     "status": "sent"
+    },
+    {
+     "sym": "Detroit @ Brooklyn \u00b7 Pistons ML",
+     "price": "73c",
+     "qty": "$49.64",
+     "when": "Oct 30 8:20 AM",
+     "status": "sent"
+    },
+    {
+     "sym": "Milwaukee @ Tampa Bay (WS G5) \u00b7 Brewers ML",
+     "price": "55c",
+     "qty": "$48.40",
+     "when": "Oct 28 6:20 PM",
+     "status": "passed"
+    },
+    {
+     "sym": "Kansas City @ Seattle (SNF) \u00b7 Sam Darnold Under 223.5 pass yds",
+     "price": "-113",
+     "qty": "$10.00",
+     "when": "Oct 25 5:55 PM",
+     "status": "sent"
+    }
+   ],
    "chart": [
     [
      "10/27 PM",

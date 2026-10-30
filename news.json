@@ -1,10 +1,28 @@
 {
  "stories": [
   {
+   "title": "Intel stock has worst day since 1970s, wiping about $12 billion off government's stake",
+   "src": "CNBC",
+   "t": 1793392257,
+   "summary": "Intel shares fell 29% on Friday and headed for their worst day since the 1970s. The chipmaker issued weaker-than-expected guidance, citing ongoing softness in the PC market. Amazon also sold off following an earnings miss."
+  },
+  {
    "title": "Criminal investigation of Alaska Senate race is 'ongoing,' U.S. Attorney says",
    "src": "CNBC",
-   "t": 1793392099,
+   "t": 1793392184,
    "summary": "A federal judge kept on a fast track motions to dismiss the Department of Justice's lawsuit that seeks to delay certification of Alaska's U.S. Senate election. Judge Sharon Gleason ordered the DOJ to quickly respond to new dismissal motions filed after the agency added a new claim to its suit in U.S. District Court in Anchorage. The suit seeks to\u2026"
+  },
+  {
+   "title": "Microsoft is winning the cloud wars and becoming Wall Street\u2019s new golden child",
+   "src": "MarketWatch",
+   "t": 1793392140,
+   "summary": "Various factors indicate that Microsoft is in a better financial position than its cloud rivals, analysts say."
+  },
+  {
+   "title": "AMD\u2019s stock slides after Intel earnings reveal two big issues",
+   "src": "MarketWatch",
+   "t": 1793392080,
+   "summary": "Intel is struggling to make enough AI server chips and dealing with a weak PC market. Investors will soon find out the degree to which AMD may be suffering from the same problems."
   },
   {
    "title": "The selloff in tech stocks is shifting into overdrive",
@@ -25,28 +43,10 @@
    "summary": "Teachers, nurses and other borrowers have waited years for approval to complete their payment obligation and access debt relief, the suit claims."
   },
   {
-   "title": "Stock market rocked as investors dump tech shares; Nasdaq suffers worst day since June: Live updates",
-   "src": "CNBC",
-   "t": 1793391640,
-   "summary": "The tech-heavy Nasdaq Composite posted its worst month since March 2025. The Nasdaq Composite tumbled on Friday, while the Dow Jones Industrial Average outperformed as traders moved out of key stocks related to artificial intelligence and into more defensive areas of the market. The tech-heavy Nasdaq lost 2.86% for its worst single-day performance\u2026"
-  },
-  {
-   "title": "Intel stock has worst day since 1970s, wiping about $12 billion off government's stake",
-   "src": "CNBC",
-   "t": 1793390568,
-   "summary": "Intel shares fell 29% on Friday and headed for their worst day since the 1970s. The chipmaker issued weaker-than-expected guidance, citing ongoing softness in the PC market. Amazon also sold off following an earnings miss."
-  },
-  {
    "title": "Beware these stock funds for big capital gains distributions this year. How to manage the tax bill",
    "src": "CNBC",
    "t": 1793390462,
    "summary": "Mutual fund families are preparing to roll out large capital gains to shareholders."
-  },
-  {
-   "title": "\u2018Showy jewelry and fancy cars hold no appeal\u2019: We have a 99% chance of outliving our life savings. Why not spend it all?",
-   "src": "MarketWatch",
-   "t": 1793389500,
-   "summary": "\u201cI\u2019m 68, she\u2019s 74, and we\u2019re both in good health. We married later in life and have no children.\u201d"
   }
  ]
 }

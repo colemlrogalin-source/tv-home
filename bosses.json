@@ -27,7 +27,7 @@
    "week": -76.05,
    "total": -76.05,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:52:23.091126-04:00"
+   "asOf": "2026-10-30T17:52:55.900016-04:00"
   },
   {
    "name": "Sports Quant",
@@ -691,12 +691,12 @@
     "total": 352.74,
     "open": [
      {
-      "name": "NBA DET @ BKN \u00b7 DET win",
+      "name": "Pistons ML @ Nets (NBA DET@BKN 7:30 PM)",
       "qty": 67.22,
       "cost": 49.07
      },
      {
-      "name": "NBA J. Mcdaniels 6+ reb",
+      "name": "Jaden McDaniels 6+ rebounds (NBA LAC@MIN 8:00 PM)",
       "qty": 52.36,
       "cost": 24.09
      },
@@ -706,7 +706,7 @@
       "cost": 23.96
      },
      {
-      "name": "NFL LV @ NYJ \u00b7 LV win",
+      "name": "Raiders ML @ Jets (NFL 11/1)",
       "qty": 41.03,
       "cost": 19.28
      },
@@ -716,7 +716,7 @@
       "cost": 9.58
      },
      {
-      "name": "NFL CLE @ PIT \u00b7 CLE win",
+      "name": "Browns ML @ Steelers (NFL 11/1)",
       "qty": 25.88,
       "cost": 9.58
      },
@@ -744,31 +744,31 @@
     "settled": [
      {
       "when": "10/29 11:39 PM",
-      "name": "Mvecrosscategory0 \u00b7 5WWTMLFDW",
+      "name": "7-leg NFL combo parlay",
       "wl": "L",
       "pnl": -0.97
      },
      {
       "when": "10/29 11:33 PM",
-      "name": "NFL CAR @ GB \u00b7 CAR win",
+      "name": "Panthers ML (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
       "wl": "L",
       "pnl": -76.0
      },
      {
       "when": "10/29 11:16 PM",
-      "name": "Nfltd \u00b7 1",
+      "name": "Jalen Coker ATD (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
       "wl": "W",
       "pnl": 99.15
      },
      {
       "when": "10/29 10:14 PM",
-      "name": "Nfltd \u00b7 1",
+      "name": "Chuba Hubbard ATD (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
       "wl": "W",
       "pnl": 46.61
      },
      {
       "when": "10/28 11:36 PM",
-      "name": "Mvecrosscategory \u00b7 V2YGFACSF",
+      "name": "Combo parlay",
       "wl": "L",
       "pnl": -10.0
      }

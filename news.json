@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Why Intel\u2019s stock saw its worst day in decades \u2014 and a $140 billion wipeout",
+   "src": "MarketWatch",
+   "t": 1793393280,
+   "summary": "Intel\u2019s PC business is under pressure as memory-chip prices dent demand and as corporate IT teams have less budget for laptops."
+  },
+  {
    "title": "Criminal investigation of Alaska Senate race is 'ongoing,' U.S. Attorney says",
    "src": "CNBC",
    "t": 1793393164,
@@ -41,12 +47,6 @@
    "src": "MarketWatch",
    "t": 1793391780,
    "summary": "\u201cA cheaper stock does not necessarily offer better value,\u201d one expert says."
-  },
-  {
-   "title": "Trump administration is illegally delaying student-debt forgiveness for tens of thousands of public servants, lawsuit alleges",
-   "src": "MarketWatch",
-   "t": 1793391780,
-   "summary": "Teachers, nurses and other borrowers have waited years for approval to complete their payment obligation and access debt relief, the suit claims."
   }
  ]
 }

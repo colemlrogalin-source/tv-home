@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Alaska Senate election: DOJ wants to 'segregate' all ballots for 2nd Sullivan candidate",
+   "src": "CNBC",
+   "t": 1793401075,
+   "summary": "The U.S. attorney in Alaska said Friday that a criminal investigation of the state's U.S. Senate race is \"ongoing.\". The probe is occurring as the Department of Justice pursues a related civil lawsuit to block quick certification of that race's result because of possible voter confusion due to the presence of two Dan Sullivans on the ballot, one\u2026"
+  },
+  {
    "title": "Meta outlook revised downward by S&P on cash flow and capex concerns",
    "src": "CNBC",
    "t": 1793400146,
@@ -13,40 +19,34 @@
    "summary": "Okta is slated to join the index on Wednesday, replacing Kenvue."
   },
   {
-   "title": "Binance loses $6.3 billion in crypto heist\u2014what happens to your money when an exchange gets hacked",
-   "src": "CNBC",
-   "t": 1793396752,
-   "summary": "Crypto exchanges make it easier to buy, sell and store digital assets, but they come with risks, too. A record-breaking hack at Binance, the world's largest cryptocurrency exchange, is a reminder of the risks investors take when trusting a company to hold their digital tokens. Binance said Friday that the security breach affected about $6.3\u2026"
-  },
-  {
    "title": "Why gold plunged to its lowest price in a year despite renewed Iran jitters",
    "src": "MarketWatch",
    "t": 1793395800,
-   "summary": "Safe-haven gold fell to its lowest price in a year, despite jitters around the potential for fresh Middle East attacks following the U.S. midterm elections on Tuesday. Investors, in the recent past, reliably flocked to the safety of gold, Treasurys and the U.S. dollar when regional conflict or war between nations looked imminent, or likely to\u2026"
+   "summary": "Safe-haven gold fell to its lowest price in a year, despite jitters around the potential for fresh Middle East attacks following the U.S. midterm elections on Tuesday"
   },
   {
    "title": "Warsh wants the Fed to say less. Two officials are pushing for more transparency.",
    "src": "MarketWatch",
    "t": 1793395380,
-   "summary": "More interest-rate hikes are needed to fight inflation, Fed officials say. The comments show there is no settled policy at the central bank when it comes to communicating to the public about the economic outlook. Since taking over as Fed chair in May, Kevin Warsh has been pulling back on commenting on how he views past data and future economic\u2026"
+   "summary": "More interest-rate hikes are needed to fight inflation, Fed officials say."
   },
   {
    "title": "In a wild October for markets, these stocks were the biggest winners and losers",
    "src": "MarketWatch",
    "t": 1793393520,
-   "summary": "Many Big Tech stocks were hit hard but the S&P 500 showed strength under the surface, with a majority of stocks showing gains for the month. The S&P 500 SPX declined 0.9% for October, even though 72% of stocks in the large-cap benchmark index were up for the month."
+   "summary": "Many Big Tech stocks were hit hard but the S&P 500 showed strength under the surface, with a majority of stocks showing gains for the month."
   },
   {
    "title": "Why Intel\u2019s stock saw its worst day in decades \u2014 and a $140 billion wipeout",
    "src": "MarketWatch",
    "t": 1793393280,
-   "summary": "Intel\u2019s PC business is under pressure as memory-chip prices dent demand and as corporate IT teams have less budget for laptops. The chip company blamed a weak PC market for a revenue forecast that came in well shy of what analysts were expecting Thursday. Intel\u2019s INTC outlook for the December quarter calls for revenue of between $15 billion and\u2026"
+   "summary": "Intel\u2019s PC business is under pressure as memory-chip prices dent demand and as corporate IT teams have less budget for laptops."
   },
   {
-   "title": "Criminal investigation of Alaska Senate race is 'ongoing,' U.S. Attorney says",
-   "src": "CNBC",
-   "t": 1793393164,
-   "summary": "The U.S. attorney in Alaska said Friday that a criminal investigation of the state's U.S. Senate race is \"ongoing.\". The probe is occurring as the Department of Justice pursues a related civil lawsuit to block quick certification of that race's result because of possible voter confusion due to the presence of two Dan Sullivans on the ballot, one\u2026"
+   "title": "Reddit\u2019s stock logs its biggest one-day drop ever. It\u2019s not the last of the bad news, analysts say.",
+   "src": "MarketWatch",
+   "t": 1793392920,
+   "summary": "Reddit\u2019s stock plunged on Friday after the community-discussion forum said its search referral traffic was down significantly in the third quarter."
   }
  ],
  "sports": [
@@ -60,19 +60,19 @@
    "title": "Morant, hurt against Grizzlies, to miss at least four weeks",
    "src": "ESPN",
    "summary": "Trail Blazers guard Ja Morant sustained a left hamstring strain in his first game against the Grizzlies, his former team, and will be out at least four weeks.",
-   "t": 1793400264
+   "t": 1793401449
   },
   {
    "title": "Beer-fueled Brewers take to streets, continue World Series party",
    "src": "ESPN",
    "summary": "Tens of thousands of exuberant Brewers fans flooded the streets of downtown Milwaukee to celebrate the franchise's first World Series title with a parade and victory rally.",
-   "t": 1793400265
+   "t": 1793401449
   },
   {
    "title": "UConn's Hurley gets 2-year extension, now signed through 2032",
    "src": "ESPN",
    "summary": "UConn coach Dan Hurley has signed a two-year extension that puts him under contract through the 2031-32 season and maintains his annual salary of roughly $8 million.",
-   "t": 1793400265
+   "t": 1793401449
   }
  ]
 }

@@ -1,6 +1,18 @@
 {
  "stories": [
   {
+   "title": "Intel stock has worst day since 1970s, wiping about $12 billion off government's stake",
+   "src": "CNBC",
+   "t": 1793390568,
+   "summary": "Intel shares fell 29% on Friday and headed for their worst day since the 1970s. The chipmaker issued weaker-than-expected guidance, citing ongoing softness in the PC market. Amazon also sold off following an earnings miss."
+  },
+  {
+   "title": "'Bad time to troll': Binance co-founder Zhao asks Musk for support after hack",
+   "src": "CNBC",
+   "t": 1793390565,
+   "summary": "Binance's cofounder Changpeng Zhao urged Elon Musk to stop mocking the exchange after it suffered a $6.3 billion hack. The SpaceX and Tesla CEO posted a series of emojis on X which appeared to poke fun at the attack, which has seen $3 billion in crypto assets frozen so far."
+  },
+  {
    "title": "\u2018Showy jewelry and fancy cars hold no appeal\u2019: We have a 99% chance of outliving our life savings. Why not spend it all?",
    "src": "MarketWatch",
    "t": 1793389500,
@@ -35,18 +47,6 @@
    "src": "MarketWatch",
    "t": 1793389020,
    "summary": "An AARP study shows the financial sacrifices families make and their long-term impacts."
-  },
-  {
-   "title": "Stock market rocked as investors dump tech shares, Nasdaq drops 3%: Live updates",
-   "src": "CNBC",
-   "t": 1793388926,
-   "summary": "Amazon and Intel shares tumbled after the companies posted their latest earnings reports. The Nasdaq Composite tumbled on Friday, while the Dow Jones Industrial Average outperformed as traders moved out of key stocks related to artificial intelligence and into more defensive areas of the market. The tech-heavy Nasdaq lost 3.7% and was on track for\u2026"
-  },
-  {
-   "title": "What gave this city its \u2018best place to retire\u2019 crown? You can actually afford to live there.",
-   "src": "MarketWatch",
-   "t": 1793388780,
-   "summary": "Low cost of living, high quality of life and favorable taxes for retirees, for the win."
   }
  ]
 }

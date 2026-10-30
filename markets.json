@@ -1,26 +1,26 @@
 {
- "asOf": "4:11 PM ET",
+ "asOf": "4:15 PM ET",
  "indexes": [
   {
    "name": "S&P 500",
-   "level": 7578.48,
-   "chg": -141.91,
-   "pct": -1.84,
-   "t": "3:55 PM ET"
+   "level": 7580.28,
+   "chg": -140.11,
+   "pct": -1.81,
+   "t": "3:58 PM ET"
   },
   {
    "name": "Nasdaq",
    "level": 25437.0,
    "chg": -747.73,
    "pct": -2.86,
-   "t": "4:06 PM ET"
+   "t": "4:13 PM ET"
   }
  ],
  "movers": [
   {
    "sym": "RDDT",
-   "price": 91.92,
-   "pct": -29.07
+   "price": 91.7,
+   "pct": -29.24
   },
   {
    "sym": "INTC",
@@ -34,38 +34,38 @@
   },
   {
    "sym": "RBLX",
-   "price": 43.53,
-   "pct": -17.01
+   "price": 42.98,
+   "pct": -18.08
   },
   {
    "sym": "SNDK",
-   "price": 1118.53,
-   "pct": -15.91
+   "price": 1116.37,
+   "pct": -16.07
   },
   {
    "sym": "FDXF",
-   "price": 126.53,
-   "pct": 15.35
+   "price": 126.06,
+   "pct": 14.92
   },
   {
    "sym": "TWLO",
-   "price": 205.49,
-   "pct": -15.05
+   "price": 206.87,
+   "pct": -14.48
   },
   {
    "sym": "COIN",
-   "price": 137.63,
-   "pct": -14.3
+   "price": 137.55,
+   "pct": -14.35
   },
   {
    "sym": "COHR",
-   "price": 204.53,
-   "pct": -13.78
+   "price": 204.31,
+   "pct": -13.87
   },
   {
    "sym": "GPN",
-   "price": 96.81,
-   "pct": 12.94
+   "price": 97.05,
+   "pct": 13.22
   }
  ]
 }

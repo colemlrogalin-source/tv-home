@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Has the tech bubble burst? Why the Nasdaq\u2019s rough ride looks eerily like 2000.",
+   "src": "MarketWatch",
+   "t": 1793402040,
+   "summary": "Friday\u2019s big plunge raises disturbing parallels with the top of the dot-com bubble"
+  },
+  {
    "title": "Alaska Senate election: DOJ wants to 'segregate' all ballots for 2nd Sullivan candidate",
    "src": "CNBC",
    "t": 1793401075,
@@ -41,12 +47,6 @@
    "src": "MarketWatch",
    "t": 1793393280,
    "summary": "Intel\u2019s PC business is under pressure as memory-chip prices dent demand and as corporate IT teams have less budget for laptops."
-  },
-  {
-   "title": "Reddit\u2019s stock logs its biggest one-day drop ever. It\u2019s not the last of the bad news, analysts say.",
-   "src": "MarketWatch",
-   "t": 1793392920,
-   "summary": "Reddit\u2019s stock plunged on Friday after the community-discussion forum said its search referral traffic was down significantly in the third quarter."
   }
  ],
  "sports": [

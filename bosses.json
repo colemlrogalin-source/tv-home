@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 05:48 PM ET",
+ "asOf": "2026-10-30 05:52 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -22,22 +22,22 @@
   {
    "name": "Stock Exchange Quant",
    "start": 10000.0,
-   "equity": 9925.78,
-   "day": -399.85,
-   "week": -74.22,
-   "total": -74.22,
+   "equity": 9923.95,
+   "day": -401.99,
+   "week": -76.05,
+   "total": -76.05,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:48:01.599458-04:00"
+   "asOf": "2026-10-30T17:52:23.091126-04:00"
   },
   {
    "name": "Sports Quant",
    "start": 250.0,
-   "day": 2.42,
-   "week": 108.33,
-   "total": 108.33,
-   "equity": 358.33,
-   "note": "Kalshi (Cole-reported)",
-   "asOf": "2026-10-30T13:27:00-04:00"
+   "day": null,
+   "week": 102.74,
+   "total": 102.74,
+   "equity": 352.74,
+   "note": "Kalshi (live sync)",
+   "asOf": "2026-10-30T17:49:00-04:00"
   }
  ],
  "vwapCurve": [
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T17:48",
+  "asOf": "2026-10-30T17:52",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "8h 18m",
+     "held": "8h 22m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -260,9 +260,9 @@
   {
    "name": "Stock Exchange Quant",
    "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
-   "equity": 9925.78,
-   "total": -74.22,
-   "today": -399.85,
+   "equity": 9923.95,
+   "total": -76.05,
+   "today": -401.99,
    "start": 10000.0,
    "record": "8\u20131",
    "noStop": true,
@@ -272,10 +272,10 @@
      "side": "Long",
      "qty": "7.75",
      "entry": 377.872258,
-     "now": 371.8,
-     "value": 2881.45,
+     "now": 371.78,
+     "value": 2881.3,
      "stop": null,
-     "pnl": -47.06,
+     "pnl": -47.21,
      "pct": -1.61,
      "held": "1d 6h"
     },
@@ -284,11 +284,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 702.881429,
-     "now": 691.12,
-     "value": 1209.46,
+     "now": 690.51,
+     "value": 1208.39,
      "stop": null,
-     "pnl": -20.58,
-     "pct": -1.67,
+     "pnl": -21.65,
+     "pct": -1.76,
      "held": "8d 2h"
     },
     {
@@ -296,11 +296,11 @@
      "side": "Long",
      "qty": "1.25",
      "entry": 769.016,
-     "now": 755.72,
-     "value": 944.65,
+     "now": 755.51,
+     "value": 944.39,
      "stop": null,
-     "pnl": -16.62,
-     "pct": -1.73,
+     "pnl": -16.88,
+     "pct": -1.76,
      "held": "1d 6h"
     },
     {
@@ -308,11 +308,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 515.72,
-     "now": 505.25,
-     "value": 378.94,
+     "now": 505.05,
+     "value": 378.79,
      "stop": null,
-     "pnl": -7.85,
-     "pct": -2.03,
+     "pnl": -8.0,
+     "pct": -2.07,
      "held": "8d 5h"
     },
     {
@@ -320,11 +320,11 @@
      "side": "Long",
      "qty": "1",
      "entry": 353.0775,
-     "now": 365.0517,
-     "value": 365.05,
+     "now": 366.0,
+     "value": 366.0,
      "stop": null,
-     "pnl": 11.97,
-     "pct": 3.39,
+     "pnl": 12.92,
+     "pct": 3.66,
      "held": "8d 5h"
     },
     {
@@ -344,11 +344,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 225.52,
-     "now": 196.3,
-     "value": 343.52,
+     "now": 196.19,
+     "value": 343.33,
      "stop": null,
-     "pnl": -51.13,
-     "pct": -12.96,
+     "pnl": -51.33,
+     "pct": -13.01,
      "held": "8d 5h"
     },
     {
@@ -356,11 +356,11 @@
      "side": "Long",
      "qty": "0.5",
      "entry": 635.08,
-     "now": 645.0,
-     "value": 322.5,
+     "now": 643.5,
+     "value": 321.75,
      "stop": null,
-     "pnl": 4.96,
-     "pct": 1.56,
+     "pnl": 4.21,
+     "pct": 1.33,
      "held": "8d 5h"
     },
     {
@@ -368,11 +368,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 454.54,
-     "now": 423.4347,
-     "value": 317.58,
+     "now": 423.41,
+     "value": 317.56,
      "stop": null,
-     "pnl": -23.33,
-     "pct": -6.84,
+     "pnl": -23.35,
+     "pct": -6.85,
      "held": "8d 5h"
     },
     {
@@ -392,11 +392,11 @@
      "side": "Long",
      "qty": "4.5",
      "entry": 87.631111,
-     "now": 64.9978,
-     "value": 292.49,
+     "now": 64.89,
+     "value": 292.0,
      "stop": null,
-     "pnl": -101.85,
-     "pct": -25.83,
+     "pnl": -102.33,
+     "pct": -25.95,
      "held": "8d 5h"
     },
     {
@@ -404,11 +404,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1278.63,
-     "now": 1146.55,
-     "value": 286.64,
+     "now": 1147.68,
+     "value": 286.92,
      "stop": null,
-     "pnl": -33.02,
-     "pct": -10.33,
+     "pnl": -32.74,
+     "pct": -10.24,
      "held": "8d 5h"
     },
     {
@@ -428,10 +428,10 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 867.14,
-     "now": 884.5,
-     "value": 221.12,
+     "now": 884.45,
+     "value": 221.11,
      "stop": null,
-     "pnl": 4.34,
+     "pnl": 4.33,
      "pct": 2.0,
      "held": "8d 5h"
     },
@@ -440,11 +440,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 802.3,
-     "now": 839.99,
-     "value": 210.0,
+     "now": 840.5,
+     "value": 210.12,
      "stop": null,
-     "pnl": 9.42,
-     "pct": 4.7,
+     "pnl": 9.55,
+     "pct": 4.76,
      "held": "8d 7h"
     },
     {
@@ -452,11 +452,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 345.37,
-     "now": 344.82,
+     "now": 344.8,
      "value": 86.2,
      "stop": null,
      "pnl": -0.14,
-     "pct": -0.16,
+     "pct": -0.17,
      "held": "8d 7h"
     },
     {
@@ -464,11 +464,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 321.68,
-     "now": 274.5,
-     "value": 68.62,
+     "now": 274.14,
+     "value": 68.53,
      "stop": null,
-     "pnl": -11.79,
-     "pct": -14.67,
+     "pnl": -11.88,
+     "pct": -14.78,
      "held": "8d 7h"
     }
    ],
@@ -535,7 +535,7 @@
     }
    ],
    "note": "",
-   "week": -74.22,
+   "week": -76.05,
    "baseline": "start @ $10,000",
    "chart": [
     [
@@ -608,49 +608,19 @@
     ],
     [
      "10/30 PM",
-     9925.78
+     9923.95
     ]
    ]
   },
   {
    "name": "Sports Quant",
    "tag": "Kalshi \u00b7 real money",
-   "equity": 358.33,
-   "total": 108.33,
-   "today": 2.42,
+   "equity": 352.74,
+   "total": 102.74,
+   "today": null,
    "start": 250.0,
-   "record": "3\u20131",
+   "record": "9\u20137",
    "positions": [
-    {
-     "sym": "7-leg NFL combo \u00b7 pays $454.54",
-     "side": "",
-     "qty": "$0.97",
-     "entry": null,
-     "now": null,
-     "pnl": null,
-     "pct": null,
-     "held": ""
-    },
-    {
-     "sym": "Raiders \u00b7 pays $41.03",
-     "side": "",
-     "qty": "$20.00",
-     "entry": null,
-     "now": null,
-     "pnl": null,
-     "pct": null,
-     "held": ""
-    },
-    {
-     "sym": "Browns \u00b7 pays $25.88",
-     "side": "",
-     "qty": "$10.00",
-     "entry": null,
-     "now": null,
-     "pnl": null,
-     "pct": null,
-     "held": ""
-    },
     {
      "sym": "politics (Kalshi desk)",
      "side": "",
@@ -664,50 +634,149 @@
    ],
    "closed": [
     {
-     "sym": "Jalen Coker ATD",
-     "side": "WIN",
-     "qty": "$50.00",
-     "pnl": 99.15,
-     "pct": 198.3,
-     "held": "4h 0m",
-     "when": "Oct 29 11:23 PM",
-     "ts": 1793330580
+     "sym": "7-leg NFL combo parlay",
+     "side": "LOSS",
+     "qty": "$0.91",
+     "pnl": -0.97,
+     "pct": -106.59,
+     "held": "2d 1h",
+     "when": "Oct 29 11:39 PM",
+     "ts": 1793331540
     },
     {
      "sym": "Panthers ML",
      "side": "LOSS",
-     "qty": "$50.00",
-     "pnl": -50.0,
-     "pct": -100.0,
-     "held": "3h 59m",
-     "when": "Oct 29 11:23 PM",
-     "ts": 1793330580
+     "qty": "$72.77",
+     "pnl": -76.0,
+     "pct": -104.44,
+     "held": "4h 9m",
+     "when": "Oct 29 11:33 PM",
+     "ts": 1793331180
+    },
+    {
+     "sym": "Jalen Coker ATD",
+     "side": "WIN",
+     "qty": "$47.73",
+     "pnl": 99.15,
+     "pct": 207.73,
+     "held": "3h 53m",
+     "when": "Oct 29 11:16 PM",
+     "ts": 1793330160
     },
     {
      "sym": "Chuba Hubbard ATD",
      "side": "WIN",
-     "qty": "$50.00",
+     "qty": "$48.30",
      "pnl": 46.61,
-     "pct": 93.22,
-     "held": "",
+     "pct": 96.5,
+     "held": "2h 51m",
      "when": "Oct 29 10:14 PM",
      "ts": 1793326440
     },
     {
-     "sym": "Brewers ML WS Game 5 @ Rays",
-     "side": "WIN",
-     "qty": "$75.00",
-     "pnl": 35.22,
-     "pct": 46.96,
-     "held": "1h 30m",
-     "when": "Oct 28 11:00 PM",
-     "ts": 1793242800
+     "sym": "#28-4",
+     "side": "LOSS",
+     "qty": "$9.42",
+     "pnl": -10.0,
+     "pct": -106.16,
+     "held": "3h 31m",
+     "when": "Oct 28 11:36 PM",
+     "ts": 1793244960
     }
    ],
    "note": "",
+   "real": {
+    "asOf": "2026-10-30 17:49",
+    "cash": 180.36,
+    "total": 352.74,
+    "open": [
+     {
+      "name": "NBA DET @ BKN \u00b7 DET win",
+      "qty": 67.22,
+      "cost": 49.07
+     },
+     {
+      "name": "NBA J. Mcdaniels 6+ reb",
+      "qty": 52.36,
+      "cost": 24.09
+     },
+     {
+      "name": "Federal charge \u00b7 IOMA",
+      "qty": 63.05,
+      "cost": 23.96
+     },
+     {
+      "name": "NFL LV @ NYJ \u00b7 LV win",
+      "qty": 41.03,
+      "cost": 19.28
+     },
+     {
+      "name": "Senate control \u00b7 Rep",
+      "qty": 25.88,
+      "cost": 9.58
+     },
+     {
+      "name": "NFL CLE @ PIT \u00b7 CLE win",
+      "qty": 25.88,
+      "cost": 9.58
+     },
+     {
+      "name": "TX Senate \u00b7 Rep",
+      "qty": 27.32,
+      "cost": 9.56
+     },
+     {
+      "name": "NV governor \u00b7 Rep",
+      "qty": 41.25,
+      "cost": 9.49
+     },
+     {
+      "name": "PA-10 House \u00b7 Rep",
+      "qty": 47.34,
+      "cost": 9.47
+     },
+     {
+      "name": "House control \u00b7 Rep",
+      "qty": 98.99,
+      "cost": 9.4
+     }
+    ],
+    "settled": [
+     {
+      "when": "10/29 11:39 PM",
+      "name": "Mvecrosscategory0 \u00b7 5WWTMLFDW",
+      "wl": "L",
+      "pnl": -0.97
+     },
+     {
+      "when": "10/29 11:33 PM",
+      "name": "NFL CAR @ GB \u00b7 CAR win",
+      "wl": "L",
+      "pnl": -76.0
+     },
+     {
+      "when": "10/29 11:16 PM",
+      "name": "Nfltd \u00b7 1",
+      "wl": "W",
+      "pnl": 99.15
+     },
+     {
+      "when": "10/29 10:14 PM",
+      "name": "Nfltd \u00b7 1",
+      "wl": "W",
+      "pnl": 46.61
+     },
+     {
+      "when": "10/28 11:36 PM",
+      "name": "Mvecrosscategory \u00b7 V2YGFACSF",
+      "wl": "L",
+      "pnl": -10.0
+     }
+    ]
+   },
    "suggestHead": [
     "Real money: Goal 7/10 \u00b7 Today 0\u20130 \u00b7 Since 10/30 0\u20130 \u00b7 Units today 1.5/4u ($200 cap, 1u = $50)",
-    "Roll $358.33 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 6 PM"
+    "Roll $352.74 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 6 PM"
    ],
    "suggestRec": "ALL \u00b7 15\u201320 (43%) \u00b7 NET +0.9u / +$44.28",
    "flip": [
@@ -1232,7 +1301,7 @@
     ],
     [
      "10/30 PM",
-     358.33
+     352.74
     ]
    ]
   }
@@ -1260,36 +1329,47 @@
    "ts": 1793367000
   },
   {
-   "id": "s-c-#29-2 Jalen 2026-10-29 23:23",
+   "id": "s-c-#27-11 7-leg2026-10-29 23:39",
    "kind": "close",
    "desk": "Sports Quant",
-   "sym": "Jalen Coker ATD",
-   "qty": 50.0,
+   "sym": "7-leg NFL combo parlay",
+   "qty": 0.91,
    "price": null,
-   "pnl": 99.15,
-   "pct": 198.3,
-   "ts": 1793330580
+   "pnl": -0.97,
+   "pct": -106.59,
+   "ts": 1793331540
   },
   {
-   "id": "s-c-#29-4 Panthe2026-10-29 23:23",
+   "id": "s-c-#29-4 Panthe2026-10-29 23:33",
    "kind": "close",
    "desk": "Sports Quant",
    "sym": "Panthers ML",
-   "qty": 50.0,
+   "qty": 72.77,
    "price": null,
-   "pnl": -50.0,
-   "pct": -100.0,
-   "ts": 1793330580
+   "pnl": -76.0,
+   "pct": -104.44,
+   "ts": 1793331180
+  },
+  {
+   "id": "s-c-#29-2 Jalen 2026-10-29 23:16",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Jalen Coker ATD",
+   "qty": 47.73,
+   "price": null,
+   "pnl": 99.15,
+   "pct": 207.73,
+   "ts": 1793330160
   },
   {
    "id": "s-c-#29-3 Chuba 2026-10-29 22:14",
    "kind": "close",
    "desk": "Sports Quant",
    "sym": "Chuba Hubbard ATD",
-   "qty": 50.0,
+   "qty": 48.3,
    "price": null,
    "pnl": 46.61,
-   "pct": 93.22,
+   "pct": 96.5,
    "ts": 1793326440
   },
   {
@@ -1297,7 +1377,7 @@
    "kind": "open",
    "desk": "Sports Quant",
    "sym": "Panthers ML",
-   "qty": 50.0,
+   "qty": 72.77,
    "price": null,
    "ts": 1793316240
   },
@@ -1306,79 +1386,131 @@
    "kind": "open",
    "desk": "Sports Quant",
    "sym": "Jalen Coker ATD",
-   "qty": 50.0,
+   "qty": 47.73,
    "price": null,
    "ts": 1793316180
   },
   {
-   "id": "s-c-#28-1L Brewe2026-10-28 23:00",
+   "id": "s-o-#29-3 Chuba 2026-10-29 19:23",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "Chuba Hubbard ATD",
+   "qty": 48.3,
+   "price": null,
+   "ts": 1793316180
+  },
+  {
+   "id": "s-c-#28-4 Kalshi2026-10-28 23:36",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "#28-4",
+   "qty": 9.42,
+   "price": null,
+   "pnl": -10.0,
+   "pct": -106.16,
+   "ts": 1793244960
+  },
+  {
+   "id": "s-c-#28-2 Jackso2026-10-28 23:20",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Jackson Chourio 2+ total bases",
+   "qty": 9.63,
+   "price": null,
+   "pnl": -10.0,
+   "pct": -103.84,
+   "ts": 1793244000
+  },
+  {
+   "id": "s-c-#28-3 Willia2026-10-28 23:20",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "William Contreras 2+ total bases",
+   "qty": 9.59,
+   "price": null,
+   "pnl": 14.59,
+   "pct": 152.14,
+   "ts": 1793244000
+  },
+  {
+   "id": "s-c-#28-1L Brewe2026-10-28 23:17",
    "kind": "close",
    "desk": "Sports Quant",
    "sym": "Brewers ML WS Game 5 @ Rays",
-   "qty": 75.0,
+   "qty": 73.94,
    "price": null,
-   "pnl": 35.22,
-   "pct": 46.96,
-   "ts": 1793242800
+   "pnl": 50.32,
+   "pct": 68.06,
+   "ts": 1793243820
   },
   {
-   "id": "s-o-#28-1L Brewe2026-10-28 21:30",
+   "id": "s-o-#28-4 Kalshi2026-10-28 20:05",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "#28-4",
+   "qty": 9.42,
+   "price": null,
+   "ts": 1793232300
+  },
+  {
+   "id": "s-o-#28-2 Jackso2026-10-28 20:04",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "Jackson Chourio 2+ total bases",
+   "qty": 9.63,
+   "price": null,
+   "ts": 1793232240
+  },
+  {
+   "id": "s-o-#28-3 Willia2026-10-28 20:04",
+   "kind": "open",
+   "desk": "Sports Quant",
+   "sym": "William Contreras 2+ total bases",
+   "qty": 9.59,
+   "price": null,
+   "ts": 1793232240
+  },
+  {
+   "id": "s-o-#28-1L Brewe2026-10-28 07:54",
    "kind": "open",
    "desk": "Sports Quant",
    "sym": "Brewers ML WS Game 5 @ Rays",
-   "qty": 75.0,
+   "qty": 73.94,
    "price": null,
-   "ts": 1793237400
+   "ts": 1793188440
   },
   {
-   "id": "v-o-XLE-2026-10-23 12:12 PM ET",
-   "kind": "open",
-   "desk": "VWAP/EMA Agent",
-   "sym": "XLE",
-   "qty": 0.99,
-   "price": 69.61,
-   "side": "long",
-   "ts": 1792771920
+   "id": "s-c-#27-8 Golden2026-10-28 00:43",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Golden Knights ML vs Senators",
+   "qty": 9.73,
+   "price": null,
+   "pnl": 6.21,
+   "pct": 63.82,
+   "ts": 1793162580
   },
   {
-   "id": "v-o-XLF-2026-10-22 03:25 PM ET",
-   "kind": "open",
-   "desk": "VWAP/EMA Agent",
-   "sym": "XLF",
-   "qty": 12.9,
-   "price": 56.5,
-   "side": "long",
-   "ts": 1792697100
+   "id": "s-c-#27-1 Brewer2026-10-28 00:36",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Brewers ML WS Game 4 @ Rays",
+   "qty": 34.3,
+   "price": null,
+   "pnl": -35.0,
+   "pct": -102.04,
+   "ts": 1793162160
   },
   {
-   "id": "v-o-AAPL-2026-10-22 03:15 PM ET",
-   "kind": "open",
-   "desk": "VWAP/EMA Agent",
-   "sym": "AAPL",
-   "qty": 6.95,
-   "price": 346.99,
-   "side": "long",
-   "ts": 1792696500
-  },
-  {
-   "id": "v-o-GOOGL-2026-10-22 03:10 PM ET",
-   "kind": "open",
-   "desk": "VWAP/EMA Agent",
-   "sym": "GOOGL",
-   "qty": 2.98,
-   "price": 322.59,
-   "side": "short",
-   "ts": 1792696200
-  },
-  {
-   "id": "v-o-META-2026-10-22 03:04 PM ET",
-   "kind": "open",
-   "desk": "VWAP/EMA Agent",
-   "sym": "META",
-   "qty": 0.99,
-   "price": 640.7,
-   "side": "short",
-   "ts": 1792695840
+   "id": "s-c-#27-2 Jackso2026-10-28 00:36",
+   "kind": "close",
+   "desk": "Sports Quant",
+   "sym": "Jackson Chourio 2+ total bases",
+   "qty": 24.53,
+   "price": null,
+   "pnl": 29.5,
+   "pct": 120.26,
+   "ts": 1793162160
   }
  ]
 }

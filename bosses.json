@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 05:52 PM ET",
+ "asOf": "2026-10-30 05:53 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -27,7 +27,7 @@
    "week": -76.05,
    "total": -76.05,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:52:55.900016-04:00"
+   "asOf": "2026-10-30T17:53:11.199737-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T17:52",
+  "asOf": "2026-10-30T17:53",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "8h 22m",
+     "held": "8h 23m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -457,7 +457,7 @@
      "stop": null,
      "pnl": -0.14,
      "pct": -0.17,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "TER",
@@ -691,12 +691,12 @@
     "total": 352.74,
     "open": [
      {
-      "name": "Pistons ML @ Nets (NBA DET@BKN 7:30 PM)",
+      "name": "Pistons ML @ Nets",
       "qty": 67.22,
       "cost": 49.07
      },
      {
-      "name": "Jaden McDaniels 6+ rebounds (NBA LAC@MIN 8:00 PM)",
+      "name": "Jaden McDaniels 6+ rebounds",
       "qty": 52.36,
       "cost": 24.09
      },
@@ -706,7 +706,7 @@
       "cost": 23.96
      },
      {
-      "name": "Raiders ML @ Jets (NFL 11/1)",
+      "name": "Raiders ML @ Jets",
       "qty": 41.03,
       "cost": 19.28
      },
@@ -716,7 +716,7 @@
       "cost": 9.58
      },
      {
-      "name": "Browns ML @ Steelers (NFL 11/1)",
+      "name": "Browns ML @ Steelers",
       "qty": 25.88,
       "cost": 9.58
      },
@@ -750,19 +750,19 @@
      },
      {
       "when": "10/29 11:33 PM",
-      "name": "Panthers ML (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
+      "name": "Panthers ML",
       "wl": "L",
       "pnl": -76.0
      },
      {
       "when": "10/29 11:16 PM",
-      "name": "Jalen Coker ATD (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
+      "name": "Jalen Coker ATD",
       "wl": "W",
       "pnl": 99.15
      },
      {
       "when": "10/29 10:14 PM",
-      "name": "Chuba Hubbard ATD (Panthers @ Packers, TNF CAR@GB 8:15 PM)",
+      "name": "Chuba Hubbard ATD",
       "wl": "W",
       "pnl": 46.61
      },

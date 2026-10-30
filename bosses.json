@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 06:20 PM ET",
+ "asOf": "2026-10-30 06:25 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -22,20 +22,20 @@
   {
    "name": "Stock Exchange Quant",
    "start": 10000.0,
-   "equity": 9934.09,
-   "day": -392.11,
-   "week": -65.91,
-   "total": -65.91,
+   "equity": 9935.93,
+   "day": -390.28,
+   "week": -64.07,
+   "total": -64.07,
    "note": "$10k book",
-   "asOf": "2026-10-30T18:20:06.302389-04:00"
+   "asOf": "2026-10-30T18:25:17.997376-04:00"
   },
   {
    "name": "Sports Quant",
    "start": 250.0,
    "day": 0.0,
-   "week": 102.96,
-   "total": 102.96,
-   "equity": 352.96,
+   "week": 103.27,
+   "total": 103.27,
+   "equity": 353.27,
    "note": "Kalshi (live sync)",
    "asOf": "2026-10-30T17:49:00-04:00"
   }
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T18:20",
+  "asOf": "2026-10-30T18:25",
   "positions": [
    {
     "sym": "META",
@@ -157,7 +157,7 @@
      "now": 56.56,
      "pnl": 0.77,
      "pct": 0.11,
-     "held": "8d 2h",
+     "held": "8d 3h",
      "value": 729.51,
      "stop": 55.405
     },
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "8h 50m",
+     "held": "8h 55m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -260,9 +260,9 @@
   {
    "name": "Stock Exchange Quant",
    "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
-   "equity": 9934.09,
-   "total": -65.91,
-   "today": -392.11,
+   "equity": 9935.93,
+   "total": -64.07,
+   "today": -390.28,
    "start": 10000.0,
    "record": "8\u20131",
    "noStop": true,
@@ -284,11 +284,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 702.881429,
-     "now": 691.38,
-     "value": 1209.91,
+     "now": 691.6998,
+     "value": 1210.47,
      "stop": null,
-     "pnl": -20.13,
-     "pct": -1.64,
+     "pnl": -19.57,
+     "pct": -1.59,
      "held": "8d 3h"
     },
     {
@@ -296,10 +296,10 @@
      "side": "Long",
      "qty": "1.25",
      "entry": 769.016,
-     "now": 755.85,
-     "value": 944.81,
+     "now": 755.8308,
+     "value": 944.79,
      "stop": null,
-     "pnl": -16.46,
+     "pnl": -16.48,
      "pct": -1.71,
      "held": "1d 7h"
     },
@@ -308,11 +308,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 515.72,
-     "now": 507.0,
-     "value": 380.25,
+     "now": 507.1999,
+     "value": 380.4,
      "stop": null,
-     "pnl": -6.54,
-     "pct": -1.69,
+     "pnl": -6.39,
+     "pct": -1.65,
      "held": "8d 5h"
     },
     {
@@ -320,11 +320,11 @@
      "side": "Long",
      "qty": "1",
      "entry": 353.0775,
-     "now": 366.46,
-     "value": 366.46,
+     "now": 366.11,
+     "value": 366.11,
      "stop": null,
-     "pnl": 13.38,
-     "pct": 3.79,
+     "pnl": 13.03,
+     "pct": 3.69,
      "held": "8d 5h"
     },
     {
@@ -344,11 +344,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 225.52,
-     "now": 197.15,
-     "value": 345.01,
+     "now": 197.6962,
+     "value": 345.97,
      "stop": null,
-     "pnl": -49.65,
-     "pct": -12.58,
+     "pnl": -48.69,
+     "pct": -12.34,
      "held": "8d 5h"
     },
     {
@@ -368,11 +368,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 454.54,
-     "now": 424.3,
-     "value": 318.23,
+     "now": 424.14,
+     "value": 318.11,
      "stop": null,
-     "pnl": -22.68,
-     "pct": -6.65,
+     "pnl": -22.8,
+     "pct": -6.69,
      "held": "8d 5h"
     },
     {
@@ -392,11 +392,11 @@
      "side": "Long",
      "qty": "4.5",
      "entry": 87.631111,
-     "now": 64.8,
-     "value": 291.6,
+     "now": 64.86,
+     "value": 291.87,
      "stop": null,
-     "pnl": -102.74,
-     "pct": -26.05,
+     "pnl": -102.47,
+     "pct": -25.99,
      "held": "8d 5h"
     },
     {
@@ -404,11 +404,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1278.63,
-     "now": 1149.7832,
+     "now": 1149.82,
      "value": 287.45,
      "stop": null,
-     "pnl": -32.21,
-     "pct": -10.08,
+     "pnl": -32.2,
+     "pct": -10.07,
      "held": "8d 5h"
     },
     {
@@ -416,11 +416,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1013.48,
-     "now": 1011.9421,
-     "value": 252.99,
+     "now": 1012.0398,
+     "value": 253.01,
      "stop": null,
-     "pnl": -0.38,
-     "pct": -0.15,
+     "pnl": -0.36,
+     "pct": -0.14,
      "held": "8d 5h"
     },
     {
@@ -428,11 +428,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 867.14,
-     "now": 887.48,
-     "value": 221.87,
+     "now": 887.7183,
+     "value": 221.93,
      "stop": null,
-     "pnl": 5.08,
-     "pct": 2.35,
+     "pnl": 5.14,
+     "pct": 2.37,
      "held": "8d 5h"
     },
     {
@@ -440,11 +440,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 802.3,
-     "now": 844.0,
-     "value": 211.0,
+     "now": 845.0,
+     "value": 211.25,
      "stop": null,
-     "pnl": 10.43,
-     "pct": 5.2,
+     "pnl": 10.68,
+     "pct": 5.32,
      "held": "8d 8h"
     },
     {
@@ -452,11 +452,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 345.37,
-     "now": 344.9,
-     "value": 86.22,
+     "now": 344.8581,
+     "value": 86.21,
      "stop": null,
-     "pnl": -0.12,
-     "pct": -0.14,
+     "pnl": -0.13,
+     "pct": -0.15,
      "held": "8d 8h"
     },
     {
@@ -464,11 +464,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 321.68,
-     "now": 274.14,
-     "value": 68.53,
+     "now": 274.41,
+     "value": 68.6,
      "stop": null,
-     "pnl": -11.88,
-     "pct": -14.78,
+     "pnl": -11.82,
+     "pct": -14.69,
      "held": "8d 8h"
     }
    ],
@@ -535,7 +535,7 @@
     }
    ],
    "note": "",
-   "week": -65.91,
+   "week": -64.07,
    "baseline": "start @ $10,000",
    "chart": [
     [
@@ -608,15 +608,15 @@
     ],
     [
      "10/30 PM",
-     9934.09
+     9935.93
     ]
    ]
   },
   {
    "name": "Sports Quant",
    "tag": "Kalshi \u00b7 real money",
-   "equity": 352.96,
-   "total": 102.96,
+   "equity": 353.27,
+   "total": 103.27,
    "today": 0.0,
    "start": 250.0,
    "record": "9\u20137",
@@ -686,9 +686,9 @@
    ],
    "note": "",
    "real": {
-    "asOf": "2026-10-30 17:57",
+    "asOf": "2026-10-30 18:25",
     "cash": 180.36,
-    "total": 352.96,
+    "total": 353.27,
     "open": [
      {
       "name": "Pistons ML @ Nets",
@@ -746,7 +746,7 @@
    },
    "suggestHead": [
     "Real money: Goal 7/10 \u00b7 Today 0\u20130 \u00b7 Since 10/30 0\u20130 \u00b7 Units today 1.5/4u ($200 cap, 1u = $50)",
-    "Roll $352.96 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 7 PM"
+    "Roll $353.27 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 7 PM"
    ],
    "suggestRec": "ALL \u00b7 15\u201320 (43%) \u00b7 NET +0.9u / +$44.28",
    "flip": [
@@ -1271,7 +1271,7 @@
     ],
     [
      "10/30 PM",
-     352.96
+     353.27
     ]
    ]
   }

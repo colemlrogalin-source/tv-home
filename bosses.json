@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 05:58 PM ET",
+ "asOf": "2026-10-30 06:14 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -22,12 +22,12 @@
   {
    "name": "Stock Exchange Quant",
    "start": 10000.0,
-   "equity": 9924.14,
-   "day": -401.42,
-   "week": -75.86,
-   "total": -75.86,
+   "equity": 9932.27,
+   "day": null,
+   "week": -67.73,
+   "total": -67.73,
    "note": "$10k book",
-   "asOf": "2026-10-30T17:58:37.206630-04:00"
+   "asOf": "2026-10-30T18:14:59.462090-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T17:58",
+  "asOf": "2026-10-30T18:14",
   "positions": [
    {
     "sym": "META",
@@ -133,7 +133,7 @@
      "now": 278.92,
      "pnl": 129.98,
      "pct": 13.54,
-     "held": "8d 2h",
+     "held": "8d 3h",
      "value": 830.19,
      "stop": 303.16
     },
@@ -145,7 +145,7 @@
      "now": 615.78,
      "pnl": 24.72,
      "pct": 3.89,
-     "held": "8d 2h",
+     "held": "8d 3h",
      "value": 610.95,
      "stop": 669.07
     },
@@ -169,7 +169,7 @@
      "now": 70.05,
      "pnl": 0.44,
      "pct": 0.64,
-     "held": "7d 5h",
+     "held": "7d 6h",
      "value": 69.5,
      "stop": 66.73
     },
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "8h 28m",
+     "held": "8h 44m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -260,9 +260,9 @@
   {
    "name": "Stock Exchange Quant",
    "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
-   "equity": 9924.14,
-   "total": -75.86,
-   "today": -401.42,
+   "equity": 9932.27,
+   "total": -67.73,
+   "today": null,
    "start": 10000.0,
    "record": "8\u20131",
    "noStop": true,
@@ -272,11 +272,11 @@
      "side": "Long",
      "qty": "7.75",
      "entry": 377.872258,
-     "now": 371.78,
-     "value": 2881.3,
+     "now": 371.96,
+     "value": 2882.69,
      "stop": null,
-     "pnl": -47.21,
-     "pct": -1.61,
+     "pnl": -45.82,
+     "pct": -1.56,
      "held": "1d 6h"
     },
     {
@@ -284,35 +284,35 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 702.881429,
-     "now": 690.5797,
-     "value": 1208.51,
+     "now": 691.06,
+     "value": 1209.36,
      "stop": null,
-     "pnl": -21.53,
-     "pct": -1.75,
-     "held": "8d 2h"
+     "pnl": -20.69,
+     "pct": -1.68,
+     "held": "8d 3h"
     },
     {
      "sym": "SPY",
      "side": "Long",
      "qty": "1.25",
      "entry": 769.016,
-     "now": 755.84,
-     "value": 944.8,
+     "now": 755.89,
+     "value": 944.86,
      "stop": null,
-     "pnl": -16.47,
+     "pnl": -16.41,
      "pct": -1.71,
-     "held": "1d 6h"
+     "held": "1d 7h"
     },
     {
      "sym": "AMD",
      "side": "Long",
      "qty": "0.75",
      "entry": 515.72,
-     "now": 505.4474,
-     "value": 379.09,
+     "now": 506.51,
+     "value": 379.88,
      "stop": null,
-     "pnl": -7.7,
-     "pct": -1.99,
+     "pnl": -6.91,
+     "pct": -1.79,
      "held": "8d 5h"
     },
     {
@@ -320,11 +320,11 @@
      "side": "Long",
      "qty": "1",
      "entry": 353.0775,
-     "now": 365.055,
-     "value": 365.06,
+     "now": 366.7692,
+     "value": 366.77,
      "stop": null,
-     "pnl": 11.98,
-     "pct": 3.39,
+     "pnl": 13.69,
+     "pct": 3.88,
      "held": "8d 5h"
     },
     {
@@ -344,11 +344,11 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 225.52,
-     "now": 196.65,
-     "value": 344.14,
+     "now": 197.16,
+     "value": 345.03,
      "stop": null,
-     "pnl": -50.52,
-     "pct": -12.8,
+     "pnl": -49.63,
+     "pct": -12.58,
      "held": "8d 5h"
     },
     {
@@ -356,11 +356,11 @@
      "side": "Long",
      "qty": "0.5",
      "entry": 635.08,
-     "now": 643.5,
-     "value": 321.75,
+     "now": 645.9792,
+     "value": 322.99,
      "stop": null,
-     "pnl": 4.21,
-     "pct": 1.33,
+     "pnl": 5.45,
+     "pct": 1.72,
      "held": "8d 5h"
     },
     {
@@ -368,11 +368,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 454.54,
-     "now": 423.311,
-     "value": 317.48,
+     "now": 423.8,
+     "value": 317.85,
      "stop": null,
-     "pnl": -23.42,
-     "pct": -6.87,
+     "pnl": -23.05,
+     "pct": -6.76,
      "held": "8d 5h"
     },
     {
@@ -380,7 +380,7 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 419.08,
-     "now": 399.0101,
+     "now": 399.01,
      "value": 299.26,
      "stop": null,
      "pnl": -15.05,
@@ -392,11 +392,11 @@
      "side": "Long",
      "qty": "4.5",
      "entry": 87.631111,
-     "now": 64.8588,
-     "value": 291.86,
+     "now": 64.8301,
+     "value": 291.74,
      "stop": null,
-     "pnl": -102.48,
-     "pct": -25.99,
+     "pnl": -102.6,
+     "pct": -26.02,
      "held": "8d 5h"
     },
     {
@@ -404,11 +404,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1278.63,
-     "now": 1148.9681,
-     "value": 287.24,
+     "now": 1150.0,
+     "value": 287.5,
      "stop": null,
-     "pnl": -32.42,
-     "pct": -10.14,
+     "pnl": -32.16,
+     "pct": -10.06,
      "held": "8d 5h"
     },
     {
@@ -416,11 +416,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1013.48,
-     "now": 1012.35,
-     "value": 253.09,
+     "now": 1012.5,
+     "value": 253.12,
      "stop": null,
-     "pnl": -0.28,
-     "pct": -0.11,
+     "pnl": -0.24,
+     "pct": -0.1,
      "held": "8d 5h"
     },
     {
@@ -428,7 +428,7 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 867.14,
-     "now": 885.4597,
+     "now": 885.4437,
      "value": 221.36,
      "stop": null,
      "pnl": 4.58,
@@ -440,23 +440,23 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 802.3,
-     "now": 841.0,
-     "value": 210.25,
+     "now": 843.6,
+     "value": 210.9,
      "stop": null,
-     "pnl": 9.68,
-     "pct": 4.82,
-     "held": "8d 7h"
+     "pnl": 10.32,
+     "pct": 5.15,
+     "held": "8d 8h"
     },
     {
      "sym": "AAPL",
      "side": "Long",
      "qty": "0.25",
      "entry": 345.37,
-     "now": 344.7155,
-     "value": 86.18,
+     "now": 344.7824,
+     "value": 86.2,
      "stop": null,
-     "pnl": -0.16,
-     "pct": -0.19,
+     "pnl": -0.15,
+     "pct": -0.17,
      "held": "8d 8h"
     },
     {
@@ -535,7 +535,7 @@
     }
    ],
    "note": "",
-   "week": -75.86,
+   "week": -67.73,
    "baseline": "start @ $10,000",
    "chart": [
     [
@@ -608,7 +608,7 @@
     ],
     [
      "10/30 PM",
-     9924.14
+     9932.27
     ]
    ]
   },
@@ -746,7 +746,7 @@
    },
    "suggestHead": [
     "Real money: Goal 7/10 \u00b7 Today 0\u20130 \u00b7 Since 10/30 0\u20130 \u00b7 Units today 1.5/4u ($200 cap, 1u = $50)",
-    "Roll $352.96 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 6 PM"
+    "Roll $352.96 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 7 PM"
    ],
    "suggestRec": "ALL \u00b7 15\u201320 (43%) \u00b7 NET +0.9u / +$44.28",
    "flip": [

@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 04:28 PM ET",
+ "asOf": "2026-10-30 04:29 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T16:28",
+  "asOf": "2026-10-30T16:29",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "6h 58m",
+     "held": "6h 59m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -903,7 +903,7 @@
    "kind": "close",
    "desk": "VWAP/EMA Agent",
    "sym": "GOOGL",
-   "qty": 1.9843002166855834,
+   "qty": 1.98,
    "price": 278.03,
    "pnl": 88.42,
    "pct": 13.81,
@@ -914,7 +914,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "MSFT",
-   "qty": 2.976450325028375,
+   "qty": 2.98,
    "price": 525.03,
    "side": "long",
    "ts": 1793367000
@@ -995,7 +995,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "XLE",
-   "qty": 0.9921501083427917,
+   "qty": 0.99,
    "price": 69.61,
    "side": "long",
    "ts": 1792771920
@@ -1005,7 +1005,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "XLF",
-   "qty": 12.897951408456292,
+   "qty": 12.9,
    "price": 56.5,
    "side": "long",
    "ts": 1792697100
@@ -1015,7 +1015,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "AAPL",
-   "qty": 6.9450507583995424,
+   "qty": 6.95,
    "price": 346.99,
    "side": "long",
    "ts": 1792696500
@@ -1025,7 +1025,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "GOOGL",
-   "qty": 2.976450325028375,
+   "qty": 2.98,
    "price": 322.59,
    "side": "short",
    "ts": 1792696200
@@ -1035,7 +1035,7 @@
    "kind": "open",
    "desk": "VWAP/EMA Agent",
    "sym": "META",
-   "qty": 0.9921501083427917,
+   "qty": 0.99,
    "price": 640.7,
    "side": "short",
    "ts": 1792695840

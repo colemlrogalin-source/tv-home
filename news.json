@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Warsh wants the Fed to say less. Two officials are pushing for more transparency.",
+   "src": "MarketWatch",
+   "t": 1793395380,
+   "summary": "More interest-rate hikes are needed to fight inflation, Fed officials say."
+  },
+  {
    "title": "In a wild October for markets, these stocks were the biggest winners and losers",
    "src": "MarketWatch",
    "t": 1793393520,
@@ -41,12 +47,6 @@
    "src": "MarketWatch",
    "t": 1793392140,
    "summary": "Various factors indicate that Microsoft is in a better financial position than its cloud rivals, analysts say."
-  },
-  {
-   "title": "AMD\u2019s stock slides after Intel earnings reveal two big issues",
-   "src": "MarketWatch",
-   "t": 1793392080,
-   "summary": "Intel is struggling to make enough AI server chips and dealing with a weak PC market. Investors will soon find out the degree to which AMD may be suffering from the same problems."
   }
  ]
 }

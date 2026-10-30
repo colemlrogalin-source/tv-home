@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "Why gold plunged to its lowest price in a year despite renewed Iran jitters",
+   "src": "MarketWatch",
+   "t": 1793395800,
+   "summary": "Safe-haven gold fell to its lowest price in a year, despite jitters around the potential for fresh Middle East attacks following the U.S. midterm elections on Tuesday"
+  },
+  {
    "title": "Warsh wants the Fed to say less. Two officials are pushing for more transparency.",
    "src": "MarketWatch",
    "t": 1793395380,
@@ -19,34 +25,54 @@
    "summary": "Intel\u2019s PC business is under pressure as memory-chip prices dent demand and as corporate IT teams have less budget for laptops."
   },
   {
-   "title": "Criminal investigation of Alaska Senate race is 'ongoing,' U.S. Attorney says",
-   "src": "CNBC",
-   "t": 1793393164,
-   "summary": "A federal judge kept on a fast track motions to dismiss the Department of Justice's lawsuit that seeks to delay certification of Alaska's U.S. Senate election. Judge Sharon Gleason ordered the DOJ to quickly respond to new dismissal motions filed after the agency added a new claim to its suit in U.S. District Court in Anchorage. The suit seeks to\u2026"
-  },
-  {
-   "title": "Trump admin again loses bid to block California from counting alleged noncitizen votes",
-   "src": "CNBC",
-   "t": 1793393037,
-   "summary": "A US appeals court on Friday rejected the Trump admin's request that it temporarily block the state from counting mail ballots from more than 20,000 registered voters. A US appeals court on Friday rejected the Trump administration's request that it temporarily block California from counting any mail ballots for the November 3 midterm elections\u2026"
-  },
-  {
    "title": "Reddit\u2019s stock logs its biggest one-day drop ever. It\u2019s not the last of the bad news, analysts say.",
    "src": "MarketWatch",
    "t": 1793392920,
    "summary": "Reddit\u2019s stock plunged on Friday after the community-discussion forum said its search referral traffic was down significantly in the third quarter."
   },
   {
-   "title": "Intel stock has worst day since 1970s, wiping about $12 billion off government's stake",
-   "src": "CNBC",
-   "t": 1793392257,
-   "summary": "Intel shares fell 29% on Friday and headed for their worst day since the 1970s. The chipmaker issued weaker-than-expected guidance, citing ongoing softness in the PC market. Amazon also sold off following an earnings miss."
-  },
-  {
    "title": "Microsoft is winning the cloud wars and becoming Wall Street\u2019s new golden child",
    "src": "MarketWatch",
    "t": 1793392140,
    "summary": "Various factors indicate that Microsoft is in a better financial position than its cloud rivals, analysts say."
+  },
+  {
+   "title": "AMD\u2019s stock slides after Intel earnings reveal two big issues",
+   "src": "MarketWatch",
+   "t": 1793392080,
+   "summary": "Intel is struggling to make enough AI server chips and dealing with a weak PC market. Investors will soon find out the degree to which AMD may be suffering from the same problems."
+  },
+  {
+   "title": "The selloff in tech stocks is shifting into overdrive",
+   "src": "MarketWatch",
+   "t": 1793391960,
+   "summary": "Technology stocks had been priced for perfection. They are now getting hammered."
+  }
+ ],
+ "sports": [
+  {
+   "title": "Thunder's $500 million problem: Execs on what they could -- and should -- do",
+   "src": "ESPN",
+   "summary": "What should OKC do after two season-altering injuries? Brian Windhorst and Tim MacMahon take the pulse of the league.",
+   "t": 1793398780
+  },
+  {
+   "title": "An exclusive with Kevin Durant: On his time in OKC, his legacy and the Thunder's 2025 title",
+   "src": "ESPN",
+   "summary": "Durant reveals how much he appreciates OKC and shares his feelings as the team tries to create a dynasty.",
+   "t": 1793398780
+  },
+  {
+   "title": "Morant, hurt against Grizzlies, to miss at least four weeks",
+   "src": "ESPN",
+   "summary": "Trail Blazers guard Ja Morant sustained a left hamstring strain in his first game against the Grizzlies, his former team, and will be out at least four weeks.",
+   "t": 1793398828
+  },
+  {
+   "title": "Beer-fueled Brewers take to streets, continue World Series party",
+   "src": "ESPN",
+   "summary": "Tens of thousands of exuberant Brewers fans flooded the streets of downtown Milwaukee to celebrate the franchise's first World Series title with a parade and victory rally.",
+   "t": 1793398828
   }
  ]
 }

@@ -1,13 +1,13 @@
 {
- "asOf": "2026-10-30 03:02 PM ET",
+ "asOf": "2026-10-30 03:07 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -27.51,
-   "week": 204.53,
-   "total": 285.7,
-   "equity": 10285.7,
+   "day": -35.6,
+   "week": 196.44,
+   "total": 277.61,
+   "equity": 10277.61,
    "note": ""
   },
   {
@@ -66,14 +66,14 @@
   ],
   [
    "now",
-   10285.7
+   10277.61
   ]
  ],
  "vwap": {
-  "equity": 10285.7,
+  "equity": 10277.61,
   "start": 10000,
-  "pnlToday": -27.51,
-  "pnlTotal": 285.7,
+  "pnlToday": -35.6,
+  "pnlTotal": 277.61,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -86,43 +86,43 @@
    10079.12,
    10334.61,
    10313.21,
-   10285.7
+   10277.61
   ],
-  "asOf": "2026-10-30T15:02",
+  "asOf": "2026-10-30T15:07",
   "positions": [
    {
     "sym": "META",
-    "upnl": 27.99,
+    "upnl": 28.01,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 135.33,
+    "upnl": 134.88,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -24.99,
+    "upnl": -30.66,
     "entry": 346.99,
     "qty": 7
    },
    {
     "sym": "XLF",
-    "upnl": -0.78,
+    "upnl": -1.3,
     "entry": 56.5,
     "qty": 13
    },
    {
     "sym": "XLE",
-    "upnl": 0.2,
+    "upnl": 0.08,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -16.71,
+    "upnl": -18.06,
     "entry": 525.03,
     "qty": 3
    }
@@ -132,9 +132,9 @@
   {
    "name": "VWAP/EMA Agent",
    "tag": "VWAP/EMA crossover stock model \u00b7 paper",
-   "equity": 10285.7,
-   "total": 285.7,
-   "today": -27.51,
+   "equity": 10277.61,
+   "total": 277.61,
+   "today": -35.6,
    "start": 10000,
    "record": "4\u20134",
    "positions": [
@@ -143,9 +143,9 @@
      "side": "SHORT",
      "qty": "3",
      "entry": 322.59,
-     "now": 277.48,
-     "pnl": 135.33,
-     "pct": 13.98,
+     "now": 277.63,
+     "pnl": 134.88,
+     "pct": 13.94,
      "held": "7d 23h"
     },
     {
@@ -153,19 +153,19 @@
      "side": "SHORT",
      "qty": "1",
      "entry": 640.7,
-     "now": 612.71,
-     "pnl": 27.99,
+     "now": 612.69,
+     "pnl": 28.01,
      "pct": 4.37,
-     "held": "7d 23h"
+     "held": "8d 0h"
     },
     {
      "sym": "XLE",
      "side": "LONG",
      "qty": "1",
      "entry": 69.61,
-     "now": 69.81,
-     "pnl": 0.2,
-     "pct": 0.29,
+     "now": 69.69,
+     "pnl": 0.08,
+     "pct": 0.11,
      "held": "7d 2h"
     },
     {
@@ -173,9 +173,9 @@
      "side": "LONG",
      "qty": "13",
      "entry": 56.5,
-     "now": 56.44,
-     "pnl": -0.78,
-     "pct": -0.11,
+     "now": 56.4,
+     "pnl": -1.3,
+     "pct": -0.18,
      "held": "7d 23h"
     },
     {
@@ -183,19 +183,19 @@
      "side": "LONG",
      "qty": "3",
      "entry": 525.03,
-     "now": 519.46,
-     "pnl": -16.71,
-     "pct": -1.06,
-     "held": "5h 32m"
+     "now": 519.01,
+     "pnl": -18.06,
+     "pct": -1.15,
+     "held": "5h 37m"
     },
     {
      "sym": "AAPL",
      "side": "LONG",
      "qty": "7",
      "entry": 346.99,
-     "now": 343.42,
-     "pnl": -24.99,
-     "pct": -1.03,
+     "now": 342.61,
+     "pnl": -30.66,
+     "pct": -1.26,
      "held": "7d 23h"
     }
    ],
@@ -256,10 +256,10 @@
   {
    "name": "Crypto CEO",
    "tag": "Crypto Trend50 \u00b7 paper",
-   "equity": 3000.48,
-   "total": 0.48,
-   "today": 0.06,
-   "start": 3000.0,
+   "equity": 10001.61,
+   "total": 1.61,
+   "today": 7001.19,
+   "start": 10000.0,
    "record": "",
    "positions": [],
    "closed": [],

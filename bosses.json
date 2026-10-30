@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 04:23 PM ET",
+ "asOf": "2026-10-30 04:28 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T16:23",
+  "asOf": "2026-10-30T16:28",
   "positions": [
    {
     "sym": "META",
@@ -157,7 +157,7 @@
      "now": 56.56,
      "pnl": 0.77,
      "pct": 0.11,
-     "held": "8d 0h",
+     "held": "8d 1h",
      "value": 729.51,
      "stop": 55.405
     },
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "6h 53m",
+     "held": "6h 58m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -347,6 +347,26 @@
      "held": "3h 59m",
      "when": "Oct 29 11:23 PM",
      "ts": 1793330580
+    },
+    {
+     "sym": "Chuba Hubbard ATD",
+     "side": "WIN",
+     "qty": "$50.00",
+     "pnl": 46.61,
+     "pct": 93.22,
+     "held": "",
+     "when": "Oct 29 10:14 PM",
+     "ts": 1793326440
+    },
+    {
+     "sym": "Brewers ML WS Game 5 @ Rays",
+     "side": "WIN",
+     "qty": "$75.00",
+     "pnl": 35.22,
+     "pct": 46.96,
+     "held": "1h 30m",
+     "when": "Oct 28 11:00 PM",
+     "ts": 1793242800
     }
    ],
    "note": "",

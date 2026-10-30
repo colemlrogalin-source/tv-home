@@ -1,6 +1,12 @@
 {
  "stories": [
   {
+   "title": "In a wild October for markets, these stocks were the biggest winners and losers",
+   "src": "MarketWatch",
+   "t": 1793393520,
+   "summary": "Many Big Tech stocks were hit hard but the S&P 500 showed strength under the surface, with a majority of stocks showing gains for the month."
+  },
+  {
    "title": "Why Intel\u2019s stock saw its worst day in decades \u2014 and a $140 billion wipeout",
    "src": "MarketWatch",
    "t": 1793393280,
@@ -11,6 +17,12 @@
    "src": "CNBC",
    "t": 1793393164,
    "summary": "A federal judge kept on a fast track motions to dismiss the Department of Justice's lawsuit that seeks to delay certification of Alaska's U.S. Senate election. Judge Sharon Gleason ordered the DOJ to quickly respond to new dismissal motions filed after the agency added a new claim to its suit in U.S. District Court in Anchorage. The suit seeks to\u2026"
+  },
+  {
+   "title": "Trump admin again loses bid to block California from counting alleged noncitizen votes",
+   "src": "CNBC",
+   "t": 1793393037,
+   "summary": "A US appeals court on Friday rejected the Trump admin's request that it temporarily block the state from counting mail ballots from more than 20,000 registered voters. A US appeals court on Friday rejected the Trump administration's request that it temporarily block California from counting any mail ballots for the November 3 midterm elections\u2026"
   },
   {
    "title": "Reddit\u2019s stock logs its biggest one-day drop ever. It\u2019s not the last of the bad news, analysts say.",
@@ -35,18 +47,6 @@
    "src": "MarketWatch",
    "t": 1793392080,
    "summary": "Intel is struggling to make enough AI server chips and dealing with a weak PC market. Investors will soon find out the degree to which AMD may be suffering from the same problems."
-  },
-  {
-   "title": "The selloff in tech stocks is shifting into overdrive",
-   "src": "MarketWatch",
-   "t": 1793391960,
-   "summary": "Technology stocks had been priced for perfection. They are now getting hammered."
-  },
-  {
-   "title": "After Intel\u2019s historic stock drop, analysts say there\u2019s no reason to buy the dip",
-   "src": "MarketWatch",
-   "t": 1793391780,
-   "summary": "\u201cA cheaper stock does not necessarily offer better value,\u201d one expert says."
   }
  ]
 }

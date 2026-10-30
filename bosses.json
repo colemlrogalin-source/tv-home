@@ -1,13 +1,13 @@
 {
- "asOf": "2026-10-30 03:14 PM ET",
+ "asOf": "2026-10-30 03:19 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -25.93,
-   "week": 206.11,
-   "total": 287.28,
-   "equity": 10287.28,
+   "day": -28.25,
+   "week": 203.79,
+   "total": 284.96,
+   "equity": 10284.96,
    "note": ""
   },
   {
@@ -67,14 +67,14 @@
   ],
   [
    "now",
-   10287.28
+   10284.96
   ]
  ],
  "vwap": {
-  "equity": 10287.28,
+  "equity": 10284.96,
   "start": 10000,
-  "pnlToday": -25.93,
-  "pnlTotal": 287.28,
+  "pnlToday": -28.25,
+  "pnlTotal": 284.96,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -87,43 +87,43 @@
    10079.12,
    10334.61,
    10313.21,
-   10287.28
+   10284.96
   ],
-  "asOf": "2026-10-30T15:14",
+  "asOf": "2026-10-30T15:19",
   "positions": [
    {
     "sym": "META",
-    "upnl": 27.04,
+    "upnl": 27.62,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 133.95,
+    "upnl": 134.25,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -26.32,
+    "upnl": -28.28,
     "entry": 346.99,
     "qty": 7
    },
    {
     "sym": "XLF",
-    "upnl": -0.78,
+    "upnl": -1.56,
     "entry": 56.5,
     "qty": 13
    },
    {
     "sym": "XLE",
-    "upnl": 0.13,
+    "upnl": 0.06,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -11.4,
+    "upnl": -11.79,
     "entry": 525.03,
     "qty": 3
    }
@@ -133,10 +133,10 @@
   {
    "name": "VWAP/EMA Agent",
    "tag": "VWAP/EMA crossover stock model \u00b7 paper",
-   "equity": 10287.28,
-   "week": 206.11,
-   "total": 287.28,
-   "today": -25.93,
+   "equity": 10284.96,
+   "week": 203.79,
+   "total": 284.96,
+   "today": -28.25,
    "start": 10000,
    "record": "4\u20134",
    "positions": [
@@ -145,9 +145,9 @@
      "side": "SHORT",
      "qty": "3",
      "entry": 322.59,
-     "now": 277.94,
-     "pnl": 133.95,
-     "pct": 13.84,
+     "now": 277.84,
+     "pnl": 134.25,
+     "pct": 13.87,
      "held": "8d 0h"
     },
     {
@@ -155,9 +155,9 @@
      "side": "SHORT",
      "qty": "1",
      "entry": 640.7,
-     "now": 613.66,
-     "pnl": 27.04,
-     "pct": 4.22,
+     "now": 613.08,
+     "pnl": 27.62,
+     "pct": 4.31,
      "held": "8d 0h"
     },
     {
@@ -165,9 +165,9 @@
      "side": "LONG",
      "qty": "1",
      "entry": 69.61,
-     "now": 69.74,
-     "pnl": 0.13,
-     "pct": 0.19,
+     "now": 69.67,
+     "pnl": 0.06,
+     "pct": 0.09,
      "held": "7d 3h"
     },
     {
@@ -175,9 +175,9 @@
      "side": "LONG",
      "qty": "13",
      "entry": 56.5,
-     "now": 56.44,
-     "pnl": -0.78,
-     "pct": -0.11,
+     "now": 56.38,
+     "pnl": -1.56,
+     "pct": -0.21,
      "held": "7d 23h"
     },
     {
@@ -185,20 +185,20 @@
      "side": "LONG",
      "qty": "3",
      "entry": 525.03,
-     "now": 521.23,
-     "pnl": -11.4,
-     "pct": -0.72,
-     "held": "5h 44m"
+     "now": 521.1,
+     "pnl": -11.79,
+     "pct": -0.75,
+     "held": "5h 49m"
     },
     {
      "sym": "AAPL",
      "side": "LONG",
      "qty": "7",
      "entry": 346.99,
-     "now": 343.23,
-     "pnl": -26.32,
-     "pct": -1.08,
-     "held": "7d 23h"
+     "now": 342.95,
+     "pnl": -28.28,
+     "pct": -1.16,
+     "held": "8d 0h"
     }
    ],
    "closed": [

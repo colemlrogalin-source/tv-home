@@ -1,6 +1,30 @@
 {
  "stories": [
   {
+   "title": "Is it curtains for COLA? Saving Social Security could mean changing the cost-of-living adjustment.",
+   "src": "MarketWatch",
+   "t": 1793389140,
+   "summary": "Several proposals consider changing the way retirees receive inflation protection. Here\u2019s what it could cost you."
+  },
+  {
+   "title": "Wage growth hits 5-year low as American workers find their take-home pay is \u2018stretched thinner and thinner\u2019",
+   "src": "MarketWatch",
+   "t": 1793389140,
+   "summary": "Worker compensation grows slower than inflation for second straight quarter"
+  },
+  {
+   "title": "This is where most people go wrong in their 30s and 40s",
+   "src": "MarketWatch",
+   "t": 1793389020,
+   "summary": "These big life decisions will determine just how well you retire."
+  },
+  {
+   "title": "Caregivers are now spending more than $11,000 a year out of pocket\u2014up 60% in five years",
+   "src": "MarketWatch",
+   "t": 1793389020,
+   "summary": "An AARP study shows the financial sacrifices families make and their long-term impacts."
+  },
+  {
    "title": "Stock market rocked as investors dump tech shares, Nasdaq drops 3%: Live updates",
    "src": "CNBC",
    "t": 1793388926,
@@ -23,30 +47,6 @@
    "src": "CNBC",
    "t": 1793386926,
    "summary": "Binance's cofounder Changpeng Zhao urged Elon Musk to stop mocking the exchange after it suffered a $6.3 billion hack. The SpaceX and Tesla CEO posted a series of emojis on X which appeared to poke fun at the attack, which has seen $3 billion in crypto assets frozen so far."
-  },
-  {
-   "title": "Midterms, Apple earnings, jobs report. Wall Street faces a big week ahead just as investors dump tech",
-   "src": "CNBC",
-   "t": 1793386515,
-   "summary": "Next week is shaping up to be a potentially shaky one amid rumblings in the artificial intelligence trade."
-  },
-  {
-   "title": "Is your crypto safe? What Binance\u2019s $6.3 billion hack means for bitcoin investors.",
-   "src": "MarketWatch",
-   "t": 1793386200,
-   "summary": "A look at how safe your money really is when even the world\u2019s largest cryptocurrency exchange can be breached. Prices of bitcoin and Ethereum were tumbling on Friday after Binance disclosed the hack \u2014 described as the largest relating to cryptocurrencies on record \u2014 that raises new concerns about whether investors can count on crypto exchanges to\u2026"
-  },
-  {
-   "title": "Reid Hoffman gives millions to Dems in late spending spree as Epstein fight spills into election",
-   "src": "CNBC",
-   "t": 1793385137,
-   "summary": "LinkedIn co-founder Reid Hoffman has poured $8 million into Wisconsin Democrats in five weeks, part of a broader last-minute rush of billionaire money into 2026 races by donors including Michael Bloomberg, Jessica Livingston and Luke Nosek. The billionaire cash is landing amid a record-setting political ad blitz, with more than $1 billion booked\u2026"
-  },
-  {
-   "title": "My father has Alzheimer\u2019s and his caregiver is using his debit card for DoorDash. Do I intervene?",
-   "src": "MarketWatch",
-   "t": 1793385000,
-   "summary": "\u201cI suspect the live-in caregiver is benefiting from my parent\u2019s generosity.\u201d There\u2019s a lot of hurt between us, and I\u2019m struggling to figure out how to support him without giving up the boundaries I worked hard to set. It feels wrong to just excuse this from here on out. He is still an adult, and I think I deserve the same respect I give him. But\u2026"
   }
  ]
 }

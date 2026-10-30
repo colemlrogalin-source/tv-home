@@ -1,9 +1,15 @@
 {
  "stories": [
   {
+   "title": "Criminal investigation of Alaska Senate race is 'ongoing,' U.S. Attorney says",
+   "src": "CNBC",
+   "t": 1793391686,
+   "summary": "A federal judge kept on a fast track motions to dismiss the Department of Justice's lawsuit that seeks to delay certification of Alaska's U.S. Senate election. Judge Sharon Gleason ordered the DOJ to quickly respond to new dismissal motions filed after the agency added a new claim to its suit in U.S. District Court in Anchorage. The suit seeks to\u2026"
+  },
+  {
    "title": "Stock market rocked as investors dump tech shares; Nasdaq suffers worst day since June: Live updates",
    "src": "CNBC",
-   "t": 1793391459,
+   "t": 1793391640,
    "summary": "The tech-heavy Nasdaq Composite posted its worst month since March 2025. The Nasdaq Composite tumbled on Friday, while the Dow Jones Industrial Average outperformed as traders moved out of key stocks related to artificial intelligence and into more defensive areas of the market. The tech-heavy Nasdaq lost 2.86% for its worst single-day performance\u2026"
   },
   {
@@ -13,10 +19,10 @@
    "summary": "Intel shares fell 29% on Friday and headed for their worst day since the 1970s. The chipmaker issued weaker-than-expected guidance, citing ongoing softness in the PC market. Amazon also sold off following an earnings miss."
   },
   {
-   "title": "'Bad time to troll': Binance co-founder Zhao asks Musk for support after hack",
+   "title": "Beware these stock funds for big capital gains distributions this year. How to manage the tax bill",
    "src": "CNBC",
-   "t": 1793390565,
-   "summary": "Binance's cofounder Changpeng Zhao urged Elon Musk to stop mocking the exchange after it suffered a $6.3 billion hack. The SpaceX and Tesla CEO posted a series of emojis on X which appeared to poke fun at the attack, which has seen $3 billion in crypto assets frozen so far."
+   "t": 1793390462,
+   "summary": "Mutual fund families are preparing to roll out large capital gains to shareholders."
   },
   {
    "title": "\u2018Showy jewelry and fancy cars hold no appeal\u2019: We have a 99% chance of outliving our life savings. Why not spend it all?",
@@ -31,22 +37,16 @@
    "summary": "Dallas Fed\u2019s Lorie Logan sees \u201cat least\u201d 50 basis points in additional hikes."
   },
   {
+   "title": "Binance loses $6.3 billion in crypto heist\u2014what happens to your money when an exchange gets hacked",
+   "src": "CNBC",
+   "t": 1793389186,
+   "summary": "Crypto exchanges make it easier to buy, sell and store digital assets, but they come with risks, too. A record-breaking hack at Binance, the world's largest cryptocurrency exchange, is a reminder of the risks investors take when trusting a company to hold their digital tokens. Binance said Friday that the security breach affected about $6.3\u2026"
+  },
+  {
    "title": "Is it curtains for COLA? Saving Social Security could mean changing the cost-of-living adjustment.",
    "src": "MarketWatch",
    "t": 1793389140,
    "summary": "Several proposals consider changing the way retirees receive inflation protection. Here\u2019s what it could cost you."
-  },
-  {
-   "title": "Wage growth hits 5-year low as American workers find their take-home pay is \u2018stretched thinner and thinner\u2019",
-   "src": "MarketWatch",
-   "t": 1793389140,
-   "summary": "Worker compensation grows slower than inflation for second straight quarter"
-  },
-  {
-   "title": "This is where most people go wrong in their 30s and 40s",
-   "src": "MarketWatch",
-   "t": 1793389020,
-   "summary": "These big life decisions will determine just how well you retire."
   }
  ]
 }

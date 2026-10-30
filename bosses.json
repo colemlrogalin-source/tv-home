@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 04:12 PM ET",
+ "asOf": "2026-10-30 04:15 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T16:12",
+  "asOf": "2026-10-30T16:15",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "6h 42m",
+     "held": "6h 45m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -193,7 +193,7 @@
      "now": 344.04,
      "pnl": -20.49,
      "pct": -0.85,
-     "held": "8d 0h",
+     "held": "8d 1h",
      "value": 2389.38,
      "stop": 335.735
     }
@@ -347,47 +347,518 @@
      "held": "3h 59m",
      "when": "Oct 29 11:23 PM",
      "ts": 1793330580
-    },
-    {
-     "sym": "Chuba Hubbard ATD",
-     "side": "WIN",
-     "qty": "$50.00",
-     "pnl": 46.61,
-     "pct": 93.22,
-     "held": "",
-     "when": "Oct 29 10:14 PM",
-     "ts": 1793326440
     }
    ],
    "note": "",
+   "suggestHead": [
+    "Real money: Goal 7/10 \u00b7 Today 0\u20130 \u00b7 Since 10/30 0\u20130 \u00b7 Units today 1.5/4u ($200 cap, 1u = $50)",
+    "Roll $358.33 \u00b7 Benchmark net \u2212$1,108 \u00b7 Dec 1 test: 32 days \u00b7 Next scan 5 PM"
+   ],
+   "suggestRec": "ALL \u00b7 15\u201320 (43%) \u00b7 NET +0.9u / +$44.28",
    "suggest": [
     {
+     "id": "#30-2",
+     "date": "10/30",
      "sym": "LA Clippers @ Minnesota \u00b7 Jaden McDaniels 6+ rebounds",
      "price": "46c",
-     "qty": "$24.84",
-     "when": "Oct 30 1:20 PM",
-     "status": "sent"
+     "units": "0.5u",
+     "status": "open",
+     "pnl": null
     },
     {
+     "id": "#30-1",
+     "date": "10/30",
      "sym": "Detroit @ Brooklyn \u00b7 Pistons ML",
      "price": "73c",
-     "qty": "$49.64",
-     "when": "Oct 30 8:20 AM",
-     "status": "sent"
+     "units": "1u",
+     "status": "open",
+     "pnl": null
     },
     {
+     "id": "#28-1",
+     "date": "10/28",
      "sym": "Milwaukee @ Tampa Bay (WS G5) \u00b7 Brewers ML",
      "price": "55c",
-     "qty": "$48.40",
-     "when": "Oct 28 6:20 PM",
-     "status": "passed"
+     "units": "1u",
+     "status": "W",
+     "pnl": 38.07
     },
     {
+     "id": "#25-23",
+     "date": "10/25",
      "sym": "Kansas City @ Seattle (SNF) \u00b7 Sam Darnold Under 223.5 pass yds",
      "price": "-113",
-     "qty": "$10.00",
-     "when": "Oct 25 5:55 PM",
-     "status": "sent"
+     "units": "0.5u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-20",
+     "date": "10/25",
+     "sym": "Kansas City @ Seattle (SNF) \u00b7 Under 42.5",
+     "price": "-110",
+     "units": "0.5u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-17",
+     "date": "10/25",
+     "sym": "LA Rams @ Las Vegas (4:25 PM FOX) \u00b7 Raiders ML",
+     "price": "+150",
+     "units": "0u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-18",
+     "date": "10/25",
+     "sym": "Rams@Raiders 4:25 + Browns@Titans 1 PM \u00b7 2-leg RISK-FREE parlay: Raiders +3.5 / CLE-TEN Under 36.5",
+     "price": "+250",
+     "units": "0u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-13",
+     "date": "10/25",
+     "sym": "Cincinnati @ Baltimore \u00b7 Under 46.5",
+     "price": "-115",
+     "units": "2u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-14",
+     "date": "10/25",
+     "sym": "Indianapolis @ Minnesota \u00b7 Under 41.5",
+     "price": "-110",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-15",
+     "date": "10/25",
+     "sym": "NY Giants @ Houston \u00b7 Under 42.5",
+     "price": "-108",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-12",
+     "date": "10/25",
+     "sym": "Indianapolis @ Minnesota \u00b7 Under 41.5",
+     "price": "-110",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-2",
+     "date": "10/25",
+     "sym": "Cincinnati @ Baltimore \u00b7 Under 46.5",
+     "price": "-115",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-3",
+     "date": "10/25",
+     "sym": "NY Giants @ Houston \u00b7 Under 42.5",
+     "price": "-108",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-4",
+     "date": "10/25",
+     "sym": "BAL vs CIN / HOU vs NYG \u00b7 ATD 2-leg parlay: Derrick Henry + Woody Marks",
+     "price": "+205",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#25-1",
+     "date": "10/25",
+     "sym": "Pittsburgh @ New Orleans (Paris) \u00b7 Under 43.5",
+     "price": "-118",
+     "units": "1u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-32",
+     "date": "10/24",
+     "sym": "Colorado @ Oklahoma State \u00b7 LIVE Oklahoma State ML",
+     "price": "-250",
+     "units": "0.5u",
+     "status": "W",
+     "pnl": 4.0
+    },
+    {
+     "id": "#24-31",
+     "date": "10/24",
+     "sym": "Tampa Bay @ Milwaukee (WS G2) \u00b7 SGP: Brewers -1.5 + Under 6.5",
+     "price": "+430",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#24-29",
+     "date": "10/24",
+     "sym": "USC @ Wisconsin \u00b7 Wisconsin +2.5",
+     "price": "-115",
+     "units": "1u",
+     "status": "W",
+     "pnl": 17.39
+    },
+    {
+     "id": "#24-30",
+     "date": "10/24",
+     "sym": "Iowa @ Minnesota \u00b7 LIVE Iowa ML",
+     "price": "+170",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#24-23",
+     "date": "10/24",
+     "sym": "Tampa Bay @ Milwaukee (WS G2) \u00b7 Logan Henderson Under 3.5 Hits Allowed",
+     "price": "+111",
+     "units": "0.5u",
+     "status": "W",
+     "pnl": 11.1
+    },
+    {
+     "id": "#24-24",
+     "date": "10/24",
+     "sym": "Tampa Bay @ Milwaukee (WS G2) \u00b7 Logan Henderson Under 1.5 Earned Runs",
+     "price": "-141",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#24-21",
+     "date": "10/24",
+     "sym": "Tampa Bay @ Milwaukee (WS G2) \u00b7 Milwaukee ML",
+     "price": "-125",
+     "units": "0.5u",
+     "status": "W",
+     "pnl": 8.0
+    },
+    {
+     "id": "#24-22",
+     "date": "10/24",
+     "sym": "Tampa Bay @ Milwaukee (WS G2) \u00b7 Under 6.5",
+     "price": "6.5",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#24-20",
+     "date": "10/24",
+     "sym": "Parlay: MISS@TEX + WAS@CHI + SAS@DAL \u00b7 Ole Miss +3",
+     "price": "+587",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#24-17",
+     "date": "10/24",
+     "sym": "Ole Miss @ Texas \u00b7 Ole Miss +3",
+     "price": "+3",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#24-18",
+     "date": "10/24",
+     "sym": "Washington @ Chicago \u00b7 Chicago -1.5",
+     "price": "-1.5",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#24-19",
+     "date": "10/24",
+     "sym": "San Antonio @ Dallas \u00b7 San Antonio -14.5",
+     "price": "-14.5",
+     "units": "0.25u",
+     "status": "W",
+     "pnl": 4.55
+    },
+    {
+     "id": "#24-14",
+     "date": "10/24",
+     "sym": "Washington @ Chicago \u00b7 Chicago -2.5",
+     "price": "-2.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-15",
+     "date": "10/24",
+     "sym": "San Antonio @ Dallas \u00b7 San Antonio -14.5",
+     "price": "-14.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-16",
+     "date": "10/24",
+     "sym": "Milwaukee @ Philadelphia \u00b7 Over 234.5",
+     "price": "234.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-13",
+     "date": "10/24",
+     "sym": "Syracuse @ North Carolina \u00b7 Over 50.5",
+     "price": "50.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-10",
+     "date": "10/24",
+     "sym": "Kansas State @ Arizona State \u00b7 Kansas State -1.5",
+     "price": "-1.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-11",
+     "date": "10/24",
+     "sym": "Utah State @ Texas State \u00b7 Texas State -14",
+     "price": "-14",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-12",
+     "date": "10/24",
+     "sym": "Iowa State @ Arizona \u00b7 Arizona -12.5",
+     "price": "-12.5",
+     "units": "0.25u",
+     "status": "\u2013",
+     "pnl": null
+    },
+    {
+     "id": "#24-4",
+     "date": "10/24",
+     "sym": "Baylor @ Kansas \u00b7 Under 52.5",
+     "price": "-108",
+     "units": "2u",
+     "status": "W",
+     "pnl": 37.04
+    },
+    {
+     "id": "#24-5",
+     "date": "10/24",
+     "sym": "Old Dominion @ Louisiana Tech \u00b7 Under 44.5",
+     "price": "-108",
+     "units": "1u",
+     "status": "W",
+     "pnl": 18.52
+    },
+    {
+     "id": "#24-6",
+     "date": "10/24",
+     "sym": "Vanderbilt @ Kentucky \u00b7 Vanderbilt +10.5",
+     "price": "-110",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#24-7",
+     "date": "10/24",
+     "sym": "Virginia Tech @ Clemson \u00b7 Clemson ML",
+     "price": "-155",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#24-8",
+     "date": "10/24",
+     "sym": "Hawaii @ Northern Illinois \u00b7 Northern Illinois ML",
+     "price": "+154",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#24-9",
+     "date": "10/24",
+     "sym": "Texas A&M @ Alabama \u00b7 Texas A&M ML",
+     "price": "+425",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#24-1",
+     "date": "10/24",
+     "sym": "Pittsburgh @ Miami \u00b7 Under 48.5",
+     "price": "-112",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#24-2",
+     "date": "10/24",
+     "sym": "Indiana @ Michigan \u00b7 Michigan +7.5",
+     "price": "-115",
+     "units": "1u",
+     "status": "W",
+     "pnl": 17.39
+    },
+    {
+     "id": "#24-3",
+     "date": "10/24",
+     "sym": "Michigan State @ UCLA \u00b7 Under 44.5",
+     "price": "-118",
+     "units": "2u",
+     "status": "W",
+     "pnl": 33.9
+    },
+    {
+     "id": "#23-4",
+     "date": "10/23",
+     "sym": "Rays @ Brewers (WS G1) \u00b7 Brewers ML",
+     "price": "-193",
+     "units": "1u",
+     "status": "W",
+     "pnl": 10.36
+    },
+    {
+     "id": "#23-5",
+     "date": "10/23",
+     "sym": "Rays @ Brewers (WS G1) \u00b7 Jacob Misiorowski Over 5.5 Ks",
+     "price": "-286",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#23-6",
+     "date": "10/23",
+     "sym": "Rays @ Brewers (WS G1) \u00b7 Under 6.5",
+     "price": "-108",
+     "units": "1u",
+     "status": "W",
+     "pnl": 18.52
+    },
+    {
+     "id": "#23-7",
+     "date": "10/23",
+     "sym": "Army @ Tulsa \u00b7 Tulsa ML",
+     "price": "-115",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#23-8",
+     "date": "10/23",
+     "sym": "Air Force @ Wyoming \u00b7 Air Force ML",
+     "price": "-225",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#23-9",
+     "date": "10/23",
+     "sym": "Canadiens @ Blackhawks \u00b7 Canadiens ML",
+     "price": "-150",
+     "units": "0.25u",
+     "status": "W",
+     "pnl": 3.33
+    },
+    {
+     "id": "#23-10",
+     "date": "10/23",
+     "sym": "Lightning @ Avalanche \u00b7 Brock Nelson anytime goal",
+     "price": "+300",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#23-2",
+     "date": "10/23",
+     "sym": "Trail Blazers @ Kings \u00b7 Under 231.5",
+     "price": "-105",
+     "units": "1u",
+     "status": "L",
+     "pnl": -20.0
+    },
+    {
+     "id": "#23-3",
+     "date": "10/23",
+     "sym": "Pistons @ Heat \u00b7 Under 235.5",
+     "price": "-112",
+     "units": "0.5u",
+     "status": "L",
+     "pnl": -10.0
+    },
+    {
+     "id": "#23-1",
+     "date": "10/23",
+     "sym": "Duke @ Virginia \u00b7 Under 46.5",
+     "price": "-102",
+     "units": "1u",
+     "status": "W",
+     "pnl": 19.61
+    },
+    {
+     "id": "#22-13",
+     "date": "10/22",
+     "sym": "Patriots @ Bears \u00b7 Kyle Williams",
+     "price": "+750",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#22-12",
+     "date": "10/22",
+     "sym": "Patriots @ Bears \u00b7 Caleb Williams Anytime TD",
+     "price": "+350",
+     "units": "0.25u",
+     "status": "L",
+     "pnl": -5.0
+    },
+    {
+     "id": "#22-11",
+     "date": "10/22",
+     "sym": "Patriots @ Bears \u00b7 D'Andre Swift First TD",
+     "price": "+550 min",
+     "units": "0.25u",
+     "status": "W",
+     "pnl": 27.5
     }
    ],
    "chart": [

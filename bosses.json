@@ -1,31 +1,32 @@
 {
- "asOf": "2026-10-30 03:07 PM ET",
+ "asOf": "2026-10-30 03:09 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -35.6,
-   "week": 196.44,
-   "total": 277.61,
-   "equity": 10277.61,
+   "day": -29.45,
+   "week": 202.59,
+   "total": 283.76,
+   "equity": 10283.76,
    "note": ""
   },
   {
    "name": "Crypto CEO",
-   "start": null,
-   "day": null,
-   "week": null,
-   "total": null,
-   "note": "from floor.json"
+   "start": 10000.0,
+   "day": 1.61,
+   "week": 1.61,
+   "total": 1.61,
+   "note": "",
+   "equity": 10001.61
   },
   {
    "name": "Stock Exchange Quant",
    "start": 40000.0,
-   "day": -515.32,
+   "day": -2174.38,
    "week": null,
-   "total": 1167.16,
-   "note": "Mac status.json copy, Oct 29 1:06 AM ET",
-   "equity": 41167.16,
+   "total": -454.14,
+   "note": "",
+   "equity": 39545.86,
    "asOf": "2026-10-29T05:06:13+00:00"
   },
   {
@@ -66,14 +67,14 @@
   ],
   [
    "now",
-   10277.61
+   10283.76
   ]
  ],
  "vwap": {
-  "equity": 10277.61,
+  "equity": 10283.76,
   "start": 10000,
-  "pnlToday": -35.6,
-  "pnlTotal": 277.61,
+  "pnlToday": -29.45,
+  "pnlTotal": 283.76,
   "record": {
    "wins": 4,
    "losses": 4,
@@ -86,43 +87,43 @@
    10079.12,
    10334.61,
    10313.21,
-   10277.61
+   10283.76
   ],
-  "asOf": "2026-10-30T15:07",
+  "asOf": "2026-10-30T15:09",
   "positions": [
    {
     "sym": "META",
-    "upnl": 28.01,
+    "upnl": 27.06,
     "entry": 640.7,
     "qty": 1
    },
    {
     "sym": "GOOGL",
-    "upnl": 134.88,
+    "upnl": 134.01,
     "entry": 322.59,
     "qty": 3
    },
    {
     "sym": "AAPL",
-    "upnl": -30.66,
+    "upnl": -25.41,
     "entry": 346.99,
     "qty": 7
    },
    {
     "sym": "XLF",
-    "upnl": -1.3,
+    "upnl": -0.65,
     "entry": 56.5,
     "qty": 13
    },
    {
     "sym": "XLE",
-    "upnl": 0.08,
+    "upnl": 0.17,
     "entry": 69.61,
     "qty": 1
    },
    {
     "sym": "MSFT",
-    "upnl": -18.06,
+    "upnl": -16.08,
     "entry": 525.03,
     "qty": 3
    }
@@ -132,9 +133,10 @@
   {
    "name": "VWAP/EMA Agent",
    "tag": "VWAP/EMA crossover stock model \u00b7 paper",
-   "equity": 10277.61,
-   "total": 277.61,
-   "today": -35.6,
+   "equity": 10283.76,
+   "week": 202.59,
+   "total": 283.76,
+   "today": -29.45,
    "start": 10000,
    "record": "4\u20134",
    "positions": [
@@ -143,9 +145,9 @@
      "side": "SHORT",
      "qty": "3",
      "entry": 322.59,
-     "now": 277.63,
-     "pnl": 134.88,
-     "pct": 13.94,
+     "now": 277.92,
+     "pnl": 134.01,
+     "pct": 13.85,
      "held": "7d 23h"
     },
     {
@@ -153,9 +155,9 @@
      "side": "SHORT",
      "qty": "1",
      "entry": 640.7,
-     "now": 612.69,
-     "pnl": 28.01,
-     "pct": 4.37,
+     "now": 613.64,
+     "pnl": 27.06,
+     "pct": 4.22,
      "held": "8d 0h"
     },
     {
@@ -163,9 +165,9 @@
      "side": "LONG",
      "qty": "1",
      "entry": 69.61,
-     "now": 69.69,
-     "pnl": 0.08,
-     "pct": 0.11,
+     "now": 69.78,
+     "pnl": 0.17,
+     "pct": 0.24,
      "held": "7d 2h"
     },
     {
@@ -173,9 +175,9 @@
      "side": "LONG",
      "qty": "13",
      "entry": 56.5,
-     "now": 56.4,
-     "pnl": -1.3,
-     "pct": -0.18,
+     "now": 56.45,
+     "pnl": -0.65,
+     "pct": -0.09,
      "held": "7d 23h"
     },
     {
@@ -183,19 +185,19 @@
      "side": "LONG",
      "qty": "3",
      "entry": 525.03,
-     "now": 519.01,
-     "pnl": -18.06,
-     "pct": -1.15,
-     "held": "5h 37m"
+     "now": 519.67,
+     "pnl": -16.08,
+     "pct": -1.02,
+     "held": "5h 39m"
     },
     {
      "sym": "AAPL",
      "side": "LONG",
      "qty": "7",
      "entry": 346.99,
-     "now": 342.61,
-     "pnl": -30.66,
-     "pct": -1.26,
+     "now": 343.36,
+     "pnl": -25.41,
+     "pct": -1.05,
      "held": "7d 23h"
     }
    ],
@@ -251,19 +253,22 @@
      "ts": 1792783140
     }
    ],
-   "note": ""
+   "note": "",
+   "baseline": "start @ $10,000"
   },
   {
    "name": "Crypto CEO",
    "tag": "Crypto Trend50 \u00b7 paper",
    "equity": 10001.61,
    "total": 1.61,
-   "today": 7001.19,
+   "today": 1.61,
    "start": 10000.0,
    "record": "",
    "positions": [],
    "closed": [],
-   "note": "Position details stay on Cole's Mac"
+   "note": "Position details stay on Cole's Mac",
+   "week": 1.61,
+   "baseline": "reset Oct 30 12:00 AM ET @ $10,000"
   },
   {
    "name": "Stock Exchange Quant",
@@ -275,7 +280,9 @@
    "record": "",
    "positions": [],
    "closed": [],
-   "note": "17 open positions \u00b7 details stay on Cole's Mac"
+   "note": "17 open positions \u00b7 details stay on Cole's Mac",
+   "week": null,
+   "baseline": "start @ $40,000"
   },
   {
    "name": "Sports Quant",

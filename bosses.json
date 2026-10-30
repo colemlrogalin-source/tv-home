@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 04:40 PM ET",
+ "asOf": "2026-10-30 04:42 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -21,13 +21,13 @@
   },
   {
    "name": "Stock Exchange Quant",
-   "start": 40000.0,
-   "day": -2174.38,
+   "start": 10000.0,
+   "equity": 9926.44,
+   "day": -399.19,
    "week": null,
-   "total": -454.14,
-   "note": "",
-   "equity": 39545.86,
-   "asOf": "2026-10-29T05:06:13+00:00"
+   "total": -73.56,
+   "note": "$10k book",
+   "asOf": "2026-10-30T16:42:50.602807-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T16:40",
+  "asOf": "2026-10-30T16:42",
   "positions": [
    {
     "sym": "META",
@@ -181,7 +181,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "7h 10m",
+     "held": "7h 12m",
      "value": 1558.32,
      "stop": 502.67
     },
@@ -259,21 +259,226 @@
   },
   {
    "name": "Stock Exchange Quant",
-   "tag": "Stock Exchange Quant \u00b7 paper",
-   "equity": 39545.86,
-   "total": -454.14,
-   "today": -2174.38,
-   "start": 40000.0,
+   "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
+   "equity": 9926.44,
+   "total": -73.56,
+   "today": -399.19,
+   "start": 10000.0,
    "record": "",
-   "positions": [],
+   "positions": [
+    {
+     "sym": "VTI",
+     "side": "LONG",
+     "qty": "7.75",
+     "entry": 377.872258,
+     "now": 371.81,
+     "value": 2881.53,
+     "stop": null,
+     "pnl": -46.98,
+     "pct": -1.6,
+     "held": ""
+    },
+    {
+     "sym": "QQQ",
+     "side": "LONG",
+     "qty": "1.75",
+     "entry": 702.881429,
+     "now": 690.82,
+     "value": 1208.93,
+     "stop": null,
+     "pnl": -21.11,
+     "pct": -1.72,
+     "held": ""
+    },
+    {
+     "sym": "SPY",
+     "side": "LONG",
+     "qty": "1.25",
+     "entry": 769.016,
+     "now": 755.98,
+     "value": 944.98,
+     "stop": null,
+     "pnl": -16.3,
+     "pct": -1.7,
+     "held": ""
+    },
+    {
+     "sym": "AMD",
+     "side": "LONG",
+     "qty": "0.75",
+     "entry": 515.72,
+     "now": 504.9,
+     "value": 378.68,
+     "stop": null,
+     "pnl": -8.12,
+     "pct": -2.1,
+     "held": ""
+    },
+    {
+     "sym": "WDC",
+     "side": "LONG",
+     "qty": "1",
+     "entry": 353.0775,
+     "now": 365.5,
+     "value": 365.5,
+     "stop": null,
+     "pnl": 12.42,
+     "pct": 3.52,
+     "held": ""
+    },
+    {
+     "sym": "LRCX",
+     "side": "LONG",
+     "qty": "1.5",
+     "entry": 234.88,
+     "now": 238.8179,
+     "value": 358.23,
+     "stop": null,
+     "pnl": 5.91,
+     "pct": 1.68,
+     "held": ""
+    },
+    {
+     "sym": "MRVL",
+     "side": "LONG",
+     "qty": "1.75",
+     "entry": 225.52,
+     "now": 196.79,
+     "value": 344.38,
+     "stop": null,
+     "pnl": -50.28,
+     "pct": -12.74,
+     "held": ""
+    },
+    {
+     "sym": "STX",
+     "side": "LONG",
+     "qty": "0.5",
+     "entry": 635.08,
+     "now": 643.94,
+     "value": 321.97,
+     "stop": null,
+     "pnl": 4.43,
+     "pct": 1.4,
+     "held": ""
+    },
+    {
+     "sym": "DELL",
+     "side": "LONG",
+     "qty": "0.75",
+     "entry": 454.54,
+     "now": 422.7,
+     "value": 317.02,
+     "stop": null,
+     "pnl": -23.88,
+     "pct": -7.0,
+     "held": ""
+    },
+    {
+     "sym": "VLO",
+     "side": "LONG",
+     "qty": "0.75",
+     "entry": 419.08,
+     "now": 399.0982,
+     "value": 299.32,
+     "stop": null,
+     "pnl": -14.99,
+     "pct": -4.77,
+     "held": ""
+    },
+    {
+     "sym": "INTC",
+     "side": "LONG",
+     "qty": "4.5",
+     "entry": 87.631111,
+     "now": 65.22,
+     "value": 293.49,
+     "stop": null,
+     "pnl": -100.85,
+     "pct": -25.57,
+     "held": ""
+    },
+    {
+     "sym": "SNDK",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 1278.63,
+     "now": 1148.0,
+     "value": 287.0,
+     "stop": null,
+     "pnl": -32.66,
+     "pct": -10.22,
+     "held": ""
+    },
+    {
+     "sym": "COST",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 1013.48,
+     "now": 1012.28,
+     "value": 253.07,
+     "stop": null,
+     "pnl": -0.3,
+     "pct": -0.12,
+     "held": ""
+    },
+    {
+     "sym": "MU",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 867.14,
+     "now": 885.5,
+     "value": 221.38,
+     "stop": null,
+     "pnl": 4.59,
+     "pct": 2.12,
+     "held": ""
+    },
+    {
+     "sym": "LITE",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 802.3,
+     "now": 842.97,
+     "value": 210.74,
+     "stop": null,
+     "pnl": 10.17,
+     "pct": 5.07,
+     "held": ""
+    },
+    {
+     "sym": "AAPL",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 345.37,
+     "now": 344.91,
+     "value": 86.23,
+     "stop": null,
+     "pnl": -0.12,
+     "pct": -0.13,
+     "held": ""
+    },
+    {
+     "sym": "TER",
+     "side": "LONG",
+     "qty": "0.25",
+     "entry": 321.68,
+     "now": 274.49,
+     "value": 68.62,
+     "stop": null,
+     "pnl": -11.8,
+     "pct": -14.67,
+     "held": ""
+    }
+   ],
    "closed": [],
-   "note": "17 open positions \u00b7 details stay on Cole's Mac",
+   "note": "",
    "week": null,
-   "baseline": "start @ $40,000",
+   "baseline": "start @ $10,000",
    "chart": [
     [
      "10/30 PM",
-     39545.86
+     9926.44
     ]
    ]
   },

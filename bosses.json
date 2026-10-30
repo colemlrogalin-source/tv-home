@@ -1,14 +1,14 @@
 {
- "asOf": "2026-10-29 11:56 PM ET",
+ "asOf": "2026-10-30 02:12 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
    "start": 10000,
-   "day": -17.82,
-   "week": 276.68,
-   "total": 316.79,
-   "note": "",
-   "equity": 10316.79
+   "day": -30.73,
+   "week": 201.31,
+   "total": 282.48,
+   "equity": 10282.48,
+   "note": ""
   },
   {
    "name": "Crypto CEO",
@@ -31,13 +31,12 @@
   {
    "name": "Sports Quant",
    "start": 250.0,
-   "day": 68.92,
-   "week": 108.02,
-   "total": 108.02,
-   "equity": 358.02,
-   "note": "Kalshi (Cole's video)",
-   "asOf": "2026-10-29T23:31:00-04:00",
-   "src_file": "/workspace/betlog/changes.md 10/29 11:31 PM: total $358.02, 24h +$68.92; deposit $250 on 10/27 (bankroll.json)"
+   "day": 2.42,
+   "week": 108.33,
+   "total": 108.33,
+   "equity": 358.33,
+   "note": "Kalshi (Cole-reported)",
+   "asOf": "2026-10-30T13:27:00-04:00"
   }
  ],
  "vwapCurve": [
@@ -62,8 +61,71 @@
    10334.61
   ],
   [
+   "10/30",
+   10313.21
+  ],
+  [
    "now",
-   10316.79
+   10282.48
   ]
- ]
+ ],
+ "vwap": {
+  "equity": 10282.48,
+  "start": 10000,
+  "pnlToday": -30.73,
+  "pnlTotal": 282.48,
+  "record": {
+   "wins": 4,
+   "losses": 4,
+   "trades": 8
+  },
+  "curve": [
+   10000,
+   10040.11,
+   10081.17,
+   10079.12,
+   10334.61,
+   10313.21,
+   10282.48
+  ],
+  "asOf": "2026-10-30T14:12",
+  "positions": [
+   {
+    "sym": "META",
+    "upnl": 24.97,
+    "entry": 640.7,
+    "qty": 1
+   },
+   {
+    "sym": "GOOGL",
+    "upnl": 219.0,
+    "entry": 322.59,
+    "qty": 5
+   },
+   {
+    "sym": "AAPL",
+    "upnl": -25.2,
+    "entry": 346.99,
+    "qty": 7
+   },
+   {
+    "sym": "XLF",
+    "upnl": -0.13,
+    "entry": 56.5,
+    "qty": 13
+   },
+   {
+    "sym": "XLE",
+    "upnl": -0.03,
+    "entry": 69.61,
+    "qty": 1
+   },
+   {
+    "sym": "MSFT",
+    "upnl": -11.67,
+    "entry": 525.03,
+    "qty": 3
+   }
+  ]
+ }
 }

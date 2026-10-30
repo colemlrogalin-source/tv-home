@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 07:38 PM ET",
+ "asOf": "2026-10-30 07:44 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -22,12 +22,12 @@
   {
    "name": "Stock Exchange Quant",
    "start": 10000.0,
-   "equity": 9946.64,
-   "day": -378.39,
-   "week": -53.36,
-   "total": -53.36,
+   "equity": 9949.93,
+   "day": -375.87,
+   "week": -50.07,
+   "total": -50.07,
    "note": "$10k book",
-   "asOf": "2026-10-30T19:38:50.454355-04:00"
+   "asOf": "2026-10-30T19:44:04.609937-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T19:38",
+  "asOf": "2026-10-30T19:44",
   "positions": [
    {
     "sym": "META",
@@ -193,7 +193,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "10h 8m",
+     "held": "10h 14m",
      "value": 1558.32,
      "stop": 502.67
     }
@@ -685,7 +685,7 @@
         "dn"
        ],
        [
-        "10h 8m",
+        "10h 14m",
         "tx"
        ]
       ],
@@ -828,7 +828,7 @@
       -1.24
      ]
     ],
-    "upd": "7:38 PM ET"
+    "upd": "7:44 PM ET"
    },
    "baseline": "start @ $10,000",
    "chart": [
@@ -915,9 +915,9 @@
   {
    "name": "Stock Exchange Quant",
    "tag": "Stock Exchange Quant \u00b7 paper \u00b7 $10k book",
-   "equity": 9946.64,
-   "total": -53.36,
-   "today": -378.39,
+   "equity": 9949.93,
+   "total": -50.07,
+   "today": -375.87,
    "start": 10000.0,
    "record": "8\u20131",
    "noStop": true,
@@ -932,18 +932,18 @@
      "stop": null,
      "pnl": -44.35,
      "pct": -1.51,
-     "held": "1d 7h"
+     "held": "1d 8h"
     },
     {
      "sym": "QQQ",
      "side": "Long",
      "qty": "1.75",
      "entry": 702.881429,
-     "now": 692.3,
-     "value": 1211.53,
+     "now": 692.47,
+     "value": 1211.82,
      "stop": null,
-     "pnl": -18.52,
-     "pct": -1.51,
+     "pnl": -18.22,
+     "pct": -1.48,
      "held": "8d 4h"
     },
     {
@@ -951,11 +951,11 @@
      "side": "Long",
      "qty": "1.25",
      "entry": 769.016,
-     "now": 756.69,
-     "value": 945.86,
+     "now": 756.55,
+     "value": 945.69,
      "stop": null,
-     "pnl": -15.41,
-     "pct": -1.6,
+     "pnl": -15.58,
+     "pct": -1.62,
      "held": "1d 8h"
     },
     {
@@ -963,11 +963,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 515.72,
-     "now": 508.5,
-     "value": 381.38,
+     "now": 508.6,
+     "value": 381.45,
      "stop": null,
-     "pnl": -5.42,
-     "pct": -1.4,
+     "pnl": -5.34,
+     "pct": -1.38,
      "held": "8d 7h"
     },
     {
@@ -975,11 +975,11 @@
      "side": "Long",
      "qty": "1",
      "entry": 353.0775,
-     "now": 367.2102,
-     "value": 367.21,
+     "now": 367.65,
+     "value": 367.65,
      "stop": null,
-     "pnl": 14.13,
-     "pct": 4.0,
+     "pnl": 14.57,
+     "pct": 4.13,
      "held": "8d 7h"
     },
     {
@@ -987,11 +987,11 @@
      "side": "Long",
      "qty": "1.5",
      "entry": 234.88,
-     "now": 240.6189,
-     "value": 360.93,
+     "now": 240.724,
+     "value": 361.09,
      "stop": null,
-     "pnl": 8.61,
-     "pct": 2.44,
+     "pnl": 8.77,
+     "pct": 2.49,
      "held": "8d 7h"
     },
     {
@@ -999,23 +999,23 @@
      "side": "Long",
      "qty": "1.75",
      "entry": 225.52,
-     "now": 197.9,
-     "value": 346.32,
+     "now": 198.05,
+     "value": 346.59,
      "stop": null,
-     "pnl": -48.34,
-     "pct": -12.25,
-     "held": "8d 6h"
+     "pnl": -48.07,
+     "pct": -12.18,
+     "held": "8d 7h"
     },
     {
      "sym": "STX",
      "side": "Long",
      "qty": "0.5",
      "entry": 635.08,
-     "now": 647.3,
-     "value": 323.65,
+     "now": 649.4505,
+     "value": 324.73,
      "stop": null,
-     "pnl": 6.11,
-     "pct": 1.92,
+     "pnl": 7.19,
+     "pct": 2.26,
      "held": "8d 7h"
     },
     {
@@ -1023,11 +1023,11 @@
      "side": "Long",
      "qty": "0.75",
      "entry": 454.54,
-     "now": 423.5,
-     "value": 317.62,
+     "now": 423.9478,
+     "value": 317.96,
      "stop": null,
-     "pnl": -23.28,
-     "pct": -6.83,
+     "pnl": -22.94,
+     "pct": -6.73,
      "held": "8d 7h"
     },
     {
@@ -1040,18 +1040,18 @@
      "stop": null,
      "pnl": -14.38,
      "pct": -4.58,
-     "held": "8d 6h"
+     "held": "8d 7h"
     },
     {
      "sym": "INTC",
      "side": "Long",
      "qty": "4.5",
      "entry": 87.631111,
-     "now": 64.95,
-     "value": 292.27,
+     "now": 65.08,
+     "value": 292.86,
      "stop": null,
-     "pnl": -102.06,
-     "pct": -25.88,
+     "pnl": -101.48,
+     "pct": -25.73,
      "held": "8d 7h"
     },
     {
@@ -1059,11 +1059,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 1278.63,
-     "now": 1156.5,
-     "value": 289.12,
+     "now": 1156.2067,
+     "value": 289.05,
      "stop": null,
-     "pnl": -30.53,
-     "pct": -9.55,
+     "pnl": -30.61,
+     "pct": -9.57,
      "held": "8d 7h"
     },
     {
@@ -1083,10 +1083,10 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 867.14,
-     "now": 889.46,
-     "value": 222.37,
+     "now": 889.43,
+     "value": 222.36,
      "stop": null,
-     "pnl": 5.58,
+     "pnl": 5.57,
      "pct": 2.57,
      "held": "8d 7h"
     },
@@ -1095,11 +1095,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 802.3,
-     "now": 843.68,
-     "value": 210.92,
+     "now": 844.99,
+     "value": 211.25,
      "stop": null,
-     "pnl": 10.35,
-     "pct": 5.16,
+     "pnl": 10.67,
+     "pct": 5.32,
      "held": "8d 9h"
     },
     {
@@ -1107,11 +1107,11 @@
      "side": "Long",
      "qty": "0.25",
      "entry": 345.37,
-     "now": 344.9221,
-     "value": 86.23,
+     "now": 344.88,
+     "value": 86.22,
      "stop": null,
-     "pnl": -0.11,
-     "pct": -0.13,
+     "pnl": -0.12,
+     "pct": -0.14,
      "held": "8d 9h"
     },
     {
@@ -1190,7 +1190,7 @@
     }
    ],
    "note": "",
-   "week": -53.36,
+   "week": -50.07,
    "baseline": "start @ $10,000",
    "chart": [
     [
@@ -1263,7 +1263,7 @@
     ],
     [
      "10/30 PM",
-     9946.64
+     9949.93
     ]
    ]
   },
@@ -2139,7 +2139,7 @@
   }
  ],
  "sports_full": {
-  "upd": "7:38 PM",
+  "upd": "7:44 PM",
   "src": "SPORTS QUANT FEED 19:34",
   "kpi": [
    [
@@ -3460,9 +3460,9 @@
   "scores": [
    [
     "NBA \u00b7 DET @ BKN",
-    "7:30 PM",
-    "scheduled",
-    "muted",
+    "0\u20138",
+    "10:14 - 1st",
+    "up",
     true
    ],
    [
@@ -3474,44 +3474,44 @@
    ],
    [
     "NHL \u00b7 NJ @ VGK",
-    "3\u20132",
-    "1:43 - 2nd",
+    "4\u20132",
+    "End of 2nd",
     "up",
     false
    ],
    [
     "NBA \u00b7 CHA @ WSH",
-    "26\u201322",
-    "End of 1st",
+    "28\u201330",
+    "9:58 - 2nd",
     "up",
     false
    ],
    [
     "NHL \u00b7 WPG @ FLA",
-    "0\u20130",
-    "4:17 - 1st",
+    "0\u20131",
+    "1:24 - 1st",
     "up",
     false
    ],
    [
     "NBA \u00b7 CHI @ BOS",
-    "7:30 PM",
-    "scheduled",
-    "muted",
+    "9\u20136",
+    "9:45 - 1st",
+    "up",
     false
    ],
    [
     "NBA \u00b7 NY @ PHI",
-    "7:30 PM",
-    "scheduled",
-    "muted",
+    "0\u20130",
+    "11:24 - 1st",
+    "up",
     false
    ],
    [
     "NBA \u00b7 ORL @ TOR",
-    "7:30 PM",
-    "scheduled",
-    "muted",
+    "0\u20132",
+    "10:39 - 1st",
+    "up",
     false
    ],
    [
@@ -3545,12 +3545,12 @@
   ],
   "tick": [
    [
-    "NBA DET",
+    "NBA DET 0",
     "amber"
    ],
    [
-    "BKN \u00b7 7:30 PM",
-    "wh"
+    "BKN 8 \u00b7 10:14 - 1st",
+    "upb"
    ],
    [
     "NBA LAC",
@@ -3561,19 +3561,19 @@
     "wh"
    ],
    [
-    "NHL NJ 3",
+    "NHL NJ 4",
     "amber"
    ],
    [
-    "VGK 2 \u00b7 1:43 - 2nd",
+    "VGK 2 \u00b7 End of 2nd",
     "upb"
    ],
    [
-    "NBA CHA 26",
+    "NBA CHA 28",
     "amber"
    ],
    [
-    "WSH 22 \u00b7 End of 1st",
+    "WSH 30 \u00b7 9:58 - 2nd",
     "upb"
    ],
    [
@@ -3581,32 +3581,32 @@
     "amber"
    ],
    [
-    "FLA 0 \u00b7 4:17 - 1st",
+    "FLA 1 \u00b7 1:24 - 1st",
     "upb"
    ],
    [
-    "NBA CHI",
+    "NBA CHI 9",
     "amber"
    ],
    [
-    "BOS \u00b7 7:30 PM",
-    "wh"
+    "BOS 6 \u00b7 9:45 - 1st",
+    "upb"
    ],
    [
-    "NBA NY",
+    "NBA NY 0",
     "amber"
    ],
    [
-    "PHI \u00b7 7:30 PM",
-    "wh"
+    "PHI 0 \u00b7 11:24 - 1st",
+    "upb"
    ],
    [
-    "NBA ORL",
+    "NBA ORL 0",
     "amber"
    ],
    [
-    "TOR \u00b7 7:30 PM",
-    "wh"
+    "TOR 2 \u00b7 10:39 - 1st",
+    "upb"
    ],
    [
     "NBA IND",

@@ -95,9 +95,3 @@
     if (ids.length && JSON.stringify(ids) !== JSON.stringify(cur || [])) { Prefs.set('shelf', ids); location.reload(); }
   });
 })();
-/* full8 glass dashboard (Home / EMA / Sports Edge) on top of the app; add ?classic to the page URL for the old look. */
-(function () {
-  if (/classic/.test(location.search) || window.__glass) return;
-  var s = document.createElement('script'); s.src = (window.DASH_BASE && window.DASH_REMOTE !== false ? window.DASH_BASE : '') + 'glass.js?v=' + Date.now();
-  document.body.appendChild(s);
-})();

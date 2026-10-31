@@ -33,7 +33,7 @@
     var pg = document.createElement('div'), h = [], svg = '', nxt = ''; pg.className = 'pg ' + cls;
     for (var i = 0; i < ops.length; i++) {
       var o = ops[i];
-      if (o[0] === 'bg') pg.style.backgroundImage = "url('" + BASE + ({'bg.png': 'gd_home.jpg', 'bg_full.png': 'gd_full.jpg', 'bg_sports.png': 'gd_sports.jpg'}[o[1]] || 'gd_full.jpg') + "?v=8')";
+      if (o[0] === 'bg') pg.style.backgroundImage = "url('" + BASE + (o[1] === 'bg.png' ? 'gd_home.jpg' : 'gd_full.jpg') + "?v=8')";
       else if (o[0] === 'r') h.push('<div class="r" style="left:' + o[1] + 'px;top:' + o[2] + 'px;width:' + o[3] + 'px;height:' + o[4] + 'px;background:' + o[5] + '"></div>');
       else if (o[0] === 't') {
         var tag = '';
@@ -45,7 +45,7 @@
           String(o[3]).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>');
       } else if (o[0] === 'l') svg += '<polyline fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="' + o[2] + '" stroke-width="' + o[3] + '" points="' + o[1].join(' ') + '"/>';
     }
-    if (cls === 'p-sports') h.push('<div class="t" style="left:1150px;top:10px;font-size:19px;color:#F4F7FB">' + nxt + ' · <span style="color:#2BD96B">Updated ' + String(G.made || '').replace(/^\S+ /, '') + '</span></div>');
+    if (cls === 'p-sports') h.push('<div class="t" style="left:1150px;top:10px;font-size:19px;color:#F5F5F5">' + nxt + ' · <span style="color:#F2C46B">Updated ' + String(G.made || '').replace(/^\S+ /, '') + '</span></div>');
     pg.innerHTML = h.join('') + '<svg width="1920" height="1080">' + svg + '</svg>';
     return pg;
   }

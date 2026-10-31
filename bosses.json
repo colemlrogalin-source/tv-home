@@ -1,5 +1,5 @@
 {
- "asOf": "2026-10-30 08:19 PM ET",
+ "asOf": "2026-10-30 08:39 PM ET",
  "bosses": [
   {
    "name": "VWAP/EMA Agent",
@@ -27,7 +27,7 @@
    "week": -56.83,
    "total": -56.83,
    "note": "$10k book",
-   "asOf": "2026-10-30T20:19:55.914753-04:00"
+   "asOf": "2026-10-30T20:39:11.698163-04:00"
   },
   {
    "name": "Sports Quant",
@@ -74,7 +74,7 @@
    10232.25,
    10215.9
   ],
-  "asOf": "2026-10-30T20:19",
+  "asOf": "2026-10-30T20:39",
   "positions": [
    {
     "sym": "META",
@@ -150,6 +150,18 @@
      "stop": 669.07
     },
     {
+     "sym": "XLF",
+     "side": "Long",
+     "qty": "12.9",
+     "entry": 56.5,
+     "now": 56.56,
+     "pnl": 0.77,
+     "pct": 0.11,
+     "held": "8d 5h",
+     "value": 729.51,
+     "stop": 55.405
+    },
+    {
      "sym": "AAPL",
      "side": "Long",
      "qty": "6.95",
@@ -160,18 +172,6 @@
      "held": "8d 5h",
      "value": 2389.38,
      "stop": 335.735
-    },
-    {
-     "sym": "XLF",
-     "side": "Long",
-     "qty": "12.9",
-     "entry": 56.5,
-     "now": 56.56,
-     "pnl": 0.77,
-     "pct": 0.11,
-     "held": "8d 4h",
-     "value": 729.51,
-     "stop": 55.405
     },
     {
      "sym": "XLE",
@@ -193,7 +193,7 @@
      "now": 523.55,
      "pnl": -4.41,
      "pct": -0.28,
-     "held": "10h 49m",
+     "held": "11h 9m",
      "value": 1558.32,
      "stop": 502.67
     }
@@ -460,6 +460,65 @@
      {
       "c": [
        [
+        "XLF",
+        "tx"
+       ],
+       [
+        "LONG",
+        "up"
+       ],
+       [
+        "12.9",
+        "tx"
+       ],
+       [
+        "56.50",
+        "tx"
+       ],
+       [
+        "56.56",
+        "tx"
+       ],
+       [
+        "\u25bc1.01%",
+        "dn"
+       ],
+       [
+        "$729.51",
+        "tx"
+       ],
+       [
+        "7.1%",
+        "tx"
+       ],
+       [
+        "55.41",
+        "tx"
+       ],
+       [
+        "$14.90",
+        "tx"
+       ],
+       [
+        "+$0.77",
+        "up"
+       ],
+       [
+        "\u25b20.11%",
+        "up"
+       ],
+       [
+        "8d 5h",
+        "tx"
+       ]
+      ],
+      "stop": 55.405,
+      "entry": 56.5,
+      "now": 56.56
+     },
+     {
+      "c": [
+       [
         "AAPL",
         "tx"
        ],
@@ -515,65 +574,6 @@
       "stop": 335.735,
       "entry": 346.99,
       "now": 344.04
-     },
-     {
-      "c": [
-       [
-        "XLF",
-        "tx"
-       ],
-       [
-        "LONG",
-        "up"
-       ],
-       [
-        "12.9",
-        "tx"
-       ],
-       [
-        "56.50",
-        "tx"
-       ],
-       [
-        "56.56",
-        "tx"
-       ],
-       [
-        "\u25bc1.01%",
-        "dn"
-       ],
-       [
-        "$729.51",
-        "tx"
-       ],
-       [
-        "7.1%",
-        "tx"
-       ],
-       [
-        "55.41",
-        "tx"
-       ],
-       [
-        "$14.90",
-        "tx"
-       ],
-       [
-        "+$0.77",
-        "up"
-       ],
-       [
-        "\u25b20.11%",
-        "up"
-       ],
-       [
-        "8d 4h",
-        "tx"
-       ]
-      ],
-      "stop": 55.405,
-      "entry": 56.5,
-      "now": 56.56
      },
      {
       "c": [
@@ -685,7 +685,7 @@
         "dn"
        ],
        [
-        "10h 49m",
+        "11h 9m",
         "tx"
        ]
       ],
@@ -828,7 +828,7 @@
       -1.24
      ]
     ],
-    "upd": "8:19 PM ET"
+    "upd": "8:39 PM ET"
    },
    "baseline": "start @ $10,000",
    "chart": [
@@ -968,7 +968,7 @@
      "stop": null,
      "pnl": -5.63,
      "pct": -1.45,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "WDC",
@@ -980,7 +980,7 @@
      "stop": null,
      "pnl": 14.92,
      "pct": 4.23,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "LRCX",
@@ -992,7 +992,7 @@
      "stop": null,
      "pnl": 8.05,
      "pct": 2.29,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "MRVL",
@@ -1016,7 +1016,7 @@
      "stop": null,
      "pnl": 7.05,
      "pct": 2.22,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "DELL",
@@ -1028,7 +1028,7 @@
      "stop": null,
      "pnl": -22.77,
      "pct": -6.68,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "VLO",
@@ -1052,7 +1052,7 @@
      "stop": null,
      "pnl": -102.33,
      "pct": -25.95,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "SNDK",
@@ -1064,7 +1064,7 @@
      "stop": null,
      "pnl": -30.26,
      "pct": -9.47,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "COST",
@@ -1088,7 +1088,7 @@
      "stop": null,
      "pnl": 5.51,
      "pct": 2.54,
-     "held": "8d 7h"
+     "held": "8d 8h"
     },
     {
      "sym": "LITE",
@@ -2139,7 +2139,7 @@
   }
  ],
  "sports_full": {
-  "upd": "8:19 PM",
+  "upd": "8:39 PM",
   "src": "SPORTS QUANT FEED 20:13",
   "kpi": [
    [
@@ -3460,78 +3460,71 @@
   "scores": [
    [
     "NBA \u00b7 DET @ BKN",
-    "32\u201337",
-    "8:03 - 2nd",
+    "49\u201345",
+    "2:26 - 2nd",
     "up",
     true
    ],
    [
     "NBA \u00b7 LAC @ MIN",
-    "16\u201315",
-    "6:02 - 1st",
+    "24\u201334",
+    "11:57 - 2nd",
     "up",
     true
    ],
    [
-    "NHL \u00b7 NJ @ VGK",
-    "4\u20132",
-    "9:15 - 3rd",
-    "up",
-    false
-   ],
-   [
     "NBA \u00b7 CHA @ WSH",
-    "\u2013",
-    "Halftime",
+    "51\u201364",
+    "6:35 - 3rd",
     "up",
     false
    ],
    [
     "NHL \u00b7 WPG @ FLA",
-    "0\u20132",
-    "12:03 - 2nd",
+    "1\u20133",
+    "4:14 - 2nd",
     "up",
     false
    ],
    [
     "NBA \u00b7 CHI @ BOS",
-    "30\u201352",
-    "9:07 - 2nd",
+    "44\u201373",
+    "2:07 - 2nd",
     "up",
     false
    ],
    [
     "NBA \u00b7 NY @ PHI",
-    "26\u201335",
-    "7:23 - 2nd",
+    "41\u201350",
+    "1:05 - 2nd",
     "up",
     false
    ],
    [
     "NBA \u00b7 ORL @ TOR",
-    "35\u201329",
-    "10:47 - 2nd",
+    "52\u201345",
+    "4:26 - 2nd",
     "up",
     false
    ],
    [
     "NBA \u00b7 IND @ MIA",
-    "10\u201316",
-    "8:13 - 1st",
+    "41\u201334",
+    "30.3 - 1st",
     "up",
     false
    ],
    [
     "NBA \u00b7 HOU @ DAL",
-    "16\u201314",
-    "5:30 - 1st",
+    "20\u201327",
+    "End of 1st",
     "up",
     false
    ],
    [
     "NHL \u00b7 SEA @ CGY",
-    "0\u20131",
-    "13:51 - 1st",
+    "1\u20131",
+    "4:26 - 1st",
     "up",
     false
    ],
@@ -3541,95 +3534,94 @@
     "scheduled",
     "muted",
     false
+   ],
+   [
+    "NBA \u00b7 DEN @ PHX",
+    "10:00 PM",
+    "scheduled",
+    "muted",
+    false
    ]
   ],
   "tick": [
    [
-    "NBA DET 32",
+    "NBA DET 49",
     "amber"
    ],
    [
-    "BKN 37 \u00b7 8:03 - 2nd",
+    "BKN 45 \u00b7 2:26 - 2nd",
     "upb"
    ],
    [
-    "NBA LAC 16",
+    "NBA LAC 24",
     "amber"
    ],
    [
-    "MIN 15 \u00b7 6:02 - 1st",
+    "MIN 34 \u00b7 11:57 - 2nd",
     "upb"
    ],
    [
-    "NHL NJ 4",
+    "NBA CHA 51",
     "amber"
    ],
    [
-    "VGK 2 \u00b7 9:15 - 3rd",
+    "WSH 64 \u00b7 6:35 - 3rd",
     "upb"
    ],
    [
-    "NBA CHA ",
+    "NHL WPG 1",
     "amber"
    ],
    [
-    "WSH  \u00b7 Halftime",
+    "FLA 3 \u00b7 4:14 - 2nd",
     "upb"
    ],
    [
-    "NHL WPG 0",
+    "NBA CHI 44",
     "amber"
    ],
    [
-    "FLA 2 \u00b7 12:03 - 2nd",
+    "BOS 73 \u00b7 2:07 - 2nd",
     "upb"
    ],
    [
-    "NBA CHI 30",
+    "NBA NY 41",
     "amber"
    ],
    [
-    "BOS 52 \u00b7 9:07 - 2nd",
+    "PHI 50 \u00b7 1:05 - 2nd",
     "upb"
    ],
    [
-    "NBA NY 26",
+    "NBA ORL 52",
     "amber"
    ],
    [
-    "PHI 35 \u00b7 7:23 - 2nd",
+    "TOR 45 \u00b7 4:26 - 2nd",
     "upb"
    ],
    [
-    "NBA ORL 35",
+    "NBA IND 41",
     "amber"
    ],
    [
-    "TOR 29 \u00b7 10:47 - 2nd",
+    "MIA 34 \u00b7 30.3 - 1st",
     "upb"
    ],
    [
-    "NBA IND 10",
+    "NBA HOU 20",
     "amber"
    ],
    [
-    "MIA 16 \u00b7 8:13 - 1st",
+    "DAL 27 \u00b7 End of 1st",
     "upb"
    ],
    [
-    "NBA HOU 16",
+    "NHL SEA 1",
     "amber"
    ],
    [
-    "DAL 14 \u00b7 5:30 - 1st",
-    "upb"
-   ],
-   [
-    "NHL SEA 0",
-    "amber"
-   ],
-   [
-    "CGY 1 \u00b7 13:51 - 1st",
+    "CGY 1 \u00b7 4:26 - 1st",
     "upb"
    ],
    [
@@ -3646,6 +3638,14 @@
    ],
    [
     "PHX \u00b7 10:00 PM",
+    "wh"
+   ],
+   [
+    "NHL NJ 5",
+    "amber"
+   ],
+   [
+    "VGK 2 \u00b7 Final",
     "wh"
    ]
   ]

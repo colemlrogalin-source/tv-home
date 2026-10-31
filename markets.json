@@ -1,5 +1,5 @@
 {
- "asOf": "11:11 PM ET",
+ "asOf": "11:23 PM ET",
  "indexes": [
   {
    "name": "S&P 500",
@@ -17,10 +17,10 @@
   },
   {
    "name": "Dow",
-   "level": 51770.3,
-   "chg": -572.3,
+   "level": 51770.31,
+   "chg": -572.29,
    "pct": -1.09,
-   "t": "4:00 PM ET"
+   "t": "4:47 PM ET"
   },
   {
    "name": "Russell 2000",

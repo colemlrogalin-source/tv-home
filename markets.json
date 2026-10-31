@@ -1,12 +1,12 @@
 {
- "asOf": "5:31 PM ET",
+ "asOf": "11:10 PM ET",
  "indexes": [
   {
    "name": "S&P 500",
    "level": 7580.07,
    "chg": -140.32,
    "pct": -1.82,
-   "t": "4:47 PM ET"
+   "t": "4:00 PM ET"
   },
   {
    "name": "Nasdaq",
@@ -17,17 +17,17 @@
   },
   {
    "name": "Dow",
-   "level": 51770.31,
-   "chg": -572.25,
+   "level": 51770.3,
+   "chg": -572.3,
    "pct": -1.09,
-   "t": "4:47 PM ET"
+   "t": "4:00 PM ET"
   },
   {
    "name": "Russell 2000",
    "level": 2811.84,
-   "chg": -47.37,
+   "chg": -47.38,
    "pct": -1.66,
-   "t": "4:30 PM ET"
+   "t": "4:00 PM ET"
   }
  ],
  "metals": [

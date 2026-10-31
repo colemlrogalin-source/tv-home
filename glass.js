@@ -30,7 +30,7 @@
   root.addEventListener('mousemove', showTabs);
   function key(o) { return o.page + ':' + (o.page === 'home' ? o.desk : ''); }
   function paint(ops, cls) {
-    var pg = document.createElement('div'), h = [], svg = ''; pg.className = 'pg ' + cls;
+    var pg = document.createElement('div'), h = [], svg = '', nxt = ''; pg.className = 'pg ' + cls;
     for (var i = 0; i < ops.length; i++) {
       var o = ops[i];
       if (o[0] === 'bg') pg.style.backgroundImage = "url('" + BASE + (o[1] === 'bg.png' ? 'gd_home.jpg' : 'gd_full.jpg') + "?v=8')";
@@ -40,10 +40,12 @@
         if (o[4] === 72 && o[1] === 944 && o[2] === 14) tag = ' data-c="hm"';
         else if (o[1] === 944 && o[2] === 104 && o[4] === 26) tag = ' data-c="date"';
         else if (o[2] === 10 && /^\d{1,2}:\d\d [AP]M ET$/.test(o[3])) tag = ' data-c="et"';
+        else if (cls === 'p-sports' && o[2] === 10 && /^(NEXT SCAN|UPD) /.test(o[3])) { if (/^NEXT/.test(o[3])) nxt = o[3]; continue; }
         h.push('<div class="t"' + tag + ' style="left:' + o[1] + 'px;top:' + o[2] + 'px;font-size:' + o[4] + 'px;color:' + o[5] + '">' +
           String(o[3]).replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>');
       } else if (o[0] === 'l') svg += '<polyline fill="none" stroke-linejoin="round" stroke-linecap="round" stroke="' + o[2] + '" stroke-width="' + o[3] + '" points="' + o[1].join(' ') + '"/>';
     }
+    if (cls === 'p-sports') h.push('<div class="t" style="left:1150px;top:10px;font-size:19px;color:#F5F5F5">' + nxt + ' · <span style="color:#F2C46B">Updated ' + String(G.made || '').replace(/^\S+ /, '') + '</span></div>');
     pg.innerHTML = h.join('') + '<svg width="1920" height="1080">' + svg + '</svg>';
     return pg;
   }
@@ -76,7 +78,7 @@
     };
     x.open('GET', BASE + 'bosses.json?t=' + Date.now()); x.send();
   }
-  load(); setInterval(load, 60000);
+  load(); setInterval(load, 45000);   // bosses.json re-fetched every 45 s (cache-busted)
   window.addEventListener('keydown', function (e) {
     var k = e.keyCode, i = PAGES.indexOf(page), used = true;
     if (k === 40) { if (i < 2) go(PAGES[i + 1]); }

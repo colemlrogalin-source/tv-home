@@ -30,6 +30,7 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 @media (max-width:330px){body{font-size:12px}.p{font-size:18px}.sc{font-size:14.5px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:10px}.m .c{display:none}}
 .pay{font-size:10px;font-weight:600;opacity:.85;margin-right:6px}.pay b{font-weight:800}.st{position:absolute;top:15px;right:9px;font-size:13px;line-height:1;color:#f5c542;text-shadow:0 0 1px #000,0 0 2px #000}
 .r>.f:has(.cb),.r>.f:has(.pb){padding:3px 4px;margin:-3px -4px;overflow:visible}
+.tw{position:relative;flex:0 0 130px;width:130px;padding-top:12px}.tw .tr{width:100%}.mk{position:absolute;bottom:-3px;width:3px;height:12px;margin-left:-1.5px;background:#fff;border-radius:1px;box-shadow:0 0 0 1px #000}.mn{position:absolute;top:0;transform:translateX(-50%);font-size:10px;font-weight:800;line-height:1;white-space:nowrap}.r>.f:has(.tw){flex:1 1 auto}.pb:has(.tw){flex:1 1 auto;padding-right:6px}
 </style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
@@ -46,12 +47,12 @@ const HIT=b=>b.prop_kind&&b.prop_line!=null&&(b.prop_cur||0)>=b.prop_line;
 const CBP=b=>CB(b.prop_kind=='td'?b.prop_cur+' TD':b.prop_kind=='rec'?b.prop_cur+' rec':b.prop_cur+' yds');
 const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line;
 if(c>=l)return '';
-if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c} / ${l}${b.stat_label?' '+b.stat_label:''}</span></div>`;
+if(b.prop_kind=='yds'){const q=Math.max(0,Math.min(100,100*c/l));return `<div class="pb"><div class="tw"><span class="mn" style="left:${q}%">${c}</span><div class="tr"><div class="fil" style="width:${q}%"></div></div><span class="mk" style="left:${q}%"></span></div><span class="pt">${l}${b.stat_label?' '+b.stat_label:''}</span></div>`}
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
 const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';
 const ISP=b=>!!b.prop_kind||/(\d+\+\s*(pts|reb|ast|yds|rec|3pm|td|ks|hits))|\bATD\b|\bTD\b/i.test(b.bet||'');
-const POT=b=>b.entry_pct?`<span class="pay">Pays <b>${$(b.cost/(b.entry_pct/100))}</b></span>`:'';
+const POT=b=>'';
 const ST=b=>ISP(b)?'<span class="st">★</span>':'';
 const card=b=>`<div class="b hw" style="${(b.prop_kind&&b.prop_line!=null&&b.prop_cur>=b.prop_line&&b.side!='NO')?G:b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>

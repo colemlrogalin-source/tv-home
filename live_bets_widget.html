@@ -4,13 +4,13 @@ body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px -apple-system,Helvetica
 h1{font-size:11px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
 h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:9.5px;color:#7d8394;white-space:nowrap}
 #l{padding:0 8px 10px}
-.hc{cursor:pointer;user-select:none}.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
+.hc{cursor:pointer;user-select:none}.hv{font-size:12px;letter-spacing:0;font-weight:700}.hv.g{color:#e6c45a}.hv.r{color:#e06c6c}.hs{display:flex;justify-content:space-between;font-size:9.5px;color:#6b7080;margin:-1px 4px 4px}.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
 .e{color:#8a90a0;text-align:center;padding:36px}
-.b{position:relative;display:flex;gap:9px;width:100%;border-radius:12px;padding:6px 9px 6px 7px;margin:4px 0;border-left:5px solid #555;overflow:hidden}
+.b{position:relative;display:flex;gap:11px;width:100%;border-radius:12px;padding:9px 11px 9px 9px;margin:6px 0;border-left:5px solid #555;overflow:hidden}
 .lc{flex:0 0 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
 .lc img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}.lc.two img{width:28px;height:28px}
 .lc .x{font-size:13px;font-weight:700;border-radius:8px;padding:2px 8px}
-.mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:4px}
 .r{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
 .r>.k .cb{margin-right:4px;font-size:8.5px;padding:1px 7px}.r>.f{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.r>.k{flex:0 0 auto;white-space:nowrap}
 .n{font-weight:700;font-size:13px}.p{font-size:18.5px;font-weight:700;line-height:1}
@@ -40,7 +40,7 @@ const LC=(b,top)=>{const l=b.logos||[];return `<div class="lc ${l.length>1?'two'
 const WHO=b=>`<span class="w ${b.who=='Grok'?'g':''}">${b.who=='Grok'?'GROK':'COLE'}</span>`;
 const UN=b=>`<span class="u">${b.units??''}u</span>`;
 const PAY=(b,lbl,nc)=>`<span class="m"><span class="lb">Paid</span> <b>${$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null&&!nc?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
-const CB=t=>`<span class="cb">💰 CASHED${t?' '+t:''}</span>`;
+const CB=t=>`<span class="cb">CASHED${t?' '+t:''}</span>`;
 const HIT=b=>b.prop_kind&&b.prop_line!=null&&(b.prop_cur||0)>=b.prop_line;
 const CBP=b=>CB(b.prop_kind=='td'?b.prop_cur+' TD':b.prop_kind=='rec'?b.prop_cur+' rec':b.prop_cur+' yds');
 const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line;
@@ -61,9 +61,9 @@ const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" s
 let LD=null,CL={};try{CL=JSON.parse(localStorage.getItem('lb_c')||'{}')}catch(e){}
 function TG(k){CL[k]=!CL[k];try{localStorage.setItem('lb_c',JSON.stringify(CL))}catch(e){}if(LD)R(LD)}
 function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
-const ar=k=>CL[k]?'▸ ':'▾ ';
+const ar=k=>'';
 const won=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
-document.getElementById('l').innerHTML=(W.length?`<div class="h hc" onclick="TG('w')"><span>${ar('w')}TODAY · ${d.today_record} · +$${won} profit</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(X.length?`<div class="h hc" onclick="TG('l')"><span>${ar('l')}LOST TODAY · ${X.length}</span><span>−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
+document.getElementById('l').innerHTML=(W.length?`<div class="h hc" onclick="TG('w')"><span>TODAY · ${d.today_record}</span><span class="hv g">+$${won} won</span></div><div class="hs"><span>${d.today_u_wag??0}u wagered</span><span>${d.today_u_won??0}u returned</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(X.length?`<div class="h hc" onclick="TG('l')"><span>LOST TODAY · ${X.length}</span><span class="hv r">−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
 R(d);}

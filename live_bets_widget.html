@@ -68,5 +68,4 @@ async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{hea
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
 R(d);}
 catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
-function FZ(){try{var z=Math.max(1,Math.min(3,window.innerWidth/260));document.documentElement.style.zoom=z.toFixed(3)}catch(e){}}window.addEventListener('resize',FZ);FZ();
 </script></body></html>

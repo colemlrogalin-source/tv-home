@@ -62,8 +62,8 @@ let LD=null,CL=JSON.parse(localStorage.getItem('lb_c')||'{}');
 function TG(k){CL[k]=!CL[k];localStorage.setItem('lb_c',JSON.stringify(CL));if(LD)R(LD)}
 function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
 const ar=k=>CL[k]?'▸ ':'▾ ';
-const won=TD.reduce((a,b)=>a+(+b.cash_out||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
-document.getElementById('l').innerHTML=(W.length?`<div class="h hc" onclick="TG('w')"><span>${ar('w')}TODAY · ${d.today_record} · $${won} won</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(X.length?`<div class="h hc" onclick="TG('l')"><span>${ar('l')}LOST TODAY · ${X.length}</span><span>−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
+const won=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
+document.getElementById('l').innerHTML=(W.length?`<div class="h hc" onclick="TG('w')"><span>${ar('w')}TODAY · ${d.today_record} · +$${won} profit</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(X.length?`<div class="h hc" onclick="TG('l')"><span>${ar('l')}LOST TODAY · ${X.length}</span><span>−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
 R(d);}

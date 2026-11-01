@@ -17,7 +17,7 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 .cf{font-size:14.5px;margin-right:4px;cursor:help;vertical-align:2px}
 .w{position:absolute;top:0;right:0;font-size:7.5px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:0 0 0 9px;background:#000;color:#fff}.w.g{color:#f5c542}
 .b.hw .r1{padding-right:30px}
-.sc{font-size:16px;font-weight:700;letter-spacing:.2px;line-height:1.15}.ck{font-size:9.5px;font-weight:600;opacity:.7;margin-left:6px}
+.sc{font-size:16px;font-weight:700;letter-spacing:.2px;line-height:1.15}.ck{font-size:10.5px;font-weight:600;opacity:.7;margin-left:6px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:6px;vertical-align:2px;box-shadow:0 0 0 1px #000}.dot.red{background:#ff2d2d}.dot.green{background:#22e06b}
 .m{font-size:10.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:9.5px}.m .ar{opacity:.55;margin:0 3px}.m b{font-weight:700}.m .c{opacity:.55;font-size:9px;margin-left:5px}
 .nw{padding:1px 7px;border-radius:8px;background:rgba(0,0,0,.18)}.nw.fl{background:#000;color:#fff}
@@ -30,7 +30,9 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 @media (max-width:330px){body{font-size:12px}.p{font-size:18px}.sc{font-size:14.5px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:10px}.m .c{display:none}}
 .pay{font-size:10px;font-weight:600;opacity:.85;margin-right:6px}.pay b{font-weight:800}.st{position:absolute;top:15px;right:9px;font-size:13px;line-height:1;color:#f5c542;text-shadow:0 0 1px #000,0 0 2px #000}
 .r>.f:has(.cb),.r>.f:has(.pb){padding:3px 4px;margin:-3px -4px;overflow:visible}
-.tw{position:relative;flex:0 0 130px;width:130px;padding-top:12px}.tw .tr{width:100%}.mk{position:absolute;bottom:-3px;width:3px;height:12px;margin-left:-1.5px;background:#fff;border-radius:1px;box-shadow:0 0 0 1px #000}.mn{position:absolute;top:0;transform:translateX(-50%);font-size:10px;font-weight:800;line-height:1;white-space:nowrap}.r>.f:has(.tw){flex:1 1 auto}.pb:has(.tw){flex:1 1 auto;padding-right:6px}
+.tw{position:relative;flex:1 1 auto;min-width:60px;padding-top:12px}.tw .tr{width:100%}.mk{position:absolute;bottom:-3px;width:3px;height:12px;margin-left:-1.5px;background:#fff;border-radius:1px;box-shadow:0 0 0 1px #000}.mn{position:absolute;top:0;transform:translateX(-50%);font-size:10px;font-weight:800;line-height:1;white-space:nowrap}.r>.f:has(.tw){flex:1 1 auto}.pb:has(.tw){flex:1 1 auto;padding-right:6px}
+.b:not(.w1):not(.l1) .lc{background:none;border-radius:0;padding:0;box-shadow:none;margin-left:-5px}
+.r>.f:has(.tw){flex:1 1 auto;width:100%}.pb:has(.tw){width:100%}.b:not(.w1):not(.l1) .r>.f>.m{display:flex;align-items:center;gap:6px}.b:not(.w1):not(.l1) .m .ar{margin:0}.b:not(.w1):not(.l1) .m .c{margin-left:auto;margin-right:4px}
 </style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
@@ -41,7 +43,7 @@ const $=v=>v==null?'—':'$'+Number(v).toFixed(2);
 const LC=(b,top)=>{const l=b.logos||[];return `<div class="lc ${l.length>1?'two':''}">${top||''}${l.map(u=>`<img src="${u}" onerror="this.remove()">`).join('')}</div>`};
 const WHO=b=>`<span class="w ${b.who=='Grok'?'g':''}">${b.who=='Grok'?'GROK':'COLE'}</span>`;
 const UN=b=>{const v=+b.units||0,k=(window.SAMSUNG||v<=0.5)?1:1+(Math.min(v,5)-0.5)/4.5;return `<span class="u"${k>1?` style="font-size:${(9.5*k).toFixed(1)}px;padding:${(1*k).toFixed(1)}px ${(7*k).toFixed(1)}px;border-radius:${(7*k).toFixed(1)}px"`:''}>${b.units??''}u</span>`};
-const PAY=(b,lbl,nc)=>`<span class="m"><span class="lb">Paid</span> <b>${$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null&&!nc?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
+const PAY=(b,lbl,nc,cu)=>`<span class="m"><span class="lb">Cost</span> <b>${cu?(b.units??'')+'u':$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null&&!nc?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
 const CB=t=>`<span class="cb">CASHED${t?' '+t:''}</span>`;
 const HIT=b=>b.prop_kind&&b.prop_line!=null&&(b.prop_cur||0)>=b.prop_line;
 const CBP=b=>CB(b.prop_kind=='td'?b.prop_cur+' TD':b.prop_kind=='rec'?b.prop_cur+' rec':b.prop_cur+' yds');
@@ -50,6 +52,7 @@ if(c>=l)return '';
 if(b.prop_kind=='yds'){const q=Math.max(0,Math.min(100,100*c/l));return `<div class="pb"><div class="tw"><span class="mn" style="left:${q}%">${c}</span><div class="tr"><div class="fil" style="width:${q}%"></div></div><span class="mk" style="left:${q}%"></span></div><span class="pt">${l}${b.stat_label?' '+b.stat_label:''}</span></div>`}
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
+const UNP=b=>{const p=b.payout??(b.entry_pct?b.cost/(b.entry_pct/100):null);return p==null?UN(b):`<span class="u">${(p/50).toFixed(2)}u | ${$(p)}</span>`};
 const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';
 const ISP=b=>!!b.prop_kind||/(\d+\+\s*(pts|reb|ast|yds|rec|3pm|td|ks|hits))|\bATD\b|\bTD\b/i.test(b.bet||'');
 const POT=b=>'';
@@ -57,8 +60,8 @@ const ST=b=>ISP(b)?'<span class="st">★</span>':'';
 const card=b=>`<div class="b hw" style="${(b.prop_kind&&b.prop_line!=null&&b.prop_cur>=b.prop_line&&b.side!='NO')?G:b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
 <div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
-<div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now',HIT(b))}</span>${HIT(b)?`<span class="k">${CBP(b)}</span>`:''}</div>
-<div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${POT(b)}${UN(b)}</span></div></div></div>`;
+<div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Worth',HIT(b),1)}</span>${HIT(b)?`<span class="k">${CBP(b)}</span>`:''}</div>
+<div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${POT(b)}${UNP(b)}</span></div></div></div>`;
 const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span></div>
 <div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>

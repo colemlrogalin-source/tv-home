@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Live Bets</title><style>
+body{margin:0;background:#0d0f14;color:#e8eaf0;font:13px -apple-system,Helvetica,sans-serif;-webkit-user-select:none}
+h1{font-size:12px;margin:0;padding:8px 12px;color:#8a90a0;display:flex;justify-content:space-between;-webkit-app-region:drag}
+#l{padding:0 8px 8px}.b{border-radius:14px;padding:8px 12px;margin:6px 0;background:#161a22;border-left:4px solid #555}
+.up{border-color:#22c55e;background:#10231a}.dn{border-color:#ef4444;background:#2a1215}
+.r{display:flex;justify-content:space-between;align-items:baseline}.n{font-weight:600}.p{font-size:20px;font-weight:700}
+.up .p{color:#4ade80}.dn .p{color:#f87171}.s{color:#9aa1b2;font-size:11px;margin-top:2px}.w{font-size:10px;padding:1px 6px;border-radius:8px;background:#2a2f3a}
+.x{display:inline-block;min-width:18px;text-align:center;font-weight:800;border-radius:7px;padding:1px 5px;margin-right:6px}.w1 .x{background:#22c55e;color:#04130a}.l1 .x{background:#ef4444;color:#fff}.w1{border-color:#22c55e;background:#10231a}.l1{border-color:#ef4444;background:#2a1215}.h{font-size:11px;color:#8a90a0;margin:8px 4px 2px;letter-spacing:.5px}.e{color:#8a90a0;text-align:center;padding:30px}</style></head><body>
+<h1><span>🎯 LIVE BETS</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
+const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
+const ar=v=>v>0?'▲':v<0?'▼':'▬';
+async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
+const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
+const T=(d.today||[]).map(b=>`<div class="b ${b.result=='W'?'w1':'l1'}"><div class="r"><span class="n"><span class="x">${b.result}</span>${b.bet}</span><span class="w">${b.who}</span></div>
+<div class="r s"><span>${b.final||'Final'}</span><span>entry ${b.entry_pct}c</span></div></div>`).join('');
+const L=d.bets.map(b=>`<div class="b ${b.vs_entry>0?'up':b.vs_entry<0?'dn':''}">
+<div class="r"><span class="n">${b.bet}</span><span class="p">${b.live_pct}%</span></div>
+<div class="r s"><span>${b.game} · ${b.clock}</span><span>${ar(b.vs_entry)} ${b.vs_entry>0?'+':''}${b.vs_entry} vs ${b.entry_pct}c${b.vs_recent!=null?` · ${ar(b.vs_recent)}${Math.abs(b.vs_recent)} 5m`:''}</span></div>
+<div class="s"><span class="w">${b.who}</span></div></div>`).join('');
+document.getElementById('l').innerHTML=(T?`<div class="h">TODAY · ${d.today_record}</div>`+T:'')+`<div class="h">LIVE · ${d.count}</div>`+(L||'<div class="e">No live bets right now</div>');}
+catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
+</script></body></html>

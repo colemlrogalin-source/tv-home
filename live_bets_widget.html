@@ -70,7 +70,7 @@ const ar=k=>'';
 const won=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
 document.getElementById('l').innerHTML=`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(W.length?`<div class="h hc" onclick="TG('w')"><span>TODAY · ${d.today_record}</span><span><span class="hv g">+$${won} won</span><span class="hv ${(won-lost)>=0?'g':'r'}"> · Net ${(won-lost)>=0?'+':'−'}$${Math.abs(won-lost).toFixed(2)}</span></span></div><div class="hs"><span>${d.today_u_wag??0}u wagered</span><span>${d.today_u_won??0}u returned</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+(X.length?`<div class="h hc" onclick="TG('l')"><span>LOST TODAY · ${X.length}</span><span class="hv r">−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
-const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
+const d=await r.json();wait=Math.min(d.poll_sec||300,60);document.getElementById('t').textContent=d.as_of+' · '+d.count;
 R(d);}
 catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
 </script></body></html>

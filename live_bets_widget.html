@@ -28,7 +28,7 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 .cb{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.4px;color:#1a1204;padding:2px 9px;border-radius:10px;border:1.5px solid #2a1d00;background:linear-gradient(110deg,#ffd84d 0%,#fff6c2 45%,#ffcf33 60%,#e0a100 100%);box-shadow:0 0 0 1px #000,0 0 9px 2px rgba(255,240,160,.95);white-space:nowrap}
 .w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}
 @media (max-width:330px){body{font-size:12px}.p{font-size:18px}.sc{font-size:14.5px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:10px}.m .c{display:none}}
-.st{position:absolute;top:15px;right:9px;font-size:13px;line-height:1;color:#f5c542;text-shadow:0 0 1px #000,0 0 2px #000}
+.pay{font-size:10px;font-weight:600;opacity:.85;margin-right:6px}.pay b{font-weight:800}.st{position:absolute;top:15px;right:9px;font-size:13px;line-height:1;color:#f5c542;text-shadow:0 0 1px #000,0 0 2px #000}
 .r>.f:has(.cb),.r>.f:has(.pb){padding:3px 4px;margin:-3px -4px;overflow:visible}
 </style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
@@ -51,12 +51,13 @@ const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'o
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
 const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';
 const ISP=b=>!!b.prop_kind||/(\d+\+\s*(pts|reb|ast|yds|rec|3pm|td|ks|hits))|\bATD\b|\bTD\b/i.test(b.bet||'');
+const POT=b=>b.entry_pct?`<span class="pay">Pays <b>${$(b.cost/(b.entry_pct/100))}</b></span>`:'';
 const ST=b=>ISP(b)?'<span class="st">★</span>':'';
 const card=b=>`<div class="b hw" style="${(b.prop_kind&&b.prop_line!=null&&b.prop_cur>=b.prop_line&&b.side!='NO')?G:b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
 <div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
 <div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now',HIT(b))}</span>${HIT(b)?`<span class="k">${CBP(b)}</span>`:''}</div>
-<div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${UN(b)}</span></div></div></div>`;
+<div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${POT(b)}${UN(b)}</span></div></div></div>`;
 const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span></div>
 <div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>

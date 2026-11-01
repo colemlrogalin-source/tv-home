@@ -33,6 +33,7 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 .tw{position:relative;flex:1 1 auto;min-width:60px;padding-top:12px}.tw .tr{width:100%}.mk{position:absolute;bottom:-3px;width:3px;height:12px;margin-left:-1.5px;background:#fff;border-radius:1px;box-shadow:0 0 0 1px #000}.mn{position:absolute;top:0;transform:translateX(-50%);font-size:10px;font-weight:800;line-height:1;white-space:nowrap}.r>.f:has(.tw){flex:1 1 auto}.pb:has(.tw){flex:1 1 auto;padding-right:6px}
 .b:not(.w1):not(.l1) .lc{background:none;border-radius:0;padding:0;box-shadow:none;margin-left:-5px}
 .r>.f:has(.tw){flex:1 1 auto;width:100%}.pb:has(.tw){width:100%}.b:not(.w1):not(.l1) .r>.f>.m{display:flex;align-items:center;gap:6px}.b:not(.w1):not(.l1) .m .ar{margin:0}.b:not(.w1):not(.l1) .m .c{margin-left:auto;margin-right:4px}
+.b:not(.w1):not(.l1) .n{font-size:15.5px;white-space:normal;line-height:1.15}.b:not(.w1):not(.l1) .sc{font-size:13px}
 </style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
@@ -70,8 +71,8 @@ let LD=null,CL={};try{CL=JSON.parse(localStorage.getItem('lb_c')||'{}')}catch(e)
 function TG(k){CL[k]=!CL[k];try{localStorage.setItem('lb_c',JSON.stringify(CL))}catch(e){}if(LD)R(LD)}
 function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
 const ar=k=>'';
-const won=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
-document.getElementById('l').innerHTML=`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(W.length?`<div class="h hc" onclick="TG('w')"><span>TODAY · ${d.today_record}</span><span><span class="hv g">+$${won} won</span><span class="hv ${(won-lost)>=0?'g':'r'}"> · Net ${(won-lost)>=0?'+':'−'}$${Math.abs(won-lost).toFixed(2)}</span></span></div><div class="hs"><span>${d.today_u_wag??0}u wagered</span><span>${d.today_u_won??0}u returned</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+(X.length?`<div class="h hc" onclick="TG('l')"><span>LOST TODAY · ${X.length}</span><span class="hv r">−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
+const won=W.reduce((a,b)=>a+(+b.cash_out||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2),net=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0)-lost;
+document.getElementById('l').innerHTML=`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(W.length?`<div class="h hc" onclick="TG('w')"><span>TODAY · ${d.today_record}</span><span><span class="hv g">+$${won} won</span><span class="hv ${net>=0?'g':'r'}"> · Net ${net>=0?'+':'−'}$${Math.abs(net).toFixed(2)}</span></span></div><div class="hs"><span>${d.today_u_wag??0}u wagered</span><span>${d.today_u_won??0}u returned</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+(X.length?`<div class="h hc" onclick="TG('l')"><span>LOST TODAY · ${X.length}</span><span class="hv r">−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=Math.min(d.poll_sec||300,60);document.getElementById('t').textContent=d.as_of+' · '+d.count;
 R(d);}

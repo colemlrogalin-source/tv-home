@@ -193,3 +193,82 @@
 #mk .news .nd { -webkit-line-clamp: 1; max-height: 19px; } #mk .news .n { margin-bottom: 14px; }
 #mk .news { height: 290px; } #mk .news .nd { -webkit-line-clamp: 2; max-height: 38px; } #mk .news .n { margin-bottom: 10px; } #movers { top: 948px; }
 #mk .news { top: 646px; height: 276px; } #mk .news .n { margin-bottom: 4px; } #movers { top: 926px; height: 46px; } #movers .mvi { height: 46px; line-height: 46px; }
+/* ===== v8 (Oct 31): Roku-style Home. Deep navy panels, white headers, colour only on P/L, smaller type, fleet overview, subtle loops. ===== */
+html.tv #mk .mkp { background: rgba(10, 16, 30, 0.92) !important; border: 1px solid rgba(120, 150, 210, 0.16) !important; border-top: 1px solid rgba(120, 150, 210, 0.16) !important; border-radius: 16px !important; }
+html.tv #mk .mkh, html.tv #mk svg .mkh { color: #F5F5F7 !important; fill: #F5F5F7 !important; letter-spacing: 0.06em; }
+html.tv #mk .dn2 { color: #F5F5F7 !important; }
+html.tv #mk .mkh .cd, html.tv #mk .sub, html.tv #mk th { color: rgba(245, 245, 247, 0.5) !important; }
+html.tv #mk td { font-size: 19px; } html.tv #mk .bosses td { font-size: 21px !important; } html.tv #mk .bosses td.big { font-size: 30px !important; } html.tv #mk .bosses .nm { font-size: 22px !important; }
+html.tv #mk .desk .kp b { font-size: 34px !important; line-height: 44px !important; } html.tv #mk .desk .k2 b { font-size: 24px !important; }
+html.tv #mk .news .nt { font-size: 19px !important; line-height: 26px !important; white-space: nowrap !important; display: block !important; max-height: 26px !important; overflow: hidden !important; text-overflow: clip !important; }
+html.tv #mk .news .nd { -webkit-line-clamp: 4 !important; max-height: 76px !important; font-size: 14px; line-height: 19px; }
+html.tv #mk .news .n { margin-bottom: 6px !important; }
+html.tv #movers .mvi { background: rgba(10, 16, 30, 0.92) !important; font-size: 21px; }
+html.tv .fleet { position: absolute; left: 1400px; top: 10px; width: 300px; height: 140px; padding: 10px 14px; box-sizing: border-box; border-radius: 16px; background: rgba(10, 16, 30, 0.92); border: 1px solid rgba(120, 150, 210, 0.16); color: #F5F5F7; overflow: hidden; z-index: 5; }
+html.tv .fleet .fh { position: relative; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+html.tv .fleet .fk { display: inline-block; width: 50%; margin-bottom: 4px; } html.tv .fleet .fk i { display: block; font-style: normal; font-size: 11px; color: rgba(245, 245, 247, 0.5); } html.tv .fleet .fk b { font-size: 19px; font-weight: 600; }
+html.tv .fleet .fb { font-size: 11px; color: rgba(245, 245, 247, 0.55); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } html.tv .fleet em { font-style: normal; color: #F5F5F7; }
+html.tv .fleet .up, html.tv #mk .up { color: #30D158; } html.tv .fleet .dn, html.tv #mk .dn { color: #FF453A; }
+html.tv .fleet .sw { position: absolute; left: 0; bottom: -3px; width: 60px; height: 1px; background: rgba(100, 210, 255, 0.7); -webkit-animation: sweep 6s linear infinite; animation: sweep 6s linear infinite; }
+@-webkit-keyframes sweep { from { -webkit-transform: translateX(-60px); } to { -webkit-transform: translateX(280px); } }
+@keyframes sweep { from { transform: translateX(-60px); } to { transform: translateX(280px); } }
+html.tv .fleet { left: 1335px !important; width: 248px !important; padding: 8px 12px !important; } html.tv .fleet .fk b { font-size: 17px !important; }
+html.tv .fleet { top: 6px !important; height: 114px !important; } html.tv .fleet .fk { margin-bottom: 1px !important; } html.tv .fleet .fb { display: none; }
+/* ===== v10 TV grid (html.tv = Tizen only). Navy frame, white headers, colour only on data; each desk's vibe = thin accent edge + chart colours. ===== */
+html.tv #car, html.tv #mk .bosses, html.tv #mk .desk, html.tv #movers, html.tv .fleet { display: none !important; }
+html.tv #clock { left: 30px !important; top: 2px !important; font-size: 78px !important; line-height: 90px !important; }
+html.tv #clock .date { font-size: 22px !important; }
+html.tv #mk .wx { left: 20px !important; top: 148px !important; width: 540px !important; height: 214px !important; }
+html.tv #mk .news { left: 20px !important; top: 372px !important; width: 540px !important; height: 594px !important; }
+html.tv #mk .news .nl .n { width: auto !important; float: none !important; margin-bottom: 10px !important; }
+html.tv #mk .news .nd { -webkit-line-clamp: 4 !important; max-height: 80px !important; font-size: 15px !important; line-height: 20px !important; }
+html.tv #g10 { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 6; pointer-events: none; color: #F5F5F7; }
+html.tv #race { position: absolute; left: 420px; top: 14px; width: 1480px; height: 118px; box-sizing: border-box; padding: 12px 20px; border-radius: 16px; background: rgba(10, 16, 30, 0.92); border: 1px solid rgba(120, 150, 210, 0.16); overflow: hidden; }
+html.tv #race .rt { font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; } html.tv #race .rt i { font-style: normal; color: rgba(245, 245, 247, 0.55); margin-left: 16px; text-transform: none; }
+html.tv #race .rr { display: inline-block; width: 240px; font-size: 18px; white-space: nowrap; } html.tv #race .rr i { font-style: normal; color: rgba(245, 245, 247, 0.45); margin-right: 8px; } html.tv #race .rr b { font-size: 24px; font-weight: 600; margin-left: 4px; display: block; }
+html.tv .dk { position: absolute; width: 435px; height: 405px; box-sizing: border-box; padding: 12px 18px; border-radius: 16px; background: rgba(10, 16, 30, 0.92); border: 1px solid rgba(120, 150, 210, 0.16); border-left: 4px solid; overflow: hidden; }
+html.tv .vw { left: 575px; top: 145px; border-left-color: #fbbf24; } html.tv .sq { left: 1020px; top: 145px; border-left-color: #ffb000; } html.tv .sp { left: 1465px; top: 145px; border-left-color: #1f8f4e; }
+html.tv .kd { left: 575px; top: 561px; border-left-color: #00D395; } html.tv .cr { left: 1020px; top: 561px; border-left-color: #8B5CF6; box-shadow: inset 0 2px 0 #22D3EE; } html.tv .ov { left: 1465px; top: 561px; border-left-color: #FFB547; background: rgba(11, 16, 38, 0.95); }
+html.tv .ch { font-size: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; height: 26px; white-space: nowrap; } html.tv .ch span + span { float: right; }
+html.tv .pl { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 9px; margin-left: 6px; background: rgba(245, 245, 247, 0.12); color: rgba(245, 245, 247, 0.75); letter-spacing: 0.05em; vertical-align: 2px; }
+html.tv .pl.on { background: rgba(48, 209, 88, 0.18); color: #30D158; } html.tv .pl.bad { background: rgba(255, 69, 58, 0.2); color: #FF453A; } html.tv .pl.off { background: rgba(245, 245, 247, 0.1); color: rgba(245, 245, 247, 0.6); }
+html.tv .hero { font-size: 30px; font-weight: 600; white-space: nowrap; margin: 2px 0 4px; } html.tv .hero em { font-style: normal; font-size: 18px; font-weight: 500; margin-left: 8px; }
+html.tv .sb { color: #FFC23D; font-family: 'Courier New', monospace; }
+html.tv .row { white-space: nowrap; margin-top: 4px; } html.tv .k { display: inline-block; width: 32%; vertical-align: top; } html.tv .k i { display: block; font-style: normal; font-size: 12px; color: rgba(245, 245, 247, 0.5); } html.tv .k b { font-size: 18px; font-weight: 600; }
+html.tv .lg { font-size: 12px; color: rgba(245, 245, 247, 0.5); white-space: nowrap; overflow: hidden; } html.tv .lg span { margin-right: 6px; }
+html.tv .ao { position: absolute; left: 18px; right: 14px; bottom: 8px; font-size: 12px; line-height: 16px; color: rgba(245, 245, 247, 0.45); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html.tv .up { color: #30D158; } html.tv .dn { color: #FF453A; } html.tv .kd .dn { color: #FF7A6B; } html.tv .sq .up { color: #7CFF6B; } html.tv .sq .dn { color: #ff5d4a; } html.tv .na { color: rgba(245, 245, 247, 0.45); font-size: 14px; }
+html.tv #g10 svg { display: block; } html.tv .ln { fill: none; stroke-width: 2.5; stroke-linejoin: round; } html.tv .bl { stroke: rgba(245, 245, 247, 0.25); stroke-dasharray: 4 4; } html.tv .tk { stroke: rgba(245, 245, 247, 0.35); }
+html.tv .draw { stroke-dasharray: 2000; -webkit-animation: drawin 4s ease-out; animation: drawin 4s ease-out; }
+@-webkit-keyframes drawin { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } } @keyframes drawin { from { stroke-dashoffset: 2000; } to { stroke-dashoffset: 0; } }
+html.tv .rb { margin-top: 8px; } html.tv .rb i { display: block; font-style: normal; font-size: 12px; color: rgba(245, 245, 247, 0.55); margin-top: 3px; } html.tv .rb s { display: block; height: 5px; border-radius: 3px; background: rgba(245, 245, 247, 0.12); } html.tv .rb u { display: block; height: 5px; border-radius: 3px; background: #FF453A; }
+html.tv .tape { position: absolute; left: 18px; right: 14px; bottom: 8px; height: 22px; overflow: hidden; border-top: 1px solid rgba(255, 176, 0, 0.5); font-size: 13px; line-height: 22px; white-space: nowrap; }
+html.tv .tape div { display: inline-block; -webkit-animation: tape 60s linear infinite; animation: tape 60s linear infinite; } html.tv .tape span { margin-right: 18px; color: rgba(245, 245, 247, 0.7); }
+@-webkit-keyframes tape { from { -webkit-transform: translateX(0); } to { -webkit-transform: translateX(-50%); } } @keyframes tape { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+html.tv .sw { margin-top: 8px; padding: 6px 10px; border-radius: 10px; background: rgba(245, 245, 247, 0.05); font-size: 14px; line-height: 20px; height: 40px; overflow: hidden; } html.tv .sw i { font-style: normal; color: rgba(245, 245, 247, 0.5); } html.tv .sw em { font-style: normal; float: right; }
+html.tv .cts { white-space: nowrap; margin: 6px 0; } html.tv .ct { display: inline-block; width: 31%; margin-right: 2%; box-sizing: border-box; padding: 8px 10px; border-radius: 10px; vertical-align: top; }
+html.tv .ct.lo { background: rgba(48, 209, 88, 0.12); } html.tv .ct.sh { background: rgba(255, 69, 58, 0.12); } html.tv .ct b { display: block; font-size: 20px; } html.tv .ct b:first-child { color: #F5F5F7; } html.tv .ct i { display: block; font-style: normal; font-size: 12px; color: rgba(245, 245, 247, 0.55); } html.tv .ct em { display: block; font-style: normal; font-size: 18px; font-weight: 600; margin: 2px 0; }
+html.tv .ring svg { float: left; margin-right: 8px; } html.tv .k.ring { width: 36%; } html.tv .rg { fill: none; stroke: rgba(245, 245, 247, 0.12); stroke-width: 5; } html.tv .rf { fill: none; stroke: #22D3EE; stroke-width: 5; stroke-linecap: round; }
+html.tv .call { font-size: 16px; margin: 4px 0 8px; } html.tv .call b { color: #FFB547; margin: 0 8px; } html.tv .call i { font-style: normal; font-size: 12px; color: rgba(245, 245, 247, 0.45); }
+html.tv .pipe { font-size: 13px; color: rgba(245, 245, 247, 0.6); margin-bottom: 6px; } html.tv .nt { font-size: 13px; white-space: nowrap; margin: 4px 0; } html.tv .nt i { display: inline-block; width: 70px; font-style: normal; color: rgba(245, 245, 247, 0.5); }
+html.tv .nt span { display: inline-block; width: 110px; height: 6px; border-radius: 3px; background: rgba(245, 245, 247, 0.1); margin-right: 10px; vertical-align: 2px; } html.tv .nt u { display: block; height: 6px; border-radius: 3px; background: rgba(245, 245, 247, 0.45); } html.tv .nt b { font-weight: 500; }
+html.tv #mk .crypto { display: none !important; }
+html.tv #race { width: 1150px !important; } html.tv #race .rr { width: 186px !important; font-size: 15px !important; }
+html.tv #mk .wx .wf { display: none !important; }
+html.tv #race .rr { width: 180px !important; } html.tv .cts { height: 86px; }
+/* v10b polish (TV only) */
+html.tv .hero { font-size: 38px !important; letter-spacing: -0.01em; } html.tv .hero em { font-size: 17px !important; }
+html.tv .chips { margin-top: 8px; white-space: normal; height: 52px; overflow: hidden; } html.tv .chips span { display: inline-block; font-size: 13px; padding: 3px 8px; margin: 0 5px 5px 0; border-radius: 8px; background: rgba(245, 245, 247, 0.07); } html.tv .chips i { font-style: normal; color: rgba(245, 245, 247, 0.5); }
+html.tv .tape { height: 28px !important; line-height: 28px !important; border-top: 0 !important; } html.tv .tape .ht { display: inline-block; margin-right: 4px !important; padding: 0 8px; border-radius: 6px; color: #0B0F14 !important; font-weight: 600; font-size: 13px; } html.tv .tape .ht b { margin-left: 6px; }
+html.tv .al { margin-top: 8px; } html.tv .al s { display: block; height: 8px; border-radius: 4px; overflow: hidden; white-space: nowrap; font-size: 0; } html.tv .al u { display: inline-block; height: 8px; } html.tv .al i { display: block; font-style: normal; font-size: 12px; color: rgba(245, 245, 247, 0.55); margin-top: 3px; }
+html.tv .sp .sw { background: #0E1A12; border: 1px solid rgba(48, 209, 88, 0.35); font-size: 15px; color: #FFFFFF; } html.tv .sp .sw b { color: #FFC23D; font-size: 17px; }
+html.tv .roi { margin-top: 8px; white-space: nowrap; overflow: hidden; } html.tv .roi span { display: inline-block; width: 16.6%; font-size: 12px; color: rgba(245, 245, 247, 0.55); } html.tv .roi b { display: block; font-size: 16px; }
+html.tv .pmb { margin-top: 8px; } html.tv .pmb div { font-size: 13px; height: 20px; line-height: 20px; white-space: nowrap; } html.tv .pmb i { display: inline-block; width: 70px; font-style: normal; color: rgba(245, 245, 247, 0.55); }
+html.tv .pmb s { display: inline-block; width: 200px; height: 6px; border-radius: 3px; background: rgba(245, 245, 247, 0.08); vertical-align: 2px; margin-right: 10px; } html.tv .pmb u { display: block; height: 6px; border-radius: 3px; background: #00D395; } html.tv .pmb u.neg { background: #FF7A6B; }
+html.tv .nt em { font-style: normal; color: rgba(245, 245, 247, 0.45); } html.tv .nt b { color: #F5F5F7; } html.tv .ov .sw { height: 60px; }
+html.tv .pz { -webkit-animation: pz 2.4s ease-out; animation: pz 2.4s ease-out; }
+@-webkit-keyframes pz { 0% { text-shadow: 0 0 14px rgba(255, 255, 255, 0.9); } 100% { text-shadow: none; } } @keyframes pz { 0% { text-shadow: 0 0 14px rgba(255, 255, 255, 0.9); } 100% { text-shadow: none; } }
+html.tv #mk .news .nt { -webkit-mask-image: -webkit-linear-gradient(left, #000 85%, transparent); -webkit-mask-image: linear-gradient(to right, #000 85%, transparent); }
+html.tv .draw { -webkit-animation-duration: 6s !important; animation-duration: 6s !important; }
+html.tv .tape .ht { color: #FFFFFF !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6); } html.tv .sq .tape { bottom: 10px !important; } html.tv .sq .al { margin-top: 4px; }
+html.tv .kd .ao { display: none; } html.tv .kd .sw { margin-top: 6px; } html.tv .kd .pmb { margin-top: 6px; }

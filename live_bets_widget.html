@@ -28,7 +28,7 @@ const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textCon
 const T=(d.today||[]).map(b=>`<div class="b ${b.result=='W'?'w1':'l1'}" style="${b.result=='W'?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}"><div class="r"><span class="n"><span class="x">${b.result}</span>${LG(b)}${b.bet}</span><span class="w ${b.who=='Grok'?'g':''}">${b.who}</span></div>
 <div class="r s"><span>${b.final||'Final'}</span><span>${b.result=='W'?CB('')+' ':''}Paid ${b.entry_pct}c<span class="u">${b.units??''}u</span></span></div></div>`).join('');
 const L=d.bets.map(b=>`<div class="b" style="${b.live_pct>=99?G:sh(b.live_pct)}">
-<div class="r"><span class="n">${LG(b)}${b.bet}</span><span class="p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
+<div class="r"><span class="n">${LG(b)}${b.bet}</span><span class="p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡${b.cash_out!=null?' $'+Math.round(b.cash_out):''}</span>`:''}${b.live_pct}%</span></div>
 <div class="r s gl"><span class="gm">${b.game} · ${b.clock}</span>${PB(b)?`<span class="pbw">${PB(b)}</span>`:`<span>${ST(b)}</span>`}</div>
 <div class="r s"><span><span class="w ${b.who=='Grok'?'g':''}">${b.who}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}</span>${PB(b)?`<span>${ST(b)}</span>`:''}</div></div>`).join('');
 document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record}</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>');}

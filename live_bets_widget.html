@@ -61,6 +61,6 @@ const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" s
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
 const TD=d.today||[],T=TD.filter(b=>b.result!='L').map(tcard).join(''),TL=TD.filter(b=>b.result=='L').map(tcard).join(''),L=d.bets.map(card).join('');
-document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record}</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(TL?`<div class="h"><span>LOST TODAY · ${TD.filter(b=>b.result=='L').length}</span></div>`+TL:'');}
+document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record}</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(TL?`<div class="h"><span>LOST TODAY · ${TD.filter(b=>b.result=='L').length}</span><span>−$${TD.filter(b=>b.result=='L').reduce((a,b)=>a+(+b.cost||0),0).toFixed(2)} lost</span></div>`+TL:'');}
 catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
 </script></body></html>

@@ -97,7 +97,7 @@
 })();
 /* full8 glass dashboard (Home / EMA / Sports Edge) on top of the app; add ?classic to the page URL for the old look. */
 (function () {
-  if (/classic/.test(location.search) || window.__glass) return;
+  if (/classic/.test(location.search) || window.__glass || /Tizen/i.test(navigator.userAgent)) return;   /* v10c: TV keeps the v10b Home; glass stays on desktop */
   var s = document.createElement('script'); s.src = (window.DASH_BASE && window.DASH_REMOTE !== false ? window.DASH_BASE : '') + 'glass.js?v=' + Date.now();
   document.body.appendChild(s);
 })();

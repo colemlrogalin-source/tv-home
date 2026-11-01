@@ -1,38 +1,39 @@
 <!doctype html><html><head><meta charset="utf-8"><title>My Mac's Live Action Tracker</title><style>
 *{box-sizing:border-box}html,body{width:100%;overflow-x:hidden}
 body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px -apple-system,Helvetica,sans-serif;-webkit-user-select:none}
-h1{font-size:13px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
-h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:11px;color:#7d8394;white-space:nowrap}
+h1{font-size:11px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
+h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:9.5px;color:#7d8394;white-space:nowrap}
 #l{padding:0 8px 10px}
-.h{display:flex;justify-content:space-between;font-size:12px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
+.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
 .e{color:#8a90a0;text-align:center;padding:36px}
-.b{position:relative;display:flex;gap:10px;width:100%;border-radius:17px;padding:10px 12px 10px 10px;margin:7px 0;border-left:5px solid #555;overflow:hidden}
-.lc{flex:0 0 50px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
-.lc img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}.lc.two img{width:34px;height:34px}
-.lc .x{font-size:15px;font-weight:900;border-radius:8px;padding:2px 8px}
+.b{position:relative;display:flex;gap:10px;width:100%;border-radius:14px;padding:7px 10px 7px 8px;margin:5px 0;border-left:5px solid #555;overflow:hidden}
+.lc{flex:0 0 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
+.lc img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}.lc.two img{width:28px;height:28px}
+.lc .x{font-size:13px;font-weight:700;border-radius:8px;padding:2px 8px}
 .mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
 .r{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
 .r>.f{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.r>.k{flex:0 0 auto;white-space:nowrap}
-.n{font-weight:700;font-size:15px}.p{font-size:22px;font-weight:800;line-height:1}
-.cf{font-size:17px;margin-right:4px;cursor:help;vertical-align:2px}
-.w{position:absolute;top:0;right:0;font-size:9px;font-weight:800;letter-spacing:.4px;padding:2px 8px;border-radius:0 0 0 9px;background:#000;color:#fff}.w.g{color:#f5c542}
+.n{font-weight:700;font-size:13px}.p{font-size:18.5px;font-weight:700;line-height:1}
+.cf{font-size:14.5px;margin-right:4px;cursor:help;vertical-align:2px}
+.w{position:absolute;top:0;right:0;font-size:7.5px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:0 0 0 9px;background:#000;color:#fff}.w.g{color:#f5c542}
 .b.hw .r1{padding-right:30px}
-.sc{font-size:19px;font-weight:800;letter-spacing:.2px;line-height:1.15}.ck{font-size:11px;font-weight:600;opacity:.7;margin-left:6px}
+.sc{font-size:16px;font-weight:700;letter-spacing:.2px;line-height:1.15}.ck{font-size:9.5px;font-weight:600;opacity:.7;margin-left:6px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:6px;vertical-align:2px;box-shadow:0 0 0 1px #000}.dot.red{background:#ff2d2d}.dot.green{background:#22e06b}
-.m{font-size:12.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:11px}.m .ar{opacity:.55;margin:0 4px}.m b{font-weight:800}.m .c{opacity:.55;font-size:10.5px;margin-left:5px}
+.m{font-size:10.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:9.5px}.m .ar{opacity:.55;margin:0 4px}.m b{font-weight:700}.m .c{opacity:.55;font-size:9px;margin-left:5px}
 .nw{padding:1px 7px;border-radius:8px;background:rgba(0,0,0,.18)}.nw.fl{background:#000;color:#fff}
-.mv{font-size:10.5px;opacity:.7;font-weight:600}
-.u{font-size:11px;font-weight:800;padding:1px 7px;border-radius:7px;background:rgba(0,0,0,.22)}
+.mv{font-size:9px;opacity:.7;font-weight:600}
+.u{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:7px;background:rgba(0,0,0,.22)}
 .pb{display:flex;align-items:center;gap:6px;justify-content:flex-start;padding:2px 0}.tr{width:84px;height:6px;border-radius:3px;background:rgba(0,0,0,.6);box-shadow:0 0 0 1px rgba(0,0,0,.35);overflow:hidden}.fil{height:100%;background:#fff;border-radius:2px}
-.pt{font-size:12px;font-weight:800;white-space:nowrap}.tk{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.7);margin-left:3px;vertical-align:middle;background:rgba(0,0,0,.35)}.tk.on{background:#fff}
-.cb{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.4px;color:#1a1204;padding:2px 9px;border-radius:10px;border:1.5px solid #2a1d00;background:linear-gradient(110deg,#ffd84d 0%,#fff6c2 45%,#ffcf33 60%,#e0a100 100%);box-shadow:0 0 0 1px #000,0 0 9px 2px rgba(255,240,160,.95);white-space:nowrap}
+.pt{font-size:10px;font-weight:700;white-space:nowrap}.tk{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.7);margin-left:3px;vertical-align:middle;background:rgba(0,0,0,.35)}.tk.on{background:#fff}
+.cb{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.4px;color:#1a1204;padding:2px 9px;border-radius:10px;border:1.5px solid #2a1d00;background:linear-gradient(110deg,#ffd84d 0%,#fff6c2 45%,#ffcf33 60%,#e0a100 100%);box-shadow:0 0 0 1px #000,0 0 9px 2px rgba(255,240,160,.95);white-space:nowrap}
 .w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}
-@media (max-width:330px){body{font-size:14px}.p{font-size:21px}.sc{font-size:17px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:11.5px}.m .c{display:none}}
+@media (max-width:330px){body{font-size:12px}.p{font-size:18px}.sc{font-size:14.5px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:10px}.m .c{display:none}}
 .r>.f:has(.cb),.r>.f:has(.pb){padding:3px 4px;margin:-3px -4px;overflow:visible}
 </style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
 const sh=p=>{const k=Math.min(1,Math.abs(p-50)/50),L=88-66*k,h=p>=50?140:0;return `background:hsl(${h},${p>=50?55:65}%,${L}%);border-color:hsl(${h},70%,${Math.max(L-18,12)}%);color:${L>55?'#0b0d12':'#f2f4f8'}`};
+const LK='background:linear-gradient(135deg,#0f5132,#0a3a24);border-color:#22e06b;color:#eafff2;box-shadow:0 0 0 1px #22e06b55,0 0 10px #22e06b33';
 const G='background:linear-gradient(135deg,#f5d36b,#c9971c);border-color:#8a6408;color:#1a1204';
 const $=v=>v==null?'—':'$'+Number(v).toFixed(2);
 const LC=(b,top)=>{const l=b.logos||[];return `<div class="lc ${l.length>1?'two':''}">${top||''}${l.map(u=>`<img src="${u}" onerror="this.remove()">`).join('')}</div>`};
@@ -46,7 +47,7 @@ if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" s
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
 const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';
-const card=b=>`<div class="b hw" style="${b.live_pct>=99?G:sh(b.live_pct)}">${WHO(b)}${LC(b)}<div class="mc">
+const card=b=>`<div class="b hw" style="${b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
 <div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
 <div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now')}</span></div>

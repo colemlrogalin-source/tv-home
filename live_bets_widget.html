@@ -1,36 +1,64 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Live Bets</title><style>
-body{margin:0;background:#0d0f14;color:#e8eaf0;font:13px -apple-system,Helvetica,sans-serif;-webkit-user-select:none}
-h1{font-size:12px;margin:0;padding:8px 12px;color:#8a90a0;display:flex;justify-content:space-between;-webkit-app-region:drag}
-#l{padding:0 8px 8px}.b{border-radius:14px;padding:8px 12px;margin:6px 0;background:#161a22;border-left:4px solid #555}
-.up{border-color:#22c55e;background:#10231a}.dn{border-color:#ef4444;background:#2a1215}
-.r{display:flex;justify-content:space-between;align-items:baseline}.n{font-weight:600}.p{font-size:20px;font-weight:700}
-.b .p,.b .s{color:inherit}.s{opacity:.8;font-size:11px;margin-top:2px}.w{font-size:10px;font-weight:700;padding:1px 7px;border-radius:8px;background:#000;border:1px solid #000;color:#fff;opacity:1}.w.g{color:#f5c542}.cb{display:inline-block;font-size:10px;font-weight:900;letter-spacing:.4px;color:#1a1204;padding:2px 8px;border-radius:9px;border:1.5px solid #2a1d00;background:linear-gradient(110deg,#ffd84d 0%,#fff6c2 45%,#ffcf33 60%,#e0a100 100%);box-shadow:0 0 0 1px #000,0 0 9px 2px rgba(255,240,160,.95);white-space:nowrap}.cs{font-size:10px;font-weight:700;margin-left:5px}.pb{display:flex;align-items:center;gap:6px;justify-content:flex-end}.pbw{flex:0 0 auto}.gl .gm{font-size:10px}.tr{width:84px;height:5px;border-radius:3px;background:rgba(0,0,0,.6);box-shadow:0 0 0 1px rgba(0,0,0,.35);overflow:hidden}.fl{height:100%;background:#fff;border-radius:2px}.hit .fl,.hit .tk.on{background:#f5c542}.pt{font-size:11px;font-weight:800;opacity:1;white-space:nowrap}.tk{display:inline-block;width:8px;height:8px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.7);margin-left:3px;vertical-align:middle;background:rgba(0,0,0,.35)}.tk.on{background:#fff}.hit .tk{border-color:#f5c542}.pg{font-size:11px;font-weight:600;margin-left:6px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-left:5px;vertical-align:1px}.dot.red{background:#ff2d2d;box-shadow:0 0 0 1px #000}.dot.green{background:#22e06b;box-shadow:0 0 0 1px #000}.cf{margin-right:5px;cursor:help}.co{font-size:10px;font-weight:800;margin-left:6px;padding:1px 7px;border-radius:8px;background:#000;color:#fff;white-space:nowrap}
-.x{display:inline-block;min-width:18px;text-align:center;font-weight:800;border-radius:7px;padding:1px 5px;margin-right:6px}.w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}.w1{border-color:#22c55e;background:#10231a}.l1{border-color:#ef4444;background:#2a1215}.lg{height:18px;width:18px;vertical-align:-4px;margin-right:4px;object-fit:contain}.lg.s2{height:14px;width:14px;margin-right:2px}.u{font-size:9px;opacity:.65;margin-left:4px;padding:0 4px;border-radius:5px;background:rgba(0,0,0,.18)}.m{font-weight:500;font-size:10px;color:#9aa1b2;border:1px solid #2e3440;background:#161a22;border-radius:8px;padding:1px 7px;letter-spacing:0}.h{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#8a90a0;margin:8px 4px 2px;letter-spacing:.5px}.e{color:#8a90a0;text-align:center;padding:30px}*{box-sizing:border-box}html,body{width:100%;overflow-x:hidden}
-.r{gap:8px;min-width:0}.r>span{min-width:0}.r>span:first-child{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.r>span:last-child{flex:0 0 auto;white-space:nowrap}.b{width:100%;overflow:hidden}
-@media (max-width:330px){.p{font-size:17px}.s{font-size:10px}.b{padding:7px 9px}}
+<!doctype html><html><head><meta charset="utf-8"><title>My Mac's Live Action Tracker</title><style>
+*{box-sizing:border-box}html,body{width:100%;overflow-x:hidden}
+body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px -apple-system,Helvetica,sans-serif;-webkit-user-select:none}
+h1{font-size:13px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
+h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:11px;color:#7d8394;white-space:nowrap}
+#l{padding:0 8px 10px}
+.h{display:flex;justify-content:space-between;font-size:12px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
+.e{color:#8a90a0;text-align:center;padding:36px}
+.b{position:relative;display:flex;gap:10px;width:100%;border-radius:17px;padding:10px 12px 10px 10px;margin:7px 0;border-left:5px solid #555;overflow:hidden}
+.lc{flex:0 0 50px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
+.lc img{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}.lc.two img{width:34px;height:34px}
+.lc .x{font-size:15px;font-weight:900;border-radius:8px;padding:2px 8px}
+.mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
+.r>.f{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.r>.k{flex:0 0 auto;white-space:nowrap}
+.n{font-weight:700;font-size:15px}.p{font-size:22px;font-weight:800;line-height:1}
+.cf{font-size:17px;margin-right:4px;cursor:help;vertical-align:2px}
+.w{position:absolute;top:0;right:0;font-size:9px;font-weight:800;letter-spacing:.4px;padding:2px 8px;border-radius:0 0 0 9px;background:#000;color:#fff}.w.g{color:#f5c542}
+.b.hw .r1{padding-right:30px}
+.sc{font-size:19px;font-weight:800;letter-spacing:.2px;line-height:1.15}.ck{font-size:11px;font-weight:600;opacity:.7;margin-left:6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:6px;vertical-align:2px;box-shadow:0 0 0 1px #000}.dot.red{background:#ff2d2d}.dot.green{background:#22e06b}
+.m{font-size:12.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:11px}.m .ar{opacity:.55;margin:0 4px}.m b{font-weight:800}.m .c{opacity:.55;font-size:10.5px;margin-left:5px}
+.nw{padding:1px 7px;border-radius:8px;background:rgba(0,0,0,.18)}.nw.fl{background:#000;color:#fff}
+.mv{font-size:10.5px;opacity:.7;font-weight:600}
+.u{font-size:11px;font-weight:800;padding:1px 7px;border-radius:7px;background:rgba(0,0,0,.22)}
+.pb{display:flex;align-items:center;gap:6px;justify-content:flex-start;padding:2px 0}.tr{width:84px;height:6px;border-radius:3px;background:rgba(0,0,0,.6);box-shadow:0 0 0 1px rgba(0,0,0,.35);overflow:hidden}.fil{height:100%;background:#fff;border-radius:2px}
+.pt{font-size:12px;font-weight:800;white-space:nowrap}.tk{display:inline-block;width:9px;height:9px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.7);margin-left:3px;vertical-align:middle;background:rgba(0,0,0,.35)}.tk.on{background:#fff}
+.cb{display:inline-block;font-size:11px;font-weight:900;letter-spacing:.4px;color:#1a1204;padding:2px 9px;border-radius:10px;border:1.5px solid #2a1d00;background:linear-gradient(110deg,#ffd84d 0%,#fff6c2 45%,#ffcf33 60%,#e0a100 100%);box-shadow:0 0 0 1px #000,0 0 9px 2px rgba(255,240,160,.95);white-space:nowrap}
+.w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}
+@media (max-width:330px){body{font-size:14px}.p{font-size:21px}.sc{font-size:17px}.lc{flex-basis:44px}.lc img{width:36px;height:36px}.lc.two img{width:30px;height:30px}.m{font-size:11.5px}.m .c{display:none}}
+.r>.f:has(.cb),.r>.f:has(.pb){padding:3px 4px;margin:-3px -4px;overflow:visible}
 </style></head><body>
-<h1><span>🎯 LIVE BETS</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
+<h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
 const sh=p=>{const k=Math.min(1,Math.abs(p-50)/50),L=88-66*k,h=p>=50?140:0;return `background:hsl(${h},${p>=50?55:65}%,${L}%);border-color:hsl(${h},70%,${Math.max(L-18,12)}%);color:${L>55?'#0b0d12':'#f2f4f8'}`};
 const G='background:linear-gradient(135deg,#f5d36b,#c9971c);border-color:#8a6408;color:#1a1204';
-const LG=b=>(b.logos||[]).map(u=>`<img class="lg ${b.logos.length>1?'s2':''}" src="${u}" onerror="this.remove()">`).join('')+((b.logos||[]).length>1?' ':'');
-const ST=b=>`${ar(b.vs_entry)} ${b.vs_entry>0?'+':''}${b.vs_entry} · Paid ${b.entry_pct}c<span class="u">${b.units??''}u</span>${b.vs_recent!=null?` · ${ar(b.vs_recent)}${Math.abs(b.vs_recent)} 5m`:''}`;
-const CB=t=>`<span class="cb">💰 CASHED</span>${t?`<span class="cs">${t}</span>`:''}`;
-const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line,h=c>=l?'hit':'';
-if(h)return `<div class="pb">${CB(b.prop_kind=='td'?c+' TD':b.prop_kind=='rec'?c+' rec':c+' yds')}</div>`;
-if(b.prop_kind=='yds')return `<div class="pb ${h}"><div class="tr"><div class="fl" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c}/${l}</span></div>`;
+const $=v=>v==null?'—':'$'+Number(v).toFixed(2);
+const LC=(b,top)=>{const l=b.logos||[];return `<div class="lc ${l.length>1?'two':''}">${top||''}${l.map(u=>`<img src="${u}" onerror="this.remove()">`).join('')}</div>`};
+const WHO=b=>`<span class="w ${b.who=='Grok'?'g':''}">${b.who=='Grok'?'GROK':'COLE'}</span>`;
+const UN=b=>`<span class="u">${b.units??''}u</span>`;
+const PAY=(b,lbl)=>`<span class="m"><span class="lb">Paid</span> <b>${$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
+const CB=t=>`<span class="cb">💰 CASHED${t?' '+t:''}</span>`;
+const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line;
+if(c>=l)return `<div class="pb">${CB(b.prop_kind=='td'?c+' TD':b.prop_kind=='rec'?c+' rec':c+' yds')}</div>`;
+if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c}/${l}</span></div>`;
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
-return `<div class="pb ${h}"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
-const ar=v=>v>0?'▲':v<0?'▼':'▬';
+return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
+const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';
+const card=b=>`<div class="b hw" style="${b.live_pct>=99?G:sh(b.live_pct)}">${WHO(b)}${LC(b)}<div class="mc">
+<div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
+<div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
+<div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now')}</span></div>
+<div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${UN(b)}</span></div></div></div>`;
+const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${LC(b,`<span class="x">${b.result}</span>`)}<div class="mc">
+<div class="r r1"><span class="f n">${b.bet}</span></div>
+<div class="r"><span class="f sc">${b.final||'Final'}</span></div>
+<div class="r"><span class="f">${PAY(b,W?'Won':'Got')}</span></div>
+<div class="r">${W?`<span class="f">${CB('')}</span>`:'<span></span>'}<span class="k">${UN(b)}</span></div></div></div>`};
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
-const T=(d.today||[]).map(b=>`<div class="b ${b.result=='W'?'w1':'l1'}" style="${b.result=='W'?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}"><div class="r"><span class="n"><span class="x">${b.result}</span>${LG(b)}${b.bet}</span><span class="w ${b.who=='Grok'?'g':''}">${b.who}</span></div>
-<div class="r s"><span>${b.final||'Final'}</span><span>${b.result=='W'?CB('')+' ':''}Paid ${b.entry_pct}c<span class="u">${b.units??''}u</span></span></div></div>`).join('');
-const L=d.bets.map(b=>`<div class="b" style="${b.live_pct>=99?G:sh(b.live_pct)}">
-<div class="r"><span class="n">${LG(b)}${b.bet}</span><span class="p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
-<div class="r s gl"><span class="gm">${b.game} · ${b.clock}</span>${PB(b)?`<span class="pbw">${PB(b)}</span>`:`<span>${ST(b)}</span>`}</div>
-<div class="r s"><span><span class="w ${b.who=='Grok'?'g':''}">${b.who}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}${b.cash_flag&&b.cash_out!=null?`<span class="co">⚡ Cash out $${Math.round(b.cash_out)}</span>`:''}</span>${PB(b)?`<span>${ST(b)}</span>`:''}</div></div>`).join('');
-document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record}</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>');}
+const TD=d.today||[],T=TD.filter(b=>b.result!='L').map(tcard).join(''),TL=TD.filter(b=>b.result=='L').map(tcard).join(''),L=d.bets.map(card).join('');
+document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record}</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(TL?`<div class="h"><span>LOST TODAY · ${TD.filter(b=>b.result=='L').length}</span></div>`+TL:'');}
 catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
 </script></body></html>

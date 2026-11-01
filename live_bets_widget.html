@@ -58,8 +58,8 @@ const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" s
 <div class="r r1"><span class="f n">${b.bet}</span></div>
 <div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>
 <div class="r"><span class="f">${PAY(b,W?'Won':'Got',1)}</span>${W?`<span class="k">${CB('')}</span>`:''}</div></div></div>`};
-let LD=null,CL=JSON.parse(localStorage.getItem('lb_c')||'{}');
-function TG(k){CL[k]=!CL[k];localStorage.setItem('lb_c',JSON.stringify(CL));if(LD)R(LD)}
+let LD=null,CL={};try{CL=JSON.parse(localStorage.getItem('lb_c')||'{}')}catch(e){}
+function TG(k){CL[k]=!CL[k];try{localStorage.setItem('lb_c',JSON.stringify(CL))}catch(e){}if(LD)R(LD)}
 function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
 const ar=k=>CL[k]?'▸ ':'▾ ';
 const won=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);

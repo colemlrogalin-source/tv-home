@@ -5,18 +5,19 @@ h1{font-size:12px;margin:0;padding:8px 12px;color:#8a90a0;display:flex;justify-c
 .up{border-color:#22c55e;background:#10231a}.dn{border-color:#ef4444;background:#2a1215}
 .r{display:flex;justify-content:space-between;align-items:baseline}.n{font-weight:600}.p{font-size:20px;font-weight:700}
 .b .p,.b .s{color:inherit}.s{opacity:.8;font-size:11px;margin-top:2px}.w{font-size:10px;padding:1px 6px;border-radius:8px;background:rgba(0,0,0,.25);color:inherit}
-.x{display:inline-block;min-width:18px;text-align:center;font-weight:800;border-radius:7px;padding:1px 5px;margin-right:6px}.w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}.w1{border-color:#22c55e;background:#10231a}.l1{border-color:#ef4444;background:#2a1215}.m{opacity:.55;font-weight:400;margin-left:6px}.h{font-size:11px;color:#8a90a0;margin:8px 4px 2px;letter-spacing:.5px}.e{color:#8a90a0;text-align:center;padding:30px}</style></head><body>
+.x{display:inline-block;min-width:18px;text-align:center;font-weight:800;border-radius:7px;padding:1px 5px;margin-right:6px}.w1 .x{background:#1a1204;color:#f5d36b}.l1 .x{background:#ef4444;color:#fff}.w1{border-color:#22c55e;background:#10231a}.l1{border-color:#ef4444;background:#2a1215}.lg{height:18px;width:18px;vertical-align:-4px;margin-right:4px;object-fit:contain}.lg.s2{height:14px;width:14px;margin-right:2px}.m{opacity:.55;font-weight:400;margin-left:6px}.h{font-size:11px;color:#8a90a0;margin:8px 4px 2px;letter-spacing:.5px}.e{color:#8a90a0;text-align:center;padding:30px}</style></head><body>
 <h1><span>🎯 LIVE BETS</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
 const sh=p=>{const k=Math.min(1,Math.abs(p-50)/50),L=88-66*k,h=p>=50?140:0;return `background:hsl(${h},${p>=50?55:65}%,${L}%);border-color:hsl(${h},70%,${Math.max(L-18,12)}%);color:${L>55?'#0b0d12':'#f2f4f8'}`};
 const G='background:linear-gradient(135deg,#f5d36b,#c9971c);border-color:#8a6408;color:#1a1204';
+const LG=b=>(b.logos||[]).map(u=>`<img class="lg ${b.logos.length>1?'s2':''}" src="${u}" onerror="this.remove()">`).join('')+((b.logos||[]).length>1?' ':'');
 const ar=v=>v>0?'▲':v<0?'▼':'▬';
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
-const T=(d.today||[]).map(b=>`<div class="b ${b.result=='W'?'w1':'l1'}" style="${b.result=='W'?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}"><div class="r"><span class="n"><span class="x">${b.result}</span>${b.bet}</span><span class="w">${b.who}</span></div>
+const T=(d.today||[]).map(b=>`<div class="b ${b.result=='W'?'w1':'l1'}" style="${b.result=='W'?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}"><div class="r"><span class="n"><span class="x">${b.result}</span>${LG(b)}${b.bet}</span><span class="w">${b.who}</span></div>
 <div class="r s"><span>${b.final||'Final'}</span><span>Paid ${b.entry_pct}c</span></div></div>`).join('');
 const L=d.bets.map(b=>`<div class="b" style="${b.live_pct>=99?G:sh(b.live_pct)}">
-<div class="r"><span class="n">${b.bet}</span><span class="p">${b.live_pct}%</span></div>
+<div class="r"><span class="n">${LG(b)}${b.bet}</span><span class="p">${b.live_pct}%</span></div>
 <div class="r s"><span>${b.game} · ${b.clock}</span><span>${ar(b.vs_entry)} ${b.vs_entry>0?'+':''}${b.vs_entry} · Paid ${b.entry_pct}c${b.vs_recent!=null?` · ${ar(b.vs_recent)}${Math.abs(b.vs_recent)} 5m`:''}</span></div>
 <div class="s"><span class="w">${b.who}</span></div></div>`).join('');
 document.getElementById('l').innerHTML=(T?`<div class="h">TODAY · ${d.today_record}<span class="m">$${d.today_wagered??''}</span></div>`+T:'')+`<div class="h">LIVE BETS · ${d.count}<span class="m">$${d.live_wagered??''}</span></div>`+(L||'<div class="e">No live bets right now</div>');}

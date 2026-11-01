@@ -6,20 +6,20 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 #l{padding:0 8px 10px}
 .h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
 .e{color:#8a90a0;text-align:center;padding:36px}
-.b{position:relative;display:flex;gap:10px;width:100%;border-radius:14px;padding:7px 10px 7px 8px;margin:5px 0;border-left:5px solid #555;overflow:hidden}
+.b{position:relative;display:flex;gap:9px;width:100%;border-radius:12px;padding:6px 9px 6px 7px;margin:4px 0;border-left:5px solid #555;overflow:hidden}
 .lc{flex:0 0 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
 .lc img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 1px rgba(0,0,0,.35))}.lc.two img{width:28px;height:28px}
 .lc .x{font-size:13px;font-weight:700;border-radius:8px;padding:2px 8px}
-.mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:3px}
+.mc{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:2px}
 .r{display:flex;justify-content:space-between;align-items:center;gap:8px;min-width:0}
-.r>.f{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.r>.k{flex:0 0 auto;white-space:nowrap}
+.r>.k .cb{margin-right:4px;font-size:8.5px;padding:1px 7px}.r>.f{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.r>.k{flex:0 0 auto;white-space:nowrap}
 .n{font-weight:700;font-size:13px}.p{font-size:18.5px;font-weight:700;line-height:1}
 .cf{font-size:14.5px;margin-right:4px;cursor:help;vertical-align:2px}
 .w{position:absolute;top:0;right:0;font-size:7.5px;font-weight:700;letter-spacing:.4px;padding:2px 8px;border-radius:0 0 0 9px;background:#000;color:#fff}.w.g{color:#f5c542}
 .b.hw .r1{padding-right:30px}
 .sc{font-size:16px;font-weight:700;letter-spacing:.2px;line-height:1.15}.ck{font-size:9.5px;font-weight:600;opacity:.7;margin-left:6px}
 .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:6px;vertical-align:2px;box-shadow:0 0 0 1px #000}.dot.red{background:#ff2d2d}.dot.green{background:#22e06b}
-.m{font-size:10.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:9.5px}.m .ar{opacity:.55;margin:0 4px}.m b{font-weight:700}.m .c{opacity:.55;font-size:9px;margin-left:5px}
+.m{font-size:10.5px;font-weight:600}.m .lb{opacity:.65;font-weight:600;font-size:9.5px}.m .ar{opacity:.55;margin:0 3px}.m b{font-weight:700}.m .c{opacity:.55;font-size:9px;margin-left:5px}
 .nw{padding:1px 7px;border-radius:8px;background:rgba(0,0,0,.18)}.nw.fl{background:#000;color:#fff}
 .mv{font-size:9px;opacity:.7;font-weight:600}
 .u{font-size:9.5px;font-weight:700;padding:1px 7px;border-radius:7px;background:rgba(0,0,0,.22)}
@@ -39,10 +39,12 @@ const $=v=>v==null?'—':'$'+Number(v).toFixed(2);
 const LC=(b,top)=>{const l=b.logos||[];return `<div class="lc ${l.length>1?'two':''}">${top||''}${l.map(u=>`<img src="${u}" onerror="this.remove()">`).join('')}</div>`};
 const WHO=b=>`<span class="w ${b.who=='Grok'?'g':''}">${b.who=='Grok'?'GROK':'COLE'}</span>`;
 const UN=b=>`<span class="u">${b.units??''}u</span>`;
-const PAY=(b,lbl)=>`<span class="m"><span class="lb">Paid</span> <b>${$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
+const PAY=(b,lbl,nc)=>`<span class="m"><span class="lb">Paid</span> <b>${$(b.cost)}</b><span class="ar">→</span><span class="nw ${b.cash_flag?'fl':''}"><span class="lb">${lbl}</span> <b>${$(b.cash_out)}</b></span>${b.entry_pct!=null&&!nc?`<span class="c">${b.entry_pct}c</span>`:''}</span>`;
 const CB=t=>`<span class="cb">💰 CASHED${t?' '+t:''}</span>`;
+const HIT=b=>b.prop_kind&&b.prop_line!=null&&(b.prop_cur||0)>=b.prop_line;
+const CBP=b=>CB(b.prop_kind=='td'?b.prop_cur+' TD':b.prop_kind=='rec'?b.prop_cur+' rec':b.prop_cur+' yds');
 const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line;
-if(c>=l)return `<div class="pb">${CB(b.prop_kind=='td'?c+' TD':b.prop_kind=='rec'?c+' rec':c+' yds')}</div>`;
+if(c>=l)return '';
 if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c}/${l}</span></div>`;
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
@@ -50,13 +52,12 @@ const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs
 const card=b=>`<div class="b hw" style="${(b.prop_kind&&b.prop_line!=null&&b.prop_cur>=b.prop_line&&b.side!='NO')?G:b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
 <div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
-<div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now')}</span></div>
+<div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Now',HIT(b))}</span>${HIT(b)?`<span class="k">${CBP(b)}</span>`:''}</div>
 <div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${UN(b)}</span></div></div></div>`;
-const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${LC(b,`<span class="x">${b.result}</span>`)}<div class="mc">
+const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span></div>
-<div class="r"><span class="f sc">${b.final||'Final'}</span></div>
-<div class="r"><span class="f">${PAY(b,W?'Won':'Got')}</span></div>
-<div class="r">${W?`<span class="f">${CB('')}</span>`:'<span></span>'}<span class="k">${UN(b)}</span></div></div></div>`};
+<div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>
+<div class="r"><span class="f">${PAY(b,W?'Won':'Got',1)}</span>${W?`<span class="k">${CB('')}</span>`:''}</div></div></div>`};
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
 const TD=d.today||[],T=TD.filter(b=>b.result!='L').map(tcard).join(''),TL=TD.filter(b=>b.result=='L').map(tcard).join(''),L=d.bets.map(card).join('');

@@ -4,7 +4,7 @@ body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px -apple-system,Helvetica
 h1{font-size:11px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
 h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:9.5px;color:#7d8394;white-space:nowrap}
 #l{padding:0 8px 10px}
-.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
+.hc{cursor:pointer;user-select:none}.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
 .e{color:#8a90a0;text-align:center;padding:36px}
 .b{position:relative;display:flex;gap:9px;width:100%;border-radius:12px;padding:6px 9px 6px 7px;margin:4px 0;border-left:5px solid #555;overflow:hidden}
 .lc{flex:0 0 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
@@ -58,9 +58,14 @@ const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" s
 <div class="r r1"><span class="f n">${b.bet}</span></div>
 <div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>
 <div class="r"><span class="f">${PAY(b,W?'Won':'Got',1)}</span>${W?`<span class="k">${CB('')}</span>`:''}</div></div></div>`};
+let LD=null,CL=JSON.parse(localStorage.getItem('lb_c')||'{}');
+function TG(k){CL[k]=!CL[k];localStorage.setItem('lb_c',JSON.stringify(CL));if(LD)R(LD)}
+function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
+const ar=k=>CL[k]?'▸ ':'▾ ';
+const won=TD.reduce((a,b)=>a+(+b.cash_out||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2);
+document.getElementById('l').innerHTML=(W.length?`<div class="h hc" onclick="TG('w')"><span>${ar('w')}TODAY · ${d.today_record} · $${won} won</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(X.length?`<div class="h hc" onclick="TG('l')"><span>${ar('l')}LOST TODAY · ${X.length}</span><span>−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
 async function go(){let wait=300;try{const r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=d.poll_sec||300;document.getElementById('t').textContent=d.as_of+' · '+d.count;
-const TD=d.today||[],T=TD.filter(b=>b.result!='L').map(tcard).join(''),TL=TD.filter(b=>b.result=='L').map(tcard).join(''),L=d.bets.map(card).join('');
-document.getElementById('l').innerHTML=(T?`<div class="h"><span>TODAY · ${d.today_record} · $${TD.reduce((a,b)=>a+(+b.cash_out||0),0).toFixed(2)} won</span><span>${d.today_u_wag??0}u wagered · ${d.today_u_won??0}u won</span></div>`+T:'')+`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(TL?`<div class="h"><span>LOST TODAY · ${TD.filter(b=>b.result=='L').length}</span><span>−$${TD.filter(b=>b.result=='L').reduce((a,b)=>a+(+b.cost||0),0).toFixed(2)} lost</span></div>`+TL:'');}
+R(d);}
 catch(e){document.getElementById('t').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
 </script></body></html>

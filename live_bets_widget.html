@@ -46,7 +46,7 @@ const HIT=b=>b.prop_kind&&b.prop_line!=null&&(b.prop_cur||0)>=b.prop_line;
 const CBP=b=>CB(b.prop_kind=='td'?b.prop_cur+' TD':b.prop_kind=='rec'?b.prop_cur+' rec':b.prop_cur+' yds');
 const PB=b=>{if(!b.prop_kind||b.prop_line==null)return '';const c=b.prop_cur||0,l=b.prop_line;
 if(c>=l)return '';
-if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c}/${l}</span></div>`;
+if(b.prop_kind=='yds')return `<div class="pb"><div class="tr"><div class="fil" style="width:${Math.min(100,100*c/l)}%"></div></div><span class="pt">${c} / ${l}${b.stat_label?' '+b.stat_label:''}</span></div>`;
 const n=Math.min(l,12);let t='';for(let i=0;i<n;i++)t+=`<span class="tk ${i<c?'on':''}"></span>`;
 return `<div class="pb"><span>${t}</span><span class="pt">${b.prop_kind=='td'?(c?'TD ✓':'TD'):c+'/'+l}</span></div>`};
 const MV=b=>b.vs_recent!=null&&Math.abs(b.vs_recent)>=5?`<span class="mv">${b.vs_recent>0?'up':'down'} ${Math.abs(b.vs_recent)} in 5 min</span>`:'<span></span>';

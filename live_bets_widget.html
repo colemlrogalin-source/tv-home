@@ -34,7 +34,7 @@ h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1
 .b:not(.w1):not(.l1) .lc{background:none;border-radius:0;padding:0;box-shadow:none;margin-left:-5px}
 .r>.f:has(.tw){flex:1 1 auto;width:100%}.pb:has(.tw){width:100%}.b:not(.w1):not(.l1) .r>.f>.m{display:flex;align-items:center;gap:6px}.b:not(.w1):not(.l1) .m .ar{margin:0}.b:not(.w1):not(.l1) .m .c{margin-left:auto;margin-right:4px}
 .b:not(.w1):not(.l1) .n{font-size:15.5px;white-space:normal;line-height:1.15}.b:not(.w1):not(.l1) .sc{font-size:13px}
-</style></head><body>
+.tabs{display:flex;flex-direction:column;gap:2px;margin:2px 0 6px}.tb{text-align:left;padding-left:6px!important;cursor:pointer;font-size:9.5px;font-weight:700;letter-spacing:.5px;color:#7d8394;padding:6px 2px;border-bottom:2px solid #1f2330}.tb.on{color:#e8eaf0;border-bottom-color:#e8eaf0}.b.pt2{padding:5px 10px;margin:4px 0;border-radius:9px}.b.pt2 .n{font-size:12.5px!important}</style></head><body>
 <h1><span>🎯 My Mac's Live Action Tracker</span><span id="t">…</span></h1><div id="l"><div class="e">Loading…</div></div><script>
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
 const sh=p=>{const k=Math.min(1,Math.abs(p-50)/50),L=88-66*k,h=p>=50?140:0;return `background:hsl(${h},${p>=50?55:65}%,${L}%);border-color:hsl(${h},70%,${Math.max(L-18,12)}%);color:${L>55?'#0b0d12':'#f2f4f8'}`};
@@ -60,19 +60,20 @@ const POT=b=>'';
 const ST=b=>ISP(b)?'<span class="st">★</span>':'';
 const card=b=>`<div class="b hw" style="${(b.prop_kind&&b.prop_line!=null&&b.prop_cur>=b.prop_line&&b.side!='NO')?G:b.live_pct>=97?LK:sh(b.live_pct)}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
 <div class="r r1"><span class="f n">${b.bet}</span><span class="k p">${b.cash_flag?`<span class="cf" title="${(b.cash_why||'').replace(/"/g,'')}">⚡</span>`:''}${b.live_pct}%</span></div>
-<div class="r"><span class="f"><span class="sc">${b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.clock}</span></span></div>
+<div class="r"><span class="f"><span class="sc">${b.state=='pre'?b.game.replace(/ \d+ – /,' @ ').replace(/ \d+$/,''):b.game}</span>${b.redzone?`<span class="dot ${b.redzone}" title="Red zone"></span>`:''}<span class="ck">${b.state=='pre'?b.clock.replace(/^.* - /,''):b.clock}</span></span></div>
 <div class="r"><span class="f">${PAY(b,b.cash_flag?'⚡ Cash out':'Worth',HIT(b),1)}</span>${HIT(b)?`<span class="k">${CBP(b)}</span>`:''}</div>
 <div class="r">${PB(b)?`<span class="f" style="display:flex">${PB(b)}</span>`:MV(b)}<span class="k">${POT(b)}${UNP(b)}</span></div></div></div>`;
-const tcard=b=>{const W=b.result=='W';return `<div class="b hw ${W?'w1':'l1'}" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}">${WHO(b)}${ST(b)}${LC(b)}<div class="mc">
-<div class="r r1"><span class="f n">${b.bet}</span></div>
-<div class="r"><span class="f sc">${b.final||'Final'}</span><span class="k">${UN(b)}</span></div>
-<div class="r"><span class="f">${PAY(b,W?'Won':'Got',1)}</span>${W?`<span class="k">${CB('')}</span>`:''}</div></div></div>`};
+const tcard=b=>{const W=b.result=='W',pl=W?(+b.cash_out||0)-(+b.cost||0):-(+b.cost||0);return `<div class="b pt2" style="${W?G:'background:#3a1215;border-color:#7f1d1d;color:#f2f4f8'}"><div class="r" style="width:100%"><span class="f n">${b.bet}</span><span class="k"><b>${W?'W':'L'}</b> &nbsp;<b>${pl>=0?'+':'−'}$${Math.abs(pl).toFixed(2)}</b></span></div></div>`};
 let LD=null,CL={};try{CL=JSON.parse(localStorage.getItem('lb_c')||'{}')}catch(e){}
 function TG(k){CL[k]=!CL[k];try{localStorage.setItem('lb_c',JSON.stringify(CL))}catch(e){}if(LD)R(LD)}
-function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result!='L'),X=TD.filter(b=>b.result=='L'),L=d.bets.map(card).join('');
-const ar=k=>'';
-const won=W.reduce((a,b)=>a+(+b.cash_out||0),0).toFixed(2),lost=X.reduce((a,b)=>a+(+b.cost||0),0).toFixed(2),net=W.reduce((a,b)=>a+(+b.cash_out||0)-(+b.cost||0),0)-lost;
-document.getElementById('l').innerHTML=`<div class="h"><span>LIVE BETS · ${d.count}</span></div>`+(L||'<div class="e">No live bets right now</div>')+(W.length?`<div class="h hc" onclick="TG('w')"><span>TODAY · ${d.today_record}</span><span><span class="hv g">+$${won} won</span><span class="hv ${net>=0?'g':'r'}"> · Net ${net>=0?'+':'−'}$${Math.abs(net).toFixed(2)}</span></span></div><div class="hs"><span>${d.today_u_wag??0}u wagered</span><span>${d.today_u_won??0}u returned</span></div>`+(CL.w?'':W.map(tcard).join('')):'')+(X.length?`<div class="h hc" onclick="TG('l')"><span>LOST TODAY · ${X.length}</span><span class="hv r">−$${lost} lost</span></div>`+(CL.l?'':X.map(tcard).join('')):'');}
+let TAB=localStorage.getItem('lb_tab')||'live';function ST_(k){TAB=k;try{localStorage.setItem('lb_tab',k)}catch(e){}if(LD)R(LD)}
+const tm=b=>b.start?new Date(b.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET':'Start time n/a';
+function R(d){LD=d;const TD=d.today||[],W=TD.filter(b=>b.result=='W'),X=TD.filter(b=>b.result=='L'),LV=d.bets.filter(b=>b.state=='in'),UP=d.bets.filter(b=>b.state=='pre').sort((a,b)=>(a.start||'').localeCompare(b.start||''));
+const S=(a,k)=>a.reduce((s,b)=>s+(+b[k]||0),0),won=S(W,'cash_out'),cw=S(W,'cost'),lost=S(X,'cost'),net=won-cw-lost,f=v=>Math.abs(v).toFixed(2);
+const T=(k,n,c)=>`<span class="tb ${TAB==k?'on':''}" onclick="ST_('${k}')">${n} · ${c}</span>`;
+const up=b=>card(b).replace(/<span class="sc">[\s\S]*?<\/span><\/span><\/div>/,`<span class="sc">${b.game.replace(/ \d+ – /,' @ ').replace(/ \d+$/,'')}</span><span class="ck">${tm(b)}</span></span></div>`);
+const body=TAB=='up'?(UP.map(up).join('')||'<div class="e">No bets starting in the next 12 hours</div>'):TAB=='past'?(TD.map(tcard).join('')||'<div class="e">No settled bets today</div>'):(LV.map(card).join('')||'<div class="e">No live bets right now</div>');
+document.getElementById('l').innerHTML=`<div class="tabs">${T('live','LIVE BETS',LV.length)}${T('up','UPCOMING BETS',UP.length)}${T('past','PAST BETS',TD.length)}</div>`+body+(TD.length?`<div class="h"><span>TODAY · ${W.length}-${X.length}</span><span class="hv ${net>=0?'g':'r'}">Net ${net>=0?'+':'−'}$${f(net)}</span></div>`:'');}
 const RAW='https://colemlrogalin-source.github.io/tv-home/live_bets.json';
 async function go(){let wait=300;const MAC=!!window.pywebview;try{let r;if(MAC){try{r=await fetch(RAW+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0}catch(e){r=null}}if(!r)r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=MAC?30:60;document.getElementById('t').textContent=d.as_of+' · '+d.count;

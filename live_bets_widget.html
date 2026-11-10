@@ -97,7 +97,10 @@ ${['official','requested',"Cole's own",'not taken'].map(k=>`<div class="stat"><s
 <div class="foot">Updated ${asof}${O.source?' · '+O.source:''}</div>`;
 }
 function ST(t){TAB=t;if(LD)R(LD)}
-async function go(){let wait=300;const MAC=!!window.pywebview;try{let r;const tryF=async(u,h)=>{try{const x=await fetch(u+(u.includes('?')?'&':'?')+'t='+Date.now(),h);if(!x.ok)throw 0;return x}catch(e){return null}};const raw={cache:'no-store'},api={headers:{Accept:'application/vnd.github.raw'},cache:'no-store'};if(MAC){r=await tryF(RAW,raw)}if(!r)r=await tryF(RAW_FEED,raw);if(!r)r=await tryF(U_FEED,api);if(!r)r=await tryF(RAW,raw);if(!r)r=await fetch(U+(U.includes('?')?'&':'?')+'t='+Date.now(),api);
-const d=await r.json();wait=MAC?30:60;R(d);}
-catch(e){document.getElementById('app').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
+async function go(){const MAC=!!window.pywebview;try{let r;const tryF=async(u,h)=>{try{const x=await fetch(u+(u.includes('?')?'&':'?')+'t='+Date.now(),h);if(!x.ok)throw 0;return x}catch(e){return null}};const raw={cache:'no-store'},api={headers:{Accept:'application/vnd.github.raw'},cache:'no-store'};if(MAC){r=await tryF(RAW,raw)}if(!r)r=await tryF(RAW_FEED,raw);if(!r)r=await tryF(U_FEED,api);if(!r)r=await tryF(RAW,raw);if(!r)r=await fetch(U+(U.includes('?')?'&':'?')+'t='+Date.now(),api);
+const d=await r.json();R(d);}
+catch(e){document.getElementById('app').textContent='offline – retrying'}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')go()});
+window.addEventListener('pageshow',e=>{if(e.persisted)go()});
+go();
 </script></body></html>

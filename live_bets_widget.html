@@ -61,7 +61,7 @@ function card(b,flash){
  return `<div class="card${flash?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div>${statLine(b)}${bar}<div class="meta">${b.live_pct==null?'':b.live_pct+'% · '}cost ${num(b.cost)} · cash out <b class="${b.cash_out==null?'':b.cash_out-(b.cost||0)>=0?'g':'r'}">${num(b.cash_out)}</b></div></div>`;
 }
 function gameBlock(rs){
- const b=rs[0],logos=[...new Set(rs.flatMap(x=>x.logos||[]))].slice(0,3).map(u=>`<img src="${u}" alt="" onerror="this.remove()">`).join('');
+ const b=rs[0],gl=rs.flatMap(x=>x.game_logos||[]),logos=[...new Set(gl.length?gl:rs.flatMap(x=>x.logos||[]))].slice(0,3).map(u=>`<img src="${u}" alt="" onerror="this.remove()">`).join('');
  const legs=rs.slice().sort((a,c)=>((!!c.prop_kind)-(!!a.prop_kind)));
  return `<div class="game ${b.state==='in'?'live':''}"><div class="gh">${logos}<span>${b.game||'no data'} · ${b.clock||'no data'}</span></div>${legs.map(b=>card(b,FLASH.has(pid(b)))).join('')}</div>`;
 }

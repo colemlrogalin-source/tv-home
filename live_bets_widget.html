@@ -40,6 +40,8 @@ body{min-height:100vh;background:radial-gradient(circle at 20% 0%,#4A0080 0%,#0A
 @keyframes drop{0%{transform:translateY(-10px);opacity:0}15%{opacity:1}80%{transform:translateY(var(--t));opacity:1}100%{opacity:0}}
 @media (min-width:800px){body{padding-top:24px}}
 </style></head><body><div class="wrap" id="app">Loading…</div><script>
+const RAW_FEED='https://raw.githubusercontent.com/colemlrogalin-source/tv-home/feed/live_bets.json';
+const U_FEED='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json?ref=feed';
 const U='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/live_bets.json';
 const RAW='https://colemlrogalin-source.github.io/tv-home/live_bets.json';
 const sideOf=b=>String(b.side||'').toUpperCase()==='NO'?'NO':String(b.side||'').toUpperCase()==='YES'?'YES':'';
@@ -95,7 +97,7 @@ ${['official','requested',"Cole's own",'not taken'].map(k=>`<div class="stat"><s
 <div class="foot">Updated ${asof}${O.source?' · '+O.source:''}</div>`;
 }
 function ST(t){TAB=t;if(LD)R(LD)}
-async function go(){let wait=300;const MAC=!!window.pywebview;try{let r;if(MAC){try{r=await fetch(RAW+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0}catch(e){r=null}}if(!r)r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
+async function go(){let wait=300;const MAC=!!window.pywebview;try{let r;const tryF=async(u,h)=>{try{const x=await fetch(u+(u.includes('?')?'&':'?')+'t='+Date.now(),h);if(!x.ok)throw 0;return x}catch(e){return null}};const raw={cache:'no-store'},api={headers:{Accept:'application/vnd.github.raw'},cache:'no-store'};if(MAC){r=await tryF(RAW,raw)}if(!r)r=await tryF(RAW_FEED,raw);if(!r)r=await tryF(U_FEED,api);if(!r)r=await tryF(RAW,raw);if(!r)r=await fetch(U+(U.includes('?')?'&':'?')+'t='+Date.now(),api);
 const d=await r.json();wait=MAC?30:60;R(d);}
 catch(e){document.getElementById('app').textContent='offline – retrying';wait=120}setTimeout(go,wait*1000)}go();
 </script></body></html>

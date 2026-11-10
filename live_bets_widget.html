@@ -77,7 +77,7 @@ function R(d){
  OPENIDS=openIds;
  const list=TAB==='Upcoming'?up:TAB==='Settled'?done:live;
  const blocks=TAB==='Settled'?(done.length?done.map(b=>{const w=b.result==='W';return `<div class="card${FLASH.has(pid(b))?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div><div class="meta"><b class="${w?'g':'r'}">${b.result||'no data'}</b> · ${money(b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}</div></div>`}).join(''):'<div class="card">no data</div>'):(list.length?groups(list).map(gameBlock).join(''):'<div class="card">no data</div>');
- const op=openPnl(bets),tp=done.length?todayPnl(done):null,all=(d.official_record&&d.official_record.status==='ok')?d.official_record.pnl:null;
+ const op=openPnl(bets),tp=done.length?todayPnl(done):null,AT=d.all_time||{},all=AT.pnl!=null?AT.pnl:null,allTxt=AT.pnl!=null?money(AT.pnl)+(AT.race_pct!=null?' · '+((AT.race_pct>0?'+':'')+AT.race_pct+'%'):'')+(AT.label?' '+AT.label:''):(all==null?'no data':money(all));
  const wins=new Set(done.filter(b=>b.result==='W').map(b=>b.bet));
  if(SEEN&&[...wins].some(w=>!WINS.has(w)))burst();
  WINS=wins;SEEN=true;
@@ -93,7 +93,7 @@ function R(d){
  document.getElementById('app').innerHTML=`<div class="brand"><img src="https://colemlrogalin-source.github.io/tv-home/icon-180.png?v=20261109c" alt="" onerror="this.remove()">★ SPORTS QUANT · POCKET ★</div>
 <div class="upd">Updated ${asof} · ${eq}</div>
 <div class="pair"><div><span>OPEN P&amp;L</span><b class="${op==null?'gold':op>=0?'g':'r'}">${money(op)}</b></div><div><span>TODAY</span><b class="${tp==null?'gold':tp>=0?'g':'r'}">${money(tp)}</b></div></div>
-<div class="pair"><div><span>ALL-TIME</span><b class="${all==null?'gold':all>=0?'g':'r'}">${money(all)}</b></div><div><span>CASH</span><b class="gold">${cash}</b></div></div>
+<div class="pair"><div><span>ALL-TIME</span><b class="${all==null?'gold':all>=0?'g':'r'}">${allTxt}</b></div><div><span>CASH</span><b class="gold">${cash}</b></div></div>
 <div class="tabs">${tabs}</div>
 <div class="panel cyan"><div class="hd"><b>${TAB.toUpperCase()} · ${list.length}</b><span>positions ${bal}</span></div>${blocks}</div>
 <div class="panel pink">

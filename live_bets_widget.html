@@ -31,6 +31,8 @@ body{min-height:100vh;background:radial-gradient(circle at 20% 0%,#4A0080 0%,#0A
 .fine,.foot{font-size:13px;color:#fff8;text-align:center}
 .foot{margin-top:8px}
 .g{color:#39FF14}.r{color:#FF3355}.gold{color:#FFD700}
+.copulse{display:inline-block;animation:copulse .7s ease}
+@keyframes copulse{0%,100%{opacity:1}50%{opacity:.6;transform:scale(1.08)}}
 .burst{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden}
 .burst i{position:absolute;left:50%;top:28%;font-style:normal;font-size:24px;animation:fly .9s ease-out forwards}
 .card.flash-win{animation:cashBurst 1s ease}.card.flash-loss{animation:lossFade 1s ease}
@@ -49,7 +51,7 @@ const ttl=b=>{let t=b.bet||'';if(sideOf(b))t=t.replace(/^\s*NO:\s*/i,'').replace
 const PILL=b=>{const s=sideOf(b);return s?`<b class="sd ${s==='YES'?'y':'n'}">${s}</b>`:''};
 const money=v=>v==null?'no data':(v>=0?'+$':'−$')+Math.abs(Number(v).toFixed(2));
 const num=v=>v==null?'no data':'$'+Number(v).toFixed(2);
-let TAB='Live',ALL=false,LD=null,SEEN=false,WINS=new Set(),OPENIDS=null,FLASH=new Set();
+let TAB='Live',ALL=false,LD=null,SEEN=false,WINS=new Set(),OPENIDS=null,FLASH=new Set(),PREVCO=null;
 function sum(rows,fn){if(!rows.length||rows.some(b=>fn(b)==null))return null;return Math.round(rows.reduce((s,b)=>s+fn(b),0)*100)/100}
 function openPnl(rows){return sum(rows,b=>b.cash_out==null||b.cost==null?null:b.cash_out-b.cost)}
 function todayPnl(rows){return sum(rows,b=>b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}
@@ -61,7 +63,8 @@ function nstat(v){return v==null?'':(Number(v)===parseInt(v,10)?String(parseInt(
 function statLine(b){if(!('current' in b)&&!('line' in b)&&!('remaining' in b))return '';const cur=b.current,line=b.line,rem=b.remaining,lb=b.stat_label||'';if(cur==null||line==null)return '<div class="meta">stat n/a</div>';if(String(b.side||'').toUpperCase()==='NO')return `<div class="meta">Now ${nstat(cur)} ${lb} · ${nstat(rem)} left under ${nstat(line)}</div>`;const need=(rem!=null&&rem>0)?' · needs '+nstat(rem)+' more':'';return `<div class="meta">Now ${nstat(cur)} / ${nstat(line)} ${lb}${need}</div>`}
 function card(b,flash){
  const bar=b.live_pct==null?'<div class="meta">win % no data</div>':`<div class="bar" title="${b.live_pct}%"><i style="width:${Math.max(0,Math.min(100,b.live_pct))}%"></i></div>`;
- return `<div class="card${flash?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div>${statLine(b)}${bar}<div class="meta">${b.live_pct==null?'':b.live_pct+'% · '}cost ${num(b.cost)} · cash out <b class="${b.cash_out==null?'':b.cash_out-(b.cost||0)>=0?'g':'r'}">${num(b.cash_out)}</b></div></div>`;
+ const pulse=PREVCO!=null&&b.cash_out!=null&&PREVCO[pid(b)]!==undefined&&PREVCO[pid(b)]!==b.cash_out;
+ return `<div class="card${flash?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div>${statLine(b)}${bar}<div class="meta">${b.live_pct==null?'':b.live_pct+'% · '}cost ${num(b.cost)} · cash out <b class="${b.cash_out==null?'':b.cash_out-(b.cost||0)>=0?'g':'r'}${pulse?' copulse':''}">${num(b.cash_out)}</b></div></div>`;
 }
 function gameBlock(rs){
  const b=rs[0],gl=rs.flatMap(x=>x.game_logos||[]),logos=[...new Set(gl.length?gl:rs.flatMap(x=>x.logos||[]))].slice(0,3).map(u=>`<img src="${u}" alt="" onerror="this.remove()">`).join('');
@@ -82,7 +85,7 @@ function R(d){
  const blocks=TAB==='Settled'?(done.length?done.map(b=>{const w=b.result==='W';const fl=FLASH.has(pid(b))?(w?' flash-win':' flash-loss'):'';return `<div class="card${fl}"><div class="t">${PILL(b)} ${ttl(b)}</div><div class="meta"><b class="${w?'g':'r'}">${b.result||'no data'}</b> · ${money(b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}</div></div>`}).join(''):'<div class="card">no data</div>'):(list.length?groups(list).map(gameBlock).join(''):'<div class="card">no data</div>');
  const op=openPnl(bets),tp=done.length?todayPnl(done):null,AT=d.all_time||{},all=AT.pnl!=null?AT.pnl:null,allTxt=AT.pnl!=null?money(AT.pnl)+(AT.race_pct!=null?' · '+((AT.race_pct>0?'+':'')+AT.race_pct+'%'):'')+(AT.label?' '+AT.label:''):(all==null?'no data':money(all));
  const wins=new Set(done.filter(b=>b.result==='W').map(b=>b.bet));
- WINS=wins;SEEN=true;
+ WINS=wins;SEEN=true;PREVCO={};(d.bets||[]).forEach(b=>{PREVCO[pid(b)]=b.cash_out});
  const O=d.official_record||{},BK=d.bucket_records||{};
  const buck=k=>{const r=BK[k]||{};if(!r.record||r.status==='no_data')return 'no data';return r.record+(r.pnl==null?' · P&L no data':' · '+money(r.pnl))};
  const cash=d.cash&&d.cash.value!=null?num(d.cash.value):'no data';

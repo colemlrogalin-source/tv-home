@@ -49,7 +49,7 @@ const RAW='https://colemlrogalin-source.github.io/tv-home/live_bets.json';
 const sideOf=b=>String(b.side||'').toUpperCase()==='NO'?'NO':String(b.side||'').toUpperCase()==='YES'?'YES':'';
 const ttl=b=>{let t=b.bet||'';if(sideOf(b))t=t.replace(/^\s*NO:\s*/i,'').replace(/^\s*NO\s+/i,'');return t||'no data'};
 const PILL=b=>{const s=sideOf(b);return s?`<b class="sd ${s==='YES'?'y':'n'}">${s}</b>`:''};
-const money=v=>v==null?'no data':(v>=0?'+$':'−$')+Math.abs(Number(v).toFixed(2));
+const money=v=>v==null?'no data':(v>=0?'+$':'−$')+Math.abs(Number(v)).toFixed(2);
 const num=v=>v==null?'no data':'$'+Number(v).toFixed(2);
 let TAB='Live',ALL=false,LD=null,SEEN=false,WINS=new Set(),OPENIDS=null,FLASH=new Set(),PREVCO=null;
 function sum(rows,fn){if(!rows.length||rows.some(b=>fn(b)==null))return null;return Math.round(rows.reduce((s,b)=>s+fn(b),0)*100)/100}
@@ -83,7 +83,7 @@ function R(d){
  OPENIDS=openIds;
  const list=TAB==='Upcoming'?up:TAB==='Settled'?done:live;
  const blocks=TAB==='Settled'?(done.length?done.map(b=>{const w=b.result==='W';const fl=FLASH.has(pid(b))?(w?' flash-win':' flash-loss'):'';return `<div class="card${fl}"><div class="t">${PILL(b)} ${ttl(b)}</div><div class="meta"><b class="${w?'g':'r'}">${b.result||'no data'}</b> · ${money(b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}</div></div>`}).join(''):'<div class="card">no data</div>'):(list.length?groups(list).map(gameBlock).join(''):'<div class="card">no data</div>');
- const op=openPnl(bets),tp=done.length?todayPnl(done):null,AT=d.all_time||{},all=AT.pnl!=null?AT.pnl:null,allTxt=AT.pnl!=null?money(AT.pnl)+(AT.race_pct!=null?' · '+((AT.race_pct>0?'+':'')+AT.race_pct+'%'):'')+(AT.label?' '+AT.label:''):(all==null?'no data':money(all));
+ const op=openPnl(bets),tp=done.length?todayPnl(done):null,AT=d.all_time||{},all=AT.pnl!=null?AT.pnl:null,allTxt=(()=>{if(AT.pnl==null)return 'no data';const u=AT.units!=null?Number(AT.units):Math.round(AT.pnl/50*100)/100;const us=(u>0?'+':u<0?'−':'')+Math.abs(u).toFixed(2)+'u';return money(AT.pnl)+'<small style="display:block;font:700 14px/1.25 Inter,system-ui,sans-serif;margin-top:2px">'+us+' all-time</small>'})();
  const wins=new Set(done.filter(b=>b.result==='W').map(b=>b.bet));
  WINS=wins;SEEN=true;PREVCO={};(d.bets||[]).forEach(b=>{PREVCO[pid(b)]=b.cash_out});
  const O=d.official_record||{},BK=d.bucket_records||{};
@@ -102,8 +102,8 @@ function R(d){
 <div class="tabs">${tabs}</div>
 <div class="panel cyan"><div class="hd"><b>${TAB.toUpperCase()} · ${list.length}</b><span>positions ${bal}</span></div>${blocks}</div>
 <div class="panel pink">
-<div class="stat"><span>📊 Since Nov 9</span><b class="${O.pnl==null?'gold':O.pnl>=0?'g':'r'}">${O.record&&O.status!=='no_data'?O.record:'no data'}${O.pnl==null?'':' · '+money(O.pnl)}</b></div>
-${['official','requested',"Cole's own",'not taken'].map(k=>`<div class="stat"><span>${k}</span><b>${buck(k)}</b></div>`).join('')}
+<div class="stat"><span>📊 All Kalshi bets settled since Nov 9</span><b class="${O.pnl==null?'gold':O.pnl>=0?'g':'r'}">${O.record&&O.status!=='no_data'?O.record:'no data'}${O.pnl==null?'':' · '+money(O.pnl)}</b></div>
+${(()=>{const L={official:'official picks',requested:'requested picks',"Cole's own":"Cole's own picks",'not taken':'not taken'};const ks=Object.keys(L).filter(k=>buck(k)!=='no data');return ks.length?`<div class="stat"><span style="opacity:.7">Pick log · tagged bets only (subset)</span><b></b></div>`+ks.map(k=>`<div class="stat"><span>${L[k]}</span><b>${buck(k)}</b></div>`).join(''):''})()}
 <div class="stat"><span>${(d.archived_nov3_8&&d.archived_nov3_8.label)||'archived Nov 3-8'}</span><b class="gold">excluded</b></div>
 </div>
 <div class="foot">Updated ${asof}${O.source?' · '+O.source:''}</div>`;

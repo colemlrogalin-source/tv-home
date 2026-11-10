@@ -33,8 +33,9 @@ body{min-height:100vh;background:radial-gradient(circle at 20% 0%,#4A0080 0%,#0A
 .g{color:#39FF14}.r{color:#FF3355}.gold{color:#FFD700}
 .burst{position:fixed;inset:0;pointer-events:none;z-index:6;overflow:hidden}
 .burst i{position:absolute;left:50%;top:28%;font-style:normal;font-size:24px;animation:fly .9s ease-out forwards}
-.card.flash{animation:closeFlash 1s ease}
-@keyframes closeFlash{0%{background:#FFD70055}100%{background:#1A0028}}
+.card.flash-win{animation:cashBurst 1s ease}.card.flash-loss{animation:lossFade 1s ease}
+@keyframes cashBurst{0%{background:#FFD700aa;box-shadow:inset 0 0 0 2px #FFD700}70%{background:#FFD70044}100%{background:#1A0028}}
+@keyframes lossFade{0%{background:#7a1a28}100%{background:#1A0028}}
 @keyframes fly{to{transform:translate(var(--x),var(--y)) scale(.3);opacity:0}}
 @keyframes drop{0%{transform:translateY(-10px);opacity:0}15%{opacity:1}80%{transform:translateY(var(--t));opacity:1}100%{opacity:0}}
 @media (min-width:800px){body{padding-top:24px}}
@@ -78,10 +79,9 @@ function R(d){
  if(OPENIDS)done.forEach(b=>{if(OPENIDS.has(pid(b)))FLASH.add(pid(b))});
  OPENIDS=openIds;
  const list=TAB==='Upcoming'?up:TAB==='Settled'?done:live;
- const blocks=TAB==='Settled'?(done.length?done.map(b=>{const w=b.result==='W';return `<div class="card${FLASH.has(pid(b))?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div><div class="meta"><b class="${w?'g':'r'}">${b.result||'no data'}</b> · ${money(b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}</div></div>`}).join(''):'<div class="card">no data</div>'):(list.length?groups(list).map(gameBlock).join(''):'<div class="card">no data</div>');
+ const blocks=TAB==='Settled'?(done.length?done.map(b=>{const w=b.result==='W';const fl=FLASH.has(pid(b))?(w?' flash-win':' flash-loss'):'';return `<div class="card${fl}"><div class="t">${PILL(b)} ${ttl(b)}</div><div class="meta"><b class="${w?'g':'r'}">${b.result||'no data'}</b> · ${money(b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}</div></div>`}).join(''):'<div class="card">no data</div>'):(list.length?groups(list).map(gameBlock).join(''):'<div class="card">no data</div>');
  const op=openPnl(bets),tp=done.length?todayPnl(done):null,AT=d.all_time||{},all=AT.pnl!=null?AT.pnl:null,allTxt=AT.pnl!=null?money(AT.pnl)+(AT.race_pct!=null?' · '+((AT.race_pct>0?'+':'')+AT.race_pct+'%'):'')+(AT.label?' '+AT.label:''):(all==null?'no data':money(all));
  const wins=new Set(done.filter(b=>b.result==='W').map(b=>b.bet));
- if(SEEN&&[...wins].some(w=>!WINS.has(w)))burst();
  WINS=wins;SEEN=true;
  const O=d.official_record||{},BK=d.bucket_records||{};
  const buck=k=>{const r=BK[k]||{};if(!r.record||r.status==='no_data')return 'no data';return r.record+(r.pnl==null?' · P&L no data':' · '+money(r.pnl))};

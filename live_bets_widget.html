@@ -53,9 +53,11 @@ function openPnl(rows){return sum(rows,b=>b.cash_out==null||b.cost==null?null:b.
 function todayPnl(rows){return sum(rows,b=>b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}
 function groups(bets){const m=new Map();bets.forEach(b=>{const k=b.game||'no data';if(!m.has(k))m.set(k,[]);m.get(k).push(b)});return [...m.values()].sort((a,b)=>((b[0].state==='in')-(a[0].state==='in'))||String(a[0].start||'').localeCompare(String(b[0].start||'')))}
 function pid(b){return b.ticker||((b.bet||'')+'|'+(b.game||''))}
+function nstat(v){return v==null?'':(Number(v)===parseInt(v,10)?String(parseInt(v,10)):String(v))}
+function statLine(b){if(!('current' in b)&&!('line' in b)&&!('remaining' in b))return '';const cur=b.current,line=b.line,rem=b.remaining,lb=b.stat_label||'';if(cur==null||line==null)return '<div class="meta">stat n/a</div>';if(String(b.side||'').toUpperCase()==='NO')return `<div class="meta">Now ${nstat(cur)} ${lb} · ${nstat(rem)} left under ${nstat(line)}</div>`;const need=(rem!=null&&rem>0)?' · needs '+nstat(rem)+' more':'';return `<div class="meta">Now ${nstat(cur)} / ${nstat(line)} ${lb}${need}</div>`}
 function card(b,flash){
  const bar=b.live_pct==null?'<div class="meta">win % no data</div>':`<div class="bar" title="${b.live_pct}%"><i style="width:${Math.max(0,Math.min(100,b.live_pct))}%"></i></div>`;
- return `<div class="card${flash?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div>${bar}<div class="meta">${b.live_pct==null?'':b.live_pct+'% · '}cost ${num(b.cost)} · cash out <b class="${b.cash_out==null?'':b.cash_out-(b.cost||0)>=0?'g':'r'}">${num(b.cash_out)}</b></div></div>`;
+ return `<div class="card${flash?' flash':''}"><div class="t">${PILL(b)} ${ttl(b)}</div>${statLine(b)}${bar}<div class="meta">${b.live_pct==null?'':b.live_pct+'% · '}cost ${num(b.cost)} · cash out <b class="${b.cash_out==null?'':b.cash_out-(b.cost||0)>=0?'g':'r'}">${num(b.cash_out)}</b></div></div>`;
 }
 function gameBlock(rs){
  const b=rs[0],logos=[...new Set(rs.flatMap(x=>x.logos||[]))].slice(0,3).map(u=>`<img src="${u}" alt="" onerror="this.remove()">`).join('');

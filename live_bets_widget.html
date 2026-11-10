@@ -52,7 +52,9 @@ let TAB='Live',ALL=false,LD=null,SEEN=false,WINS=new Set(),OPENIDS=null,FLASH=ne
 function sum(rows,fn){if(!rows.length||rows.some(b=>fn(b)==null))return null;return Math.round(rows.reduce((s,b)=>s+fn(b),0)*100)/100}
 function openPnl(rows){return sum(rows,b=>b.cash_out==null||b.cost==null?null:b.cash_out-b.cost)}
 function todayPnl(rows){return sum(rows,b=>b.result==='W'&&b.cash_out!=null&&b.cost!=null?b.cash_out-b.cost:b.result==='L'&&b.cost!=null?-b.cost:null)}
-function groups(bets){const m=new Map();bets.forEach(b=>{const k=b.game||'no data';if(!m.has(k))m.set(k,[]);m.get(k).push(b)});return [...m.values()].sort((a,b)=>((b[0].state==='in')-(a[0].state==='in'))||String(a[0].start||'').localeCompare(String(b[0].start||'')))}
+function closeness(b){if(b.remaining==null&&(b.current==null||b.line==null))return Infinity;return Math.abs(b.remaining!=null?b.remaining:b.line-b.current)}
+function urgency(b){const c=String(b.clock||'');const pm=c.match(/(\d+)(?:st|nd|rd|th)/i);let period=pm?+pm[1]:0;if(/halftime/i.test(c))period=Math.max(period,2);const em=c.match(/end of\s+(\d+)/i);if(em)period=+em[1];let secs=9999;if(/halftime|end of/i.test(c))secs=0;else{const t=c.match(/(\d+):(\d+)/);if(t)secs=+t[1]*60+ +t[2];else{const s=c.match(/(\d+(?:\.\d+)?)\s*-/);if(s)secs=+s[1]}}return {period,secs}}
+function groups(bets){const m=new Map();bets.forEach(b=>{const k=b.game||'no data';if(!m.has(k))m.set(k,[]);m.get(k).push(b)});return [...m.values()].sort((a,b)=>{if(TAB!=='Live')return String(a[0].start||'').localeCompare(String(b[0].start||''));const A=urgency(a[0]),B=urgency(b[0]);return (B.period-A.period)||(A.secs-B.secs)})}
 function pid(b){return b.ticker||((b.bet||'')+'|'+(b.game||''))}
 function nstat(v){return v==null?'':(Number(v)===parseInt(v,10)?String(parseInt(v,10)):String(v))}
 function statLine(b){if(!('current' in b)&&!('line' in b)&&!('remaining' in b))return '';const cur=b.current,line=b.line,rem=b.remaining,lb=b.stat_label||'';if(cur==null||line==null)return '<div class="meta">stat n/a</div>';if(String(b.side||'').toUpperCase()==='NO')return `<div class="meta">Now ${nstat(cur)} ${lb} · ${nstat(rem)} left under ${nstat(line)}</div>`;const need=(rem!=null&&rem>0)?' · needs '+nstat(rem)+' more':'';return `<div class="meta">Now ${nstat(cur)} / ${nstat(line)} ${lb}${need}</div>`}
@@ -62,7 +64,7 @@ function card(b,flash){
 }
 function gameBlock(rs){
  const b=rs[0],gl=rs.flatMap(x=>x.game_logos||[]),logos=[...new Set(gl.length?gl:rs.flatMap(x=>x.logos||[]))].slice(0,3).map(u=>`<img src="${u}" alt="" onerror="this.remove()">`).join('');
- const legs=rs.slice().sort((a,c)=>((!!c.prop_kind)-(!!a.prop_kind)));
+ const legs=rs.slice().sort((a,c)=>closeness(a)-closeness(c));
  return `<div class="game ${b.state==='in'?'live':''}"><div class="gh">${logos}<span>${b.game||'no data'} · ${b.clock||'no data'}</span></div>${legs.map(b=>card(b,FLASH.has(pid(b)))).join('')}</div>`;
 }
 function burst(){

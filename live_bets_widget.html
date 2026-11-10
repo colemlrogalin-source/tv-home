@@ -1,10 +1,10 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Live Bets"><link rel="apple-touch-icon" sizes="180x180" href="https://colemlrogalin-source.github.io/tv-home/apple-touch-icon-v2.png?v=20261109b"><link rel="icon" type="image/png" sizes="512x512" href="https://colemlrogalin-source.github.io/tv-home/icon.png?v=20261109b"><title>My Mac's Live Action Tracker</title><style>
+<!doctype html><html><head><meta charset="utf-8"><title>My Mac's Live Action Tracker</title><style>
 *{box-sizing:border-box}html,body{width:100%;overflow-x:hidden}
 body{margin:0;background:#0d0f14;color:#e8eaf0;font:15px -apple-system,Helvetica,sans-serif;-webkit-user-select:none}
 h1{font-size:11px;margin:0;padding:10px 12px;color:#aab0c0;display:flex;justify-content:space-between;align-items:center;gap:8px;-webkit-app-region:drag;font-weight:700;letter-spacing:.2px}
 h1 span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}h1 #t{font-weight:500;font-size:9.5px;color:#7d8394;white-space:nowrap}
 #l{padding:0 8px 10px}
-.hc{cursor:pointer;user-select:none}.hv{font-size:12px;letter-spacing:0;font-weight:700}.hv.g{color:#e6c45a}.hv.r{color:#e06c6c}.hs{display:flex;justify-content:space-between;font-size:9.5px;color:#6b7080;margin:-1px 4px 4px}.hs.bk{flex-wrap:wrap;justify-content:flex-start;gap:2px 6px;line-height:1.35}.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
+.hc{cursor:pointer;user-select:none}.hv{font-size:12px;letter-spacing:0;font-weight:700}.hv.g{color:#e6c45a}.hv.r{color:#e06c6c}.hs{display:flex;justify-content:space-between;font-size:9.5px;color:#6b7080;margin:-1px 4px 4px}.h{display:flex;justify-content:space-between;font-size:10px;color:#8a90a0;margin:10px 4px 3px;letter-spacing:.6px;font-weight:600}
 .e{color:#8a90a0;text-align:center;padding:36px}
 .b{position:relative;display:flex;gap:11px;width:100%;border-radius:12px;padding:9px 11px 9px 9px;margin:6px 0;border-left:5px solid #555;overflow:hidden}
 .lc{flex:0 0 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:2px 0;background:rgba(255,255,255,.28);border-radius:12px;align-self:stretch}
@@ -73,13 +73,7 @@ const S=(a,k)=>a.reduce((s,b)=>s+(+b[k]||0),0),won=S(W,'cash_out'),cw=S(W,'cost'
 const T=(k,n,c)=>`<span class="tb ${TAB==k?'on':''}" onclick="ST_('${k}')">${n} · ${c}</span>`;
 const up=b=>card(b).replace(/<span class="sc">[\s\S]*?<\/span><\/span><\/div>/,`<span class="sc">${b.game.replace(/ \d+ – /,' @ ').replace(/ \d+$/,'')}</span><span class="ck">${tm(b)}</span></span></div>`);
 const body=TAB=='up'?(UP.map(up).join('')||'<div class="e">No bets starting in the next 12 hours</div>'):TAB=='past'?(TD.map(tcard).join('')||'<div class="e">No settled bets today</div>'):(LV.map(card).join('')||'<div class="e">No live bets right now</div>');
-const O=d.official_record||{},BK=d.bucket_records||{},src=O.source||'pick_buckets.csv',asof=O.as_of||d.as_of||'—';
-const noRec=!O.record||O.status==='no_data';
-const pnlTxt=noRec?'':(O.pnl==null?'<span class="hv">P&L no data</span>':`<span class="hv ${O.pnl>=0?'g':'r'}">${O.pnl>=0?'+':'−'}$${Math.abs(O.pnl).toFixed(2)}</span>`);
-const bk=['official','requested',"Cole's own",'not taken'].map(k=>{const r=BK[k]||{};if(!r.record||r.status==='no_data')return k+' no data';const p=r.pnl==null?' P&L no data':(r.pnl>=0?' +$':' −$')+Math.abs(r.pnl).toFixed(2);return k+' '+r.record+p}).join(' · ');
-const arch=d.archived_nov3_8?`<div class="hs">${d.archived_nov3_8.label||'archived Nov 3-8'} · excluded</div>`:'';
-const HEAD=`<div class="h"><span>SINCE NOV 9 · ${noRec?'no data':O.record}</span>${pnlTxt}</div><div class="hs bk">${bk}</div><div class="hs">${src} · ${asof}</div>${arch}`;
-document.getElementById('l').innerHTML=HEAD+`<div class="tabs">${T('live','LIVE BETS',LV.length)}${T('up','UPCOMING BETS',UP.length)}${T('past','PAST BETS',TD.length)}</div>`+body+(TD.length?`<div class="h"><span>TODAY · ${W.length}-${X.length}</span><span class="hv ${net>=0?'g':'r'}">Net ${net>=0?'+':'−'}$${f(net)}</span></div>`:'');}
+document.getElementById('l').innerHTML=`<div class="tabs">${T('live','LIVE BETS',LV.length)}${T('up','UPCOMING BETS',UP.length)}${T('past','PAST BETS',TD.length)}</div>`+body+(TD.length?`<div class="h"><span>TODAY · ${W.length}-${X.length}</span><span class="hv ${net>=0?'g':'r'}">Net ${net>=0?'+':'−'}$${f(net)}</span></div>`:'');}
 const RAW='https://colemlrogalin-source.github.io/tv-home/live_bets.json';
 async function go(){let wait=300;const MAC=!!window.pywebview;try{let r;if(MAC){try{r=await fetch(RAW+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw 0}catch(e){r=null}}if(!r)r=await fetch(U+'?t='+Date.now(),{headers:{Accept:'application/vnd.github.raw'},cache:'no-store'});
 const d=await r.json();wait=MAC?30:60;document.getElementById('t').textContent=d.as_of+' · '+d.count;

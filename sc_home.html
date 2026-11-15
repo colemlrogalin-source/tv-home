@@ -80,6 +80,8 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 /* grid below the list */
 .duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}
 @media (max-width:720px){.duo{grid-template-columns:minmax(0,1fr)}}
+.hms{display:none}
+@media (max-width:720px) and (orientation:landscape){.kpis{grid-template-columns:1.55fr 1fr 1fr 1fr}.kpi .lb .hmf{display:none}.kpi .lb .hms{display:inline}.kpi.today .s{font-size:13.5px;letter-spacing:-.1px}}
 .seg{display:flex;border:1.6px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
 .seg button{border:0;border-left:1.4px solid var(--line);background:#fff;min-width:44px;height:44px;font-size:14px;font-weight:700;padding:0 5px;cursor:pointer}
 .seg button:first-child{border-left:0}
@@ -264,8 +266,8 @@ function renderKpis(){
  const k=L.kpis||{},td=k.today||{},so=L.sports_open||{},prof=k.profit?.value,pct=k.pnl_pct?.value,bal=k.balance?.value,ni=k.net_invested?.value,ifwin=fin(so.max_payout)&&fin(so.cost)?so.max_payout-so.cost:null,cash=k.cash?.value;
  const card=(c,lb,v,sub)=>`<button type="button" class="kpi ${c}" aria-expanded="${OPEN.more}"><div class="lb">${lb}</div><div class="v">${v}</div><div class="s">${sub}</div></button>`;
  el.innerHTML=
-  card('today','Today’s P&amp;L',N('k_today',td.value,'wsigned',F.wsigned(td.value),` class="${cls(td.value)}"`),`${fin(td.w)?td.w+'W–'+td.l+'L':'no data'} · ${fin(td.n_open)?td.n_open:'—'} open`)+
-  card('prof',`<span class="lbt">Profit</span>${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm">House money</span>':''}`,N('k_prof',prof,'wsigned',F.wsigned(prof),` class="${cls(prof)}"`),`${fin(pct)?(pct>0?'+':pct<0?'−':'')+Math.abs(pct).toFixed(1)+'%':'% no data'}${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm">House money</span>':''}`)+
+  card('today','Today’s P&amp;L',N('k_today',td.value,'wsigned',F.wsigned(td.value),` class="${cls(td.value)}"`),`${fin(td.w)&&fin(td.l)?td.w+'W–'+td.l+'L · '+((+td.w)+(+td.l))+' settled':'no data'} · ${fin(td.n_open)?td.n_open:'—'} open`)+
+  card('prof',`<span class="lbt">Profit</span>${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm"><span class="hmf">House money</span><span class="hms">House $</span></span>':''}`,N('k_prof',prof,'wsigned',F.wsigned(prof),` class="${cls(prof)}"`),`${fin(pct)?(pct>0?'+':pct<0?'−':'')+Math.abs(pct).toFixed(1)+'%':'% no data'}${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm">House money</span>':''}`)+
   card('cash','Cash',N('k_cash',cash,'wmoney',F.wmoney(cash)),'available')+
   card('risk','At risk',N('k_risk',so.cost,'wmoney',F.wmoney(so.cost)),`if all win <span class="${cls(ifwin)}">${F.wsigned(ifwin)}</span>`);
  el.querySelectorAll('.kpi').forEach(b=>b.onclick=()=>{OPEN.more=!OPEN.more;renderKpis()});

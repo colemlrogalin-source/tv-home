@@ -27,7 +27,7 @@ function refresh(force){if(P)return P;if(document.hidden&&SCM.live)return Promis
   SCM.live={pushed_ts:L.pushed_ts,slot:L.slot,pushed_at:L.pushed_at,checked_at:L.checked_at,source:L.source,files:files};SCM.lastOk=Date.now();SCM.err=null;window.dispatchEvent(new Event('scm-feed'))}
   catch(e){SCM.err=String(e&&e.message||e)}finally{P=null}return SCM.live})();return P}
 window.SCMrefresh=refresh;
-window.fetch=function(u,o){var s=String(u&&u.url||u);var m=s.match(/^(?:\.\/)?data\/(dashboard|scores|pnl_intraday|ingest_status)\.json/);
+window.fetch=function(u,o){var s=String(u&&u.url||u);var m=s.match(/^(?:\.\/)?data\/(dashboard|scores|pnl_intraday|ingest_status|prop_progress)\.json/);
  if(m){return refresh(false).then(function(F){var v=F&&F.files[m[1]];if(v==null)return new Response('null',{status:503});return new Response(JSON.stringify(v),{status:200,headers:{'Content-Type':'application/json'}})})}
  return ORIG(u,o)};
 })();
@@ -493,9 +493,9 @@ table td{font-size:14.5px}table th{font-size:14px}
 .pos-start-status{color:#c5d2e8;font-size:15px}
 .pos-start .pos-game-tv{margin-top:1px;line-height:1.35}.pos-col-market{min-width:155px}.pos-col-matchup{width:25%;min-width:235px}
 .pos-matchup{display:flex;align-items:center;gap:8px;min-width:0}
-.pos-matchup-body{flex:1;min-width:0}
-.pos-league-mark{display:grid;place-items:center;flex:0 0 30px;min-height:32px}
-.pos-league-mark img{display:block;width:28px;height:28px;object-fit:contain;margin:0}
+.pos-matchup-body{flex:1;min-width:0;padding-left:14px}
+.pos-league-mark{display:grid;place-items:center;flex:0 0 50px;min-height:50px}
+.pos-league-mark img{display:block;width:50px;height:50px;max-width:50px;max-height:50px;object-fit:contain;margin:0}
 .pos-teams-paired{display:grid;grid-template-columns:12px minmax(0,1fr);align-items:center;gap:5px 6px}
 .pos-teams-paired>.pos-team{grid-column:2}
 .pos-away-at{grid-column:1;grid-row:2;text-align:center}
@@ -519,6 +519,16 @@ table td{font-size:14.5px}table th{font-size:14px}
 .pos-prob{display:inline-grid;justify-items:end;gap:4px;color:#bcd4ff}
 .pos-prob>span{display:block;width:47px;height:4px;border-radius:3px;background:#39475e;overflow:hidden}
 .pos-prob i{display:block;height:100%;background:#9bbaff}
+.pos-prop{margin-top:6px;min-width:0}
+.pos-prop-meta{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font:700 12px/1.3 'Inter',system-ui,sans-serif;font-variant-numeric:tabular-nums;color:var(--prop-col)}
+.pos-prop-asof{font-weight:600;color:#8fa0b8}
+.pos-prop-track{display:block;margin-top:3px;height:7px;border-radius:99px;background:#243044;overflow:hidden;border:1px solid color-mix(in srgb,var(--prop-col) 45%,#243044)}
+.pos-prop-track i{display:block;height:100%;background:var(--prop-col);border-radius:99px;box-shadow:0 0 8px var(--prop-col)}
+.pos-prop-live{--prop-col:#00F0FF}
+.pos-prop-hit,.pos-prop-ahead{--prop-col:#39FF14}
+.pos-prop-miss{--prop-col:#FF3355}
+.pos-prop-pre{--prop-col:#8fa0b8}
+
 #detail .pos-table .pos-numeric small:not(.pos-muted):not(.pos-total-coverage){font-size:12px}
 .pos-source,.pos-empty{padding:10px 15px}
 #sc-position-detail{width:min(520px,calc(100vw - 28px));max-height:calc(100vh - 28px);background:#162034;border:1px solid #39475e;border-radius:10px;color:#f2f5ff;padding:16px}
@@ -873,6 +883,23 @@ function posTotalRow(rows,group){
 }
 const posGroupOptions=[['status','Game status'],['sport','Sport'],['type','Bet type']];
 let posGroupBy='status';
+function posPropFor(row){
+ const props=(window.PROP&&window.PROP.props)||[];
+ const ticker=String(row.ticker||'').toUpperCase();
+ if(!ticker)return null;
+ return props.find(p=>String(p.ticker||'').toUpperCase()===ticker)||null;
+}
+function posPropBar(row){
+ const p=posPropFor(row);
+ if(!p||p.target==null)return '';
+ const cur=p.cur==null?0:+p.cur,tgt=+p.target;
+ const st=['live','hit','miss','pre','ahead'].includes(p.status)?p.status:(p.status==='final'?'miss':'live');
+ const pct=tgt>0?Math.min(100,Math.max(0,cur/tgt*100)):0;
+ const label=p.label||`${p.last||p.player||p.name||''} ${cur} / ${tgt} ${p.unit||''}`.replace(/\s+/g,' ').trim();
+ const tag=st==='hit'?' · HIT':st==='miss'?' · MISS':'';
+ const asof=p.as_of_label||(window.PROP&&window.PROP.as_of_label)||'';
+ return `<div class="pos-prop pos-prop-${st}" title="${esc(label+tag+(asof?' · as of '+asof:''))}"><div class="pos-prop-meta"><span>${esc(label)}${tag}</span>${asof?`<span class="pos-prop-asof">${esc(asof)}</span>`:''}</div><span class="pos-prop-track" aria-hidden="true"><i style="width:${pct}%"></i></span></div>`;
+}
 function posPage(d){
  const rows=positionRowsForPage(d);
  const today=posDay(new Date());
@@ -888,7 +915,7 @@ function posPage(d){
  const columns=[
   ['start','Game start',posStartCell],
   ['matchup','Matchup',posMatchup],
-  ['market','Bet',row=>`<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(row.market)}</button>${posSideBadge(row.side)}</div>`],
+  ['market','Bet',row=>`<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(row.market)}</button>${posSideBadge(row.side)}</div>${posPropBar(row)}`],
   ['entry','Entry price',row=>row.entry==null?'—':f(row.entry*100,1)+'¢'],
   ['probability','At start',posStartProbability],
   ['currentProbability','Current',posCurrentProbability],
@@ -1734,7 +1761,8 @@ function scoresBox(S){try{if(window.D&&!r0())closedToday(D)}catch(e){}if(!$('t_s
  while(n>1&&src&&el.getBoundingClientRect().bottom>src.getBoundingClientRect().top-8){n--;draw()}
  sbAnim(el);
  SS('s_sc',`ESPN scores ${t(String(S.as_of).replace(' ET','')).replace(/^.*?, /,'')} · open line DK via ESPN · win % Kalshi mid (ESPN fallback)`,S.source||'ESPN public scoreboard')}
-async function loadScores(){let S;try{S=await (await fetch('data/scores.json?'+Date.now(),{cache:'no-store'})).json()}catch(e){$('sb').innerHTML='<span class=mu>scores: no data</span>';return}
+async function loadPropProgress(){try{const P=await (await fetch('data/prop_progress.json?'+Date.now(),{cache:'no-store'})).json();if(P&&Array.isArray(P.props))window.PROP=P}catch(e){}}
+async function loadScores(){await loadPropProgress();let S;try{S=await (await fetch('data/scores.json?'+Date.now(),{cache:'no-store'})).json()}catch(e){$('sb').innerHTML='<span class=mu>scores: no data</span>';return}
  window.SCR=S;if(r0()==='positions'&&D)detail('positions',D);liveCard();if(!$('sb'))return;const head=`<span class=mu>${S.live?S.live+' live':'No live games'} · ESPN · ${t(S.as_of.replace(' ET',''))}</span>`;
  if(!S.games.length){$('sb').innerHTML=head+'<span class=mu>no games today</span>';return}
  const items=S.games.map(sbItem).join('');$('sb').innerHTML=head+`<div class=rl>${items}${items}</div>`;
@@ -1769,7 +1797,7 @@ function fixSports(d){if(!d||d._spfx)return;const ten=t=>/^(KXITF|KXATP|KXWTA)/.
   if(extra.length){let rest=d.by_market.rows.filter(r=>!extra.includes(r));let dst=rest.find(r=>r.k==='match');if(!dst){dst={k:'match',n:0,w:0,l:0,staked:0,pnl:0};rest.push(dst)}extra.forEach(r=>{dst.n+=r.n;dst.w+=r.w;dst.l+=r.l;dst.staked+=+r.staked||0;dst.pnl+=+r.pnl||0});dst.staked=Math.round(dst.staked*100)/100;dst.pnl=Math.round(dst.pnl*100)/100;dst.roi=dst.staked?Math.round(1000*dst.pnl/dst.staked)/10:null;dst.wr=Math.round(1000*dst.w/Math.max(1,dst.w+dst.l))/10;d.by_market.rows=rest.sort((x,y)=>y.pnl-x.pnl)}}
  d._spfx=1}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-resday]');if(!b)return;e.preventDefault();const today=etISO(0),cur=RESDAY||etISO(-1);let nxt=b.dataset.resday==='prev'?shiftISO(cur,-1):b.dataset.resday==='next'?shiftISO(cur,1):b.dataset.resday;if(nxt>today)nxt=today;RESDAY=nxt;try{render()}catch(err){}});
-const BW=1920,BH=1080;async function getJ(u){let r;try{r=await fetch(u+'?'+Date.now(),{cache:'no-store'})}catch(e){throw 'net'}if(r.status==401||r.status==403)throw 'tok';if(!r.ok)throw 'net';try{return await r.json()}catch(e){throw 'net'}}let IS=null;async function load(){try{IS=await getJ('data/ingest_status.json')}catch(e){IS=null}try{D=await getJ('data/dashboard.json');window.LVov&&LVov()}catch(k){const m=k=='tok'?'Token invalid or expired':"Can't reach data: check internet";let s='';if(D){const g=new Date(D.generated_at.replace(' ET','').replace(' ','T')),age=(Date.now()-g)/6e4;s=` <span class=mu>showing ${t(D.generated_at.replace(' ET',''))}</span>`+(age>10?` <span class="pill pr">STALE ${Math.round(age)}m</span>`:'')}$('gen').innerHTML=`<span class="pill pr">${m}</span>`+s;if(!D){let o=$('errov');if(!o){o=document.createElement('div');o.id='errov';document.body.appendChild(o)}o.innerHTML=`<b>${m}</b><span>${k=='tok'?'Use the menu: Sports Capital → Reset data token… and paste a valid read-only token.':'Retrying every 45 seconds.'}</span>`}return}{const o=$('errov');o&&o.remove()}render();if(FIRST){FIRST=false;requestAnimationFrame(countUp)}}
+const BW=1920,BH=1080;async function getJ(u){let r;try{r=await fetch(u+'?'+Date.now(),{cache:'no-store'})}catch(e){throw 'net'}if(r.status==401||r.status==403)throw 'tok';if(!r.ok)throw 'net';try{return await r.json()}catch(e){throw 'net'}}let IS=null;async function load(){try{IS=await getJ('data/ingest_status.json')}catch(e){IS=null}try{D=await getJ('data/dashboard.json');await loadPropProgress();window.LVov&&LVov()}catch(k){const m=k=='tok'?'Token invalid or expired':"Can't reach data: check internet";let s='';if(D){const g=new Date(D.generated_at.replace(' ET','').replace(' ','T')),age=(Date.now()-g)/6e4;s=` <span class=mu>showing ${t(D.generated_at.replace(' ET',''))}</span>`+(age>10?` <span class="pill pr">STALE ${Math.round(age)}m</span>`:'')}$('gen').innerHTML=`<span class="pill pr">${m}</span>`+s;if(!D){let o=$('errov');if(!o){o=document.createElement('div');o.id='errov';document.body.appendChild(o)}o.innerHTML=`<b>${m}</b><span>${k=='tok'?'Use the menu: Sports Capital → Reset data token… and paste a valid read-only token.':'Retrying every 45 seconds.'}</span>`}return}{const o=$('errov');o&&o.remove()}render();if(FIRST){FIRST=false;requestAnimationFrame(countUp)}}
 document.addEventListener('click',e=>{const f=e.target.closest&&e.target.closest('#eqsel .sf');if(!f||f.classList.contains('sx'))return;e.preventDefault();e.stopPropagation();const ES=JSON.parse(localStorage.getItem('sc_eqsel')||'{}'),k=f.dataset.k;if(k=='m')ES.m=ES.m=='pf'?'bal':'pf';if(k=='a')ES.a=ES.a=='none'?'net':'none';if(k=='r')range={ALL:'1W','1W':'1D','1D':'ALL'}[range];localStorage.setItem('sc_eqsel',JSON.stringify(ES));equity('c_eq',D.equity_curve.rows,D.equity_curve.events)},true);
 $('tg').onclick=e=>{const b=e.target.closest('button');if(!b)return;range=b.dataset.r;$('tg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x==b));equity('c_eq',D.equity_curve.rows,D.equity_curve.events)};
 addEventListener('hashchange',render);addEventListener('resize',()=>Object.values(C).forEach(c=>c.resize()));load();setInterval(load,45000);
@@ -2653,6 +2681,7 @@ next?.focus({preventScroll:true});return}const open=root.querySelector('.lyr.ope
 #gpt article.co.c1 .act{display:inline-flex;gap:4px;flex:none}
 #gpt article.co.c1 .act button{font-size:11px;padding:0 5px;flex:none}
 #gpt article.co.c1 img.lgo{max-height:16px!important;max-width:22px!important;width:auto!important;height:auto!important;object-fit:contain!important}
+.pos-league-mark img,.pos-league-mark img.lgo{display:block;width:50px!important;height:50px!important;max-width:50px!important;max-height:50px!important;object-fit:contain!important;margin:0}
 
 </style><script>(function(){var prev={};setInterval(function(){document.querySelectorAll('#gpt .num').forEach(function(el,i){var v=el.textContent,k=i+':'+v.length;if(prev[i]&&prev[i]!==v){el.classList.remove('pulse');void el.offsetWidth;el.classList.add('pulse')}prev[i]=v});},1000);})();</script><style>/* fit-home 20261109: Home scales to the window */#gpt .frame{width:100%!important;height:100%!important}</style><script>/* fit-home 20261109 */(function(){const DW=1440,DH=900;function f(){const g=document.getElementById('gpt');if(!g)return;const z=Math.min(1,innerWidth/DW,innerHeight/DH);g.style.transformOrigin='0 0';g.style.transform=z<1?'scale('+z+')':'';g.style.right='auto';g.style.bottom='auto';g.style.width=(innerWidth/z)+'px';g.style.height=(innerHeight/z)+'px'}f();addEventListener('resize',f)})();</script><style id="sc-mobile-css">
 /* sc-home-mobile v1: landscape phone layout for Home only */

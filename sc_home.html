@@ -69,7 +69,7 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 .tbtn{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;background:none;border:0;border-top:1px solid #dcd8ca;padding:0 2px;font-size:15px;font-weight:700;text-align:left;cursor:pointer}
 .tbtn .car{margin-left:auto;font-size:14px;color:var(--mute)}
 .info{flex:none;width:44px;height:44px;margin:-8px -8px -8px -10px;border:0;background:transparent;font-size:19px;line-height:44px;color:var(--mute);cursor:pointer;padding:0}.info.on{color:#111}
-.hint{font-size:14px;color:var(--mute);margin-top:3px}
+.hint{font-size:14px;color:var(--mute);margin:0 0 4px;padding:4px 6px;background:#f3efe2;border-radius:6px}
 /* grid below the list */
 .duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}
 .seg{display:flex;border:1.6px solid var(--line);border-radius:8px;overflow:hidden;margin-left:auto}
@@ -299,12 +299,13 @@ function renderBets(){
  const up=main.filter(b=>b.status==='upcoming'||b.status==='nogame').sort((a,b)=>t(a)-t(b));
  const so=L.sports_open||{};
  let h=`<div class="ch"><h2>Open bets</h2><button type="button" class="info${OPEN.key?' on':''}" data-t="key" aria-label="What the dots and prices mean" aria-expanded="${!!OPEN.key}">ⓘ</button><span class="r">${fin(so.n)?so.n:'—'} open · at risk ${N('h_risk',so.cost,'wmoney',F.wmoney(so.cost))}</span></div>`;
+ if(OPEN.key)h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Prices ¢ entry→now on your side, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
  h+=`<div class="grp"><i class="dot win" style="width:10px;height:10px"></i>Live · ${live.length}</div>`+(live.length?live.map(betRow).join(''):'<div class="nd">No live bets right now</div>');
  const upShow=OPEN.up||up.length<=5?up:up.slice(0,5);
  h+=`<div class="grp" style="margin-top:4px"><i class="dot pre" style="width:10px;height:10px"></i>Upcoming · ${up.length}</div>`+(up.length?upShow.map(betRow).join(''):'<div class="nd">No upcoming bets</div>');
  if(up.length>5)h+=`<button class="tbtn" data-t="up">${OPEN.up?'Show fewer':'Show all '+up.length}<span class="car">${OPEN.up?'▲':'▼'}</span></button>`;
  if(other.length)h+=`<button class="tbtn" data-t="other">Other · ${other.length} (other sports, parlays, non-sports)<span class="car">${OPEN.other?'Hide ▲':'Show ▼'}</span></button>${OPEN.other?other.map(betRow).join(''):''}`;
- if(OPEN.key)h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Prices ¢ entry→now on your side, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
+ //hint moved under header
  el.innerHTML=h;
  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{OPEN[b.dataset.t]=!OPEN[b.dataset.t];renderBets();animateChanges($('bets'));paintPulse()});
 }

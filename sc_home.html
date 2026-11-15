@@ -194,7 +194,7 @@ const MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','De
 const md=s=>{const m=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?MON[+m[2]-1]+' '+(+m[3]):''};
 const etT=ms=>new Date(ms).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
 const etD=ms=>new Date(ms).toLocaleDateString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric'});
-const ageMin=()=>L?(Date.now()-TT(L.generated_at))/6e4:Infinity;
+const ageMin=()=>L?(Date.now()-TT(L.built_at||L.generated_at))/6e4:Infinity;
 const fresh=()=>!lastErr&&ageMin()<=AMBER_MIN;
 
 // ---- data ----

@@ -17,14 +17,14 @@ if(LOCAL)return; /* served by the Mac runtime: use its own data/ files unchanged
 var qp=new URLSearchParams(location.search),FB=qp.get('feed');
 var RAWB='https://raw.githubusercontent.com/colemlrogalin-source/tv-home/sc-feed/sc_home_mobile/';
 var APIB='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/sc_home_mobile/';
-function urls(name){if(FB)return [FB.replace(/\/?$/,'/')+name];return [RAWB+name,APIB+name+'?ref=sc-feed']}
-async function getJSON(name){var last;for(var u of urls(name)){try{var api=u.indexOf('api.github.com')>=0;var r=await ORIG(u+(u.indexOf('?')>=0?'&':'?')+'t='+Date.now(),{cache:'no-store',headers:api?{Accept:'application/vnd.github.raw'}:{}});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('feed')}
+function urls(name,rawOnly){if(FB)return [FB.replace(/\/?$/,'/')+name];return rawOnly?[RAWB+name]:[RAWB+name,APIB+name+'?ref=sc-feed']}
+async function getJSON(name,rawOnly){var last;for(var u of urls(name,rawOnly)){try{var api=u.indexOf('api.github.com')>=0;var r=await ORIG(u+(u.indexOf('?')>=0?'&':'?')+'t='+Date.now(),{cache:'no-store',headers:api?{Accept:'application/vnd.github.raw'}:{}});if(!r.ok)throw new Error('HTTP '+r.status);return await r.json()}catch(e){last=e}}throw last||new Error('feed')}
 function apply(b,dl){if(!dl||typeof dl!=='object')return b;if('v' in dl)return dl.v;if('e' in dl)return b;if('x' in dl){var o=b.slice();for(var j=0;j<dl.x.length;j++){o[dl.x[j][0]]=apply(o[dl.x[j][0]],dl.x[j][1])}return o.concat(dl.a||[])}if('p' in dl){return (Array.isArray(b)?b.slice(0,dl.p):[]).concat(dl.a||[])}if('d' in dl){var o={};var keys=dl.k||Object.keys(dl.d);for(var i=0;i<keys.length;i++){var k=keys[i];o[k]=apply(b?b[k]:undefined,dl.d[k])}return o}return b}
 var P=null;
 function refresh(force){if(P)return P;if(document.hidden&&SCM.live)return Promise.resolve(SCM.live);if(!force&&SCM.live&&Date.now()-SCM.lastTry<20000)return Promise.resolve(SCM.live);SCM.lastTry=Date.now();
- P=(async function(){try{var L=await getJSON('live.json');if(L.base_id&&L.base_id!==SCM.baseId){var B=await getJSON('base-'+L.base_id+'.json');if(B.base_id!==L.base_id)throw new Error('base mismatch');SCM.base=B;SCM.baseId=B.base_id}
+ P=(async function(){try{var L=null,now=Math.floor(Date.now()/60000);if(!FB){for(var k=0;k<=8&&!L;k++){var sl=now-k;try{L=await getJSON('slots/'+Math.floor(sl/1440)+'/'+sl+'.json',true)}catch(e){}}}if(!L||(SCM.live&&L.pushed_ts<SCM.live.pushed_ts)){try{var L2=await getJSON('live.json');if(!L||L2.pushed_ts>L.pushed_ts)L=L2}catch(e){if(!L)throw e}}if(SCM.live&&L.pushed_ts<SCM.live.pushed_ts){return SCM.live}if(L.base_id&&L.base_id!==SCM.baseId){var B=await getJSON('base-'+L.base_id+'.json');if(B.base_id!==L.base_id)throw new Error('base mismatch');SCM.base=B;SCM.baseId=B.base_id}
   var files={};for(var n in L.files){files[n]=L.files[n].full!==undefined?L.files[n].full:apply(SCM.base&&SCM.base.files[n],L.files[n].delta)}
-  SCM.live={pushed_at:L.pushed_at,checked_at:L.checked_at,source:L.source,files:files};SCM.lastOk=Date.now();SCM.err=null;window.dispatchEvent(new Event('scm-feed'))}
+  SCM.live={pushed_ts:L.pushed_ts,slot:L.slot,pushed_at:L.pushed_at,checked_at:L.checked_at,source:L.source,files:files};SCM.lastOk=Date.now();SCM.err=null;window.dispatchEvent(new Event('scm-feed'))}
   catch(e){SCM.err=String(e&&e.message||e)}finally{P=null}return SCM.live})();return P}
 window.SCMrefresh=refresh;
 window.fetch=function(u,o){var s=String(u&&u.url||u);var m=s.match(/^(?:\.\/)?data\/(dashboard|scores|pnl_intraday|ingest_status)\.json/);

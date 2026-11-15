@@ -307,8 +307,8 @@ function renderTiles(){
 function renderSettled(){
  const el=$('settled');
  if(!L||!Array.isArray(L.settled_today)){el.innerHTML='<h2>Settled today</h2><div class="nd">no data</div>';return}
- const s=L.settled_today,w=s.filter(x=>x.result==='W').length,l=s.filter(x=>x.result==='L').length,tot=s.reduce((a,x)=>a+(+x.pnl||0),0);
- el.innerHTML=`<h2>Settled today<span class="r num">${w}–${l} · <b class="${cls(tot)}">${signed(Math.round(tot*100)/100)}</b></span></h2>`+(s.length?s.map(x=>`<div class="st"><i class="chip ${x.result==='W'?'w':x.result==='L'?'l':'p'}">${esc(x.result||'?')}</i>
+ const s=L.settled_today,w=s.filter(x=>x.result==='W').length,l=s.filter(x=>x.result==='L').length,tot=fin(L.settled_total)?+L.settled_total:Math.round(s.reduce((a,x)=>a+(+x.pnl||0),0)*100)/100;
+ el.innerHTML=`<h2>Settled today<span class="r num">${w}–${l} · <b class="${cls(tot)}">${signed(tot)}</b></span></h2>`+(s.length?s.map(x=>`<div class="st"><i class="chip ${x.result==='W'?'w':x.result==='L'?'l':'p'}">${esc(x.result||'?')}</i>
   <div class="h">${esc(x.head)}${tierTag(x.tier)}</div><div class="p num ${cls(x.pnl)}">${signed(x.pnl)}</div>
   <div class="m">${esc(hm(x.t))} ET · ${x.sport&&x.sport!=='UNKNOWN'?esc(x.sport==='NCAAF'?'CFB':x.sport)+' · ':''}${fin(x.units)?x.units+'u':''}${x.who?' · '+esc(x.who):''}${x.how&&x.how!=='Settled'?' · '+esc(x.how):''}</div></div>`).join(''):'<div class="nd">Nothing settled yet today</div>');
 }

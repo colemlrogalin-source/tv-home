@@ -1015,8 +1015,8 @@ function posPage(d){
   ['currentProbability','Current',posCurrentProbability],
   ['cost','Stake',row=>posMoney(row.cost)],
   ['win','Profit if win',row=>posMoney(row.win,true)],
-  ['value','Marked value',row=>posMoney(row.value)],
-  ['upnl','Open P&L',row=>PM(row.upnl,true,true)]
+  ['value','Marked value',row=>{const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null?posMoney(pl.marked)+`<small class="pos-muted"> from legs</small>`:posMoney(row.value)}],
+  ['upnl','Open P&L',row=>{const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null&&row.cost!=null?PM(pl.marked-row.cost,true,true):PM(row.upnl,true,true)}]
  ];
  const compare=(a,b)=>{
   if(PSORT.key==='matchup'){

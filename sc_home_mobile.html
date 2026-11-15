@@ -737,6 +737,280 @@ a.sp-bar-row:hover,a.sp-stake-row:hover{background:#1d2b43;color:#fff}
 <div id="detail"></div>
 <div class="hl" id="hl"></div>
 </main></div>
+<script>
+window.BetInfo=(function(){
+ const AL={JAC:'JAX',JAX:'JAX',WSH:'WAS',WAS:'WAS',LA:'LAR',LAR:'LAR',GMP:'GB',OKLA:'OU',OKL:'OU',OU:'OU',MISS:'MISS',OLE:'MISS',NCSU:'NCST',NCST:'NCST',MIZZ:'MIZ',WISC:'WISC',WIS:'WISC',PITT:'PITT',PIT:'PITT'};
+ const norm=c=>AL[String(c||'').toUpperCase()]||String(c||'').toUpperCase();
+ const PERIODS={'1H':['1H','First half'],'2H':['2H','Second half'],'1P':['1P','1st period'],'2P':['2P','2nd period'],'3P':['3P','3rd period'],'1Q':['1Q','1st quarter'],'2Q':['2Q','2nd quarter'],'3Q':['3Q','3rd quarter'],'4Q':['4Q','4th quarter']};
+ const PERIOD_N={'1H':2,'2H':4,'1P':1,'2P':2,'3P':3,'1Q':1,'2Q':2,'3Q':3,'4Q':4};
+ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
+ const et=s=>{
+  if(!s) return '';
+  let raw=String(s).trim();
+  let x;
+  if(/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}/.test(raw) && !/[zZ]|[+-]\d{2}:?\d{2}$/.test(raw)){
+    x=new Date(raw.replace(' ','T')+'-05:00');
+  } else {
+    x=new Date(raw);
+  }
+  if(isNaN(+x)) return raw;
+  return x.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
+ };
+ const money=(v,sign)=>{if(v==null||!Number.isFinite(+v))return '';const n=+v;return (sign?(n>0?'+':n<0?'−':''):(n<0?'−':''))+'$'+Math.abs(n).toFixed(2)};
+ const teamsFromEvent=ev=>{
+  const m=String(ev||'').toUpperCase().match(/^(\d{2})([A-Z]{3})(\d{2})([A-Z]+)$/);
+  if(!m) return null;
+  const tail=m[4], known=new Set([...Object.keys(AL),...Object.values(AL)]);
+  let best=null;
+  for(let i=2;i<=tail.length-2;i++){
+   const a=tail.slice(0,i), b=tail.slice(i);
+   if(a.length>5||b.length>5) continue;
+   let score=(a.length<=3)+(b.length<=3);
+   if(known.has(a)||known.has(norm(a))) score+=3;
+   if(known.has(b)||known.has(norm(b))) score+=3;
+   if(!best||score>=best[0]) best=[score,norm(a),norm(b)];
+  }
+  return best?{away:best[1],home:best[2]}:null;
+ };
+ const parse=tk=>{
+  tk=String(tk||'').toUpperCase();
+  const parts=tk.split('-');
+  const pre=parts[0]||'', ev=parts[1]||'', tail=parts.slice(2).join('-');
+  const pm=pre.match(/(1H|2H|1P|2P|3P|1Q|2Q|3Q|4Q)/);
+  const period=pm?pm[1]:'FG';
+  const [periodShort,periodName]=period==='FG'?['','Full game']:PERIODS[period];
+  const kind=/SPREAD/.test(pre)?'spread':/TEAMTOTAL/.test(pre)?'teamtotal':/TOTAL/.test(pre)?'total':/GAME/.test(pre)?'ml':'prop';
+  const evTeams=teamsFromEvent(ev)||{};
+  let team='', line=null;
+  if(kind==='spread'||kind==='teamtotal'){
+   const tm=tail.match(/^([A-Z]+)(\d+)$/);
+   if(tm){ team=norm(tm[1]); const n=+tm[2]; line=n>=1?n-0.5:n; }
+  } else if(kind==='total'){
+   const tm=tail.match(/^(\d+)$/);
+   if(tm){ const n=+tm[1]; line=n>=1?n-0.5:n; }
+  }
+  return {ticker:tk,pre,ev,period,periodShort,periodName,kind,away:evTeams.away||'',home:evTeams.home||'',team,line};
+ };
+ const fillIndex=()=>{
+  const src=(window.D&&D.buy_fills)||null;
+  if(fillIndex._src===src&&fillIndex._m) return fillIndex._m;
+  const rows=(src&&src.rows)||[];
+  const first={}, ids={};
+  const byDay={};
+  const sorted=rows.slice().sort((a,b)=>String(a.t||'').localeCompare(String(b.t||'')));
+  for(const r of sorted){
+   const tk=String(r.ticker||'').toUpperCase();
+   if(!tk||first[tk]) continue;
+   first[tk]=r;
+   const day=String(r.t||'').slice(0,10);
+   if(!/^\d{4}-\d{2}-\d{2}$/.test(day)) continue;
+   (byDay[day]||(byDay[day]=[])).push(tk);
+  }
+  for(const [day,tks] of Object.entries(byDay)){
+   const num=day.slice(8,10);
+   tks.forEach((tk,i)=>{ ids[tk]='#'+num+'-'+(i+1); });
+  }
+  fillIndex._src=src; fillIndex._m={ids,first};
+  return fillIndex._m;
+ };
+ const placedOf=tk=>{
+  tk=String(tk||'').toUpperCase();
+  const idx=(window.D&&D.bet_index)||(window.BETINDEX)||{};
+  if(idx[tk]) return idx[tk];
+  let best=null;
+  for(const [k,v] of Object.entries(idx)){
+   if(!k) continue;
+   if(tk.startsWith(k)||k.startsWith(tk)){
+    if(!best||k.length>best[0].length) best=[k,v];
+   }
+  }
+  return best?best[1]:null;
+ };
+ const officialOf=tk=>{
+  tk=String(tk||'').toUpperCase();
+  const pl=placedOf(tk)||{};
+  if(pl.bet_id||pl.who) return pl;
+  const rows=(((window.D&&D.settled_bets)||{}).rows)||[];
+  const hit=rows.find(r=>String(r.ticker||'').toUpperCase()===tk && (r.bet_id||r.who));
+  return hit||pl||{};
+ };
+ const gameOf=info=>{
+  const games=(window.SCR&&window.SCR.games)||[];
+  let g=games.find(x=>String(x.kalshi_event||'').toUpperCase()===(info.ev||'').toUpperCase());
+  if(g) return g;
+  if(info.away&&info.home){
+   const hits=games.filter(x=>{
+    const A=norm(x.away&&(x.away.ab||x.away.abbr)), H=norm(x.home&&(x.home.ab||x.home.abbr));
+    return [info.away,info.home].every(t=>t===A||t===H);
+   });
+   if(!hits.length) return null;
+   const fin=hits.filter(x=>x.state==='post'||String(x.detail||'').toLowerCase().startsWith('final'));
+   return fin[0]||hits[0];
+  }
+  return null;
+ };
+ const periodScore=(g,period)=>{
+  if(!g) return null;
+  const A=g.away||{}, H=g.home||{};
+  const lsA=A.linescores||A.periods||[], lsH=H.linescores||H.periods||[];
+  const val=x=>x==null?null:(typeof x==='object'?+(x.displayValue??x.value??x.score??x):+x);
+  const q=period==='1H'?[1,2]:period==='2H'?[3,4]:period&&period!=='FG'?[PERIOD_N[period]||0]:null;
+  if(q&&lsA.length&&lsH.length){
+   let a=0,h=0;
+   for(const i of q){
+    const ai=val(lsA[i-1]), hi=val(lsH[i-1]);
+    if(ai==null||hi==null) return null;
+    a+=ai; h+=hi;
+   }
+   return {a,h,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${a}–${H.ab||H.abbr||'HOME'} ${h}`,period};
+  }
+  const as=A.score??A.pts, hs=H.score??H.pts;
+  if(as==null||hs==null) return null;
+  const clock=g.detail||g.clock||'';
+  const live=g.state==='in'||period==='FG'&&g.state!=='post';
+  return {a:+as,h:+hs,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${as}–${H.ab||H.abbr||'HOME'} ${hs}${clock? ' · '+clock:''}`,live:!!live,period:'FG'};
+ };
+ const plain=(tk,side,fallback)=>{
+  const info=parse(tk);
+  const sd=String(side||'YES').toUpperCase();
+  const tag=info.period==='FG'?'':(' '+info.periodShort);
+  if(info.kind==='spread'&&info.line!=null){
+   const named=info.team||'';
+   if(sd==='YES'&&named) return named+' -'+info.line+tag;
+   if(sd==='NO'&&named){
+    const other=named===info.away?info.home:named===info.home?info.away:'';
+    return (other||named)+' +'+info.line+tag;
+   }
+  }
+  if((info.kind==='total'||info.kind==='teamtotal')&&info.line!=null){
+   const who=info.kind==='teamtotal'&&info.team?(info.team+' '):'';
+   return who+(sd==='NO'?'Under':'Over')+' '+info.line+tag;
+  }
+  if(info.kind==='ml'){
+   const tm=info.team||info.away||String(fallback||'').split(/\s+to beat|\s+wins/)[0]||'';
+   return (tm+' ML'+tag).trim();
+  }
+  const lab=String(fallback||'').replace(/^Full Game:\s*/i,'');
+  if(info.period!=='FG'&&lab&&!/\b1H\b|\b2H\b|first half|second half/i.test(lab)) return lab+tag;
+  return lab||info.ticker;
+ };
+ const whoLabel=w=>{
+  if(!w) return '';
+  const s=String(w).toLowerCase();
+  if(s==='grok'||s==='mine/grok'||s==='mine / grok') return 'Mine/Grok';
+  if(s==='own'||s==='mine'||s==='cole') return 'Cole';
+  if(/^mixed/i.test(String(w))) return String(w).replace(/\bGrok\b/g,'Mine/Grok').replace(/\bMine\b(?!\/Grok)/g,'Cole').replace(/\bown\b/g,'Cole');
+  return String(w);
+ };
+ const odds=px=>{
+  if(px==null||!Number.isFinite(+px)||+px<=0||+px>=1) return '';
+  const p=+px;
+  const amer=p>=0.5?Math.round(-100*p/(1-p)):Math.round(100*(1-p)/p);
+  return (amer>0?'+':'')+amer;
+ };
+ const facts=(row={})=>{
+  const tk=String(row.ticker||row.bet_name||row.market_ticker||'').toUpperCase();
+  const info=parse(tk);
+  const pl=officialOf(tk);
+  const fills=fillIndex();
+  const first=fills.first[tk]||{};
+  const side=String(row.side||pl.side||first.side||'').toUpperCase();
+  const g=row.game||row.list_game||gameOf(info);
+  const ps=periodScore(g,info.period);
+  const start=row.start||row.list_start||(g&&g.start)||pl.start||'';
+  const name=plain(tk,side,row.label||row.market||row.market_title||pl.label||first.label||'');
+  const game=info.away&&info.home?(info.away+' @ '+info.home):(pl.game||'');
+  const officialId=row.bet_id||pl.bet_id||'';
+  const id=officialId||fills.ids[tk]||'';
+  const who=whoLabel(row.who||pl.who||'');
+  const uUsd=+(row.unit_usd)||((window.D&&D.sq&&D.sq.settings&&D.sq.settings.unit_usd))||50;
+  const stake=row.stake!=null?+row.stake:(row.cost!=null?+row.cost:(pl.stake!=null?+pl.stake:(first.cost!=null?+first.cost:null)));
+  const un=row.units!=null?+row.units:(stake!=null?stake/uUsd:null);
+  const cts=row.contracts!=null?+row.contracts:(pl.contracts!=null?+pl.contracts:(first.contracts!=null?+first.contracts:null));
+  const px=row.entry!=null?+row.entry:(row.price!=null?+row.price:(pl.entry!=null?+pl.entry:(first.price!=null?+first.price:(cts&&stake?stake/cts:null))));
+  const pnl=row.pnl!=null?+row.pnl:null;
+  const payout=row.payout!=null?+row.payout:(row.max_payout!=null?+row.max_payout:(pnl!=null&&stake!=null?Math.max(0,+(Math.round((stake+pnl)*100)/100)):null));
+  const placed=row.opened_at||row.placed_at||pl.placed_time||pl.opened_at||first.t||'';
+  const settled=row.closed_at||row.settled_at||row.t||'';
+  let margin=row.margin||'';
+  const tag=info.period==='FG'?'Final':info.period;
+  if(!margin&&info.kind==='spread'&&ps&&info.line!=null&&info.team&&!ps.live){
+   const teamIsAway=info.team===ps.as||info.team===info.away;
+   const mgn=teamIsAway?ps.a-ps.h:ps.h-ps.a;
+   const heldYes=side!=='NO';
+   const cover=heldYes?(mgn-info.line):-(mgn-info.line);
+   const verb=mgn>0?'won by':mgn<0?'lost by':'tied';
+   const by=Math.abs(mgn);
+   margin=tag+' '+ps.as+' '+ps.a+'–'+ps.hs+' '+ps.h+', '+info.team+' '+(mgn===0?'tied':verb+' '+by)+', needed '+(heldYes?info.line:('under '+info.line))+': '+(cover>=0?'covered by ':'missed by ')+Math.abs(cover);
+  }
+  if(!margin&&(info.kind==='total'||info.kind==='teamtotal')&&ps&&!ps.live&&info.line!=null){
+   const tot=ps.a+ps.h;
+   const heldUnder=side==='NO';
+   const edge=heldUnder?(info.line-tot):(tot-info.line);
+   margin=tag+' '+ps.label+', total '+tot+' vs '+info.line+': '+(heldUnder?'Under':'Over')+' by '+Math.abs(edge)+(edge<0?' (missed)':'');
+  }
+  const prop=((window.PROP&&window.PROP.props)||[]).find(p=>String(p.ticker||'').toUpperCase()===tk);
+  if(!margin&&prop&&prop.cur!=null&&prop.target!=null){
+   margin=(prop.last||prop.player||'')+' '+prop.cur+' '+(prop.unit||'')+', needed '+prop.target;
+   margin=margin.replace(/\s+/g,' ').trim();
+  }
+  if(!margin&&ps) margin=(ps.live?'Live ':'')+ps.label+(ps.period&&ps.period!=='FG'?' '+ps.period:'')+(g&&g.detail&&ps.live?' · '+g.detail:'');
+  const score=ps?((info.period!=='FG'&&!ps.live?info.period+' ':'')+ps.label+(g&&g.detail&&(ps.live||info.period==='FG')?' · '+g.detail:'')):(prop&&prop.score?prop.score+(prop.clock?' · '+prop.clock:''):'');
+  return {info,side,name,game,periodName:info.periodName,id,who,stake,units:un,contracts:cts,price:px,odds:odds(px),pnl,payout,placed,start,settled,score,margin,ticker:tk,result:row.result,how:row.how,uUsd};
+ };
+ const tooltip=b=>{
+  const f=facts(b);
+  const c=f.pnl>0?'#0b7a32':f.pnl<0?'#a8323f':'#8a8676';
+  const res=({W:'WIN',L:'LOSS',Win:'WIN',Loss:'LOSS',P:'PUSH'}[f.result]||f.result||'');
+  const head=[res&&`<b style="color:${c}">${esc(res)}</b>`, f.id&&`<b>${esc(f.id)}</b>`, f.who&&esc(f.who)].filter(Boolean).join(' · ');
+  const lines=[];
+  if(head) lines.push(head);
+  lines.push(`<b>${esc(f.name)}</b>${f.periodName?` · ${esc(f.periodName)}`:''}`);
+  if(f.game) lines.push(esc(f.game));
+  if(f.side) lines.push('Held <b>'+esc(f.side)+'</b>');
+  const fill=[];
+  if(f.contracts!=null&&f.price!=null) fill.push((+f.contracts).toFixed((+f.contracts)%1?2:0)+' @ '+(Math.round(f.price*1000)/10)+'¢'+(f.odds?' ('+f.odds+')':''));
+  if(f.stake!=null) fill.push('Stake '+money(f.stake,false)+(f.units!=null?' · '+Math.abs(f.units).toFixed(2)+'u':''));
+  if(f.payout!=null) fill.push('Payout '+money(f.payout,false));
+  if(fill.length) lines.push(fill.join(' · '));
+  const times=[];
+  if(f.placed) times.push('Placed '+et(f.placed));
+  if(f.start) times.push('Start '+et(f.start));
+  if(f.settled) times.push('Settled '+et(f.settled));
+  if(times.length) lines.push(times.join(' · '));
+  if(f.score) lines.push(esc(f.score));
+  if(f.margin&&f.margin!==f.score) lines.push(esc(f.margin));
+  if(f.pnl!=null){
+   const pu=b.pnl_u!=null?+b.pnl_u:(f.uUsd?f.pnl/f.uUsd:null);
+   lines.push('P/L <b style="color:'+c+'">'+money(f.pnl,true)+'</b>'+(pu!=null?(' · '+(pu>0?'+':pu<0?'−':'')+Math.abs(pu).toFixed(2)+'u'):''));
+  }
+  if(f.ticker) lines.push('<span style="color:#8a8676">'+esc(f.ticker)+'</span>');
+  return lines.join('<br>');
+ };
+ const factsLines=f=>{
+  if(!f) return [];
+  const out=[];
+  if(f.id) out.push(['Bet ID', f.id]);
+  if(f.who) out.push(['Owner', f.who]);
+  if(f.game) out.push(['Game', f.game]);
+  if(f.periodName) out.push(['Period', f.periodName]);
+  if(f.name) out.push(['Our side', f.name]);
+  if(f.contracts!=null&&f.price!=null) out.push(['Contracts', (+f.contracts).toFixed((+f.contracts)%1?2:0)+' @ '+(Math.round(f.price*1000)/10)+'¢'+(f.odds?' · '+f.odds:'')]);
+  if(f.stake!=null) out.push(['Stake', money(f.stake,false)+(f.units!=null?' · '+Math.abs(f.units).toFixed(2)+'u':'')]);
+  if(f.payout!=null) out.push(['Payout', money(f.payout,false)]);
+  if(f.placed) out.push(['Placed', et(f.placed)]);
+  if(f.start) out.push(['Game start', et(f.start)]);
+  if(f.settled) out.push(['Settled', et(f.settled)]);
+  if(f.score) out.push(['Score', f.score]);
+  if(f.margin) out.push(['Margin', f.margin]);
+  if(f.pnl!=null) out.push(['P/L', money(f.pnl,true)+(f.uUsd?(' · '+(f.pnl>=0?'+':'−')+Math.abs(f.pnl/f.uUsd).toFixed(2)+'u'):'')]);
+  if(f.ticker) out.push(['Ticker', f.ticker]);
+  return out;
+ };
+ return {parse,plain,facts,tooltip,whoLabel,placedOf,periodScore,et,gameOf,factsLines,fillIndex};
+})();
+
+</script>
 <script>window.WL=(w,l)=>`<span class=wl><i class=wlw>${w}</i><i class=wll>${l}</i></span>`;/* v21 positions landing page */
 const PD=(v,s)=>v==null?'no data':(s?(v>0?'+':v<0?'−':''):(v<0?'−':''))+'$'+f(Math.abs(v),2),PUu=(v,s)=>v==null?'':(s?(v>0?'+':v<0?'−':''):'')+UF(Math.abs(v)),
 PM=(v,s,c)=>{const a=MODE=='U'?PUu(v,s)||'no data':PD(v,s),b=MODE=='U'?(v==null?'':PD(v,s)):PUu(v,s);return `<b class="${c?cl(v):''}">${a}</b>${b?`<small>${b}</small>`:''}`};
@@ -1042,7 +1316,7 @@ function posPage(d){
  const columns=[
   ['start','Game start',posStartCell],
   ['matchup','Matchup',posMatchup],
-  ['market','Bet',row=>`<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(row.market)}</button>${posSideBadge(row.side)}</div>${posIsParlay(row)?posParlaySummary(row):posPropBar(row)}`],
+  ['market','Bet',row=>{const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(row):null;const nm=(f&&f.name)||row.market;const sub=[f&&f.id,f&&f.who,f&&f.game,f&&f.periodName].filter(Boolean).join(' · ');return `<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(nm)}</button>${posSideBadge(row.side)}</div>${sub?`<div class="pos-muted">${esc(sub)}</div>`:''}${posIsParlay(row)?posParlaySummary(row):posPropBar(row)}`}],
   ['entry','Entry price',row=>row.entry==null?'—':f(row.entry*100,1)+'¢'],
   ['probability','At start',posStartProbability],
   ['currentProbability','Current',posCurrentProbability],
@@ -1120,6 +1394,17 @@ function showPositionDetail(row){
   ['Marked value',posMoney(row.value)],['Open P&L',PM(row.upnl,true,true)],
   ['Potential profit',posMoney(row.win,true)]
  ];
+ (function(){
+   const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(row):null;
+   if(!f||!BetInfo.factsLines) return;
+   const seen=new Set(details.map(x=>x[0]));
+   for(const [k,v] of BetInfo.factsLines(f)){
+     if(seen.has(k)||k==='Payout'&&row.parlay||k==='P/L'&&row.parlay) continue;
+     if(row.parlay&&(k==='Marked value'||k==='Open P&L')) continue;
+     details.push([k,esc(v)]);
+     seen.add(k);
+   }
+ })();
  if(row.parlay){
    const legs=((pl&&pl.legs)||[]);
    const ST={hit:'HIT',live:'LIVE',pre:'NOT STARTED',dead:'DEAD'};
@@ -1890,13 +2175,9 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
   }
   const sideOf=r=>String(r.side||sideMap[r.ticker]||'').toUpperCase();
   const plainBet=r=>{
-   const side=sideOf(r); let lab=String(r.label||r.ticker||'');
-   if(/^Parlay/i.test(lab)) return lab;
-   if(side==='NO'&&/wins by over/i.test(lab)) return 'NO: '+lab.replace(/^\s*NO:\s*/i,'');
-   if(side==='NO'&&/\bOver\s+\d/i.test(lab)&&!/wins by over/i.test(lab)){
-    return lab.replace(/\bOver\b/i,'Under').replace(/^Full Game:\s*/i,'');
-   }
-   if(side==='NO'&&!/^NO:/i.test(lab)) return 'NO: '+lab;
+   const lab=String(r.label||r.ticker||'');
+   if(/^Parlay/i.test(lab)||/^KXMVE/i.test(r.ticker||'')||(Array.isArray(r.legs)&&r.legs.length)) return lab;
+   if(window.BetInfo&&BetInfo.plain) return BetInfo.plain(r.ticker, sideOf(r), lab);
    return lab;
   };
   const teamAlias={JAC:'JAX',JAX:'JAX',WSH:'WAS',WAS:'WAS',LA:'LAR',LAR:'LAR',GMP:'GB',OKLA:'OU',OKL:'OU',OU:'OU',MISS:'MISS',OLE:'MISS',NCSU:'NCST',NCST:'NCST',MIZZ:'MIZ',WISC:'WISC',WIS:'WISC',PITT:'PITT',PIT:'PITT'};
@@ -1966,19 +2247,22 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    const pre=String(r.ticker||'').split('-')[0];
    const lab=String(r.label||'');
    const side=sideOf(r);
-   const fs=finalScore(g);
-   const isFinal=g&&(g.state==='post'||String(g.detail||g.clock||'').toLowerCase().startsWith('final'));
+   const info=window.BetInfo?BetInfo.parse(r.ticker||''):null;
+   const ps=info&&window.BetInfo?BetInfo.periodScore(g, info.period):null;
+   const fs=ps?`${ps.as} ${ps.a}–${ps.hs} ${ps.h}`:finalScore(g);
+   const isFinal=info&&info.period&&info.period!=='FG' ? !!(ps&&ps.a!=null&&ps.h!=null&&!ps.live) : (g&&(g.state==='post'||String(g.detail||g.clock||'').toLowerCase().startsWith('final')));
+   const periodWord=(info&&info.period&&info.period!=='FG')?info.period:'Final';
    if(/TOTAL/i.test(pre)&&!/TEAMTOTAL/i.test(pre) || /\bOver\s+\d|\bUnder\s+\d/i.test(lab)&&!/wins by over/i.test(lab)){
     if(!g||!fs) return 'margin n/a';
     const A=g.away||{},H=g.home||{};
     const tot=Number(A.score??A.pts)+Number(H.score??H.pts);
     const lm=lab.match(/(\d+(?:\.\d+)?)/);
     const line=lm?Number(lm[1]):null;
-    if(line==null||!isFinal) return fs?`Final ${fs}`+(line!=null?`, total ${tot} vs ${line}`:''):'margin n/a';
+    if(line==null||!isFinal) return fs?`${periodWord} ${fs}`+(line!=null?`, total ${tot} vs ${line}`:''):'margin n/a';
     const heldUnder=side==='NO'?/\bOver\b/i.test(lab):/\bUnder\b/i.test(lab);
     const edge=heldUnder?(line-tot):(tot-line);
     const word=heldUnder?'Under':'Over';
-    return `Final ${fs}, total ${tot} vs ${line}: ${word} by ${Math.abs(edge).toFixed(1).replace(/\.0$/,'')}${edge<0?' (missed)':''}`;
+    return `${periodWord} ${fs}, total ${tot} vs ${line}: ${word} by ${Math.abs(edge).toFixed(1).replace(/\.0$/,'')}${edge<0?' (missed)':''}`;
    }
    if(/SPREAD/i.test(pre)||/wins by over/i.test(lab)){
     if(!g||!fs) return 'margin n/a';
@@ -1993,37 +2277,51 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
     const margin=away?as-hs:home?hs-as:null;
     const lm=lab.match(/over\s+(\d+(?:\.\d+)?)/i);
     const line=lm?Number(lm[1]):null;
-    if(margin==null||line==null||!isFinal) return fs?`Final ${fs}`:'margin n/a';
+    if(margin==null||line==null||!isFinal) return fs?`${periodWord} ${fs}`:'margin n/a';
     const heldYes=side!=='NO';
     const cover=margin-line;
     const team=want||'Team';
     if(heldYes){
-     return cover>=0?`Final ${fs}, ${team} won by ${margin}, needed ${line}: covered by ${cover}`:`Final ${fs}, ${team} won by ${margin}, needed ${line}: missed by ${Math.abs(cover)}`.replace('won by -', 'lost by ').replace('won by -','lost by ');
+     return cover>=0?`${periodWord} ${fs}, ${team} won by ${margin}, needed ${line}: covered by ${cover}`:`${periodWord} ${fs}, ${team} won by ${margin}, needed ${line}: missed by ${Math.abs(cover)}`.replace('won by -', 'lost by ').replace('won by -','lost by ');
     }
-    return cover<0?`Final ${fs}, ${team} won by ${margin}, needed ${line}: NO side by ${Math.abs(cover)}`:`Final ${fs}, ${team} won by ${margin} vs ${line}: NO side missed`;
+    return cover<0?`${periodWord} ${fs}, ${team} won by ${margin}, needed ${line}: NO side by ${Math.abs(cover)}`:`${periodWord} ${fs}, ${team} won by ${margin} vs ${line}: NO side missed`;
    }
    if(/GAME/i.test(pre)&&!/SPREAD|TOTAL/i.test(pre) || /to beat|\bwins\b/i.test(lab)&&!/wins by over/i.test(lab)){
     if(!g||!fs) return 'margin n/a';
-    return `Final ${fs}`;
+    return `${periodWord} ${fs}`;
    }
    if(p&&p.cur!=null&&p.target!=null){
     const need=p.target, got=p.cur, who=p.last||p.player||'';
     return `${who} ${got} ${p.unit||''}, needed ${need}`.replace(/\s+/g,' ').trim();
    }
-   if(fs) return `Final ${fs}`;
+   if(fs) return `${periodWord} ${fs}`;
    return 'margin n/a';
   };
   const chip=r=>`<i style="display:inline-block;background:${r.result==='W'?'#a7f3c9':'#fca5b0'};color:#0a0a0a;font-style:normal;font-weight:800;font-size:12px;line-height:16px;padding:0 6px;border-radius:4px">${r.result==='W'?'WIN':'LOSS'}</i>`;
-  const cash=v=>{if(v==null||!Number.isFinite(+v))return '—';const n=+v;return (n<0?'−':n>0?'+':'')+'$'+Math.abs(n).toFixed(2)};
-  const unitsTxt=v=>{if(v==null||!Number.isFinite(+v))return '—';return (typeof TX==='function'&&typeof UF==='function')?TX(UF(+v)):(function(){const u=+v/uStep,a=Math.abs(u);return (u<0?'−':u>0?'+':'')+(Math.round(a*1000)/1000)+'u'})()};
+  const cash=v=>usd(v);
+  const unitsTxt=v=>sg(v);
   const line=r=>{
    const u=r.units!=null?+r.units:((+r.stake||0)/uStep);
-   const pu=(+r.pnl||0)/uStep;
    const cts=r.contracts!=null?Number(r.contracts):null;
    const px=r.entry!=null?Number(r.entry): (cts&&r.stake?r.stake/cts:null);
    const fill=cts!=null&&px!=null?`${Number(cts).toFixed(cts%1?2:0)} @ ${Math.round(px*1000)/10}¢`:'';
    const margin=betMargin(r);
-   return `<tr><td>${lg(r.sport)} <b>${esc(plainBet(r))}</b><div class=mu>${esc(r.sport==='NON_SPORTS'?'Other':(r.sport||''))} · settled ${esc(t(r.closed_at))}</div>${fill?`<div class=mu>${esc(fill)}</div>`:''}<div class=mu>${esc(margin)}</div></td><td>${chip(r)}<div class=mu>${unitsTxt(r.pnl)} · ${cash(r.pnl)}</div></td><td class=n>${cash(r.stake).replace(/^\+/,'')}<div class=mu>${(+u).toFixed(2)}u</div></td><td class="n ${cl(r.pnl)}"><b>${unitsTxt(r.pnl)}</b><div class=mu>${cash(r.pnl)}</div></td></tr>`;
+   const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(Object.assign({},r,{side:sideOf(r),unit_usd:uStep,margin:margin})):null;
+   const name=(f&&f.name)||plainBet(r);
+   const meta=[];
+   if(f&&f.id) meta.push(f.id);
+   if(f&&f.who) meta.push(f.who);
+   if(f&&f.game) meta.push(f.game);
+   if(f&&f.periodName) meta.push(f.periodName);
+   meta.push(r.sport==='NON_SPORTS'?'Other':(r.sport||''));
+   const times=[];
+   if(f&&f.placed) times.push('placed '+(BetInfo.et(f.placed)));
+   if(f&&f.start) times.push('start '+(BetInfo.et(f.start)));
+   if(r.closed_at) times.push('settled '+(f&&f.settled?BetInfo.et(f.settled):t(r.closed_at)));
+   const odds=f&&f.odds?` · ${f.odds}`:'';
+   const payout=f&&f.payout!=null?` · payout ${usd(f.payout)}`:'';
+   const score=f&&f.score?f.score:'';
+   return `<tr><td>${lg(r.sport)} <b>${esc(name)}</b><div class=mu>${esc(meta.filter(Boolean).join(' · '))}</div>${fill?`<div class=mu>${esc(fill)+odds+payout}</div>`:''}${times.length?`<div class=mu>${esc(times.join(' · '))}</div>`:''}${score?`<div class=mu>${esc(score)}</div>`:''}<div class=mu>${esc(margin)}</div>${f&&f.ticker?`<div class=mu>${esc(f.ticker)}</div>`:''}</td><td>${chip(r)}<div class=mu>${sg(r.pnl)}</div></td><td class=n>${usd(r.stake)}</td><td class="n ${cl(r.pnl)}"><b>${sg(r.pnl)}</b></td></tr>`;
   };
   const sec=(title,rs)=>rs.length?`<tr><td colspan=4 style="padding-top:10px"><b>${esc(title)}</b> <span class=mu>${rs.length}</span></td></tr>`+rs.map(line).join(''):'';
   const label=new Date(day+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'});
@@ -2031,12 +2329,12 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
   const nav=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px"><button type=button data-resday="prev" style="${btn}">‹ Prev</button><b>${label}</b><button type=button data-resday="next" style="${btn}" ${day>=today?'disabled':''}>Next ›</button><span class=mu>Game day · as of ${esc(t(d.closed_trades?.as_of||''))}</span></div>`;
   const resultMetric=(label,value,tone='')=>`<div class="result-metric"><span>${label}</span><strong class="${tone}">${value}</strong></div>`;
   const summary=`<div class="result-metrics" aria-label="Selected day totals">
-   ${resultMetric('Realized P&amp;L',unitsTxt(pnl)+' · '+cash(pnl),cl(pnl))}
-   ${resultMetric('Total stake',cash(stake).replace(/^\+/,'')+' · '+units.toFixed(2)+'u')}
+   ${resultMetric('Realized P&amp;L',sg(pnl),cl(pnl))}
+   ${resultMetric('Total stake',usd(stake))}
    ${resultMetric('Closed bets',rows.length)}
    ${resultMetric('Record',WL(w,rows.length-w))}
   </div>`;
-  const table=rows.length?`<table class="result-day-table"><tr><th>Bet</th><th>Result</th><th class=n>Stake</th><th class=n>P&L</th></tr>${sec('Sports',rows.filter(r=>!oth(r)))}${sec('Other',rows.filter(r=>oth(r)))}<tfoot><tr><th scope="row">Day total</th><td>${WL(w,rows.length-w)}</td><td class=n>${cash(stake).replace(/^\+/,'')}<div class=mu>${units.toFixed(2)}u</div></td><td class="n ${cl(pnl)}"><b>${unitsTxt(pnl)}</b><div class=mu>${cash(pnl)}</div></td></tr></tfoot></table>`:'<div class=mu>No settled bets on this day.</div>';
+  const table=rows.length?`<table class="result-day-table"><tr><th>Bet</th><th>Result</th><th class=n>Stake</th><th class=n>P&L</th></tr>${sec('Sports',rows.filter(r=>!oth(r)))}${sec('Other',rows.filter(r=>oth(r)))}<tfoot><tr><th scope="row">Day total</th><td>${WL(w,rows.length-w)}</td><td class=n>${usd(stake)}</td><td class="n ${cl(pnl)}"><b>${sg(pnl)}</b></td></tr></tfoot></table>`:'<div class=mu>No settled bets on this day.</div>';
 const BL=TABS.results[1];h=back+`Results</div>`+resultsCharts(d,day)+card(day===etISO(-1)?'Yesterday':'Day',nav+summary+table,(d.closed_trades||{}).source)+`<div class=bgrid>${BL.map(q=>`<a class="card blk" href="#/results/${q.id}"><h3>${esc(q.t)}<span class=go>›</span></h3>${q.sum}<div class=src>${esc(q.src||'')}</div></a>`).join('')}</div>`}
  else if(a=='games'&&!SBL){h=back+`Games</div><div class=mu>Loading score feed…</div>`}
  else if(a=='games'&&SBL){{const GG=sbSort(SBL),EVS=new Set((D.open_positions.rows||[]).map(o=>String(o.ticker).split('-')[1])),hm=g=>g.kalshi_event&&EVS.has(g.kalshi_event),mine=GG.filter(hm).length,lv=GG.filter(g=>g.state=='in').length,fin=GG.filter(g=>g.state=='post').length,hd=`<div class="sbr hd"><i></i><b>Team</b><span class=sbs>Pts</span><span class=sbo>Open</span><span class=sbw><em>Win %</em></span></div>`;
@@ -2874,8 +3172,7 @@ if(ovOn('set')){
   return point?[{value:[time,point.value],bet,itemStyle:{color,borderColor:'#fffdf6',borderWidth:1}}]:[];
  });
  if(settled.length)S.push({name:'Settled bet',type:'scatter',symbol:'circle',symbolSize:8,data:settled,z:7,
-  tooltip:{trigger:'item',formatter:({data})=>{const b=data.bet,c=SBC[b.result]||'#8a8676';
-   return `<b style="color:${c}">${SBN[b.result]||e(b.result||nd)}</b> · <b>${e(b.bet_id||'ID '+nd)}</b> · ${e(b.who||'Mine/Grok '+nd)}<br>${b.side?`<b>${e(b.side)}</b> · `:''}${e(b.label||b.ticker||nd)}<br><span style="color:#8a8676">${e(b.ticker||'')}</span><br>Stake <b>${df(b.stake)}</b> · ${b.units==null?nd:(+b.units).toFixed(2)+'u'}<br>P/L <b style="color:${c}">${df(b.pnl,1)}</b> · ${uf(b.pnl_u)}<br>${e(b.how||'Settled')} ${_fd(data.value[0])} ET`}}});
+  tooltip:{trigger:'item',formatter:({data})=>{const b=data.bet||{};return (window.BetInfo&&BetInfo.tooltip)?BetInfo.tooltip(b):`<b>${e(b.bet_id||b.label||b.ticker||'')}</b>`}}});
 }
 if(ovOn('inv'))S.push({name:'Net invested',type:'line',data:r.map(x=>[TT(x.t),+x.n]),showSymbol:false,step:'end',lineStyle:{color:'#1d4e89',width:2,type:'dashed'},z:2});
 const cashGroups=new Map(),minute=6e4;

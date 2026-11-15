@@ -131,7 +131,10 @@ button{font:inherit;color:inherit}
  .lower{grid-template-columns:minmax(0,1fr)}
  .title{font-size:18px}
  .asof .lbl{display:none}
- .top{flex-wrap:wrap}
+ .top{flex-wrap:nowrap}
+ .title{font-size:17px}
+ .warn{white-space:normal}
+ .um{min-width:56px}
  .bh small{display:block;margin:0;font-size:14px}
  .bet{grid-template-rows:auto auto auto}
  .bet .dot{grid-row:1/4}.bet .br{grid-row:1/4}
@@ -181,7 +184,7 @@ button{font:inherit;color:inherit}
 const SRC=(()=>{const q=new URLSearchParams(location.search).get('src');return q&&/^(\.|\/|data\/)/.test(q)?q.replace(/\/$/,''):null})();
 const RAW='https://raw.githubusercontent.com/colemlrogalin-source/tv-home/schome/';
 const API='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/';
-const POLL_MS=30000, HIST_EVERY=5, STALE_MIN=3;
+const POLL_MS=30000, HIST_EVERY=10, STALE_MIN=3;
 let L=null,H=null,MODE=(()=>{try{return localStorage.getItem('sc_m_mode')==='$'?'$':'U'}catch{return 'U'}})(),RANGE=(()=>{try{return localStorage.getItem('sc_m_range')||'1'}catch{return '1'}})(),
  SHOW={bal:true,cp:true},OPEN_OTHER=false,polls=0,timer=null,lastErr=null,lastOkFetch=0,prevVals={},POCKET=null;
 try{const s=JSON.parse(localStorage.getItem('sc_m_show')||'null');if(s)SHOW=Object.assign(SHOW,s)}catch{}
@@ -205,10 +208,15 @@ const md=s=>{const m=String(s||'').match(/^(\d{4})-(\d{2})-(\d{2})/);return m?MO
 const etTimeOfMs=ms=>new Date(ms).toLocaleTimeString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
 const etDayOfMs=ms=>new Date(ms).toLocaleDateString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric'});
 
-async function getJSON(name){
+let apiBackoff=0,viaRaw=false;
+async function viaApi(name){const r=await fetch(API+name+'?ref=schome',{cache:'no-cache',headers:{Accept:'application/vnd.github.raw'}});if(r.status===403||r.status===429){apiBackoff=Date.now()+6e5;throw new Error('api limit')}if(!r.ok)throw new Error('api '+r.status);return r.json()}
+async function viaRawF(name){const r=await fetch(RAW+name+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('raw '+r.status);return r.json()}
+async function getJSON(name,live){
  if(SRC){const r=await fetch(SRC+'/'+name+'?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw new Error('http '+r.status);return r.json()}
- try{const r=await fetch(RAW+name+'?t='+Date.now(),{cache:'no-store'});if(r.ok)return await r.json();throw new Error('raw '+r.status)}
- catch(e){const r=await fetch(API+name+'?ref=schome&t='+Date.now(),{cache:'no-store',headers:{Accept:'application/vnd.github.raw'}});if(!r.ok)throw new Error('api '+r.status);return r.json()}
+ // Live file: GitHub contents API (fresh; unchanged answers are free 304s). History: raw CDN (may lag up to 5 min).
+ if(live&&Date.now()>apiBackoff){try{const j=await viaApi(name);viaRaw=false;return j}catch(e){}}
+ if(live)viaRaw=true;
+ try{return await viaRawF(name)}catch(e){if(!live)return viaApi(name);throw e}
 }
 async function getPocket(){
  if(SRC)return null;
@@ -218,7 +226,7 @@ async function getPocket(){
 
 async function refresh(force){
  try{
-  const [l,h,pk]=await Promise.all([getJSON('sc_home.json'),(force||!H||polls%HIST_EVERY===0)?getJSON('sc_home_hist.json').catch(()=>H):Promise.resolve(H),getPocket()]);
+  const [l,h,pk]=await Promise.all([getJSON('sc_home.json',true),(force||!H||polls%HIST_EVERY===0)?getJSON('sc_home_hist.json',false).catch(()=>H):Promise.resolve(H),(force||!POCKET||polls%4===0)?getPocket():Promise.resolve(POCKET)]);
   L=l;H=h||H;POCKET=pk||POCKET;lastErr=null;lastOkFetch=Date.now();
  }catch(e){lastErr=String(e&&e.message||e)}
  polls++;render();
@@ -240,6 +248,7 @@ function renderStatus(){
  else st.innerHTML='';
  let msg='';
  if(lastErr)msg='Can’t reach the live feed. Showing data from '+hm(L.generated_at)+' ET.';
+ else if(age>STALE_MIN&&viaRaw)msg='Updates are slower right now (GitHub limit). Last update '+hm(L.generated_at)+' ET.';
  else if(age>STALE_MIN)msg='Mac data is '+Math.round(age)+' min old (last update '+hm(L.generated_at)+' ET). The Mac may be asleep or offline.';
  w.className='warn'+(msg?' on':'');w.textContent=msg;
 }

@@ -68,6 +68,7 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 @keyframes pu{0%,100%{box-shadow:0 0 0 0 rgba(31,157,74,.0)}50%{box-shadow:0 0 0 5px rgba(31,157,74,.28)}}
 .tbtn{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;background:none;border:0;border-top:1px solid #dcd8ca;padding:0 2px;font-size:15px;font-weight:700;text-align:left;cursor:pointer}
 .tbtn .car{margin-left:auto;font-size:14px;color:var(--mute)}
+.info{flex:none;width:44px;height:44px;margin:-8px -8px -8px -10px;border:0;background:transparent;font-size:19px;line-height:44px;color:var(--mute);cursor:pointer;padding:0}.info.on{color:#111}
 .hint{font-size:14px;color:var(--mute);margin-top:3px}
 /* grid below the list */
 .duo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;align-items:start}
@@ -151,7 +152,7 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
   <div class="hint" id="eqhint"></div>
  </section>
  <section class="card" id="settled"></section>
- <section class="card" id="daily"><div class="ch"><h2>Daily P&amp;L · 14 days</h2><span class="src">Kalshi · Mac</span></div><div class="chartw" id="dyc"><div class="tip" id="dytip"></div></div></section>
+ <section class="card" id="daily"><div class="ch"><h2>Daily P&amp;L · 14 days</h2></div><div class="chartw" id="dyc"><div class="tip" id="dytip"></div></div></section>
  <section class="card" id="sport"></section>
  <section class="card" id="expo"></section>
  <section class="card" id="formc"></section>
@@ -165,7 +166,7 @@ const QS=new URLSearchParams(location.search);
 const SRC=(()=>{const q=QS.get('src');return q&&/^(\.|\/|data\/)/.test(q)?q.replace(/\/$/,''):null})();
 const RAW='https://raw.githubusercontent.com/colemlrogalin-source/tv-home/schome/';
 const API='https://api.github.com/repos/colemlrogalin-source/tv-home/contents/';
-const POLL_MS=+(QS.get('poll')||30000), HIST_EVERY=10, AMBER_MIN=2, STALE_MIN=3;
+const POLL_MS=+(QS.get('poll')||30000), HIST_EVERY=10, AMBER_MIN=3, STALE_MIN=4;
 let L=null,H=null,POCKET=null,polls=0,timer=null,lastErr=null,apiBackoff=0,viaRaw=false;
 const ls=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v}catch{return d}},lss=(k,v)=>{try{localStorage.setItem(k,v)}catch{}};
 let MODE=ls('sc_m_mode','$')==='U'?'U':'$',RANGE=ls('sc_m_range','1'),SHOW={bal:true,cp:true},OPEN={other:false,up:false,set:false,more:false};
@@ -185,7 +186,6 @@ const F={
  cents:v=>!fin(v)?'—':Math.round(+v)+'¢',
  plain:v=>!fin(v)?'—':String(Math.round(+v)),
 };
-const alt=(v,sign)=>!fin(v)?'':MODE==='U'?((sign&&+v>0?'+':+v<0?'−':'')+c0.format(Math.abs(Math.round(+v)))):uTxt(v,sign);
 const cls=v=>!fin(v)||Math.round(+v*100)===0?'':+v>0?'pos':'neg';
 const etClock=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
 const TT=x=>{const s=String(x||'').replace(/ ET$/,'').trim().replace(' ','T');const m=s.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})(?::(\d{2}))?/);if(!m)return NaN;const utc=Date.UTC(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+(m[6]||0));const z=Object.fromEntries(etClock.formatToParts(new Date(utc)).map(p=>[p.type,p.value]));const asIf=Date.UTC(+z.year,+z.month-1,+z.day,+(z.hour==='24'?0:z.hour),+z.minute,+z.second);return utc-(asIf-utc)};
@@ -249,16 +249,15 @@ function renderKpis(){
  const el=$('kpis'),mo=$('more');
  if(!L){el.innerHTML='';mo.innerHTML='';return}
  const k=L.kpis||{},td=k.today||{},so=L.sports_open||{},prof=k.profit?.value,pct=k.pnl_pct?.value,bal=k.balance?.value,ni=k.net_invested?.value,ifwin=fin(so.max_payout)&&fin(so.cost)?so.max_payout-so.cost:null,cash=k.cash?.value;
- const nSet=fin(td.w)&&fin(td.l)?(+td.w)+(+td.l):'—';
- const card=(c,lb,v,sub)=>`<button type="button" class="kpi ${c}" aria-expanded="${OPEN.more}"><div class="lb">${lb}<span class="src">Kalshi · Mac</span></div><div class="v">${v}</div><div class="s">${sub}</div></button>`;
+ const card=(c,lb,v,sub)=>`<button type="button" class="kpi ${c}" aria-expanded="${OPEN.more}"><div class="lb">${lb}</div><div class="v">${v}</div><div class="s">${sub}</div></button>`;
  el.innerHTML=
-  card('today','Today’s P&amp;L',N('k_today',td.value,'wsigned',F.wsigned(td.value),` class="${cls(td.value)}"`),`${fin(td.w)?td.w+'-'+td.l:'no data'} · ${nSet}✓ · ${fin(td.n_open)?td.n_open:'—'} open`)+
+  card('today','Today’s P&amp;L',N('k_today',td.value,'wsigned',F.wsigned(td.value),` class="${cls(td.value)}"`),`${fin(td.w)?td.w+'W–'+td.l+'L':'no data'} · ${fin(td.n_open)?td.n_open:'—'} open`)+
   card('prof',`<span class="lbt">Profit</span>${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm">House money</span>':''}`,N('k_prof',prof,'wsigned',F.wsigned(prof),` class="${cls(prof)}"`),`${fin(pct)?(pct>0?'+':pct<0?'−':'')+Math.abs(pct).toFixed(1)+'%':'% no data'}${fin(bal)&&fin(ni)&&+bal>+ni?'<span class="hm">House money</span>':''}`)+
-  card('cash','Cash',N('k_cash',cash,'wmoney',F.wmoney(cash)),`${alt(cash,false)} available`)+
-  card('risk','At risk',N('k_risk',so.cost,'wmoney',F.wmoney(so.cost)),`${fin(so.n)?so.n:'—'} open · ${alt(so.cost,false)}`);
+  card('cash','Cash',N('k_cash',cash,'wmoney',F.wmoney(cash)),'available')+
+  card('risk','At risk',N('k_risk',so.cost,'wmoney',F.wmoney(so.cost)),`if all win <span class="${cls(ifwin)}">${F.wsigned(ifwin)}</span>`);
  el.querySelectorAll('.kpi').forEach(b=>b.onclick=()=>{OPEN.more=!OPEN.more;renderKpis()});
  mo.className='more'+(OPEN.more?' on':'');
- mo.innerHTML=`Today exact <b class="${cls(td.value)}">${F.signed(td.value)}</b> (settled <b class="${cls(td.settled)}">${F.signed(td.settled)}</b> · open <b class="${cls(td.unrealized)}">${F.signed(td.unrealized)}</b>) · Profit <b>${F.signed(prof)}</b> on ${F.money(ni)} net invested · Record <b>${fin(k.wins?.value)?k.wins.value+'–'+k.losses.value:'no data'}</b>${fin(k.win_rate?.value)?' ('+k.win_rate.value+'%)':''} · Streak <b>${esc(k.streak?.value??'no data')}</b> · Kalshi equity <b>${F.money(bal)}</b> · Cash <b>${F.money(cash)}</b> · At risk <b>${F.money(so.cost)}</b> · If all win <b class="${cls(ifwin)}">${F.signed(ifwin)}</b><span class="src">Kalshi · Mac · tap a card to close</span>`;
+ mo.innerHTML=`Today exact <b class="${cls(td.value)}">${F.signed(td.value)}</b> (settled <b class="${cls(td.settled)}">${F.signed(td.settled)}</b> · open <b class="${cls(td.unrealized)}">${F.signed(td.unrealized)}</b>) · Profit <b>${F.signed(prof)}</b> on ${F.money(ni)} net invested · Record <b>${fin(k.wins?.value)?k.wins.value+'–'+k.losses.value:'no data'}</b>${fin(k.win_rate?.value)?' ('+k.win_rate.value+'%)':''} · Streak <b>${esc(k.streak?.value??'no data')}</b> · Kalshi equity <b>${F.money(bal)}</b> · Cash <b>${F.money(cash)}</b> · At risk <b>${F.money(so.cost)}</b> · If all win <b class="${cls(ifwin)}">${F.signed(ifwin)}</b><span class="src">tap a card to close</span>`;
 }
 
 // ---- open bets ----
@@ -288,7 +287,7 @@ function betRow(b){
  else mid=esc(b.league==='Politics'?'Politics · not a game':(b.league||''));
  const px=fin(b.entry_c)&&fin(b.live_c)?`${b.entry_c}→${N('px_'+b.id,b.live_c,'plain',esc(b.live_c))}¢`:'price —';
  const pnl=b.status==='final'?`<small>exp.</small>${N('pl_'+b.id,b.upnl,'wsigned',F.wsigned(b.upnl))}`:N('pl_'+b.id,b.upnl,'wsigned',F.wsigned(b.upnl));
- return `<div class="bet"><i class="dot ${ds} ${b.status==='live'?'lv':''}" title="${DOTTXT[ds]}" aria-label="${DOTTXT[ds]}"></i><span class="pick">${esc(b.head)}${b.tier?`<span class="tag ${esc(b.tier)}">${esc(b.tier)}</span>`:''}</span><span class="mid">${mid}</span><span class="pxs">${px} · ${fin(b.units)?esc(b.units)+'u':''}</span><span class="pnl ${cls(b.upnl)}">${pnl}</span></div>`;
+ return `<div class="bet"><i class="dot ${ds} ${b.status==='live'?'lv':''}" title="${DOTTXT[ds]}" aria-label="${DOTTXT[ds]}"></i><span class="pick">${esc(b.head)}${b.tier?`<span class="tag ${esc(b.tier)}">${esc(b.tier)}</span>`:''}</span><span class="mid">${mid}</span><span class="pxs">${px} · ${F.wmoney(b.cost)}</span><span class="pnl ${cls(b.upnl)}">${pnl}</span></div>`;
 }
 function renderBets(){
  const el=$('bets');
@@ -299,13 +298,13 @@ function renderBets(){
  const live=main.filter(b=>b.status==='live'||b.status==='final').sort((a,b)=>(b.status==='final')-(a.status==='final')||fr(b)-fr(a)||t(a)-t(b));
  const up=main.filter(b=>b.status==='upcoming'||b.status==='nogame').sort((a,b)=>t(a)-t(b));
  const so=L.sports_open||{};
- let h=`<div class="ch"><h2>Open bets</h2><span class="src">Kalshi · ESPN · Mac</span><span class="r">${fin(so.n)?so.n:'—'} open · at risk ${N('h_risk',so.cost,'wmoney',F.wmoney(so.cost))}</span></div>`;
+ let h=`<div class="ch"><h2>Open bets</h2><button type="button" class="info${OPEN.key?' on':''}" data-t="key" aria-label="What the dots and prices mean" aria-expanded="${!!OPEN.key}">ⓘ</button><span class="r">${fin(so.n)?so.n:'—'} open · at risk ${N('h_risk',so.cost,'wmoney',F.wmoney(so.cost))}</span></div>`;
  h+=`<div class="grp"><i class="dot win" style="width:10px;height:10px"></i>Live · ${live.length}</div>`+(live.length?live.map(betRow).join(''):'<div class="nd">No live bets right now</div>');
  const upShow=OPEN.up||up.length<=5?up:up.slice(0,5);
  h+=`<div class="grp" style="margin-top:4px"><i class="dot pre" style="width:10px;height:10px"></i>Upcoming · ${up.length}</div>`+(up.length?upShow.map(betRow).join(''):'<div class="nd">No upcoming bets</div>');
  if(up.length>5)h+=`<button class="tbtn" data-t="up">${OPEN.up?'Show fewer':'Show all '+up.length}<span class="car">${OPEN.up?'▲':'▼'}</span></button>`;
  if(other.length)h+=`<button class="tbtn" data-t="other">Other · ${other.length} (other sports, parlays, non-sports)<span class="car">${OPEN.other?'Hide ▲':'Show ▼'}</span></button>${OPEN.other?other.map(betRow).join(''):''}`;
- h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Prices ¢ entry→now on your side, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
+ if(OPEN.key)h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Prices ¢ entry→now on your side, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
  el.innerHTML=h;
  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{OPEN[b.dataset.t]=!OPEN[b.dataset.t];renderBets();animateChanges($('bets'));paintPulse()});
 }
@@ -314,7 +313,7 @@ function renderSettled(){
  if(!L||!Array.isArray(L.settled_today)){el.innerHTML='<div class="ch"><h2>Settled today</h2></div><div class="nd">no data</div>';return}
  const s=L.settled_today,w=s.filter(x=>x.result==='W').length,l=s.filter(x=>x.result==='L').length,tot=fin(L.settled_total)?+L.settled_total:null;
  const show=OPEN.set?s:s.slice(0,5);
- el.innerHTML=`<div class="ch"><h2>Settled today</h2><span class="src">Kalshi · Mac</span><span class="r">${w}-${l} · <span class="${cls(tot)}">${N('set_tot',tot,'wsigned',F.wsigned(tot))}</span></span></div>`+(s.length?show.map(x=>`<div class="st"><i class="chip ${x.result==='W'?'w':x.result==='L'?'l':'p'}">${esc(x.result||'?')}</i><span class="h">${esc(x.head)}${x.tier?`<span class="tag ${esc(x.tier)}">${esc(x.tier)}</span>`:''}</span><span class="m">${esc(hm(x.t))}</span><span class="p ${cls(x.pnl)}">${F.signed(x.pnl)}</span></div>`).join('')+(s.length>5?`<button class="tbtn" data-t="set">${OPEN.set?'Show last 5':'Show all '+s.length}<span class="car">${OPEN.set?'▲':'▼'}</span></button>`:''):'<div class="nd">Nothing settled yet today</div>');
+ el.innerHTML=`<div class="ch"><h2>Settled today</h2><span class="r">${w}-${l} · <span class="${cls(tot)}">${N('set_tot',tot,'wsigned',F.wsigned(tot))}</span></span></div>`+(s.length?show.map(x=>`<div class="st"><i class="chip ${x.result==='W'?'w':x.result==='L'?'l':'p'}">${esc(x.result||'?')}</i><span class="h">${esc(x.head)}${x.tier?`<span class="tag ${esc(x.tier)}">${esc(x.tier)}</span>`:''}</span><span class="m">${esc(hm(x.t))}</span><span class="p ${cls(x.pnl)}">${F.signed(x.pnl)}</span></div>`).join('')+(s.length>5?`<button class="tbtn" data-t="set">${OPEN.set?'Show last 5':'Show all '+s.length}<span class="car">${OPEN.set?'▲':'▼'}</span></button>`:''):'<div class="nd">Nothing settled yet today</div>');
  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{OPEN.set=!OPEN.set;renderSettled()});
 }
 // ---- charts ----
@@ -329,7 +328,7 @@ function bindTip(wrap,tip,svg,xs,fmt,onMove){
 function renderEq(){
  const seg=$('rng');seg.innerHTML=RANGES.map(([k,n])=>`<button type="button" data-r="${k}" class="${RANGE===k?'on':''}">${n}</button>`).join('');
  seg.querySelectorAll('button').forEach(b=>b.onclick=()=>{RANGE=b.dataset.r;lss('sc_m_range',RANGE);renderEq()});
- const lg=$('legend');lg.innerHTML=[['bal','Kalshi Equity','#111'],['cp','Cash Profit','#a05712']].map(([k,n,c])=>`<button type="button" class="lgb ${SHOW[k]?'on':''}" data-s="${k}"><i style="background:${c}"></i>${n}</button>`).join('')+'<span class="src" style="align-self:center;margin-left:auto">Kalshi · Mac</span>';
+ const lg=$('legend');lg.innerHTML=[['bal','Kalshi Equity','#111'],['cp','Cash Profit','#a05712']].map(([k,n,c])=>`<button type="button" class="lgb ${SHOW[k]?'on':''}" data-s="${k}"><i style="background:${c}"></i>${n}</button>`).join('')+'';
  lg.querySelectorAll('button').forEach(b=>b.onclick=()=>{SHOW[b.dataset.s]=!SHOW[b.dataset.s];lss('sc_m_show',JSON.stringify(SHOW));renderEq()});
  const wrap=$('eqc'),tip=$('eqtip');wrap.querySelectorAll('svg,.nd').forEach(n=>n.remove());tip.classList.remove('on');
  const rp=L&&L.ranges?L.ranges[RANGE]:null,k=L?L.kpis||{}:{};
@@ -375,18 +374,18 @@ function renderLower(){
  // P&L by sport, realized (UNKNOWN folded into Other)
  const sp=$('sport');let br=H&&Array.isArray(H.by_sport)?H.by_sport.map(x=>({...x})):null;
  if(br){const o={k:'Other',pnl:0,n:0,w:0,l:0},keep=[];br.forEach(x=>{if(x.k==='UNKNOWN'||x.k==='NON_SPORTS'||x.k==='Other'){o.pnl+=+x.pnl||0;o.n+=+x.n||0}else keep.push(x)});if(o.n)keep.push({...o,pnl:Math.round(o.pnl*100)/100});br=keep.sort((a,b)=>(+b.pnl||0)-(+a.pnl||0))}
- const hd='<div class="ch"><h2>P&amp;L by sport · realized</h2><span class="src">Kalshi · Mac</span></div>';
+ const hd='<div class="ch"><h2>P&amp;L by sport · realized</h2></div>';
  if(!br||!br.length)sp.innerHTML=hd+'<div class="nd">no data</div>';
  else{const pos=Math.max(0,...br.map(x=>+x.pnl||0)),neg=Math.abs(Math.min(0,...br.map(x=>+x.pnl||0))),tot=pos+neg||1,zl=100*neg/tot,sc=100/tot;
   sp.innerHTML=hd+br.map(x=>{const v=+x.pnl||0,w=Math.abs(v)*sc,name=x.k==='NCAAF'?'CFB':x.k;return `<div class="sprow"><b>${esc(name)}</b><span class="trk"><span class="z" style="left:${zl}%"></span>${w?`<i style="left:${v>=0?zl:zl-w}%;width:${w}%;background:${v>=0?'#a9bf96':'#d9b0a4'}"></i>`:''}</span><span class="pv ${cls(v)}">${F.signed(v)}</span></div>`}).join('')}
- const ex=$('expo'),es=L&&Array.isArray(L.exposure_sport)?L.exposure_sport:null,eh='<div class="ch"><h2>Exposure by sport</h2><span class="src">Kalshi · Mac</span></div>';
+ const ex=$('expo'),es=L&&Array.isArray(L.exposure_sport)?L.exposure_sport:null,eh='<div class="ch"><h2>Exposure by sport</h2></div>';
  if(!es)ex.innerHTML=eh+'<div class="nd">no data</div>';else if(!es.length)ex.innerHTML=eh+'<div class="nd">No open sports bets</div>';
  else{const t=es.reduce((a,x)=>a+x.cost,0)||1;ex.innerHTML=eh+'<div class="exbar">'+es.map(x=>`<i style="width:${100*x.cost/t}%;background:${CHIP[x.k]||'#9a8f78'}"></i>`).join('')+'</div><div class="exk">'+es.map(x=>`<span><s style="background:${CHIP[x.k]||'#9a8f78'}"></s><b>${esc(x.k==='NCAAF'?'CFB':x.k)}</b> ${F.wmoney(x.cost)} · ${x.n} open</span>`).join('')+'</div>'}
  const f=$('formc'),l10=L&&Array.isArray(L.last10)?L.last10:null;
- f.innerHTML='<div class="ch"><h2>Recent form</h2><span class="src">Kalshi · Mac</span></div>'+(l10&&l10.length?'<div class="form">'+l10.map(x=>`<span class="${x==='W'?'w':x==='L'?'l':''}">${esc(x)}</span>`).join('')+'</div>':'<div class="nd">no data</div>');
+ f.innerHTML='<div class="ch"><h2>Recent form</h2></div>'+(l10&&l10.length?'<div class="form">'+l10.map(x=>`<span class="${x==='W'?'w':x==='L'?'l':''}">${esc(x)}</span>`).join('')+'</div>':'<div class="nd">no data</div>');
  const gk=$('grok'),now=Date.now(),cs=L&&Array.isArray(L.callouts)?L.callouts.filter(c=>{const t=TT(c.t);return now-t<=432e5&&now-t>=-36e5}):[];
- gk.hidden=!cs.length;gk.innerHTML=cs.length?'<div class="ch"><h2>Live Grok · callouts</h2><span class="src">Sports Quant · Mac</span></div>'+cs.map(c=>`<div class="co"><b>${esc(c.bet)}</b> · ${esc(c.sport||'')} ${esc(c.matchup||'')}<br><span class="mute">${esc(hm(c.t))} ET${c.odds?' · '+esc(c.odds):''}${fin(c.dollars)?' · '+F.money(c.dollars):''} · ${esc(c.chip)}</span></div>`).join(''):'';
- $('foot').textContent=L?`Data refreshed ${md(L.generated_at)}, ${hm(L.generated_at)} ET · Kalshi (sports)`:'';
+ gk.hidden=!cs.length;gk.innerHTML=cs.length?'<div class="ch"><h2>Live Grok · callouts</h2></div>'+cs.map(c=>`<div class="co"><b>${esc(c.bet)}</b> · ${esc(c.sport||'')} ${esc(c.matchup||'')}<br><span class="mute">${esc(hm(c.t))} ET${c.odds?' · '+esc(c.odds):''}${fin(c.dollars)?' · '+F.money(c.dollars):''} · ${esc(c.chip)}</span></div>`).join(''):'';
+ $('foot').textContent=L?`Sources: Kalshi (balance, cash, P&L, bets, prices) and ESPN (scores, clocks), via the Mac${Array.isArray(L.callouts)&&L.callouts.length?' · Live Grok from Sports Quant':''} · as of ${hm(L.built_at||L.generated_at)} ET, ${md(L.generated_at)}`:'';
 }
 function paintUnit(){$('um').innerHTML=MODE==='U'?'$ / <b>U</b>':'<b>$</b> / U'}
 $('um').onclick=()=>{MODE=MODE==='U'?'$':'U';lss('sc_m_mode',MODE);render()};

@@ -740,23 +740,35 @@ a.sp-bar-row:hover,a.sp-stake-row:hover{background:#1d2b43;color:#fff}
 <script>
 window.BetInfo=(function(){
  const AL={JAC:'JAX',JAX:'JAX',WSH:'WAS',WAS:'WAS',LA:'LAR',LAR:'LAR',GMP:'GB',OKLA:'OU',OKL:'OU',OU:'OU',MISS:'MISS',OLE:'MISS',NCSU:'NCST',NCST:'NCST',MIZZ:'MIZ',WISC:'WISC',WIS:'WISC',PITT:'PITT',PIT:'PITT'};
- const norm=c=>AL[String(c||'').toUpperCase()]||String(c||'').toUpperCase();
- const PERIODS={'1H':['1H','First half'],'2H':['2H','Second half'],'1P':['1P','1st period'],'2P':['2P','2nd period'],'3P':['3P','3rd period'],'1Q':['1Q','1st quarter'],'2Q':['2Q','2nd quarter'],'3Q':['3Q','3rd quarter'],'4Q':['4Q','4th quarter']};
+ const NICK={'SMITH-NJIGBA':'JSN','SMITHNJIGBA':'JSN','MCCAFFREY':'CMC','MCCAFFREY23':'CMC'};
+ const PERIODS={'1H':['1H','1st half'],'2H':['2H','2nd half'],'1P':['1P','1st period'],'2P':['2P','2nd period'],'3P':['3P','3rd period'],'1Q':['1Q','1st quarter'],'2Q':['2Q','2nd quarter'],'3Q':['3Q','3rd quarter'],'4Q':['4Q','4th quarter']};
  const PERIOD_N={'1H':2,'2H':4,'1P':1,'2P':2,'3P':3,'1Q':1,'2Q':2,'3Q':3,'4Q':4};
+ const norm=c=>AL[String(c||'').toUpperCase()]||String(c||'').toUpperCase();
  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;' }[c]));
- const et=s=>{
-  if(!s) return '';
+ const parseDate=s=>{
+  if(!s) return null;
   let raw=String(s).trim();
   let x;
-  if(/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}/.test(raw) && !/[zZ]|[+-]\d{2}:?\d{2}$/.test(raw)){
+  if(/^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}/.test(raw) && !/[zZ]|[+-]\d{2}:?\d{2}$/.test(raw))
     x=new Date(raw.replace(' ','T')+'-05:00');
-  } else {
-    x=new Date(raw);
-  }
-  if(isNaN(+x)) return raw;
+  else x=new Date(raw);
+  return isNaN(+x)?null:x;
+ };
+ const et=s=>{
+  const x=parseDate(s); if(!x) return s?String(s):'';
   return x.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})+' ET';
  };
+ const etShort=s=>{
+  const x=parseDate(s); if(!x) return s?String(s):'';
+  const now=new Date();
+  const same=x.toLocaleDateString('en-US',{timeZone:'America/New_York'})===now.toLocaleDateString('en-US',{timeZone:'America/New_York'});
+  const t=x.toLocaleString('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'});
+  if(same) return t;
+  return x.toLocaleString('en-US',{timeZone:'America/New_York',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+ };
  const money=(v,sign)=>{if(v==null||!Number.isFinite(+v))return '';const n=+v;return (sign?(n>0?'+':n<0?'−':''):(n<0?'−':''))+'$'+Math.abs(n).toFixed(2)};
+ const units=(v)=>{if(v==null||!Number.isFinite(+v))return '';const n=+v;return (n>0?'+':n<0?'−':'')+Math.abs(n).toFixed(2)+'u'};
+ const mode=()=>(typeof MODE!=='undefined'&&MODE==='$')?'$':'U';
  const teamsFromEvent=ev=>{
   const m=String(ev||'').toUpperCase().match(/^(\d{2})([A-Z]{3})(\d{2})([A-Z]+)$/);
   if(!m) return null;
@@ -779,7 +791,7 @@ window.BetInfo=(function(){
   const pm=pre.match(/(1H|2H|1P|2P|3P|1Q|2Q|3Q|4Q)/);
   const period=pm?pm[1]:'FG';
   const [periodShort,periodName]=period==='FG'?['','Full game']:PERIODS[period];
-  const kind=/SPREAD/.test(pre)?'spread':/TEAMTOTAL/.test(pre)?'teamtotal':/TOTAL/.test(pre)?'total':/GAME/.test(pre)?'ml':'prop';
+  const kind=/SPREAD/.test(pre)?'spread':/TEAMTOTAL/.test(pre)?'teamtotal':/TOTAL/.test(pre)?'total':/GAME/.test(pre)?'ml':/TD/.test(pre)?'td':/RECYDS|REC/.test(pre)?'rec':/RSHYDS|RUSH/.test(pre)?'rush':'prop';
   const evTeams=teamsFromEvent(ev)||{};
   let team='', line=null;
   if(kind==='spread'||kind==='teamtotal'){
@@ -862,18 +874,33 @@ window.BetInfo=(function(){
     if(ai==null||hi==null) return null;
     a+=ai; h+=hi;
    }
-   return {a,h,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${a}–${H.ab||H.abbr||'HOME'} ${h}`,period};
+   return {a,h,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${a}-${H.ab||H.abbr||'HOME'} ${h}`,period,done:true};
   }
   const as=A.score??A.pts, hs=H.score??H.pts;
   if(as==null||hs==null) return null;
-  const clock=g.detail||g.clock||'';
-  const live=g.state==='in'||period==='FG'&&g.state!=='post';
-  return {a:+as,h:+hs,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${as}–${H.ab||H.abbr||'HOME'} ${hs}${clock? ' · '+clock:''}`,live:!!live,period:'FG'};
+  const live=g.state==='in'||(period==='FG'&&g.state!=='post'&&!String(g.detail||'').toLowerCase().startsWith('final'));
+  return {a:+as,h:+hs,as:A.ab||A.abbr||'AWAY',hs:H.ab||H.abbr||'HOME',label:`${A.ab||A.abbr||'AWAY'} ${as}-${H.ab||H.abbr||'HOME'} ${hs}`,live:!!live,period:period||'FG'};
  };
- const plain=(tk,side,fallback)=>{
+ const shortPlayer=p=>{
+  const s=String(p||'').trim(); if(!s) return '';
+  const last=s.split(/\s+/).slice(-1)[0];
+  const key=last.replace(/[^A-Za-z\-]/g,'').toUpperCase();
+  if(NICK[key]||NICK[key.replace(/-/g,'')]) return NICK[key]||NICK[key.replace(/-/g,'')];
+  return last;
+ };
+ const unitWord=(kind,unit)=>{
+  const u=String(unit||'').toLowerCase();
+  const k=String(kind||'').toLowerCase();
+  if(k==='td'||u==='td'||u==='tds') return 'TD';
+  if(k==='rec'||/rec/.test(u)) return 'rec yds';
+  if(k==='rush'||/rush/.test(u)) return 'rush yds';
+  return unit||'';
+ };
+ const periodParen=info=>info&&info.period&&info.period!=='FG'?` (${info.periodName})`:'';
+ const plain=(tk,side,fallback,prop)=>{
   const info=parse(tk);
   const sd=String(side||'YES').toUpperCase();
-  const tag=info.period==='FG'?'':(' '+info.periodShort);
+  const tag=periodParen(info);
   if(info.kind==='spread'&&info.line!=null){
    const named=info.team||'';
    if(sd==='YES'&&named) return named+' -'+info.line+tag;
@@ -890,16 +917,41 @@ window.BetInfo=(function(){
    const tm=info.team||info.away||String(fallback||'').split(/\s+to beat|\s+wins/)[0]||'';
    return (tm+' ML'+tag).trim();
   }
-  const lab=String(fallback||'').replace(/^Full Game:\s*/i,'');
-  if(info.period!=='FG'&&lab&&!/\b1H\b|\b2H\b|first half|second half/i.test(lab)) return lab+tag;
+  if(prop){
+   const who=shortPlayer(prop.last||prop.player||prop.first||'');
+   const kind=prop.kind||info.kind;
+   const target=prop.target;
+   const uw=unitWord(kind,prop.unit);
+   if(who&&target!=null&&(kind==='td'||uw==='TD')){
+    return (+target<=1?who+' anytime TD':who+' '+target+'+ TDs')+tag;
+   }
+   if(who&&target!=null){
+    return who+' '+target+'+ '+(uw||'yds')+tag;
+   }
+  }
+  const lab=String(fallback||'').replace(/^Full Game:\s*/i,'').replace(/\?$/,'');
+  // "Player: 1+" TD-ish
+  const plus=lab.match(/^(.+?):\s*(\d+)\+\s*(.*)$/);
+  if(plus){
+   const who=shortPlayer(plus[1]);
+   const n=+plus[2];
+   const rest=plus[3].toLowerCase();
+   if(/td|touchdown/.test(rest)||(!rest&&info.kind==='td'))
+    return (n<=1?who+' anytime TD':who+' '+n+'+ TDs')+tag;
+   if(/rec/.test(rest)) return who+' '+n+'+ rec yds'+tag;
+   if(/rush/.test(rest)) return who+' '+n+'+ rush yds'+tag;
+   if(rest) return who+' '+n+'+ '+rest+tag;
+   return who+' '+n+'+'+tag;
+  }
+  if(info.period!=='FG'&&lab&&!/\b1H\b|\b2H\b|first half|second half|1st half/i.test(lab)) return lab+tag;
   return lab||info.ticker;
  };
  const whoLabel=w=>{
   if(!w) return '';
   const s=String(w).toLowerCase();
-  if(s==='grok'||s==='mine/grok'||s==='mine / grok') return 'Mine/Grok';
-  if(s==='own'||s==='mine'||s==='cole') return 'Cole';
-  if(/^mixed/i.test(String(w))) return String(w).replace(/\bGrok\b/g,'Mine/Grok').replace(/\bMine\b(?!\/Grok)/g,'Cole').replace(/\bown\b/g,'Cole');
+  if(s==='grok'||s==='mine/grok'||s==='mine / grok'||s==='mine') return 'Mine';
+  if(s==='own'||s==='cole') return 'Cole';
+  if(/^mixed/i.test(String(w))) return String(w).replace(/\bGrok\b/g,'Mine').replace(/\bMine\/Grok\b/g,'Mine').replace(/\bown\b/g,'Cole');
   return String(w);
  };
  const odds=px=>{
@@ -915,10 +967,11 @@ window.BetInfo=(function(){
   const fills=fillIndex();
   const first=fills.first[tk]||{};
   const side=String(row.side||pl.side||first.side||'').toUpperCase();
-  const g=row.game||row.list_game||gameOf(info);
+  const g=row.game&&row.game.away?row.game:(row.list_game||gameOf(info));
   const ps=periodScore(g,info.period);
   const start=row.start||row.list_start||(g&&g.start)||pl.start||'';
-  const name=plain(tk,side,row.label||row.market||row.market_title||pl.label||first.label||'');
+  const prop=((window.PROP&&window.PROP.props)||[]).find(p=>String(p.ticker||'').toUpperCase()===tk);
+  const name=plain(tk,side,row.label||row.market||row.market_title||row.plain||pl.label||first.label||'',prop);
   const game=info.away&&info.home?(info.away+' @ '+info.home):(pl.game||'');
   const officialId=row.bet_id||pl.bet_id||'';
   const id=officialId||fills.ids[tk]||'';
@@ -928,86 +981,108 @@ window.BetInfo=(function(){
   const un=row.units!=null?+row.units:(stake!=null?stake/uUsd:null);
   const cts=row.contracts!=null?+row.contracts:(pl.contracts!=null?+pl.contracts:(first.contracts!=null?+first.contracts:null));
   const px=row.entry!=null?+row.entry:(row.price!=null?+row.price:(pl.entry!=null?+pl.entry:(first.price!=null?+first.price:(cts&&stake?stake/cts:null))));
-  const pnl=row.pnl!=null?+row.pnl:null;
-  const payout=row.payout!=null?+row.payout:(row.max_payout!=null?+row.max_payout:(pnl!=null&&stake!=null?Math.max(0,+(Math.round((stake+pnl)*100)/100)):null));
+  const pnl=row.pnl!=null?+row.pnl:(row.upnl!=null?+row.upnl:null);
+  const payout=row.payout!=null?+row.payout:(row.max_payout!=null&&row.result?+row.max_payout:(pnl!=null&&stake!=null&&row.result?Math.max(0,+(Math.round((stake+pnl)*100)/100)):null));
   const placed=row.opened_at||row.placed_at||pl.placed_time||pl.opened_at||first.t||'';
-  const settled=row.closed_at||row.settled_at||row.t||'';
-  let margin=row.margin||'';
-  const tag=info.period==='FG'?'Final':info.period;
-  if(!margin&&info.kind==='spread'&&ps&&info.line!=null&&info.team&&!ps.live){
+  const settled=row.closed_at||row.settled_at||(row.result?row.t:'')||'';
+  // score: period-aware, clock once, no duplicate
+  let score='';
+  if(ps){
+   const hs=ps.as+' '+ps.a+'-'+ps.hs+' '+ps.h;
+   if(info.period!=='FG'&&ps.done){
+    const tag=info.period==='1H'?'1H':info.period;
+    score=tag+' '+hs;
+   } else if(ps.live||(g&&g.state==='in')){
+    const clock=String(g&&g.detail||g&&g.clock||'').trim();
+    score='Live '+hs+(clock&&hs.indexOf(clock)<0?', '+clock:'');
+   } else {
+    score='Final '+hs;
+   }
+  } else if(prop&&prop.score){
+   const clock=String(prop.clock||'').trim();
+   const sc=String(prop.score);
+   score=sc+(clock&&sc.indexOf(clock)<0?', '+clock:'');
+  }
+  let shortMargin='';
+  if(info.kind==='spread'&&ps&&info.line!=null&&info.team&&(ps.done||!ps.live)){
    const teamIsAway=info.team===ps.as||info.team===info.away;
    const mgn=teamIsAway?ps.a-ps.h:ps.h-ps.a;
    const heldYes=side!=='NO';
    const cover=heldYes?(mgn-info.line):-(mgn-info.line);
-   const verb=mgn>0?'won by':mgn<0?'lost by':'tied';
-   const by=Math.abs(mgn);
-   margin=tag+' '+ps.as+' '+ps.a+'–'+ps.hs+' '+ps.h+', '+info.team+' '+(mgn===0?'tied':verb+' '+by)+', needed '+(heldYes?info.line:('under '+info.line))+': '+(cover>=0?'covered by ':'missed by ')+Math.abs(cover);
-  }
-  if(!margin&&(info.kind==='total'||info.kind==='teamtotal')&&ps&&!ps.live&&info.line!=null){
+   shortMargin=(cover>=0?'covered by ':'missed by ')+Math.abs(cover);
+  } else if((info.kind==='total'||info.kind==='teamtotal')&&ps&&(ps.done||!ps.live)&&info.line!=null){
    const tot=ps.a+ps.h;
    const heldUnder=side==='NO';
    const edge=heldUnder?(info.line-tot):(tot-info.line);
-   margin=tag+' '+ps.label+', total '+tot+' vs '+info.line+': '+(heldUnder?'Under':'Over')+' by '+Math.abs(edge)+(edge<0?' (missed)':'');
+   shortMargin=(heldUnder?'Under':'Over')+' by '+Math.abs(edge)+(edge<0?' (missed)':'');
   }
-  const prop=((window.PROP&&window.PROP.props)||[]).find(p=>String(p.ticker||'').toUpperCase()===tk);
-  if(!margin&&prop&&prop.cur!=null&&prop.target!=null){
-   margin=(prop.last||prop.player||'')+' '+prop.cur+' '+(prop.unit||'')+', needed '+prop.target;
-   margin=margin.replace(/\s+/g,' ').trim();
+  if(prop&&prop.cur!=null&&prop.target!=null){
+   const uw=unitWord(prop.kind||info.kind,prop.unit);
+   shortMargin=prop.cur+' '+uw+' (needed '+prop.target+')';
   }
-  if(!margin&&ps) margin=(ps.live?'Live ':'')+ps.label+(ps.period&&ps.period!=='FG'?' '+ps.period:'')+(g&&g.detail&&ps.live?' · '+g.detail:'');
-  const score=ps?((info.period!=='FG'&&!ps.live?info.period+' ':'')+ps.label+(g&&g.detail&&(ps.live||info.period==='FG')?' · '+g.detail:'')):(prop&&prop.score?prop.score+(prop.clock?' · '+prop.clock:''):'');
-  return {info,side,name,game,periodName:info.periodName,id,who,stake,units:un,contracts:cts,price:px,odds:odds(px),pnl,payout,placed,start,settled,score,margin,ticker:tk,result:row.result,how:row.how,uUsd};
+  let resultText='';
+  if(shortMargin&&score) resultText='Result: '+shortMargin+' · '+score;
+  else if(shortMargin) resultText='Result: '+shortMargin;
+  else if(score) resultText='Result: '+score;
+  const headline=name+(game?(' · '+game):'');
+  const resCode=({W:'WIN',L:'LOSS',Win:'WIN',Loss:'LOSS',P:'PUSH'}[row.result]||row.result||(pnl!=null&&row.closed_at?(pnl>0?'WIN':pnl<0?'LOSS':''):''));
+  return {info,side,name,headline,game,periodName:info.periodName,id,who,stake,units:un,contracts:cts,price:px,odds:odds(px),pnl,payout,placed,start,settled,score,shortMargin,resultText,ticker:tk,result:resCode,how:row.how,uUsd};
  };
- const tooltip=b=>{
-  const f=facts(b);
-  const c=f.pnl>0?'#0b7a32':f.pnl<0?'#a8323f':'#8a8676';
-  const res=({W:'WIN',L:'LOSS',Win:'WIN',Loss:'LOSS',P:'PUSH'}[f.result]||f.result||'');
-  const head=[res&&`<b style="color:${c}">${esc(res)}</b>`, f.id&&`<b>${esc(f.id)}</b>`, f.who&&esc(f.who)].filter(Boolean).join(' · ');
+ const pnlPair=f=>{
+  if(f.pnl==null||!Number.isFinite(+f.pnl)) return null;
+  const dol=money(f.pnl,true);
+  const un=units(f.uUsd?f.pnl/f.uUsd:f.pnl);
+  if(mode()==='U') return {primary:un,secondary:dol,color:f.pnl>0?'#2fe08a':f.pnl<0?'#ff4f64':'#c5c2b8'};
+  return {primary:dol,secondary:un,color:f.pnl>0?'#2fe08a':f.pnl<0?'#ff4f64':'#c5c2b8'};
+ };
+ const panel=(rowOrFacts,opts)=>{
+  const f=rowOrFacts&&rowOrFacts.headline!=null?rowOrFacts:facts(rowOrFacts||{});
+  const o=opts||{};
+  const variant=o.variant||'tooltip';
+  const pair=pnlPair(f);
+  const res=f.result||'';
   const lines=[];
-  if(head) lines.push(head);
-  lines.push(`<b>${esc(f.name)}</b>${f.periodName?` · ${esc(f.periodName)}`:''}`);
-  if(f.game) lines.push(esc(f.game));
-  if(f.side) lines.push('Held <b>'+esc(f.side)+'</b>');
-  const fill=[];
-  if(f.contracts!=null&&f.price!=null) fill.push((+f.contracts).toFixed((+f.contracts)%1?2:0)+' @ '+(Math.round(f.price*1000)/10)+'¢'+(f.odds?' ('+f.odds+')':''));
-  if(f.stake!=null) fill.push('Stake '+money(f.stake,false)+(f.units!=null?' · '+Math.abs(f.units).toFixed(2)+'u':''));
-  if(f.payout!=null) fill.push('Payout '+money(f.payout,false));
-  if(fill.length) lines.push(fill.join(' · '));
-  const times=[];
-  if(f.placed) times.push('Placed '+et(f.placed));
-  if(f.start) times.push('Start '+et(f.start));
-  if(f.settled) times.push('Settled '+et(f.settled));
-  if(times.length) lines.push(times.join(' · '));
-  if(f.score) lines.push(esc(f.score));
-  if(f.margin&&f.margin!==f.score) lines.push(esc(f.margin));
-  if(f.pnl!=null){
-   const pu=b.pnl_u!=null?+b.pnl_u:(f.uUsd?f.pnl/f.uUsd:null);
-   lines.push('P/L <b style="color:'+c+'">'+money(f.pnl,true)+'</b>'+(pu!=null?(' · '+(pu>0?'+':pu<0?'−':'')+Math.abs(pu).toFixed(2)+'u'):''));
+  if(variant!=='results'&&(pair||res)){
+   const head=(res?res+' ':'')+(pair?pair.primary:'')+(pair&&pair.secondary?(' <span style="font-size:13px;font-weight:650;opacity:.88">('+pair.secondary+')</span>'):'');
+   lines.push(`<div style="font-size:16px;font-weight:800;letter-spacing:-0.02em;color:${pair?pair.color:'#eef2ea'};line-height:1.2">${head}</div>`);
   }
-  if(f.ticker) lines.push('<span style="color:#8a8676">'+esc(f.ticker)+'</span>');
-  return lines.join('<br>');
+  lines.push(`<div style="font-size:14px;font-weight:700;color:#eef2ea;margin-top:5px;line-height:1.3">${esc(f.headline||f.name||'')}</div>`);
+  if(f.resultText) lines.push(`<div style="margin-top:3px;font-size:13px;color:#d5d2c8;line-height:1.35">${esc(f.resultText)}</div>`);
+  const cells=[];
+  if(f.id) cells.push('Bet '+f.id);
+  if(f.who) cells.push(f.who);
+  if(f.contracts!=null&&f.price!=null) cells.push((+f.contracts).toFixed((+f.contracts)%1?2:0)+' @ '+(Math.round(f.price*1000)/10)+'¢');
+  if(f.stake!=null) cells.push('Stake '+money(f.stake,false));
+  if(f.payout!=null) cells.push('Payout '+money(f.payout,false));
+  if(f.odds) cells.push('Odds '+f.odds);
+  if(f.start) cells.push('Kickoff '+etShort(f.start));
+  if(f.settled) cells.push('Settled '+etShort(f.settled));
+  if(f.placed) cells.push('Placed '+etShort(f.placed));
+  const grid=cells.map(c=>`<div>${esc(c)}</div>`).join('');
+  if(cells.length) lines.push(`<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 12px;margin-top:8px;font-size:11.5px;color:#9a968c;line-height:1.45">${grid}</div>`);
+  if(f.ticker) lines.push(`<div style="margin-top:6px;font-size:10px;color:#5e5c56;word-break:break-all;line-height:1.3">${esc(f.ticker)}</div>`);
+  return `<div class="bet-panel" style="max-width:320px;width:max-content;min-width:240px;font:13px/1.35 ui-sans-serif,system-ui,-apple-system,sans-serif;text-align:left;white-space:normal">${lines.join('')}</div>`;
  };
+ const tooltip=b=>panel(b,{variant:'tooltip'});
  const factsLines=f=>{
   if(!f) return [];
   const out=[];
   if(f.id) out.push(['Bet ID', f.id]);
   if(f.who) out.push(['Owner', f.who]);
   if(f.game) out.push(['Game', f.game]);
-  if(f.periodName) out.push(['Period', f.periodName]);
+  if(f.periodName&&f.periodName!=='Full game') out.push(['Period', f.periodName]);
   if(f.name) out.push(['Our side', f.name]);
   if(f.contracts!=null&&f.price!=null) out.push(['Contracts', (+f.contracts).toFixed((+f.contracts)%1?2:0)+' @ '+(Math.round(f.price*1000)/10)+'¢'+(f.odds?' · '+f.odds:'')]);
   if(f.stake!=null) out.push(['Stake', money(f.stake,false)+(f.units!=null?' · '+Math.abs(f.units).toFixed(2)+'u':'')]);
   if(f.payout!=null) out.push(['Payout', money(f.payout,false)]);
   if(f.placed) out.push(['Placed', et(f.placed)]);
-  if(f.start) out.push(['Game start', et(f.start)]);
+  if(f.start) out.push(['Kickoff', et(f.start)]);
   if(f.settled) out.push(['Settled', et(f.settled)]);
-  if(f.score) out.push(['Score', f.score]);
-  if(f.margin) out.push(['Margin', f.margin]);
-  if(f.pnl!=null) out.push(['P/L', money(f.pnl,true)+(f.uUsd?(' · '+(f.pnl>=0?'+':'−')+Math.abs(f.pnl/f.uUsd).toFixed(2)+'u'):'')]);
-  if(f.ticker) out.push(['Ticker', f.ticker]);
+  if(f.resultText) out.push(['Result', f.resultText.replace(/^Result:\s*/,'')]);
+  if(f.pnl!=null) out.push(['P/L', money(f.pnl,true)+(f.uUsd?(' · '+units(f.pnl/f.uUsd)):'')]);
   return out;
  };
- return {parse,plain,facts,tooltip,whoLabel,placedOf,periodScore,et,gameOf,factsLines,fillIndex};
+ return {parse,plain,facts,tooltip,panel,whoLabel,placedOf,periodScore,et,etShort,gameOf,factsLines,fillIndex};
 })();
 
 </script>
@@ -1316,7 +1391,7 @@ function posPage(d){
  const columns=[
   ['start','Game start',posStartCell],
   ['matchup','Matchup',posMatchup],
-  ['market','Bet',row=>{const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(row):null;const nm=(f&&f.name)||row.market;const sub=[f&&f.id,f&&f.who,f&&f.game,f&&f.periodName].filter(Boolean).join(' · ');return `<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(nm)}</button>${posSideBadge(row.side)}</div>${sub?`<div class="pos-muted">${esc(sub)}</div>`:''}${posIsParlay(row)?posParlaySummary(row):posPropBar(row)}`}],
+  ['market','Bet',row=>{const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(row):null;const nm=(f&&f.headline)||(f&&f.name)||row.market;const sub=[f&&f.id,f&&f.who].filter(Boolean).join(' · ');return `<div class="pos-bet-label"><button type="button" class="pos-market" data-pos-ticker="${esc(row.ticker)}">${esc(nm)}</button>${posSideBadge(row.side)}</div>${sub?`<div class="pos-muted">${esc(sub)}</div>`:''}${posIsParlay(row)?posParlaySummary(row):posPropBar(row)}`}],
   ['entry','Entry price',row=>row.entry==null?'—':f(row.entry*100,1)+'¢'],
   ['probability','At start',posStartProbability],
   ['currentProbability','Current',posCurrentProbability],
@@ -1394,17 +1469,12 @@ function showPositionDetail(row){
   ['Marked value',posMoney(row.value)],['Open P&L',PM(row.upnl,true,true)],
   ['Potential profit',posMoney(row.win,true)]
  ];
- (function(){
-   const f=window.BetInfo&&BetInfo.facts?BetInfo.facts(row):null;
-   if(!f||!BetInfo.factsLines) return;
-   const seen=new Set(details.map(x=>x[0]));
-   for(const [k,v] of BetInfo.factsLines(f)){
-     if(seen.has(k)||k==='Payout'&&row.parlay||k==='P/L'&&row.parlay) continue;
-     if(row.parlay&&(k==='Marked value'||k==='Open P&L')) continue;
-     details.push([k,esc(v)]);
-     seen.add(k);
-   }
- })();
+ const betFacts=window.BetInfo&&BetInfo.facts?BetInfo.facts(Object.assign({},row,{pnl:row.pnl!=null?row.pnl:row.upnl,stake:row.stake!=null?row.stake:row.cost,payout:row.payout!=null?row.payout:row.max_payout})):null;
+ const betPanel=(!row.parlay&&betFacts&&BetInfo.panel)?BetInfo.panel(betFacts,{variant:'popup'}):'';
+ if(betFacts){
+   const skip=new Set(['Side','Game start','Stake','Bet ID','Owner','Game','Period','Our side','Contracts','Payout','Placed','Kickoff','Settled','Score','Margin','Result','P/L','Ticker']);
+   for(let i=details.length-1;i>=0;i--){ if(skip.has(details[i][0])) details.splice(i,1); }
+ }
  if(row.parlay){
    const legs=((pl&&pl.legs)||[]);
    const ST={hit:'HIT',live:'LIVE',pre:'NOT STARTED',dead:'DEAD'};
@@ -1433,9 +1503,9 @@ function showPositionDetail(row){
      ${bar||''}${chart||(bar?'':'<div class="pos-muted">Waiting on score / stat</div>')}</article>`;
   }).join('')}</div>`:'';
  dialog.classList.toggle('pos-parlay-dialog',!!pl);
- dialog.innerHTML=`<header><h2 id="sc-position-title">${esc(row.market)}</h2><form method="dialog"><button type="submit">Close</button></form></header>
-  ${pl?'':posMatchup(row,true)}${legHtml}<dl>${details.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>
-  <small>${esc(row.ticker)}${pl?' · marked from legs':(row.quote_state?' · '+esc(row.quote_state):'')}</small>${!pl&&range?.through?`<p class="pos-muted">In-game quotes recorded through ${esc(posTime(Date.parse(range.through)))}.</p>`:''}`;
+ dialog.innerHTML=`<header><h2 id="sc-position-title">${esc((betFacts&&betFacts.headline)||row.market)}</h2><form method="dialog"><button type="submit">Close</button></form></header>
+  ${pl?'':posMatchup(row,true)}${legHtml}${betPanel||''}<dl>${details.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>
+  ${pl?`<small class="pos-muted">marked from legs</small>`:(range?.through?`<p class="pos-muted">In-game quotes recorded through ${esc(posTime(Date.parse(range.through)))}.</p>`:'')}`;
  if(!dialog.open)dialog.showModal();
 }
 if(!window._posPropTipBound){
@@ -2318,10 +2388,7 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    if(f&&f.placed) times.push('placed '+(BetInfo.et(f.placed)));
    if(f&&f.start) times.push('start '+(BetInfo.et(f.start)));
    if(r.closed_at) times.push('settled '+(f&&f.settled?BetInfo.et(f.settled):t(r.closed_at)));
-   const odds=f&&f.odds?` · ${f.odds}`:'';
-   const payout=f&&f.payout!=null?` · payout ${usd(f.payout)}`:'';
-   const score=f&&f.score?f.score:'';
-   return `<tr><td>${lg(r.sport)} <b>${esc(name)}</b><div class=mu>${esc(meta.filter(Boolean).join(' · '))}</div>${fill?`<div class=mu>${esc(fill)+odds+payout}</div>`:''}${times.length?`<div class=mu>${esc(times.join(' · '))}</div>`:''}${score?`<div class=mu>${esc(score)}</div>`:''}<div class=mu>${esc(margin)}</div>${f&&f.ticker?`<div class=mu>${esc(f.ticker)}</div>`:''}</td><td>${chip(r)}<div class=mu>${sg(r.pnl)}</div></td><td class=n>${usd(r.stake)}</td><td class="n ${cl(r.pnl)}"><b>${sg(r.pnl)}</b></td></tr>`;
+   return `<tr><td>${lg(r.sport)}${f&&BetInfo.panel?BetInfo.panel(f,{variant:'results'}):`<b>${esc(name)}</b>`}</td><td>${chip(r)}<div class=mu>${sg(r.pnl)}</div></td><td class=n>${usd(r.stake)}</td><td class="n ${cl(r.pnl)}"><b>${sg(r.pnl)}</b></td></tr>`;
   };
   const sec=(title,rs)=>rs.length?`<tr><td colspan=4 style="padding-top:10px"><b>${esc(title)}</b> <span class=mu>${rs.length}</span></td></tr>`+rs.map(line).join(''):'';
   const label=new Date(day+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'});
@@ -3172,7 +3239,7 @@ if(ovOn('set')){
   return point?[{value:[time,point.value],bet,itemStyle:{color,borderColor:'#fffdf6',borderWidth:1}}]:[];
  });
  if(settled.length)S.push({name:'Settled bet',type:'scatter',symbol:'circle',symbolSize:8,data:settled,z:7,
-  tooltip:{trigger:'item',formatter:({data})=>{const b=data.bet||{};return (window.BetInfo&&BetInfo.tooltip)?BetInfo.tooltip(b):`<b>${e(b.bet_id||b.label||b.ticker||'')}</b>`}}});
+  tooltip:{trigger:'item',confine:true,extraCssText:'max-width:320px;white-space:normal;padding:10px 12px;line-height:1.35;font-size:13px;',formatter:({data})=>{const b=data.bet||{};return (window.BetInfo&&BetInfo.tooltip)?BetInfo.tooltip(b):''}}});
 }
 if(ovOn('inv'))S.push({name:'Net invested',type:'line',data:r.map(x=>[TT(x.t),+x.n]),showSymbol:false,step:'end',lineStyle:{color:'#1d4e89',width:2,type:'dashed'},z:2});
 const cashGroups=new Map(),minute=6e4;

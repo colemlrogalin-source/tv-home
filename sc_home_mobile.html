@@ -525,9 +525,15 @@ table td{font-size:14.5px}table th{font-size:14px}
 .pos-prop-track{display:block;margin-top:3px;height:7px;border-radius:99px;background:#243044;overflow:hidden;border:1px solid color-mix(in srgb,var(--prop-col) 45%,#243044)}
 .pos-prop-track i{display:block;height:100%;background:var(--prop-col);border-radius:99px;box-shadow:0 0 8px var(--prop-col)}
 .pos-prop-live{--prop-col:#00F0FF}
-.pos-prop-hit,.pos-prop-ahead{--prop-col:#39FF14}
-.pos-prop-miss{--prop-col:#FF3355}
+.pos-prop-hit,.pos-prop-ahead,.pos-prop-lead{--prop-col:#39FF14}
+.pos-prop-miss,.pos-prop-trail{--prop-col:#FF3355}
 .pos-prop-pre{--prop-col:#8fa0b8}
+.pos-prop-track{position:relative}
+.pos-prop-mid{position:absolute;left:50%;top:-1px;bottom:-1px;width:1px;background:#9aa8bc;opacity:.9;z-index:1;pointer-events:none}
+.pos-prop-fill-pos,.pos-prop-fill-neg{position:absolute;top:0;height:100%;background:var(--prop-col);border-radius:99px;box-shadow:0 0 8px var(--prop-col)}
+.pos-prop-fill-pos{left:50%}
+.pos-prop-fill-neg{right:50%}
+.pos-prop-tip{position:fixed;z-index:9999;max-width:280px;padding:6px 9px;border-radius:6px;background:#1b2433;color:#eef4ff;border:1px solid #4a5a73;font:600 12px/1.35 'Inter',system-ui,sans-serif;box-shadow:0 8px 24px #0008;pointer-events:none;white-space:nowrap}
 
 #detail .pos-table .pos-numeric small:not(.pos-muted):not(.pos-total-coverage){font-size:12px}
 .pos-source,.pos-empty{padding:10px 15px}
@@ -889,16 +895,53 @@ function posPropFor(row){
  if(!ticker)return null;
  return props.find(p=>String(p.ticker||'').toUpperCase()===ticker)||null;
 }
+function posPropIsFinal(p){
+ const st=String(p.game_state||'').toLowerCase();
+ const clock=String(p.clock||p.detail||'').toLowerCase();
+ return st==='post'||!!p.completed||clock==='final'||clock.startsWith('final');
+}
+function posOurEdge(p,row){
+ const cur=p.cur==null?0:+p.cur,tgt=p.target==null?0:+p.target;
+ const side=String(p.side||row.side||'YES').toUpperCase();
+ const kind=String(p.kind||'');
+ if(kind==='ml') return side==='NO'?-cur:cur;
+ if(kind==='spread') return side==='NO'?(tgt-cur):(cur-tgt);
+ return null;
+}
 function posPropBar(row){
  const p=posPropFor(row);
  if(!p||p.target==null)return '';
+ const ticker=String(row.ticker||p.ticker||'').toUpperCase();
+ const kind=String(p.kind||'');
  const cur=p.cur==null?0:+p.cur,tgt=+p.target;
- const st=['live','hit','miss','pre','ahead'].includes(p.status)?p.status:(p.status==='final'?'miss':'live');
- const pct=tgt>0?Math.min(100,Math.max(0,cur/tgt*100)):0;
+ const signed=kind==='ml'||kind==='spread';
+ const isFinal=posPropIsFinal(p);
+ let st=['live','hit','miss','pre','ahead'].includes(p.status)?p.status:(p.status==='final'?'miss':'live');
+ if(signed&&!isFinal&&st!=='pre'){
+  const edge=posOurEdge(p,row);
+  st=edge==null||Math.abs(edge)<1e-9?'live':(edge>0?'lead':'trail');
+ }else if(signed&&isFinal){
+  const edge=posOurEdge(p,row);
+  st=(st==='hit'||st==='miss')?st:((edge||0)>=0?'hit':'miss');
+ }
  const label=p.label||`${p.last||p.player||p.name||''} ${cur} / ${tgt} ${p.unit||''}`.replace(/\s+/g,' ').trim();
  const tag=st==='hit'?' · HIT':st==='miss'?' · MISS':'';
  const asof=p.as_of_label||(window.PROP&&window.PROP.as_of_label)||'';
- return `<div class="pos-prop pos-prop-${st}" title="${esc(label+tag+(asof?' · as of '+asof:''))}"><div class="pos-prop-meta"><span>${esc(label)}${tag}</span>${asof?`<span class="pos-prop-asof">${esc(asof)}</span>`:''}</div><span class="pos-prop-track" aria-hidden="true"><i style="width:${pct}%"></i></span></div>`;
+ const tip=label+tag+(asof?' · as of '+asof:'');
+ let track;
+ if(signed&&st!=='pre'){
+  const hockey=/NHL/i.test(p.sport||'')||/goal/i.test(p.unit||'');
+  const scale=hockey?3:14;
+  const edge=posOurEdge(p,row)||0;
+  const half=Math.min(50,Math.abs(edge)/scale*50);
+  const cls=edge>0||(isFinal&&edge>=0)?'pos-prop-fill-pos':edge<0?'pos-prop-fill-neg':'';
+  const fill=cls?`<i class="${cls}" style="width:${half}%"></i>`:'';
+  track=`<span class="pos-prop-track pos-prop-signed" aria-hidden="true"><i class="pos-prop-mid"></i>${fill}</span>`;
+ }else{
+  const pct=tgt>0?Math.min(100,Math.max(0,cur/tgt*100)):0;
+  track=`<span class="pos-prop-track" aria-hidden="true"><i style="width:${pct}%"></i></span>`;
+ }
+ return `<div class="pos-prop pos-prop-${st}" data-ticker="${esc(ticker)}" data-tip="${esc(tip)}"><div class="pos-prop-meta"><span>${esc(label)}${tag}</span>${asof?`<span class="pos-prop-asof">${esc(asof)}</span>`:''}</div>${track}</div>`;
 }
 function posPage(d){
  const rows=positionRowsForPage(d);
@@ -986,6 +1029,32 @@ function showPositionDetail(row){
   ${posMatchup(row,true)}<dl>${details.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>
   <small>${esc(row.ticker)}${row.quote_state?' · '+esc(row.quote_state):''}</small>${range?.through?`<p class="pos-muted">In-game quotes recorded through ${esc(posTime(Date.parse(range.through)))}.</p>`:''}`;
  if(!dialog.open)dialog.showModal();
+}
+if(!window._posPropTipBound){
+ window._posPropTipBound=true;
+ const tip=document.createElement('div');
+ tip.className='pos-prop-tip';
+ tip.hidden=true;
+ document.body.appendChild(tip);
+ const hide=()=>{tip.hidden=true};
+ document.addEventListener('mouseover',ev=>{
+  const el=ev.target&&ev.target.closest&&ev.target.closest('.pos-prop[data-tip]');
+  if(!el)return;
+  tip.textContent=el.getAttribute('data-tip')||'';
+  tip.hidden=false;
+  const r=el.getBoundingClientRect();
+  const tw=tip.offsetWidth||180,th=tip.offsetHeight||28;
+  let left=r.left; if(left+tw>innerWidth-8) left=Math.max(8,innerWidth-tw-8);
+  let top=r.top-8-th; if(top<8) top=r.bottom+8;
+  tip.style.left=left+'px'; tip.style.top=top+'px';
+ });
+ document.addEventListener('mouseout',ev=>{
+  const el=ev.target&&ev.target.closest&&ev.target.closest('.pos-prop[data-tip]');
+  if(!el)return;
+  if(ev.relatedTarget&&el.contains(ev.relatedTarget))return;
+  hide();
+ });
+ document.addEventListener('scroll',hide,true);
 }
 function posAfter(d){
  const desk=document.querySelector('.positions-desk');

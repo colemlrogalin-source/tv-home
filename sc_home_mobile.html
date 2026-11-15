@@ -544,6 +544,7 @@ table td{font-size:14.5px}table th{font-size:14px}
 #sc-position-detail dl{margin:14px 0}#sc-position-detail dl div{display:flex;justify-content:space-between;align-items:center;gap:10px;border-top:1px solid #313e54;padding:7px 0}
 #sc-position-detail dd{margin:0;text-align:right}#sc-position-detail small{color:#a7b3c9}
 #sc-position-detail.pos-parlay-dialog{width:min(640px,calc(100vw - 28px))}
+.pos-parlay-list{color:#c9d3e6}.pl-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:0;background:#8a94a6}.pl-hit .pl-dot{background:#39FF14}.pl-live .pl-dot{background:#FFD23F}.pl-dead .pl-dot{background:#FF3355}.pl-st{font:800 10px/16px Inter,system-ui,sans-serif;letter-spacing:.04em;padding:0 6px;border-radius:4px;background:#2a3344;color:#c3cbd9}.pl-hit .pl-st{background:#163216;color:#39FF14}.pl-live .pl-st{background:#3a3212;color:#FFD23F}.pl-dead .pl-st{background:#3a1218;color:#FF3355}.pl-stat{font-size:14px;font-weight:700;color:#f2f5ff}.pl-dead{opacity:.85}
 .pos-parlay-hd{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0 10px}
 .pos-parlay-hd b{font-size:14px}
 .pos-leg-st{display:inline-block;font:800 10px/16px Inter,system-ui,sans-serif;letter-spacing:.04em;padding:0 6px;border-radius:4px;vertical-align:1px}
@@ -743,11 +744,38 @@ function kalshiEv(tk){const m=String(tk||'').split('-')[1]||'';return m.replace(
 function gmOpen(o){const S=window.SCR;return S&&S.games&&S.games.find(g=>g.kalshi_event&&g.kalshi_event==kalshiEv(o.ticker))}
 function posBucket(r){const g=gmOpen(r);if(g)return g.state==='pre'?'up':'live';const m=(String(r.ticker||'').split('-')[1]||'').match(/^(\d{2})([A-Z]{3})(\d{2})(\d{4})?/);const MON={JAN:0,FEB:1,MAR:2,APR:3,MAY:4,JUN:5,JUL:6,AUG:7,SEP:8,OCT:9,NOV:10,DEC:11};if(!m||MON[m[2]]==null)return 'live';const hh=m[4]?+m[4].slice(0,2):0,mm=m[4]?+m[4].slice(2):0;const key=`20${m[1]}-${String(MON[m[2]]+1).padStart(2,'0')}-${m[3]} ${String(hh).padStart(2,'0')}:${String(isNaN(mm)?0:mm).padStart(2,'0')}:00`;const now=new Date().toLocaleString('sv-SE',{timeZone:'America/New_York'});return key>now?'up':'live'}
 function sidePill(r){const s=String(r.side||'').toUpperCase();if(s!=='YES'&&s!=='NO')return '';return `<b class="pill ${s==='YES'?'pg':'pr'}">${s}</b> `}
+/* parlay hold: open parlays show $0 live P&L (held at stake) until they settle; legs come from data/prop_progress.json parlays */
+function posParlayRow(r){return String(r&&r.ticker||'').toUpperCase().startsWith('KXMVE')||(r&&r.market_type)==='parlay'}
+function posParlayOpen(r){return posParlayRow(r)&&!['settled','finalized','determined'].includes(String(r.market_status||'').toLowerCase())}
+function posParlayData(r){const tk=String(r&&r.ticker||'').toUpperCase(),all=(window.PROP&&window.PROP.parlays)||[];return all.find(p=>String(p.ticker||'').toUpperCase()===tk)||null}
+function posParlayN(r){const pl=posParlayData(r);if(pl&&pl.legs&&pl.legs.length)return pl.legs.length;const m=String(r.label||'').match(/^Parlay \((\d+)\)/);if(m)return +m[1];const t=String(r.market_title||'').split(',').filter(x=>x.trim());return t.length||null}
+function posParlayTitle(r){const n=posParlayN(r);return 'Parlay · '+(n?n+' legs':'legs')}
+function posLegName(L){const lab=String(L.label||'').replace(/^(yes|no)\s+/i,'');const nm=lab.split(':')[0].trim();const p=nm.split(/\s+/).filter(w=>!/^(jr\.?|sr\.?|ii|iii|iv)$/i.test(w));return p.length>1?p[0][0]+'. '+p.slice(1).join(' '):nm}
+function posLegTeam(L){const ab=String(L.ticker||'').split('-').pop();return /^[A-Z]{2,4}$/.test(ab)?ab:String(L.label||'').replace(/^(yes|no)\s+/i,'')}
+function posLegShort(L){const k=String(L.kind||''),lab=String(L.label||'').replace(/^(yes|no)\s+/i,'');
+ if(k==='ml')return posLegTeam(L)+' to win';
+ const m=lab.match(/^([^:]+):\s*(\d+(?:\.\d+)?)\+\s*(.*)$/);
+ if(m){const u=L.unit||m[3]||'';return u==='TD'&&+m[2]===1?posLegName(L)+' TD':(posLegName(L)+' '+m[2]+'+ '+u).trim()}
+ return lab||String(L.ticker||'')}
+function posParlayLegList(r){const pl=posParlayData(r);const names=pl&&pl.legs&&pl.legs.length?pl.legs.map(posLegShort):String(r.market_title||'').split(',').map(x=>x.trim().replace(/^(yes|no)\s+/i,'')).filter(Boolean);return names.join(' · ')}
+function posLegState(L){const st=String(L.status||'').toLowerCase(),g=String(L.game_state||'').toLowerCase();if(st==='hit')return 'hit';if(st==='miss')return 'dead';if(st==='pre'||g==='pre'||(!g&&!L.score))return 'pre';return 'live'}
+function posPlainMoney(v){if(v==null||!Number.isFinite(+v))return '—';const u=+(window.D&&D.sq&&D.sq.settings&&D.sq.settings.unit_usd)||50;return MODE==='U'?(+v/u).toFixed(2)+'u':'$'+(+v).toFixed(2)}
+function posLegWhen(L,s){const m=String(L.score||'').match(/^(\S+) (\d+), (\S+) (\d+)$/);if(s!=='pre')return [m?`${m[1]} ${m[2]}–${m[4]} ${m[3]}`:L.score,L.clock].filter(Boolean).join(' · ');const bits=[];if(m)bits.push(m[1]+' @ '+m[3]);if(L.start_ts)bits.push(posTime(L.start_ts*1000));else{const e=(String(L.ticker||'').split('-')[1]||'').match(/^(\d{2})([A-Z]{3})(\d{2})/);if(e)bits.push(e[2][0]+e[2].slice(1).toLowerCase()+' '+(+e[3]))}return bits.join(' · ')}
+function posParlayStart(r){const pl=posParlayData(r);const ts=((pl&&pl.legs)||[]).map(L=>L.start_ts?L.start_ts*1000:Date.parse(L.start||'')).filter(Number.isFinite);return ts.length?Math.min(...ts):null}
+function posParlayGames(r){const pl=posParlayData(r);const seen=[];((pl&&pl.legs)||[]).forEach(L=>{const m=String(L.score||'').match(/^(\S+) \d+, (\S+) \d+$/);const g=m?m[1]+' @ '+m[2]:'';if(g&&!seen.includes(g))seen.push(g)});return seen.join(' · ')}
+function posParlayCount(r){const pl=posParlayData(r);if(!pl||!pl.legs||!pl.legs.length)return '';const n=pl.legs.length,h=pl.legs.filter(L=>posLegState(L)==='hit').length,d=pl.legs.filter(L=>posLegState(L)==='dead').length;return `${h} of ${n} hit${d?` · ${d} dead`:''}`}
+function posLegStat(L){const st=posLegState(L),k=String(L.kind||'');
+ const m=String(L.score||'').match(/^(\S+) (\d+), (\S+) (\d+)$/);
+ if(k==='ml'){if(!m)return st==='pre'?'Not started':'no live data';const t=posLegTeam(L),a=m[1],as=+m[2],h=m[3],hs=+m[4];const mine=t===a?as:t===h?hs:null,oth=t===a?hs:t===h?as:null;if(mine==null)return 'no live data';if(st==='pre')return 'Not started';const fin=String(L.game_state||'')==='post';return mine>oth?`${t} ${fin?'won':'leads'} ${mine}–${oth}`:mine<oth?`${t} ${fin?'lost':'trails'} ${mine}–${oth}`:`Tied ${mine}–${oth}`}
+ if(k==='spread'||k==='total')return L.progress_label||'no live data';
+ if(st==='pre')return 'Not started';
+ if(L.cur==null)return L.score?'no stat posted yet':'no live data';
+ const tg=L.target!=null?L.target:'';return `${posLegName(L)} ${L.cur}/${tg} ${L.unit||''}`.trim()}
 function sideTitle(r){return String(lbl(r)||'').replace(/^\s*NO:\s*/i,'').replace(/^\s*NO\s+/i,'')}
 function positionDisplay(r){r={...r};if(r.contracts<0){r.contracts=-r.contracts;if(r.side!=='NO'){r.live=r.value=r.upnl=r.chg=null}r.side='NO';r.entry=r.cost/r.contracts;r.max_payout=r.contracts}if(r.quote_state!=='resolved'&&!(['settled','finalized','determined'].includes(r.market_status)&&['yes','no'].includes(r.market_result))&&(r.live===0||r.live===1)){r.live=r.value=r.upnl=r.chg=null;r.quote_state='no executable bid'}return r}
 function posRows(d){const R=(d.open_positions.rows||[]).map(positionDisplay);const L=(typeof IS!='undefined'&&IS&&IS.live&&IS.live.rows)||[];
  L.forEach(l=>{if(!R.some(r=>r.ticker==l.ticker))R.push({ticker:l.ticker,contracts:l.contracts,cost:l.cost,side:l.side,sport:l.sports?null:'NON_SPORTS',category:l.sports?'Sports':'Other',max_payout:l.contracts,fresh:1})});
- R.forEach(r=>{if(r.contracts<0){r.side='NO';/* live overlay writes Kalshi signed NO position (-n): normalise to n contracts */r.contracts=-r.contracts;r.entry=r.cost/r.contracts;r.max_payout=r.contracts;if(r.live!=null){r.value=Math.round(100*r.contracts*r.live)/100;r.upnl=Math.round(100*(r.value-r.cost))/100}}});R.forEach(r=>{r.pct=r.upnl!=null&&r.cost?100*r.upnl/r.cost:null;r.win=r.max_payout!=null&&r.cost!=null?r.max_payout-r.cost:null});return R}
+ R.forEach(r=>{if(r.contracts<0){r.side='NO';/* live overlay writes Kalshi signed NO position (-n): normalise to n contracts */r.contracts=-r.contracts;r.entry=r.cost/r.contracts;r.max_payout=r.contracts;if(r.live!=null){r.value=Math.round(100*r.contracts*r.live)/100;r.upnl=Math.round(100*(r.value-r.cost))/100}}});R.forEach(r=>{r.pct=r.upnl!=null&&r.cost?100*r.upnl/r.cost:null;r.win=r.max_payout!=null&&r.cost!=null?r.max_payout-r.cost:null});R.forEach(r=>{if(posParlayOpen(r)){r.parlay=true;r.value=r.cost;r.upnl=0;r.pct=0}});return R}
 let PSORT={key:'start',direction:1};
 const POS_ET='America/New_York';
 const posDay=date=>new Intl.DateTimeFormat('en-CA',{timeZone:POS_ET,year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
@@ -805,7 +833,9 @@ function positionRowsForPage(d){
   const active=!['settled','finalized','determined','closed','inactive'].includes(row.market_status);
   const midpoint=active&&bid>0&&ask!=null&&ask<1&&ask>=bid?(bid+ask)/2:null;
   const currentProbability=midpoint==null?null:row.side==='YES'?midpoint:row.side==='NO'?1-midpoint:null;
-  return {...row,game,league,sports,start:Number.isFinite(start)?start:null,market,matchup,group,probability,currentProbability};
+  const base={...row,game,league,sports,start:Number.isFinite(start)?start:null,market,matchup,group,probability,currentProbability};
+   if(row.parlay){const ls=posParlayStart(row);return {...base,game:null,group:'Parlays',market:posParlayTitle(row),matchup:posParlayGames(row)||'Legs across games',start:ls!=null?ls:base.start,probability:null,currentProbability:null};}
+   return base;
  });
 }
 const collegeTeams={
@@ -878,6 +908,7 @@ function posProbability(value,stamp,empty='No quote'){
  return `<span class="pos-prob" title="Kalshi bid/ask midpoint for the held side · ${esc(stamp)}"><b>${f(pct,1)}%</b><span aria-hidden="true"><i style="width:${pct}%"></i></span></span>`;
 }
 function posStartProbability(row){
+ if(row.parlay)return '';
  const empty=!row.sports?'—':row.start!=null&&row.start>Date.now()?'At game start':'No start quote';
  return posProbability(row.probability,posTime(Date.parse(row.list_start_prob?.as_of)),empty);
 }
@@ -890,6 +921,7 @@ function posIsParlay(row){
  return !!(posParlay(row)||String(row.ticker||'').toUpperCase().startsWith('KXMVE')||row.market_type==='parlay');
 }
 function posCurrentProbability(row){
+ if(row.parlay)return '';
  const pl=posParlay(row);
  if(pl && row.currentProbability==null){
   if(pl.dead) return `<small class="pos-muted">DEAD · a leg missed</small>`;
@@ -898,6 +930,7 @@ function posCurrentProbability(row){
  return posProbability(row.currentProbability,row.mark_et?TX(t(row.mark_et))+' ET':'Quote time unavailable');
 }
 function posParlaySummary(row){
+ if(row.parlay){const c=posParlayCount(row);return `<div class="pos-prop-meta pos-parlay-list">${esc(posParlayLegList(row))}</div><div class="pos-prop-meta">Stake ${posPlainMoney(row.cost)} · pays ${posPlainMoney(row.max_payout)} if it cashes${c?' · '+esc(c):''}</div>`;}
  const pl=posParlay(row);
  if(!pl) return posIsParlay(row)?'<div class="pos-prop-meta">Parlay · expanding legs…</div>':'';
  const dead=pl.dead?' <span class="pos-leg-st DEAD">DEAD</span>':'';
@@ -1015,8 +1048,8 @@ function posPage(d){
   ['currentProbability','Current',posCurrentProbability],
   ['cost','Stake',row=>posMoney(row.cost)],
   ['win','Profit if win',row=>posMoney(row.win,true)],
-  ['value','Marked value',row=>{const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null?posMoney(pl.marked)+`<small class="pos-muted"> from legs</small>`:posMoney(row.value)}],
-  ['upnl','Open P&L',row=>{const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null&&row.cost!=null?PM(pl.marked-row.cost,true,true):PM(row.upnl,true,true)}]
+  ['value','Marked value',row=>{if(row.parlay)return `${posMoney(row.value)}<small class="pos-muted"> held at stake</small>`;const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null?posMoney(pl.marked)+`<small class="pos-muted"> from legs</small>`:posMoney(row.value)}],
+  ['upnl','Open P&L',row=>{if(row.parlay)return PM(0,true,true);const pl=posParlay(row);return pl&&row.currentProbability==null&&pl.marked!=null&&row.cost!=null?PM(pl.marked-row.cost,true,true):PM(row.upnl,true,true)}]
  ];
  const compare=(a,b)=>{
   if(PSORT.key==='matchup'){
@@ -1028,7 +1061,7 @@ function posPage(d){
   if(x==null||y==null)return x==null?(y==null?0:1):-1;
   return (typeof x==='number'?x-y:String(x).localeCompare(String(y)))*PSORT.direction;
  };
- const statusOrder=['Live games','Upcoming games','Final · awaiting settlement','Game status unavailable','Other positions'];
+ const statusOrder=['Live games','Upcoming games','Parlays','Final · awaiting settlement','Game status unavailable','Other positions'];
  const buckets=new Map();
  for(const row of rows){
   const label=posGroupBy==='status'?row.group
@@ -1087,7 +1120,22 @@ function showPositionDetail(row){
   ['Marked value',posMoney(row.value)],['Open P&L',PM(row.upnl,true,true)],
   ['Potential profit',posMoney(row.win,true)]
  ];
- const legHtml=pl?`<div class="pos-parlay-hd">${posLegStatus(pl.dead?'MISS':'LIVE')}<b>${pl.hit||0}/${pl.total||0} legs hit</b><span>${pl.remaining||0} remaining</span>${pl.dead?'<span class="pos-leg-st DEAD">DEAD</span>':''}<span>Payout ${payout}</span></div>
+ if(row.parlay){
+   const legs=((pl&&pl.legs)||[]);
+   const ST={hit:'HIT',live:'LIVE',pre:'NOT STARTED',dead:'DEAD'};
+   const items=legs.length?legs.map(L=>{const s=posLegState(L);const when=posLegWhen(L,s);
+     return `<article class="pos-parlay-leg pl-${s}"><div class="pos-parlay-leg-hd"><b><i class="pl-dot"></i>${esc(posLegShort(L))}</b><span class="pl-st">${ST[s]}</span></div><div class="pos-parlay-leg-meta">${esc(when||'no live data')}</div><div class="pl-stat">${esc(posLegStat(L))}</div></article>`}).join('')
+    :String(row.market_title||'').split(',').map(x=>x.trim().replace(/^(yes|no)\s+/i,'')).filter(Boolean).map(x=>`<article class="pos-parlay-leg pl-pre"><div class="pos-parlay-leg-hd"><b><i class="pl-dot"></i>${esc(x)}</b></div><div class="pos-parlay-leg-meta">no live data</div></article>`).join('');
+   const cnt=posParlayCount(row);
+   dialog.classList.add('pos-parlay-dialog');
+   dialog.innerHTML=`<header><h2 id="sc-position-title">${esc(posParlayTitle(row))}</h2><form method="dialog"><button type="submit">Close</button></form></header>
+    <div class="pos-parlay-hd"><b>${esc(cnt||'Legs')}</b><span>Stake ${posPlainMoney(row.cost)}</span><span>Pays ${posPlainMoney(row.max_payout)} if it cashes</span><span>Live P&amp;L $0 until it settles</span></div>
+    <div class="pos-parlay-legs">${items}</div>
+    <small class="pos-muted">Scores and stats from ESPN${window.PROP&&window.PROP.as_of_label?' · as of '+esc(window.PROP.as_of_label):''}</small>`;
+   if(!dialog.open)dialog.showModal();
+   return;
+  }
+  const legHtml=pl?`<div class="pos-parlay-hd">${posLegStatus(pl.dead?'MISS':'LIVE')}<b>${pl.hit||0}/${pl.total||0} legs hit</b><span>${pl.remaining||0} remaining</span>${pl.dead?'<span class="pos-leg-st DEAD">DEAD</span>':''}<span>Payout ${payout}</span></div>
   <p class="pos-parlay-note">Combo has no executable bid — marked from the ${pl.total||0} legs, sorted by game start.</p>
   <div class="pos-parlay-legs">${(pl.legs||[]).map(L=>{
     const start=L.start_ts?posTime(L.start_ts*1000): (L.start?posTime(Date.parse(L.start)):'');
@@ -1818,7 +1866,7 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
   h=back+'P&amp;L by sport</div>'+performanceDashboard(d.by_sport,GCs,'sports');
  }
  else if(a=='results'&&!b){const today=etISO(0),day=RESDAY||today;const rows=((d.closed_trades||{}).rows||[]).filter(r=>r.day===day).slice().sort((x,y)=>String(x.closed_at)<String(y.closed_at)?1:-1);
-  const uStep=uUsd()||50;
+  const uStep=+(d&&d.sq&&d.sq.settings&&d.sq.settings.unit_usd)||50;
   const pnl=Math.round(rows.reduce((s,r)=>s+(+r.pnl||0),0)*100)/100,stake=Math.round(rows.reduce((s,r)=>s+(+r.stake||0),0)*100)/100,w=rows.filter(r=>r.result==='W').length;
   const units=Math.round(rows.reduce((s,r)=>s+(r.units!=null?+r.units:(+r.stake||0)/uStep),0)*100)/100;
   const pnlU=Math.round(pnl/uStep*100)/100;
@@ -1910,6 +1958,8 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    return 'margin n/a';
   };
   const chip=r=>`<i style="display:inline-block;background:${r.result==='W'?'#a7f3c9':'#fca5b0'};color:#0a0a0a;font-style:normal;font-weight:800;font-size:12px;line-height:16px;padding:0 6px;border-radius:4px">${r.result==='W'?'WIN':'LOSS'}</i>`;
+  const cash=v=>{if(v==null||!Number.isFinite(+v))return '—';const n=+v;return (n<0?'−':n>0?'+':'')+'$'+Math.abs(n).toFixed(2)};
+  const unitsTxt=v=>{if(v==null||!Number.isFinite(+v))return '—';return (typeof TX==='function'&&typeof UF==='function')?TX(UF(+v)):(function(){const u=+v/uStep,a=Math.abs(u);return (u<0?'−':u>0?'+':'')+(Math.round(a*1000)/1000)+'u'})()};
   const line=r=>{
    const u=r.units!=null?+r.units:((+r.stake||0)/uStep);
    const pu=(+r.pnl||0)/uStep;
@@ -1917,7 +1967,7 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    const px=r.entry!=null?Number(r.entry): (cts&&r.stake?r.stake/cts:null);
    const fill=cts!=null&&px!=null?`${Number(cts).toFixed(cts%1?2:0)} @ ${Math.round(px*1000)/10}¢`:'';
    const margin=betMargin(r);
-   return `<tr><td>${lg(r.sport)} <b>${esc(plainBet(r))}</b><div class=mu>${esc(r.sport==='NON_SPORTS'?'Other':(r.sport||''))} · settled ${esc(t(r.closed_at))}</div>${fill?`<div class=mu>${esc(fill)}</div>`:''}<div class=mu>${esc(margin)}</div></td><td>${chip(r)}<div class=mu>${sg(r.pnl)} · ${sg(pu)}u</div></td><td class=n>${usd(r.stake)}<div class=mu>${(+u).toFixed(2)}u</div></td><td class="n ${cl(r.pnl)}">${sg(r.pnl)}<div class=mu>${sg(pu)}u</div></td></tr>`;
+   return `<tr><td>${lg(r.sport)} <b>${esc(plainBet(r))}</b><div class=mu>${esc(r.sport==='NON_SPORTS'?'Other':(r.sport||''))} · settled ${esc(t(r.closed_at))}</div>${fill?`<div class=mu>${esc(fill)}</div>`:''}<div class=mu>${esc(margin)}</div></td><td>${chip(r)}<div class=mu>${unitsTxt(r.pnl)} · ${cash(r.pnl)}</div></td><td class=n>${cash(r.stake).replace(/^\+/,'')}<div class=mu>${(+u).toFixed(2)}u</div></td><td class="n ${cl(r.pnl)}"><b>${unitsTxt(r.pnl)}</b><div class=mu>${cash(r.pnl)}</div></td></tr>`;
   };
   const sec=(title,rs)=>rs.length?`<tr><td colspan=4 style="padding-top:10px"><b>${esc(title)}</b> <span class=mu>${rs.length}</span></td></tr>`+rs.map(line).join(''):'';
   const label=new Date(day+'T12:00:00Z').toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',timeZone:'UTC'});
@@ -1925,12 +1975,12 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
   const nav=`<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 8px"><button type=button data-resday="prev" style="${btn}">‹ Prev</button><b>${label}</b><button type=button data-resday="next" style="${btn}" ${day>=today?'disabled':''}>Next ›</button><span class=mu>Game day · as of ${esc(t(d.closed_trades?.as_of||''))}</span></div>`;
   const resultMetric=(label,value,tone='')=>`<div class="result-metric"><span>${label}</span><strong class="${tone}">${value}</strong></div>`;
   const summary=`<div class="result-metrics" aria-label="Selected day totals">
-   ${resultMetric('Realized P&amp;L',sg(pnl)+' · '+sg(pnlU)+'u',cl(pnl))}
-   ${resultMetric('Total stake',usd(stake)+' · '+units.toFixed(2)+'u')}
+   ${resultMetric('Realized P&amp;L',unitsTxt(pnl)+' · '+cash(pnl),cl(pnl))}
+   ${resultMetric('Total stake',cash(stake).replace(/^\+/,'')+' · '+units.toFixed(2)+'u')}
    ${resultMetric('Closed bets',rows.length)}
    ${resultMetric('Record',WL(w,rows.length-w))}
   </div>`;
-  const table=rows.length?`<table class="result-day-table"><tr><th>Bet</th><th>Result</th><th class=n>Stake</th><th class=n>P&L</th></tr>${sec('Sports',rows.filter(r=>!oth(r)))}${sec('Other',rows.filter(r=>oth(r)))}<tfoot><tr><th scope="row">Day total</th><td>${WL(w,rows.length-w)}</td><td class=n>${usd(stake)}<div class=mu>${units.toFixed(2)}u</div></td><td class="n ${cl(pnl)}"><b>${sg(pnl)}</b><div class=mu>${sg(pnlU)}u</div></td></tr></tfoot></table>`:'<div class=mu>No settled bets on this day.</div>';
+  const table=rows.length?`<table class="result-day-table"><tr><th>Bet</th><th>Result</th><th class=n>Stake</th><th class=n>P&L</th></tr>${sec('Sports',rows.filter(r=>!oth(r)))}${sec('Other',rows.filter(r=>oth(r)))}<tfoot><tr><th scope="row">Day total</th><td>${WL(w,rows.length-w)}</td><td class=n>${cash(stake).replace(/^\+/,'')}<div class=mu>${units.toFixed(2)}u</div></td><td class="n ${cl(pnl)}"><b>${unitsTxt(pnl)}</b><div class=mu>${cash(pnl)}</div></td></tr></tfoot></table>`:'<div class=mu>No settled bets on this day.</div>';
 const BL=TABS.results[1];h=back+`Results</div>`+resultsCharts(d,day)+card(day===etISO(-1)?'Yesterday':'Day',nav+summary+table,(d.closed_trades||{}).source)+`<div class=bgrid>${BL.map(q=>`<a class="card blk" href="#/results/${q.id}"><h3>${esc(q.t)}<span class=go>›</span></h3>${q.sum}<div class=src>${esc(q.src||'')}</div></a>`).join('')}</div>`}
  else if(a=='games'&&!SBL){h=back+`Games</div><div class=mu>Loading score feed…</div>`}
  else if(a=='games'&&SBL){{const GG=sbSort(SBL),EVS=new Set((D.open_positions.rows||[]).map(o=>String(o.ticker).split('-')[1])),hm=g=>g.kalshi_event&&EVS.has(g.kalshi_event),mine=GG.filter(hm).length,lv=GG.filter(g=>g.state=='in').length,fin=GG.filter(g=>g.state=='post').length,hd=`<div class="sbr hd"><i></i><b>Team</b><span class=sbs>Pts</span><span class=sbo>Open</span><span class=sbw><em>Win %</em></span></div>`;
@@ -1965,15 +2015,15 @@ function pnlChart(){pihLoad();const P=(PIH&&PIH.pts||[]).map(([t,v])=>[+t.slice(
  return `<div class=lvchh><span>Today · running P&amp;L ($, ET)</span><b class=${cl(last)}>${last>0?'+':last<0?'−':''}$${Math.abs(last).toFixed(2)}</b></div><svg viewBox="0 0 ${W} ${H}"><defs><clipPath id=${id}a><rect x=0 y=0 width=${W} height=${z.toFixed(1)} /></clipPath><clipPath id=${id}b><rect x=0 y=${z.toFixed(1)} width=${W} height=${H} /></clipPath></defs>${yt}${xt}<g clip-path="url(#${id}a)"><path d="${ar}" class=ag />${r.filter((_,i)=>i%Math.ceil(r.length/120)===0).map(a=>`<circle cx="${x(a.t)}" cy="${y(a.b)}" r="6" fill="transparent"><title>${e(fmtT(a.t))} ET · ${money(a.b)} · profit ${signed(a.p)}</title></circle>`).join('')}<polyline points="${pts}" class=lg2 /></g><g clip-path="url(#${id}b)"><path d="${ar}" class=ar2 />${r.filter((_,i)=>i%Math.ceil(r.length/120)===0).map(a=>`<circle cx="${x(a.t)}" cy="${y(a.b)}" r="6" fill="transparent"><title>${e(fmtT(a.t))} ET · ${money(a.b)} · profit ${signed(a.p)}</title></circle>`).join('')}<polyline points="${pts}" class=lr2 /></g><line x1=${l} x2=${W-r} y1=${z.toFixed(1)} y2=${z.toFixed(1)} class=zl /><circle cx=${X(P.at(-1)[0]).toFixed(1)} cy=${Y(last).toFixed(1)} r=2.6 class=${last>=0?'dg':'dr'} /></svg>`}
 function liveCard(){if(!D)return;const S=window.SCR,today=D.open_positions.today,ev=tk=>{const m=String(tk).split('-')[1]||'';return m.replace(/^(\d{2}[A-Z]{3}\d{2})\d{4}/,'$1')};
  const gm=o=>S&&S.games.find(g=>g.kalshi_event&&g.kalshi_event==ev(o.ticker));
- const L=D.open_positions.rows.filter(o=>o.category=='Sports').map(o=>({o,g:gm(o)})).sort((a,b)=>((b.g&&b.g.state=='in')-(a.g&&a.g.state=='in')));/* every open sports position shows (no date gate: after midnight bet_day!=today blanked the card) */
+ const L=D.open_positions.rows.filter(o=>o.category=='Sports').map(o=>posParlayOpen(o)?{o:{...o,upnl:0,value:o.cost,parlay:true},g:null}:{o,g:gm(o)}).sort((a,b)=>((b.g&&b.g.state=='in')-(a.g&&a.g.state=='in')));/* every open sports position shows (no date gate: after midnight bet_day!=today blanked the card) */
  const nIn=L.filter(x=>x.g&&x.g.state=='in').length;$('lvh').textContent=`open · unrealized · ${L.length} open${nIn?' · '+nIn+' in progress':''}`;
  const stt=g=>!g?'<span class="st2 pre">no score feed</span>':g.state=='in'?`<span class="st2 in">● ${esc(g.away.ab)} ${g.away.score}–${g.home.score} ${esc(g.home.ab)} · ${esc(g.detail)}</span>`:g.state=='post'?`<span class="st2 post">Final ${esc(g.away.ab)} ${g.away.score}–${g.home.score} ${esc(g.home.ab)}</span>`:`<span class="st2 pre">${new Date(g.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})} ET</span>`;
  $('t_lv').innerHTML=L.length?(()=>{const Q=L.map(x=>x.o),c=Q.reduce((s,o)=>s+(o.cost||0),0),m=Q.reduce((s,o)=>s+(o.max_payout||0),0),u=Q.every(o=>o.upnl!=null)?Q.reduce((s,o)=>s+o.upnl,0):null,nx=L.filter(x=>x.g&&x.g.state=='pre'&&x.g.start).map(x=>x.g.start).sort()[0],G={};Q.forEach(o=>{const k=o.sport||'Sports';(G[k]=G[k]||{n:0,c:0}).n++;G[k].c+=o.cost||0});
   const M2=(v,s)=>v==null?'no quote':MODE=='U'?`${s?SC(v):UC(v)}<small>${s?(v>=0?'+':'−')+'$'+f(Math.abs(v),2):UD(v,0)}</small>`:`${s?SC(v):UD(v,0)}<small>${s?(v>=0?'+':'−')+UFC(Math.abs(v)):UFC(v)}</small>`;
-  const bkt=x=>x.g?x.g.state==='pre'?'up':'live':posBucket(x.o);
-  const row=x=>{const o=x.o,g=x.g,when=!g?'':g.state==='in'?`${g.away.ab} ${g.away.score}–${g.home.score} ${g.home.ab} · ${g.detail||''}`:g.state==='post'?`Final ${g.away.ab} ${g.away.score}–${g.home.score} ${g.home.ab}`:(g.start?new Date(g.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET':'');return `<div class=pr2><div><div class=pn>${sidePill(o)}<b>${esc(sideTitle(o))}</b></div><div class=pm>${esc(g?g.away.ab+' @ '+g.home.ab:(o.sport||''))} · ${esc(when)}</div></div></div>`};
+  const bkt=x=>x.o.parlay?'par':x.g?x.g.state==='pre'?'up':'live':posBucket(x.o);
+  const row=x=>{const o=x.o,g=x.g;if(o.parlay){const c=posParlayCount(o);return `<div class=pr2><div><div class=pn>${sidePill(o)}<b>${esc(posParlayTitle(o))}</b></div><div class=pm>${esc(posParlayLegList(o))}</div><div class=pm>${esc(c?c+' · ':'')}pays ${MODE=='U'?UC(o.max_payout):UD(o.max_payout,0)} if it cashes</div></div></div>`}const when=!g?'':g.state==='in'?`${g.away.ab} ${g.away.score}–${g.home.score} ${g.home.ab} · ${g.detail||''}`:g.state==='post'?`Final ${g.away.ab} ${g.away.score}–${g.home.score} ${g.home.ab}`:(g.start?new Date(g.start).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:'America/New_York'})+' ET':'');return `<div class=pr2><div><div class=pn>${sidePill(o)}<b>${esc(sideTitle(o))}</b></div><div class=pm>${esc(g?g.away.ab+' @ '+g.home.ab:(o.sport||''))} · ${esc(when)}</div></div></div>`};
   const grp=(t,rows)=>rows.length?`<div class=cth>${t} · ${rows.length}</div>${rows.map(row).join('')}`:'';
-  const ob=`<div class=pl>${grp('Live',L.filter(x=>bkt(x)==='live'))}${grp('Upcoming',L.filter(x=>bkt(x)==='up'))}</div>`;
+  const ob=`<div class=pl>${grp('Live',L.filter(x=>bkt(x)==='live'))}${grp('Upcoming',L.filter(x=>bkt(x)==='up'))}${grp('Parlays',L.filter(x=>bkt(x)==='par'))}</div>`;
 
   return `<div class=lvst><div><span>Open bets</span><b>${Q.length}</b><small>${nIn?nIn+' in progress':'sports'}</small></div><div><span>At risk</span><b>${M2(c)}</b></div><div><span>If all win</span><b>${M2(m)}</b></div><div class="lvpl ${cl(u)}"><span>Open P&amp;L</span><b class=${cl(u)}>${M2(u,1)}</b><small class=${cl(u)}>${c&&u!=null?(u>=0?'+':'−')+f(Math.abs(100*u/c),1)+'%':''}</small></div></div>`+
   `<div class=lvbar><div class=lvbt><span>At risk ${MODE=='U'?UC(c):UD(c,0)}</span><span>If all win ${MODE=='U'?UC(m):UD(m,0)} · ${c?f(m/c,2)+'×':''}</span></div><div class=lvbb><i style="width:${m?Math.min(100,100*c/m):0}%"></i></div></div>`+`<div class=lvlg>${Object.entries(G).sort((a,b)=>b[1].c-a[1].c).map(([k,g])=>`<span>${lg(k)}<b>${esc(nm(k))}</b> ${g.n} · ${MODE=='U'?UC(g.c):UD(g.c,0)}</span>`).join('')}</div>`+

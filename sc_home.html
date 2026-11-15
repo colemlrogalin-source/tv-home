@@ -57,7 +57,10 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 .pick{font-size:16.5px;font-weight:800;white-space:nowrap}
 .mid{flex:1;min-width:0;font-size:15px;color:#2a2a2a}
 .pxs{font-size:14px;color:var(--mute);white-space:nowrap}
-.pnl{font-size:17px;font-weight:800;white-space:nowrap;min-width:66px;text-align:right}
+.pnl{font-size:17px;font-weight:800;white-space:nowrap;min-width:0;text-align:right}
+.wp{font-size:15px;font-weight:700;color:#3d3a33;white-space:nowrap;min-width:36px;text-align:right}
+.pnl small{font-size:14px}
+@media (max-width:720px) and (orientation:landscape){.bet .pxs .stk{display:none}}
 .pnl small{font-size:13px;font-weight:600;color:var(--mute);margin-right:3px}
 .tag{display:inline-block;font-size:13px;font-weight:800;letter-spacing:.3px;border:1.3px solid #222;border-radius:4px;padding:0 4px;line-height:16px;margin-left:6px;vertical-align:2px;background:#fff}
 .tag.BANGER{background:#ffd88a}.tag.PLAY{background:#d7e9cf}.tag.LEAN{background:#eceae2}
@@ -124,7 +127,8 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
  .kpis{grid-template-columns:1fr 1fr}
  .duo{grid-template-columns:minmax(0,1fr)}
  .bet{flex-wrap:wrap;row-gap:0}
- .bet .pnl{order:2;margin-left:auto}
+ .bet .wp{order:2;margin-left:auto}
+ .bet .pnl{order:2}
  .bet::after{content:'';order:3;flex-basis:100%;height:0}
  .bet .mid{order:4;flex:1 1 auto;padding-left:23px}
  .bet .pxs{order:5;margin-left:auto}
@@ -285,9 +289,11 @@ function betRow(b){
  else if(b.status==='final')mid=['Final · settling',sc].filter(Boolean).join(' · ');
  else if(b.status==='upcoming')mid=[esc(b.abbr||b.matchup||''),esc(String(b.start_et||'').replace(/^[A-Z][a-z]{2} \d+, /,'').replace(' ET',''))].filter(Boolean).join(' · ');
  else mid=esc(b.league==='Politics'?'Politics · not a game':(b.league||''));
- const px=fin(b.entry_c)&&fin(b.live_c)?`${b.entry_c}→${N('px_'+b.id,b.live_c,'plain',esc(b.live_c))}¢`:'price —';
- const pnl=b.status==='final'?`<small>exp.</small>${N('pl_'+b.id,b.upnl,'wsigned',F.wsigned(b.upnl))}`:N('pl_'+b.id,b.upnl,'wsigned',F.wsigned(b.upnl));
- return `<div class="bet"><i class="dot ${ds} ${b.status==='live'?'lv':''}" title="${DOTTXT[ds]}" aria-label="${DOTTXT[ds]}"></i><span class="pick">${esc(b.head)}${b.tier?`<span class="tag ${esc(b.tier)}">${esc(b.tier)}</span>`:''}</span><span class="mid">${mid}</span><span class="pxs">${px} · ${F.wmoney(b.cost)}</span><span class="pnl ${cls(b.upnl)}">${pnl}</span></div>`;
+ const px=fin(b.entry_c)?`in ${esc(b.entry_c)}¢`:'in —';
+ const pay=fin(b.contracts)?+b.contracts*1:null;
+ const wp=fin(b.live_c)?N('wp_'+b.id,b.live_c,'plain',esc(Math.round(+b.live_c)))+'%':'—%';
+ const win=pay==null?'<small>wins</small>no data':`<small>wins</small>${N('pay_'+b.id,pay,'wmoney',F.wmoney(pay))}`;
+ return `<div class="bet"><i class="dot ${ds} ${b.status==='live'?'lv':''}" title="${DOTTXT[ds]}" aria-label="${DOTTXT[ds]}"></i><span class="pick">${esc(b.head)}${b.tier?`<span class="tag ${esc(b.tier)}">${esc(b.tier)}</span>`:''}</span><span class="mid">${mid}</span><span class="pxs">${px}<span class="stk"> · ${F.wmoney(b.cost)}</span></span><span class="wp" title="Current Kalshi price = win chance">${wp}</span><span class="pnl">${win}</span></div>`;
 }
 function renderBets(){
  const el=$('bets');
@@ -299,7 +305,7 @@ function renderBets(){
  const up=main.filter(b=>b.status==='upcoming'||b.status==='nogame').sort((a,b)=>t(a)-t(b));
  const so=L.sports_open||{};
  let h=`<div class="ch"><h2>Open bets</h2><button type="button" class="info${OPEN.key?' on':''}" data-t="key" aria-label="What the dots and prices mean" aria-expanded="${!!OPEN.key}">ⓘ</button><span class="r">${fin(so.n)?so.n:'—'} open · at risk ${N('h_risk',so.cost,'wmoney',F.wmoney(so.cost))}</span></div>`;
- if(OPEN.key)h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Prices ¢ entry→now on your side, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
+ if(OPEN.key)h+=`<div class="hint">Dot: green winning · yellow tied/within one score · red losing · blue-grey live (can’t judge) · grey not started. Right side: what the bet pays if it wins, and the current Kalshi price as its win chance. “in” = your entry price, as of ${esc(hm(L.mark_as_of))} ET.${L.non_sports_open?` ${L.non_sports_open} non-sports bet not in sports totals.`:''}</div>`;
  h+=`<div class="grp"><i class="dot win" style="width:10px;height:10px"></i>Live · ${live.length}</div>`+(live.length?live.map(betRow).join(''):'<div class="nd">No live bets right now</div>');
  const upShow=OPEN.up||up.length<=5?up:up.slice(0,5);
  h+=`<div class="grp" style="margin-top:4px"><i class="dot pre" style="width:10px;height:10px"></i>Upcoming · ${up.length}</div>`+(up.length?upShow.map(betRow).join(''):'<div class="nd">No upcoming bets</div>');

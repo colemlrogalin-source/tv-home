@@ -1865,9 +1865,20 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
  else if(a=='sports'&&!b){
   h=back+'P&amp;L by sport</div>'+performanceDashboard(d.by_sport,GCs,'sports');
  }
- else if(a=='results'&&!b){const today=etISO(0),day=RESDAY||today;const rows=((d.closed_trades||{}).rows||[]).filter(r=>r.day===day).slice().sort((x,y)=>String(x.closed_at)<String(y.closed_at)?1:-1);
+ else if(a=='results'&&!b){const today=etISO(0),day=RESDAY||today;
+  const resultsDay=r=>{
+    const raw=String(r.closed_at||'').trim();
+    const m=raw.match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2})/);
+    if(m){
+      const date=m[1], hour=+m[2];
+      if(hour>=6) return date;
+      return r.day||shiftISO(date,-1);
+    }
+    return r.day;
+  };
+  const rows=((d.closed_trades||{}).rows||[]).filter(r=>resultsDay(r)===day).slice().sort((x,y)=>String(x.closed_at)<String(y.closed_at)?1:-1);
   const uStep=+(d&&d.sq&&d.sq.settings&&d.sq.settings.unit_usd)||50;
-  const pnl=Math.round(rows.reduce((s,r)=>s+(+r.pnl||0),0)*100)/100,stake=Math.round(rows.reduce((s,r)=>s+(+r.stake||0),0)*100)/100,w=rows.filter(r=>r.result==='W').length;
+  const pnl=Math.round(rows.reduce((s,r)=>s+Math.round((+r.pnl||0)*100),0))/100,stake=Math.round(rows.reduce((s,r)=>s+Math.round((+r.stake||0)*100),0))/100,w=rows.filter(r=>r.result==='W').length;
   const units=Math.round(rows.reduce((s,r)=>s+(r.units!=null?+r.units:(+r.stake||0)/uStep),0)*100)/100;
   const pnlU=Math.round(pnl/uStep*100)/100;
   const oth=r=>r.sport==='NON_SPORTS'||r.sport==='Politics'||r.sport==='Other'||r.category==='Non-sports';

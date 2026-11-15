@@ -55,6 +55,19 @@ button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
 .ch .src{margin-left:6px}
 .grp{font-size:14px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;color:#444;height:22px;display:flex;align-items:center;gap:6px}
 .nd{font-size:15px;color:var(--mute);font-style:italic;padding:6px 0}
+/* parlays: tap a row to see each leg */
+.pbet{width:100%;background:none;border:0;border-top:1px solid #dcd8ca;font:inherit;color:inherit;text-align:left;cursor:pointer;min-height:44px}
+.pbet .mid{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pbet .car{font-size:14px;color:var(--mute);flex:none}
+.legs{padding:2px 0 8px 23px}
+.leg{display:grid;grid-template-columns:14px minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.2fr) auto;gap:8px;align-items:center;font-size:15px;min-height:32px;border-top:1px dashed #e2ddcf}
+.ld{width:12px;height:12px;border-radius:50%;border:2px solid rgba(0,0,0,.5);background:#c9c6bb;box-sizing:border-box}
+.leg.hit .ld{background:#1f9d4a}.leg.live .ld{background:#f2c230}.leg.dead .ld{background:#d2453c}
+.ll{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lst{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lw{color:var(--mute);font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lt{font-size:14px;font-weight:800;letter-spacing:.3px;color:#6b675c}.leg.hit .lt{color:#1f7a3c}.leg.live .lt{color:#9a7400}.leg.dead .lt{color:#b0362e}
+.lnote{font-size:14px;color:var(--mute);padding-top:4px}
+@media (max-width:520px){.leg{grid-template-columns:14px minmax(0,1fr) auto;row-gap:0;padding:3px 0}.ld{grid-column:1;grid-row:1}.ll{grid-column:2;grid-row:1}.lt{grid-column:3;grid-row:1}.lst{grid-column:2/4;grid-row:2}.lw{grid-column:2/4;grid-row:3}.pbet .car{order:2}}
 /* bet rows (one line in landscape) */
 .bet{display:flex;align-items:center;gap:10px;min-height:38px;padding:4px 2px;border-top:1px solid #dcd8ca}
 .bet .dot{flex:none}
@@ -293,6 +306,14 @@ function dotState(b){
 }
 const DOTTXT={win:'winning',close:'close',lose:'losing',pre:'not started',live:'live',final:'final, settling',none:'no game'};
 const shortDetail=d=>String(d||'').replace(/\s*-\s*/,' ').replace(/^(\d+:\d{2}) (\d)(st|nd|rd|th)$/,'$1 $2$3');
+const LEGTXT={hit:'HIT',live:'LIVE',pre:'NOT STARTED',dead:'DEAD'};
+function parlayRow(b){
+ const k='pl_'+b.id,open=!!OPEN[k],pay=fin(b.contracts)?+b.contracts:null,lg=Array.isArray(b.legs)?b.legs:[];
+ const ds=lg.some(x=>x.state==='dead')?'lose':lg.some(x=>x.state==='live')?'live':'pre';
+ let h=`<button type="button" class="bet pbet" data-t="${k}" aria-expanded="${open}"><i class="dot ${ds}" aria-hidden="true"></i><span class="pick">${esc(b.head)}</span><span class="mid">${esc([b.legs_hit,b.legs_short].filter(Boolean).join(' · '))}</span><span class="pxs">stake ${F.wmoney(b.cost)}</span><span class="pnl"><small>pays</small>${pay==null?'no data':F.wmoney(pay)}</span><span class="car">${open?'▲':'▼'}</span></button>`;
+ if(open)h+=`<div class="legs">${lg.map(x=>`<div class="leg ${esc(x.state)}"><i class="ld" aria-hidden="true"></i><span class="ll">${esc(x.label)}</span><span class="lst">${esc(x.stat||'no live data')}</span><span class="lw">${esc(x.when||'')}</span><span class="lt">${LEGTXT[x.state]||''}</span></div>`).join('')||'<div class="nd">no live data</div>'}<div class="lnote">Live P&amp;L held at $0 until it settles${b.legs_as_of?' · ESPN as of '+esc(b.legs_as_of):''}</div></div>`;
+ return h;
+}
 function betRow(b){
  const ds=dotState(b),p=pocketFor(b);
  let mid='';
@@ -335,7 +356,7 @@ function renderBets(){
  const el=$('bets');
  if(!L||!Array.isArray(L.bets)){el.innerHTML='<div class="ch"><h2>Open bets</h2></div><div class="nd">no data</div>';return}
  const t=x=>Number.isFinite(Date.parse(x.start))?Date.parse(x.start):9e15;
- const main=L.bets.filter(b=>b.main),other=L.bets.filter(b=>!b.main);
+ const main=L.bets.filter(b=>b.main),par=L.bets.filter(b=>b.kind==='parlay'),other=L.bets.filter(b=>!b.main&&b.kind!=='parlay');
  const fr=b=>fin(b.frac)?+b.frac:-1;
  const live=main.filter(b=>b.status==='live'||b.status==='final').sort((a,b)=>(b.status==='final')-(a.status==='final')||fr(b)-fr(a)||t(a)-t(b));
  const up=main.filter(b=>b.status==='upcoming'||b.status==='nogame').sort((a,b)=>t(a)-t(b));
@@ -348,7 +369,8 @@ function renderBets(){
  groups.forEach(g=>{const key='g_'+g.k.replace(/[^A-Za-z0-9]/g,''),open=OPEN[key]||g.rows.length<=6,show=open?g.rows:g.rows.slice(0,5);
   h+=`<div class="grp" style="margin-top:4px"><i class="dot pre" style="width:10px;height:10px"></i>${esc(g.lab)} · ${g.rows.length}${subTot(g.rows)}</div>`+show.map(betRow).join('');
   if(g.rows.length>6)h+=`<button class="tbtn" data-t="${key}">${OPEN[key]?'Show fewer':'Show all '+g.rows.length}<span class="car">${OPEN[key]?'▲':'▼'}</span></button>`});
- if(other.length)h+=`<button class="tbtn" data-t="other">Other · ${other.length} (other sports, parlays, non-sports)<span class="car">${OPEN.other?'Hide ▲':'Show ▼'}</span></button>${OPEN.other?other.map(betRow).join(''):''}`;
+ if(par.length)h+=`<div class="grp" style="margin-top:4px"><i class="dot pre" style="width:10px;height:10px"></i>Parlays · ${par.length}${subTot(par)}</div>`+par.map(parlayRow).join('');
+ if(other.length)h+=`<button class="tbtn" data-t="other">Other · ${other.length} (other sports, non-sports)<span class="car">${OPEN.other?'Hide ▲':'Show ▼'}</span></button>${OPEN.other?other.map(betRow).join(''):''}`;
  //hint moved under header
  el.innerHTML=h;
  el.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{OPEN[b.dataset.t]=!OPEN[b.dataset.t];renderBets();animateChanges($('bets'));paintPulse()});

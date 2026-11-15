@@ -1899,10 +1899,37 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    if(side==='NO'&&!/^NO:/i.test(lab)) return 'NO: '+lab;
    return lab;
   };
+  const teamAlias={JAC:'JAX',JAX:'JAX',WSH:'WAS',WAS:'WAS',LA:'LAR',LAR:'LAR',GMP:'GB',OKLA:'OU',OKL:'OU',OU:'OU',MISS:'MISS',OLE:'MISS',NCSU:'NCST',NCST:'NCST',MIZZ:'MIZ',WISC:'WISC',WIS:'WISC',PITT:'PITT',PIT:'PITT'};
+  const normAb=c=>teamAlias[String(c||'').toUpperCase()]||String(c||'').toUpperCase();
+  const teamsFromEvent=ev=>{
+   const m=String(ev||'').toUpperCase().match(/^\d{2}[A-Z]{3}\d{2}([A-Z]+)$/);
+   if(!m) return null;
+   const tail=m[1], known=new Set([...Object.keys(teamAlias),...Object.values(teamAlias)]);
+   let best=null;
+   for(let i=2;i<=tail.length-2;i++){
+    const a=tail.slice(0,i), b=tail.slice(i);
+    if(a.length>5||b.length>5) continue;
+    let score=(a.length<=3)+(b.length<=3);
+    if(known.has(a)||known.has(normAb(a))) score+=3;
+    if(known.has(b)||known.has(normAb(b))) score+=3;
+    if(!best||score>=best[0]) best=[score,normAb(a),normAb(b)];
+   }
+   return best?{away:best[1],home:best[2]}:null;
+  };
   const gameFor=r=>{
    const ev=String(r.ticker||'').split('-')[1]||'';
    const games=(window.SCR&&window.SCR.games)||[];
-   return games.find(g=>String(g.kalshi_event||'').toUpperCase()===ev.toUpperCase())||null;
+   const exact=games.find(g=>String(g.kalshi_event||'').toUpperCase()===ev.toUpperCase());
+   if(exact) return exact;
+   const teams=teamsFromEvent(ev);
+   if(!teams) return null;
+   const hits=games.filter(g=>{
+    const A=normAb(g.away&&(g.away.ab||g.away.abbr)), H=normAb(g.home&&(g.home.ab||g.home.abbr));
+    return teams.away&&teams.home&&new Set([teams.away,teams.home]).size<=2 && [teams.away,teams.home].every(t=>t===A||t===H);
+   });
+   if(!hits.length) return null;
+   const fin=hits.filter(g=>g.state==='post'||String(g.detail||g.clock||'').toLowerCase().startsWith('final'));
+   return fin[0]||hits[0];
   };
   const finalScore=g=>{
    if(!g) return '';
@@ -1912,9 +1939,27 @@ const [a,part]=route.split('/');let b=part;if(a==='sports'&&part){try{b=decodeUR
    return `${A.ab||A.abbr||'?'} ${as}–${H.ab||H.abbr||'?'} ${hs}`;
   };
   const betMargin=r=>{
-   if(Array.isArray(r.legs)&&r.legs.length){
-    const bits=r.legs.map(x=>typeof x==='string'?x:(x.label||x.text||''));
-    return bits.length?'Legs: '+bits.join(' · ')+'. Final stat vs line: margin n/a unless listed above.':'margin n/a';
+   if((Array.isArray(r.legs)&&r.legs.length) || /^KXMVE/i.test(r.ticker||'') || /^Parlay/i.test(String(r.label||''))){
+    const sp=((window.PROP&&window.PROP.settled_parlays)||[]).find(p=>String(p.ticker||'').toUpperCase()===String(r.ticker||'').toUpperCase());
+    const legs=sp&&Array.isArray(sp.legs)&&sp.legs.length?sp.legs:((r.legs)||[]).map(x=>typeof x==='string'?{label:x,status:'',margin:'margin n/a'}:x);
+    if(!legs.length) return 'margin n/a';
+    const missed=(sp&&sp.missed&&sp.missed.length?sp.missed:legs.filter(L=>String(L.status||'').toLowerCase()==='miss'));
+    const bit=L=>{
+     const lab=L.label||L.text||L.ticker||'';
+     const st=String(L.status||'').toLowerCase();
+     const mg=L.margin||'margin n/a';
+     const tag=st==='miss'?'MISS':st==='hit'?'HIT':'';
+     return (tag?tag+' ':'')+lab+(mg&&mg!==lab?': '+mg:'');
+    };
+    if(missed.length){
+     return 'Missed: '+missed.map(bit).join(' · ');
+    }
+    if(sp&&legs.every(L=>String(L.status||'').toLowerCase()==='hit')){
+     return 'All legs hit. '+legs.map(bit).join(' · ');
+    }
+    const known=legs.filter(L=>L.margin&&L.margin!=='margin n/a');
+    if(known.length) return legs.map(bit).join(' · ');
+    return 'margin n/a';
    }
    const g=gameFor(r);
    const p=((window.PROP&&window.PROP.props)||[]).find(x=>String(x.ticker||'').toUpperCase()===String(r.ticker||'').toUpperCase());
@@ -2970,8 +3015,12 @@ const paintSel=(tA,tB,final=true)=>{
  host.querySelector('.eq-sel-x').addEventListener('click',ev=>{ev.preventDefault();ev.stopPropagation();paintSel(null,null,true)});
 };
 const xToT=x=>{
- const p=c.convertFromPixel({xAxisIndex:0},[x,0]);
- const tm=Array.isArray(p)?p[0]:p;
+ let raw=c.convertFromPixel('xAxis', x);
+ let tm=Array.isArray(raw)?raw[0]:raw;
+ if(!Number.isFinite(tm)){
+  const p=c.convertFromPixel({xAxisIndex:0},[x,0]);
+  tm=Array.isArray(p)?p[0]:p;
+ }
  if(!Number.isFinite(tm))return null;
  return Math.max(axisMin,Math.min(chartEnd,tm));
 };
